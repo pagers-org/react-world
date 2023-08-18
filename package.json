@@ -1,0 +1,29 @@
+{
+  "name": "react-world",
+  "private": true,
+  "version": "0.0.0",
+  "description": "리액트로 구현하는 리얼 월드 프로젝트",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pagers-org/react-world.git"
+  },
+  "keywords": [
+    "real-world",
+    "react",
+    "pagers"
+  ],
+  "author": {
+    "name": "InSeong-So",
+    "email": "goflvhxj2547@gmail.com",
+    "url": "https://github.com/inseong-so"
+  },
+  "devEngines": {
+    "node": "16.x || 18.x || 19.x || 20.x"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/pagers-org/react-world/issues"
+  },
+  "homepage": "https://github.com/pagers-org/react-world#readme"
+}
