@@ -14,16 +14,19 @@
     "pagers"
   ],
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "w.h heo",
+    "email": "her2478@gmail.com",
+    "url": "https://github.com/her0707"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/pagers-org/react-world/issues"
+    "url": "https://github.com/her0707/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/her0707/react-world#readme",
+  "dependencies": {
+    "astro": "^2.10.14"
+  }
 }
