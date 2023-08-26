@@ -25,5 +25,14 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "husky": "^8.0.3"
+  }
 }
