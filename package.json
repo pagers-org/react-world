@@ -29,10 +29,17 @@
   "scripts": {
     "prepare": "husky install"
   },
-  "dependencies": {},
+  "dependencies": {
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "husky": "^8.0.3"
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "husky": "^8.0.3",
+    "typescript": "^5.2.2"
   }
 }
