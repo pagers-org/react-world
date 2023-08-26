@@ -1,5 +1,6 @@
 {
   "name": "react-world",
+  "packageManager": "yarn@3.6.3",
   "private": true,
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
