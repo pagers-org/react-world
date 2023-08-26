@@ -25,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "volta": {
+    "node": "18.17.1",
+    "yarn": "1.22.19",
+    "npm": "9.8.1"
+  }
 }
