@@ -28,6 +28,7 @@
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "devDependencies": {
     "eslint": "^8.48.0",
+    "eslint-config-airbnb": "^19.0.4",
     "prettier": "^3.0.2"
   }
 }
