@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "devDependencies": {
+    "prettier": "^3.0.2"
+  }
 }
