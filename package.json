@@ -13,6 +13,9 @@
     "react",
     "pagers"
   ],
+  "scripts": {
+    "lint": "eslint ."
+  },
   "author": {
     "name": "InSeong-So",
     "email": "goflvhxj2547@gmail.com",
