@@ -1,9 +1,14 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint"],
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   },
   "settings": {
     "react": {
