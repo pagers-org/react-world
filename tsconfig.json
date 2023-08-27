@@ -9,8 +9,17 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "Node",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "allowJs": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
