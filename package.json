@@ -9,6 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "docker:build": "pnpm build && docker build --file ./Dockerfile.dev -t react-world .",
+    "docker:run": "docker run -p 3000:3000 react-world",
+    "docker:start": "pnpm docker:build && pnpm docker:run"
   },
   "repository": {
     "type": "git",
