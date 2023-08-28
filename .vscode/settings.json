@@ -11,6 +11,10 @@
     "**/.pnp.*": true,
     "**/*.map": true
   },
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.nodePath": ".yarn/sdks",
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
