@@ -8,6 +8,7 @@
     ".": "./src/index.ts"
   },
   "devDependencies": {
+    "@packages/ts-config": "*",
     "react": "^18.2.0",
     "ts-pattern": "^5.0.5"
   }
