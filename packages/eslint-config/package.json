@@ -1,0 +1,10 @@
+{
+  "name": "@packages/eslint-config",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@vercel/style-guide": "^4.0.2",
+    "eslint-config-turbo": "^1.10.12"
+  }
+}
