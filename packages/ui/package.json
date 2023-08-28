@@ -1,0 +1,14 @@
+{
+  "name": "@packages/ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "ts-pattern": "^5.0.5"
+  }
+}
