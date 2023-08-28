@@ -30,5 +30,8 @@
     "node": "18.17.1",
     "yarn": "1.22.19",
     "npm": "9.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }
