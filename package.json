@@ -21,6 +21,9 @@
     "email": "goflvhxj2547@gmail.com",
     "url": "https://github.com/inseong-so"
   },
+  "contributors": [
+    "Wooseong Kim <innocarpe@gmail.com>"
+  ],
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
   },
