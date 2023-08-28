@@ -35,5 +35,8 @@
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.0.2",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@vanilla-extract/css": "^1.13.0"
   }
 }
