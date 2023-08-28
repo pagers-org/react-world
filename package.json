@@ -8,6 +8,10 @@
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
   },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "keywords": [
     "real-world",
     "react",
