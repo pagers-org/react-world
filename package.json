@@ -4,6 +4,12 @@
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
   "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
@@ -25,5 +31,19 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "packageManager": "yarn@3.6.3",
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "8.48.0",
+    "eslint-config-next": "^13.4.19",
+    "typescript": "^5.2.2"
+  }
 }
