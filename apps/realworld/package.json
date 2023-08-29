@@ -21,6 +21,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@packages/ts-config": "*"
+    "@packages/ts-config": "*",
+    "@vanilla-extract/next-plugin": "^2.3.0"
   }
 }

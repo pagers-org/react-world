@@ -1,3 +1,2 @@
-import Button from "./Button/Button";
-
-export { Button };
+export * from "./components";
+export * from "./tokens";
