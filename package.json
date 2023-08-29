@@ -8,7 +8,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "repository": {
     "type": "git",
@@ -46,6 +53,8 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
     "prettier": "^3.0.2",
     "typescript": "^5.2.2"
   }
