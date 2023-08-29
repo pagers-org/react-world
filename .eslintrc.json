@@ -36,14 +36,8 @@
             "allowConciseArrowFunctionExpressionsStartingWithVoid": true
           }
         ],
-        "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
         "@typescript-eslint/no-explicit-any": "off",
-        "no-console": [
-          "error",
-          {
-            "allow": ["rAccess", "rApi", "rError", "rInfo", "rLog"]
-          }
-        ],
+        "no-console": ["error"],
         "camelcase": "error",
         "react/prop-types": "off"
       }
