@@ -1,8 +1,7 @@
-export default function RootLayout({ children }: React.PropsWithChildren){
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body>{children}</body>
     </html>
-  )
+  );
 }
- 

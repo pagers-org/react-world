@@ -1,3 +1,3 @@
-export default function RootPage(){
-  return <div>Hello RealWorld</div>
+export function RootPage() {
+  return <div>Hello RealWorld</div>;
 }
