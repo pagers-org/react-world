@@ -33,7 +33,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.7"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-next", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:13.4.19"],\
+            ["eslint-config-prettier", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:9.0.0"],\
             ["next", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:13.4.19"],\
+            ["prettier", "npm:3.0.3"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
@@ -1139,6 +1141,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/typescript",\
             "eslint",\
             "typescript"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["eslint-config-prettier", [\
+        ["npm:9.0.0", {\
+          "packageLocation": "./.yarn/cache/eslint-config-prettier-npm-9.0.0-8f5ce20d27-362e991b6c.zip/node_modules/eslint-config-prettier/",\
+          "packageDependencies": [\
+            ["eslint-config-prettier", "npm:9.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:9.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/eslint-config-prettier-virtual-70a52463f6/0/cache/eslint-config-prettier-npm-9.0.0-8f5ce20d27-362e991b6c.zip/node_modules/eslint-config-prettier/",\
+          "packageDependencies": [\
+            ["eslint-config-prettier", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:9.0.0"],\
+            ["@types/eslint", null],\
+            ["eslint", "npm:8.48.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/eslint",\
+            "eslint"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2690,6 +2714,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["prettier", [\
+        ["npm:3.0.3", {\
+          "packageLocation": "./.yarn/unplugged/prettier-npm-3.0.3-fced695dae/node_modules/prettier/",\
+          "packageDependencies": [\
+            ["prettier", "npm:3.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["prop-types", [\
         ["npm:15.8.1", {\
           "packageLocation": "./.yarn/cache/prop-types-npm-15.8.1-17c71ee7ee-c056d3f1c0.zip/node_modules/prop-types/",\
@@ -2773,7 +2806,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.7"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-next", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:13.4.19"],\
+            ["eslint-config-prettier", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:9.0.0"],\
             ["next", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:13.4.19"],\
+            ["prettier", "npm:3.0.3"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:870eb3f77a61fbb0797ce9d7354815d88266d8953c2630a5f620522e0d71a445cd8658c95cf8d9667144d003a47fb0d0b25a7181d57ed698109a7c47ff81e7d7#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
