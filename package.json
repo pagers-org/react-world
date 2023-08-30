@@ -26,7 +26,18 @@
     "url": "https://github.com/pagers-org/react-world/issues"
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
+  "scripts": {
+    "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
+  },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
     "typescript": "^5.2.2"
   }
 }
