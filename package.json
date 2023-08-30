@@ -27,6 +27,18 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "devDependencies": {
+    "@types/eslint": "^8",
+    "eslint": "latest",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "latest",
     "typescript": "^5.2.2"
+  },
+  "packageManager": "yarn@3.6.3",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "airbnb",
+      "prettier"
+    ]
   }
 }
