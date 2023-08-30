@@ -1,5 +1,10 @@
 {
   "printWidth": 120,
   "tabWidth": 2,
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "trailingComma": "all",
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true
 }
