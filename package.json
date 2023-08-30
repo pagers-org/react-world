@@ -13,10 +13,15 @@
     "react",
     "pagers"
   ],
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "Donghyun-Kim",
+    "email": "crtmt97@gmail.com",
+    "url": "https://github.com/cham0287"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
@@ -25,5 +30,24 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "dependencies": {
+    "@tanstack/react-query": "^4.33.0",
+    "next": "^13.4.19",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@types/node": "20.5.7",
+    "@types/react": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.33.2",
+    "typescript": "^5.2.2"
+  }
 }
