@@ -1,0 +1,42 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort",
+    "typescript-sort-keys"
+  ],
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      { "endOfLine": "auto" },
+      { "usePrettierrc": true }
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "no-empty-pattern": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
+  }
+}
