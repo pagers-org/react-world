@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$BRANCH" = "master" ];
+then
+  echo "You can't commit directly to master branch"
+  exit 1
+fi
+
+exit 0
