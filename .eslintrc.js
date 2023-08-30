@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "next"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next",
+    "plugin:storybook/recommended"
+  ],
   overrides: [],
   parser: "@typescript-eslint/parser",
   parserOptions: {
