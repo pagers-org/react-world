@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./",
+    "module": "esnext",
+    "target": "es5",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "lib": ["DOM", "ES6", "ESNext"],
+    "allowJs": true,
+    "declaration": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "composite": true
+  }
+}
