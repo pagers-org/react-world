@@ -27,10 +27,11 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "devDependencies": {
-    "@tsconfig/next": "^2.0.0",
+    "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "eslint": "^8.48.0",
+    "eslint-config-next": "^13.4.19",
     "husky": ">=7",
     "lint-staged": ">=10",
     "msw": "^1.2.5",
@@ -38,10 +39,19 @@
     "typescript": "^5.2.2"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx}": "next lint --cache --fix",
     "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
