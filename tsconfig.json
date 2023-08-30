@@ -10,7 +10,7 @@
       "@/*": ["src/*"]
     },
     "typeRoots": ["@types"],
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
