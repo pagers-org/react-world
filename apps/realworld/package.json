@@ -6,13 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "npx orval --config ./orval.config.js"
   },
   "dependencies": {
     "@packages/ui": "*",
+    "@tanstack/eslint-plugin-query": "^4.34.1",
+    "@tanstack/react-query": "^4.33.0",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "axios": "^1.5.0",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",
@@ -23,6 +27,7 @@
   },
   "devDependencies": {
     "@packages/ts-config": "*",
-    "@vanilla-extract/next-plugin": "^2.3.0"
+    "@vanilla-extract/next-plugin": "^2.3.0",
+    "orval": "^6.17.0"
   }
 }
