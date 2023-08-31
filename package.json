@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@vanilla-extract/css": "^1.13.0",
+    "create-vite": "^4.4.1",
     "zustand": "^4.4.1"
   }
 }
