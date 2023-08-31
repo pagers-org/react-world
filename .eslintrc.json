@@ -15,7 +15,14 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "vanilla-extract"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "prettier",
+    "vanilla-extract",
+    "zustand"
+  ],
   // 원하는 규칙 추가하기
   "rules": {
     "quotes": ["error", "single"],
@@ -23,6 +30,7 @@
     "vanilla-extract/no-unused-class": "error",
     "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "no-unused-vars": "error",
+    "zustand/no-undef": "error",
     "no-multiple-empty-lines": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "prettier/prettier": ["error", { "endOfLine": "auto" }]
