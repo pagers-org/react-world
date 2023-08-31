@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^4.34.1",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/node": "20.5.7",
     "@types/react": "^18.2.21",
@@ -46,6 +47,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.33.0",
     "@vanilla-extract/css": "^1.13.0",
     "next": "^13.4.19",
     "react": "^18.2.0",
