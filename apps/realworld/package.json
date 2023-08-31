@@ -37,6 +37,7 @@
     "jest-environment-jsdom": "^29.6.4",
     "msw": "^1.2.5",
     "orval": "^6.17.0",
+    "prettier": "^3.0.3",
     "ts-jest": "^29.1.1"
   }
 }

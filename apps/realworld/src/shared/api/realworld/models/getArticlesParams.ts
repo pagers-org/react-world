@@ -7,24 +7,24 @@
  */
 
 export type GetArticlesParams = {
-/**
- * Filter by tag
- */
-tag?: string;
-/**
- * Filter by author (username)
- */
-author?: string;
-/**
- * Filter by favorites of a user (username)
- */
-favorited?: string;
-/**
- * Limit number of articles returned (default is 20)
- */
-limit?: number;
-/**
- * Offset/skip number of articles (default is 0)
- */
-offset?: number;
+  /**
+   * Filter by tag
+   */
+  tag?: string;
+  /**
+   * Filter by author (username)
+   */
+  author?: string;
+  /**
+   * Filter by favorites of a user (username)
+   */
+  favorited?: string;
+  /**
+   * Limit number of articles returned (default is 20)
+   */
+  limit?: number;
+  /**
+   * Offset/skip number of articles (default is 0)
+   */
+  offset?: number;
 };

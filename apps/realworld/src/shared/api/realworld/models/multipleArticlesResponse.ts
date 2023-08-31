@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { Article } from './article';
+import type { Article } from "./article";
 
 export interface MultipleArticlesResponse {
   articles: Article[];

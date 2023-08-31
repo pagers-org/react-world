@@ -7,12 +7,12 @@
  */
 
 export type GetArticlesFeedParams = {
-/**
- * Limit number of articles returned (default is 20)
- */
-limit?: number;
-/**
- * Offset/skip number of articles (default is 0)
- */
-offset?: number;
+  /**
+   * Limit number of articles returned (default is 20)
+   */
+  limit?: number;
+  /**
+   * Offset/skip number of articles (default is 0)
+   */
+  offset?: number;
 };

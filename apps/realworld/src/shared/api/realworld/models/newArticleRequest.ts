@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { NewArticle } from './newArticle';
+import type { NewArticle } from "./newArticle";
 
 export interface NewArticleRequest {
   article: NewArticle;

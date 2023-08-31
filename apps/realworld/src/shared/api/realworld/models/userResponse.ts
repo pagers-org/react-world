@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { User } from './user';
+import type { User } from "./user";
 
 export interface UserResponse {
   user: User;

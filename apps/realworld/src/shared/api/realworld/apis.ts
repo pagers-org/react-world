@@ -43,14 +43,14 @@ import { faker } from "@faker-js/faker";
  */
 export const login = (
   loginUserRequest: LoginUserRequest,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<UserResponse>> => {
   return axios.post(`/users/login`, loginUserRequest, options);
 };
 
 export const getLoginMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof login>>,
@@ -90,7 +90,7 @@ export type LoginMutationError = AxiosError<void | GenericErrorModel>;
  */
 export const useLogin = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof login>>,
@@ -111,14 +111,14 @@ export const useLogin = <
  */
 export const createUser = (
   newUserRequest: NewUserRequest,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<UserResponse>> => {
   return axios.post(`/users`, newUserRequest, options);
 };
 
 export const getCreateUserMutationOptions = <
   TError = AxiosError<GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createUser>>,
@@ -158,7 +158,7 @@ export type CreateUserMutationError = AxiosError<GenericErrorModel>;
  */
 export const useCreateUser = <
   TError = AxiosError<GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createUser>>,
@@ -178,7 +178,7 @@ export const useCreateUser = <
  * @summary Get current user
  */
 export const getCurrentUser = (
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<UserResponse>> => {
   return axios.get(`/user`, options);
 };
@@ -187,7 +187,7 @@ export const getGetCurrentUserQueryKey = () => [`/user`] as const;
 
 export const getGetCurrentUserQueryOptions = <
   TData = Awaited<ReturnType<typeof getCurrentUser>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(options?: {
   query?: UseQueryOptions<
     Awaited<ReturnType<typeof getCurrentUser>>,
@@ -221,7 +221,7 @@ export type GetCurrentUserQueryError = AxiosError<void | GenericErrorModel>;
  */
 export const useGetCurrentUser = <
   TData = Awaited<ReturnType<typeof getCurrentUser>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(options?: {
   query?: UseQueryOptions<
     Awaited<ReturnType<typeof getCurrentUser>>,
@@ -247,14 +247,14 @@ export const useGetCurrentUser = <
  */
 export const updateCurrentUser = (
   updateUserRequest: UpdateUserRequest,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<UserResponse>> => {
   return axios.put(`/user`, updateUserRequest, options);
 };
 
 export const getUpdateCurrentUserMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateCurrentUser>>,
@@ -295,7 +295,7 @@ export type UpdateCurrentUserMutationError =
  */
 export const useUpdateCurrentUser = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateCurrentUser>>,
@@ -316,7 +316,7 @@ export const useUpdateCurrentUser = <
  */
 export const getProfileByUsername = (
   username: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<ProfileResponse>> => {
   return axios.get(`/profiles/${username}`, options);
 };
@@ -326,7 +326,7 @@ export const getGetProfileByUsernameQueryKey = (username: string) =>
 
 export const getGetProfileByUsernameQueryOptions = <
   TData = Awaited<ReturnType<typeof getProfileByUsername>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   username: string,
   options?: {
@@ -336,7 +336,7 @@ export const getGetProfileByUsernameQueryOptions = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryOptions<
   Awaited<ReturnType<typeof getProfileByUsername>>,
   TError,
@@ -366,7 +366,7 @@ export type GetProfileByUsernameQueryError =
  */
 export const useGetProfileByUsername = <
   TData = Awaited<ReturnType<typeof getProfileByUsername>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   username: string,
   options?: {
@@ -376,7 +376,7 @@ export const useGetProfileByUsername = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getGetProfileByUsernameQueryOptions(username, options);
 
@@ -395,14 +395,14 @@ export const useGetProfileByUsername = <
  */
 export const followUserByUsername = (
   username: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<ProfileResponse>> => {
   return axios.post(`/profiles/${username}/follow`, undefined, options);
 };
 
 export const getFollowUserByUsernameMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof followUserByUsername>>,
@@ -443,7 +443,7 @@ export type FollowUserByUsernameMutationError =
  */
 export const useFollowUserByUsername = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof followUserByUsername>>,
@@ -464,14 +464,14 @@ export const useFollowUserByUsername = <
  */
 export const unfollowUserByUsername = (
   username: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<ProfileResponse>> => {
   return axios.delete(`/profiles/${username}/follow`, options);
 };
 
 export const getUnfollowUserByUsernameMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof unfollowUserByUsername>>,
@@ -512,7 +512,7 @@ export type UnfollowUserByUsernameMutationError =
  */
 export const useUnfollowUserByUsername = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof unfollowUserByUsername>>,
@@ -533,7 +533,7 @@ export const useUnfollowUserByUsername = <
  */
 export const getArticlesFeed = (
   params?: GetArticlesFeedParams,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<MultipleArticlesResponse>> => {
   return axios.get(`/articles/feed`, {
     ...options,
@@ -546,7 +546,7 @@ export const getGetArticlesFeedQueryKey = (params?: GetArticlesFeedParams) =>
 
 export const getGetArticlesFeedQueryOptions = <
   TData = Awaited<ReturnType<typeof getArticlesFeed>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   params?: GetArticlesFeedParams,
   options?: {
@@ -556,7 +556,7 @@ export const getGetArticlesFeedQueryOptions = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryOptions<
   Awaited<ReturnType<typeof getArticlesFeed>>,
   TError,
@@ -583,7 +583,7 @@ export type GetArticlesFeedQueryError = AxiosError<void | GenericErrorModel>;
  */
 export const useGetArticlesFeed = <
   TData = Awaited<ReturnType<typeof getArticlesFeed>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   params?: GetArticlesFeedParams,
   options?: {
@@ -593,7 +593,7 @@ export const useGetArticlesFeed = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getGetArticlesFeedQueryOptions(params, options);
 
@@ -612,7 +612,7 @@ export const useGetArticlesFeed = <
  */
 export const getArticles = (
   params?: GetArticlesParams,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<MultipleArticlesResponse>> => {
   return axios.get(`/articles`, {
     ...options,
@@ -625,7 +625,7 @@ export const getGetArticlesQueryKey = (params?: GetArticlesParams) =>
 
 export const getGetArticlesQueryOptions = <
   TData = Awaited<ReturnType<typeof getArticles>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   params?: GetArticlesParams,
   options?: {
@@ -635,7 +635,7 @@ export const getGetArticlesQueryOptions = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryOptions<Awaited<ReturnType<typeof getArticles>>, TError, TData> & {
   queryKey: QueryKey;
 } => {
@@ -660,7 +660,7 @@ export type GetArticlesQueryError = AxiosError<void | GenericErrorModel>;
  */
 export const useGetArticles = <
   TData = Awaited<ReturnType<typeof getArticles>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   params?: GetArticlesParams,
   options?: {
@@ -670,7 +670,7 @@ export const useGetArticles = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getGetArticlesQueryOptions(params, options);
 
@@ -689,14 +689,14 @@ export const useGetArticles = <
  */
 export const createArticle = (
   newArticleRequest: NewArticleRequest,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<SingleArticleResponse>> => {
   return axios.post(`/articles`, newArticleRequest, options);
 };
 
 export const getCreateArticleMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticle>>,
@@ -736,7 +736,7 @@ export type CreateArticleMutationError = AxiosError<void | GenericErrorModel>;
  */
 export const useCreateArticle = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticle>>,
@@ -757,7 +757,7 @@ export const useCreateArticle = <
  */
 export const getArticle = (
   slug: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<SingleArticleResponse>> => {
   return axios.get(`/articles/${slug}`, options);
 };
@@ -767,7 +767,7 @@ export const getGetArticleQueryKey = (slug: string) =>
 
 export const getGetArticleQueryOptions = <
   TData = Awaited<ReturnType<typeof getArticle>>,
-  TError = AxiosError<GenericErrorModel>
+  TError = AxiosError<GenericErrorModel>,
 >(
   slug: string,
   options?: {
@@ -777,7 +777,7 @@ export const getGetArticleQueryOptions = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryOptions<Awaited<ReturnType<typeof getArticle>>, TError, TData> & {
   queryKey: QueryKey;
 } => {
@@ -802,7 +802,7 @@ export type GetArticleQueryError = AxiosError<GenericErrorModel>;
  */
 export const useGetArticle = <
   TData = Awaited<ReturnType<typeof getArticle>>,
-  TError = AxiosError<GenericErrorModel>
+  TError = AxiosError<GenericErrorModel>,
 >(
   slug: string,
   options?: {
@@ -812,7 +812,7 @@ export const useGetArticle = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getGetArticleQueryOptions(slug, options);
 
@@ -832,14 +832,14 @@ export const useGetArticle = <
 export const updateArticle = (
   slug: string,
   updateArticleRequest: UpdateArticleRequest,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<SingleArticleResponse>> => {
   return axios.put(`/articles/${slug}`, updateArticleRequest, options);
 };
 
 export const getUpdateArticleMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateArticle>>,
@@ -879,7 +879,7 @@ export type UpdateArticleMutationError = AxiosError<void | GenericErrorModel>;
  */
 export const useUpdateArticle = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateArticle>>,
@@ -900,14 +900,14 @@ export const useUpdateArticle = <
  */
 export const deleteArticle = (
   slug: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
   return axios.delete(`/articles/${slug}`, options);
 };
 
 export const getDeleteArticleMutationOptions = <
   TError = AxiosError<GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticle>>,
@@ -947,7 +947,7 @@ export type DeleteArticleMutationError = AxiosError<GenericErrorModel>;
  */
 export const useDeleteArticle = <
   TError = AxiosError<GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticle>>,
@@ -968,7 +968,7 @@ export const useDeleteArticle = <
  */
 export const getArticleComments = (
   slug: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<MultipleCommentsResponse>> => {
   return axios.get(`/articles/${slug}/comments`, options);
 };
@@ -978,7 +978,7 @@ export const getGetArticleCommentsQueryKey = (slug: string) =>
 
 export const getGetArticleCommentsQueryOptions = <
   TData = Awaited<ReturnType<typeof getArticleComments>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   slug: string,
   options?: {
@@ -988,7 +988,7 @@ export const getGetArticleCommentsQueryOptions = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryOptions<
   Awaited<ReturnType<typeof getArticleComments>>,
   TError,
@@ -1016,7 +1016,7 @@ export type GetArticleCommentsQueryError = AxiosError<void | GenericErrorModel>;
  */
 export const useGetArticleComments = <
   TData = Awaited<ReturnType<typeof getArticleComments>>,
-  TError = AxiosError<void | GenericErrorModel>
+  TError = AxiosError<void | GenericErrorModel>,
 >(
   slug: string,
   options?: {
@@ -1026,7 +1026,7 @@ export const useGetArticleComments = <
       TData
     >;
     axios?: AxiosRequestConfig;
-  }
+  },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getGetArticleCommentsQueryOptions(slug, options);
 
@@ -1046,14 +1046,14 @@ export const useGetArticleComments = <
 export const createArticleComment = (
   slug: string,
   newCommentRequest: NewCommentRequest,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<SingleCommentResponse>> => {
   return axios.post(`/articles/${slug}/comments`, newCommentRequest, options);
 };
 
 export const getCreateArticleCommentMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticleComment>>,
@@ -1094,7 +1094,7 @@ export type CreateArticleCommentMutationError =
  */
 export const useCreateArticleComment = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticleComment>>,
@@ -1116,14 +1116,14 @@ export const useCreateArticleComment = <
 export const deleteArticleComment = (
   slug: string,
   id: number,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
   return axios.delete(`/articles/${slug}/comments/${id}`, options);
 };
 
 export const getDeleteArticleCommentMutationOptions = <
   TError = AxiosError<GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticleComment>>,
@@ -1163,7 +1163,7 @@ export type DeleteArticleCommentMutationError = AxiosError<GenericErrorModel>;
  */
 export const useDeleteArticleComment = <
   TError = AxiosError<GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticleComment>>,
@@ -1184,14 +1184,14 @@ export const useDeleteArticleComment = <
  */
 export const createArticleFavorite = (
   slug: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<SingleArticleResponse>> => {
   return axios.post(`/articles/${slug}/favorite`, undefined, options);
 };
 
 export const getCreateArticleFavoriteMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticleFavorite>>,
@@ -1232,7 +1232,7 @@ export type CreateArticleFavoriteMutationError =
  */
 export const useCreateArticleFavorite = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticleFavorite>>,
@@ -1253,14 +1253,14 @@ export const useCreateArticleFavorite = <
  */
 export const deleteArticleFavorite = (
   slug: string,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<SingleArticleResponse>> => {
   return axios.delete(`/articles/${slug}/favorite`, options);
 };
 
 export const getDeleteArticleFavoriteMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticleFavorite>>,
@@ -1301,7 +1301,7 @@ export type DeleteArticleFavoriteMutationError =
  */
 export const useDeleteArticleFavorite = <
   TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown
+  TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticleFavorite>>,
@@ -1321,7 +1321,7 @@ export const useDeleteArticleFavorite = <
  * @summary Get tags
  */
 export const getTags = (
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<TagsResponse>> => {
   return axios.get(`/tags`, options);
 };
@@ -1330,7 +1330,7 @@ export const getGetTagsQueryKey = () => [`/tags`] as const;
 
 export const getGetTagsQueryOptions = <
   TData = Awaited<ReturnType<typeof getTags>>,
-  TError = AxiosError<GenericErrorModel>
+  TError = AxiosError<GenericErrorModel>,
 >(options?: {
   query?: UseQueryOptions<Awaited<ReturnType<typeof getTags>>, TError, TData>;
   axios?: AxiosRequestConfig;
@@ -1358,7 +1358,7 @@ export type GetTagsQueryError = AxiosError<GenericErrorModel>;
  */
 export const useGetTags = <
   TData = Awaited<ReturnType<typeof getTags>>,
-  TError = AxiosError<GenericErrorModel>
+  TError = AxiosError<GenericErrorModel>,
 >(options?: {
   query?: UseQueryOptions<Awaited<ReturnType<typeof getTags>>, TError, TData>;
   axios?: AxiosRequestConfig;
@@ -1376,67 +1376,67 @@ export const useGetTags = <
 
 export const getLoginMock = () => ({
   user: {
-    email: faker.internet.email(),
-    token: faker.string.uuid(),
-    username: faker.internet.userName(),
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
   },
 });
 
 export const getCreateUserMock = () => ({
   user: {
-    email: faker.internet.email(),
-    token: faker.string.uuid(),
-    username: faker.internet.userName(),
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
   },
 });
 
 export const getGetCurrentUserMock = () => ({
   user: {
-    email: faker.internet.email(),
-    token: faker.string.uuid(),
-    username: faker.internet.userName(),
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
   },
 });
 
 export const getUpdateCurrentUserMock = () => ({
   user: {
-    email: faker.internet.email(),
-    token: faker.string.uuid(),
-    username: faker.internet.userName(),
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
   },
 });
 
 export const getGetProfileByUsernameMock = () => ({
   profile: {
-    username: faker.internet.userName(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
     following: faker.datatype.boolean(),
   },
 });
 
 export const getFollowUserByUsernameMock = () => ({
   profile: {
-    username: faker.internet.userName(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
     following: faker.datatype.boolean(),
   },
 });
 
 export const getUnfollowUserByUsernameMock = () => ({
   profile: {
-    username: faker.internet.userName(),
+    username: faker.random.word(),
     bio: faker.random.word(),
-    image: faker.image.url(),
+    image: faker.random.word(),
     following: faker.datatype.boolean(),
   },
 });
@@ -1444,7 +1444,7 @@ export const getUnfollowUserByUsernameMock = () => ({
 export const getGetArticlesFeedMock = () => ({
   articles: Array.from(
     { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1
+    (_, i) => i + 1,
   ).map(() => ({
     slug: faker.random.word(),
     title: faker.random.word(),
@@ -1452,16 +1452,16 @@ export const getGetArticlesFeedMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   })),
@@ -1471,7 +1471,7 @@ export const getGetArticlesFeedMock = () => ({
 export const getGetArticlesMock = () => ({
   articles: Array.from(
     { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1
+    (_, i) => i + 1,
   ).map(() => ({
     slug: faker.random.word(),
     title: faker.random.word(),
@@ -1479,16 +1479,16 @@ export const getGetArticlesMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   })),
@@ -1503,16 +1503,16 @@ export const getCreateArticleMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   },
@@ -1526,16 +1526,16 @@ export const getGetArticleMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   },
@@ -1549,16 +1549,16 @@ export const getUpdateArticleMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   },
@@ -1567,16 +1567,16 @@ export const getUpdateArticleMock = () => ({
 export const getGetArticleCommentsMock = () => ({
   comments: Array.from(
     { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1
+    (_, i) => i + 1,
   ).map(() => ({
     id: faker.datatype.number({ min: undefined, max: undefined }),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     body: faker.random.word(),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   })),
@@ -1589,9 +1589,9 @@ export const getCreateArticleCommentMock = () => ({
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     body: faker.random.word(),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   },
@@ -1605,16 +1605,16 @@ export const getCreateArticleFavoriteMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   },
@@ -1628,16 +1628,16 @@ export const getDeleteArticleFavoriteMock = () => ({
     body: faker.random.word(),
     tagList: Array.from(
       { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1
+      (_, i) => i + 1,
     ).map(() => faker.random.word()),
     createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
-      username: faker.internet.userName(),
+      username: faker.random.word(),
       bio: faker.random.word(),
-      image: faker.image.url(),
+      image: faker.random.word(),
       following: faker.datatype.boolean(),
     },
   },
@@ -1646,7 +1646,7 @@ export const getDeleteArticleFavoriteMock = () => ({
 export const getGetTagsMock = () => ({
   tags: Array.from(
     { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1
+    (_, i) => i + 1,
   ).map(() => faker.random.word()),
 });
 
@@ -1655,84 +1655,84 @@ export const getConduitAPIMSW = () => [
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getLoginMock())
+      ctx.json(getLoginMock()),
     );
   }),
   rest.post("*/users", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getCreateUserMock())
+      ctx.json(getCreateUserMock()),
     );
   }),
   rest.get("*/user", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetCurrentUserMock())
+      ctx.json(getGetCurrentUserMock()),
     );
   }),
   rest.put("*/user", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getUpdateCurrentUserMock())
+      ctx.json(getUpdateCurrentUserMock()),
     );
   }),
   rest.get("*/profiles/:username", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetProfileByUsernameMock())
+      ctx.json(getGetProfileByUsernameMock()),
     );
   }),
   rest.post("*/profiles/:username/follow", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getFollowUserByUsernameMock())
+      ctx.json(getFollowUserByUsernameMock()),
     );
   }),
   rest.delete("*/profiles/:username/follow", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getUnfollowUserByUsernameMock())
+      ctx.json(getUnfollowUserByUsernameMock()),
     );
   }),
   rest.get("*/articles/feed", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticlesFeedMock())
+      ctx.json(getGetArticlesFeedMock()),
     );
   }),
   rest.get("*/articles", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticlesMock())
+      ctx.json(getGetArticlesMock()),
     );
   }),
   rest.post("*/articles", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getCreateArticleMock())
+      ctx.json(getCreateArticleMock()),
     );
   }),
   rest.get("*/articles/:slug", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticleMock())
+      ctx.json(getGetArticleMock()),
     );
   }),
   rest.put("*/articles/:slug", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getUpdateArticleMock())
+      ctx.json(getUpdateArticleMock()),
     );
   }),
   rest.delete("*/articles/:slug", (_req, res, ctx) => {
@@ -1742,14 +1742,14 @@ export const getConduitAPIMSW = () => [
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticleCommentsMock())
+      ctx.json(getGetArticleCommentsMock()),
     );
   }),
   rest.post("*/articles/:slug/comments", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getCreateArticleCommentMock())
+      ctx.json(getCreateArticleCommentMock()),
     );
   }),
   rest.delete("*/articles/:slug/comments/:id", (_req, res, ctx) => {
@@ -1759,21 +1759,21 @@ export const getConduitAPIMSW = () => [
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getCreateArticleFavoriteMock())
+      ctx.json(getCreateArticleFavoriteMock()),
     );
   }),
   rest.delete("*/articles/:slug/favorite", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getDeleteArticleFavoriteMock())
+      ctx.json(getDeleteArticleFavoriteMock()),
     );
   }),
   rest.get("*/tags", (_req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200, "Mocked status"),
-      ctx.json(getGetTagsMock())
+      ctx.json(getGetTagsMock()),
     );
   }),
 ];

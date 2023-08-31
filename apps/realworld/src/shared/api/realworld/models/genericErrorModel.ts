@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { GenericErrorModelErrors } from './genericErrorModelErrors';
+import type { GenericErrorModelErrors } from "./genericErrorModelErrors";
 
 export interface GenericErrorModel {
   errors: GenericErrorModelErrors;
