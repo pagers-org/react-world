@@ -1,9 +1,9 @@
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin');
 
 const withVE = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {}
 
-export default withVE(nextConfig);
-
+module.exports = withVE(nextConfig);
