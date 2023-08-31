@@ -30,12 +30,12 @@
     "@types/react-dom": "18.2.7",
     "@vanilla-extract/css": "^1.13.0",
     "eslint": "8.48.0",
+    "jotai": "^2.4.0",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.2.2",
-    "typescript": "5.2.2",
-    "xstate": "^4.38.2"
+    "typescript": "5.2.2"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
