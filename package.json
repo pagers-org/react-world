@@ -1,6 +1,7 @@
 {
-  "name": "react-world",
+  "name": "@rw/root",
   "private": true,
+  "packageManager": "yarn@3.6.3",
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
   "main": "index.js",
@@ -47,6 +48,5 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.1.6"
-  },
-  "packageManager": "yarn@3.6.3"
+  }
 }
