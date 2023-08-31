@@ -28,10 +28,15 @@
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "scripts": {
     "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "storybook": "storybook dev -p 6006",
     "e2e": "playwright test",
-    "prepare": "husky install",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "husky install"
   },
   "resolutions": {
     "jackspeak": "2.1.1"
@@ -57,7 +62,7 @@
     "@storybook/react": "^7.3.2",
     "@storybook/testing-library": "^0.2.0",
     "@svgr/webpack": "^8.1.0",
-    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.4",
