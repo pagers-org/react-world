@@ -1,0 +1,43 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/triple-slash-reference": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/restrict-template-expressions": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "n/no-callback-literal": "warn",
+    "no-useless-return": "warn",
+    "@typescript-eslint/prefer-optional-chain": "warn",
+    "@typescript-eslint/no-confusing-void-expression": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
+    "@typescript-eslint/promise-function-async": "off",
+    "no-return-await": "off",
+    "@typescript-eslint/return-await": "warn",
+    "@typescript-eslint/no-floating-promises": "warn",
+    "dot-notation": "off",
+    "@typescript-eslint/dot-notation": "warn"
+  }
+}
