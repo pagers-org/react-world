@@ -14,9 +14,9 @@
     "pagers"
   ],
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "SeulgiKim",
+    "email": "sgsg9447@gmail.com",
+    "url": "https://github.com/sgsg9447"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
@@ -25,5 +25,14 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "3.0.3",
+    "typescript": "^5.2.2"
+  }
 }
