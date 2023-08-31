@@ -7,19 +7,27 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "import", "node", "promise", "react-hooks", "prettier"],
+  "plugins": ["react", "import", "node", "promise", "prettier"],
   "env": {
     "es6": true,
     "browser": true,
     "node": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "next/core-web-vitals",
+    "plugin:storybook/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "no-console": "error",
-    "prettier/prettier": "error"
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "prettier/prettier": "off",
+    "testing-library/prefer-screen-queries": "off"
   }
 }
