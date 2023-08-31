@@ -1,0 +1,47 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "extraFileExtensions": [".astro"],
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:import/recommended", "prettier"],
+  "overrides": [
+    {
+      "files": ["*.mjs", "*.cjs"],
+      "extends": ["plugin:prettier/recommended"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off", // mjs is only used by Astro for configuration, false positive
+        "import/no-unresolved": "off" // Also false positive with mjs file
+      }
+    },
+    {
+      "files": ["*.astro"],
+      "parser": "astro-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
+      },
+      "extends": ["plugin:astro/recommended"],
+      "rules": {
+        "astro/no-conflict-set-directives": "error",
+        "astro/no-unused-define-vars-in-style": "error"
+      }
+    },
+    {
+      "parser": "@typescript-eslint/parser",
+      "files": ["*.ts", "*.tsx"],
+      "plugins": ["@typescript-eslint", "react"],
+      "extends": ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended", "plugin:import/typescript"]
+    }
+  ],
+
+  "rules": {
+    "no-empty": "off",
+    "no-unused-vars": "off"
+  }
+}
