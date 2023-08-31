@@ -9,7 +9,7 @@
     "url": "git+https://github.com/pagers-org/react-world.git"
   },
   "scripts": {
-    "realword": "yarn workspace real-world",
+    "realworld": "yarn workspace real-world",
     "eslint-config": "yarn workspace @packages/eslint-config",
     "ts-config": "yarn workspace @packages/ts-config",
     "ui": "yarn workspace @packages/ui"

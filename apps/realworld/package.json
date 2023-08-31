@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest --watch",
     "codegen": "npx orval --config ./orval.config.js"
   },
   "dependencies": {
@@ -26,8 +27,16 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@packages/ts-config": "*",
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.4",
     "@vanilla-extract/next-plugin": "^2.3.0",
-    "orval": "^6.17.0"
+    "jest": "^29.6.4",
+    "jest-environment-jsdom": "^29.6.4",
+    "msw": "^1.2.5",
+    "orval": "^6.17.0",
+    "ts-jest": "^29.1.1"
   }
 }

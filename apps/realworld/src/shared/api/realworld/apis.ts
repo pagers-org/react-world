@@ -34,6 +34,8 @@ import type {
   NewCommentRequest,
   TagsResponse,
 } from "./models";
+import { rest } from "msw";
+import { faker } from "@faker-js/faker";
 
 /**
  * Login for existing user
@@ -1371,3 +1373,407 @@ export const useGetTags = <
 
   return query;
 };
+
+export const getLoginMock = () => ({
+  user: {
+    email: faker.internet.email(),
+    token: faker.string.uuid(),
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+  },
+});
+
+export const getCreateUserMock = () => ({
+  user: {
+    email: faker.internet.email(),
+    token: faker.string.uuid(),
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+  },
+});
+
+export const getGetCurrentUserMock = () => ({
+  user: {
+    email: faker.internet.email(),
+    token: faker.string.uuid(),
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+  },
+});
+
+export const getUpdateCurrentUserMock = () => ({
+  user: {
+    email: faker.internet.email(),
+    token: faker.string.uuid(),
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+  },
+});
+
+export const getGetProfileByUsernameMock = () => ({
+  profile: {
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+    following: faker.datatype.boolean(),
+  },
+});
+
+export const getFollowUserByUsernameMock = () => ({
+  profile: {
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+    following: faker.datatype.boolean(),
+  },
+});
+
+export const getUnfollowUserByUsernameMock = () => ({
+  profile: {
+    username: faker.internet.userName(),
+    bio: faker.random.word(),
+    image: faker.image.url(),
+    following: faker.datatype.boolean(),
+  },
+});
+
+export const getGetArticlesFeedMock = () => ({
+  articles: Array.from(
+    { length: faker.datatype.number({ min: 1, max: 10 }) },
+    (_, i) => i + 1
+  ).map(() => ({
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  })),
+  articlesCount: faker.datatype.number({ min: undefined, max: undefined }),
+});
+
+export const getGetArticlesMock = () => ({
+  articles: Array.from(
+    { length: faker.datatype.number({ min: 1, max: 10 }) },
+    (_, i) => i + 1
+  ).map(() => ({
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  })),
+  articlesCount: faker.datatype.number({ min: undefined, max: undefined }),
+});
+
+export const getCreateArticleMock = () => ({
+  article: {
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  },
+});
+
+export const getGetArticleMock = () => ({
+  article: {
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  },
+});
+
+export const getUpdateArticleMock = () => ({
+  article: {
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  },
+});
+
+export const getGetArticleCommentsMock = () => ({
+  comments: Array.from(
+    { length: faker.datatype.number({ min: 1, max: 10 }) },
+    (_, i) => i + 1
+  ).map(() => ({
+    id: faker.datatype.number({ min: undefined, max: undefined }),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    body: faker.random.word(),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  })),
+});
+
+export const getCreateArticleCommentMock = () => ({
+  comment: {
+    id: faker.datatype.number({ min: undefined, max: undefined }),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    body: faker.random.word(),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  },
+});
+
+export const getCreateArticleFavoriteMock = () => ({
+  article: {
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  },
+});
+
+export const getDeleteArticleFavoriteMock = () => ({
+  article: {
+    slug: faker.random.word(),
+    title: faker.random.word(),
+    description: faker.random.word(),
+    body: faker.random.word(),
+    tagList: Array.from(
+      { length: faker.datatype.number({ min: 1, max: 10 }) },
+      (_, i) => i + 1
+    ).map(() => faker.random.word()),
+    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    favorited: faker.datatype.boolean(),
+    favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
+    author: {
+      username: faker.internet.userName(),
+      bio: faker.random.word(),
+      image: faker.image.url(),
+      following: faker.datatype.boolean(),
+    },
+  },
+});
+
+export const getGetTagsMock = () => ({
+  tags: Array.from(
+    { length: faker.datatype.number({ min: 1, max: 10 }) },
+    (_, i) => i + 1
+  ).map(() => faker.random.word()),
+});
+
+export const getConduitAPIMSW = () => [
+  rest.post("*/users/login", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getLoginMock())
+    );
+  }),
+  rest.post("*/users", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getCreateUserMock())
+    );
+  }),
+  rest.get("*/user", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetCurrentUserMock())
+    );
+  }),
+  rest.put("*/user", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getUpdateCurrentUserMock())
+    );
+  }),
+  rest.get("*/profiles/:username", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetProfileByUsernameMock())
+    );
+  }),
+  rest.post("*/profiles/:username/follow", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getFollowUserByUsernameMock())
+    );
+  }),
+  rest.delete("*/profiles/:username/follow", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getUnfollowUserByUsernameMock())
+    );
+  }),
+  rest.get("*/articles/feed", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetArticlesFeedMock())
+    );
+  }),
+  rest.get("*/articles", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetArticlesMock())
+    );
+  }),
+  rest.post("*/articles", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getCreateArticleMock())
+    );
+  }),
+  rest.get("*/articles/:slug", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetArticleMock())
+    );
+  }),
+  rest.put("*/articles/:slug", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getUpdateArticleMock())
+    );
+  }),
+  rest.delete("*/articles/:slug", (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
+  }),
+  rest.get("*/articles/:slug/comments", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetArticleCommentsMock())
+    );
+  }),
+  rest.post("*/articles/:slug/comments", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getCreateArticleCommentMock())
+    );
+  }),
+  rest.delete("*/articles/:slug/comments/:id", (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
+  }),
+  rest.post("*/articles/:slug/favorite", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getCreateArticleFavoriteMock())
+    );
+  }),
+  rest.delete("*/articles/:slug/favorite", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getDeleteArticleFavoriteMock())
+    );
+  }),
+  rest.get("*/tags", (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, "Mocked status"),
+      ctx.json(getGetTagsMock())
+    );
+  }),
+];

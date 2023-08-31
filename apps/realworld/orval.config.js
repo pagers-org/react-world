@@ -9,6 +9,7 @@ export default defineConfig({
       client: "react-query",
       prettier: true,
       clean: true,
+      mock: true,
     },
     input: {
       target: "./realworld.json",
