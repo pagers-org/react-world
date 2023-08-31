@@ -28,11 +28,14 @@
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@vanilla-extract/css": "^1.13.0",
     "eslint": "8.48.0",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.2.2"
+    "swr": "^2.2.2",
+    "typescript": "5.2.2",
+    "xstate": "^4.38.2"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
