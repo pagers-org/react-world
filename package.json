@@ -28,8 +28,13 @@
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "scripts": {
     "dev": "next dev",
+    "storybook": "storybook dev -p 6006",
     "e2e": "playwright test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build-storybook": "storybook build"
+  },
+  "resolutions": {
+    "jackspeak": "2.1.1"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.33.0",
@@ -79,6 +84,7 @@
     "jest": "^29.6.4",
     "jest-environment-jsdom": "^29.6.4",
     "lint-staged": "^14.0.1",
+    "mini-css-extract-plugin": "^2.7.6",
     "prettier": "^3.0.2",
     "storybook": "^7.3.2",
     "ts-jest": "^29.1.1",
