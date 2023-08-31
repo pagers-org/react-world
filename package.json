@@ -14,9 +14,9 @@
     "pagers"
   ],
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "DOWON LEE",
+    "email": "dwon424@gmail.com",
+    "url": "https://github.com/2dowon"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
@@ -25,5 +25,30 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "dependencies": {
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@types/node": "20.5.7",
+    "@types/react": "18.2.21",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "eslint-plugin-react": "latest",
+    "prettier": "3.0.2",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx",
+    "test": "jest"
+  }
 }
