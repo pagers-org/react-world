@@ -1,5 +1,5 @@
-import { container } from './page.css';
+import { container } from '@/app/page.css';
 
-export default function HomePage() {
-  return <div className={container}>HomePage</div>;
+export default function MainPage() {
+  return <div className={container}>MainPage</div>;
 }
