@@ -1,0 +1,43 @@
+{
+  "name": "real-world",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest --watch",
+    "codegen": "npx orval --config ./orval.config.js"
+  },
+  "dependencies": {
+    "@packages/ui": "*",
+    "@tanstack/eslint-plugin-query": "^4.34.1",
+    "@tanstack/react-query": "^4.33.0",
+    "@types/node": "20.5.7",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "axios": "^1.5.0",
+    "eslint": "8.48.0",
+    "eslint-config-next": "13.4.19",
+    "next": "13.4.19",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "ts-pattern": "^5.0.5",
+    "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@packages/ts-config": "*",
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.4",
+    "@vanilla-extract/next-plugin": "^2.3.0",
+    "jest": "^29.6.4",
+    "jest-environment-jsdom": "^29.6.4",
+    "msw": "^1.2.5",
+    "orval": "^6.17.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1"
+  }
+}

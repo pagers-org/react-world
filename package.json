@@ -8,6 +8,16 @@
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
   },
+  "scripts": {
+    "realworld": "yarn workspace real-world",
+    "eslint-config": "yarn workspace @packages/eslint-config",
+    "ts-config": "yarn workspace @packages/ts-config",
+    "ui": "yarn workspace @packages/ui"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "keywords": [
     "real-world",
     "react",
@@ -25,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "devDependencies": {
+    "turbo": "^1.10.13"
+  }
 }
