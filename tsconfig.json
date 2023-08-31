@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES6", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */ // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    "jsx": "preserve", /* Specify what JSX code is generated. */ // "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
+    "module": "commonjs", /* Specify what module code is generated. */ // "rootDir": "./",                                  /* Specify the root folder within your source files. */
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */ /* Type Checking */
+    "strict": true, /* Enable all strict type-checking options. */ // "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
