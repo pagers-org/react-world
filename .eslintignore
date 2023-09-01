@@ -1,0 +1,6 @@
+/dist
+*.js
+jest.setup.ts
+jest.config.js
+node_modules/*
+node_modules
