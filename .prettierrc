@@ -15,15 +15,16 @@
     "<THIRD_PARTY_MODULES>",
     "^@/app/(.*)$",
     "^@/pageComponents/(.*)$",
-    "^@/stories/(.*)$",
+    "^@/composables/(.)$",
     "^@/components/(.*)$",
-    "^@/interfaces/(.*)$",
-    "^@/contexts/(.*)$",
+    "^@/types/(.)$",
     "^@/constants/(.*)$",
+    "^@/stores/(.)$",
     "^@/api/(.*)$",
     "^@/hooks/(.*)$",
     "^@/utils/(.*)$",
     "^@/styles/(.*)$",
+    "^@/tests/(.*)$",
     "^[./]"
   ]
 }
