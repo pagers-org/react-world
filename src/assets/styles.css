@@ -1,0 +1,21 @@
+.spinner_d9Sa_wrapper {
+  & > svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.spinner_d9Sa {
+  transform-origin: center;
+}
+.spinner_qQQY {
+  animation: spinner_ZpfF 9s linear infinite;
+}
+.spinner_pote {
+  animation: spinner_ZpfF 0.75s linear infinite;
+}
+@keyframes spinner_ZpfF {
+  100% {
+    transform: rotate(360deg);
+  }
+}

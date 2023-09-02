@@ -1,8 +1,13 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "jsxImportSource": "solid-js",
+    "types": ["vite/client"],
+    "typeRoots": ["node_modules", "node_modules/@types", "@types"],
     "paths": {
       "@/*": ["src/*"]
     }
   },
+  "exclude": ["node_modules"],
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"]
 }

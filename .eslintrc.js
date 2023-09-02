@@ -1,12 +1,8 @@
 module.exports = {
-  extends: [
-    'eslint:recommended',
-  ],
-  plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
+  plugins: ['solid'],
+  extends: ['eslint:recommended', 'plugin:solid/typescript'],
   parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module', 
     ecmaFeatures: {
       jsx: true,
     },
@@ -44,10 +40,7 @@ module.exports = {
     'lines-between-class-members': 'off',
     'import/no-unresolved': 'off',
     // typescript
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/restrict-template-expressions': 'off',
-    '@typescript-eslint/no-var-requires': 'error',
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
@@ -55,5 +48,9 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    // solid
+    'solid/reactivity': 'warn',
+    'solid/no-destructure': 'warn',
+    'solid/jsx-no-undef': 'error',
   },
 };
