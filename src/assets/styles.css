@@ -1,3 +1,9 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+/* 로딩 스피너 */
 .spinner_d9Sa_wrapper {
   & > svg {
     width: 100%;
