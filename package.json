@@ -8,7 +8,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:fix": "eslint --fix '*.{js,jsx,ts,tsx}'",
+    "prettier:fix": "prettier --write '*.{js,jsx,ts,tsx}'"
   },
   "repository": {
     "type": "git",
@@ -37,12 +38,16 @@
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/node": "20.5.7",
     "@types/react": "^18.2.21",
+    "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "@vanilla-extract/next-plugin": "^2.3.0",
     "eslint": "^8.48.0",
+    "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
   },
@@ -50,7 +55,7 @@
     "@tanstack/react-query": "^4.33.0",
     "@vanilla-extract/css": "^1.13.0",
     "next": "^13.4.19",
-    "react": "^18.2.0",
+    "react": "^18.2.0", 
     "react-dom": "^18.2.0",
     "zustand": "^4.4.1"
   }

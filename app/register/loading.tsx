@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 const RegisterLoading = () => {
-    return <div>Register Loading...</div>
-}
+  return <div>Register Loading...</div>;
+};
 
 export default RegisterLoading;
