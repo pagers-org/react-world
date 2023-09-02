@@ -1,0 +1,30 @@
+{
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 80,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@/app/(.*)$",
+    "^@/pageComponents/(.*)$",
+    "^@/composables/(.)$",
+    "^@/components/(.*)$",
+    "^@/types/(.)$",
+    "^@/constants/(.*)$",
+    "^@/stores/(.)$",
+    "^@/api/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/utils/(.*)$",
+    "^@/styles/(.*)$",
+    "^@/tests/(.*)$",
+    "^[./]"
+  ]
+}
