@@ -1,6 +1,7 @@
 import { createResource, Show } from 'solid-js';
 import { getArticleList } from '@/api/article';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { Pagination } from '@/components/Pagination';
 import { LoadingSpinnerContainer } from '@/templates/home.css';
 import { Motion } from '@motionone/solid';
 
@@ -127,18 +128,7 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <ul class="pagination">
-                  <li class="page-item active">
-                    <a class="page-link" href="">
-                      1
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="">
-                      2
-                    </a>
-                  </li>
-                </ul>
+                <Pagination pages={13} maxPages={5} />
               </Show>
             </div>
 
