@@ -1,5 +1,3 @@
-'use client';
-
 const ProfileLoading = () => {
   return <div>ProfileLoading</div>;
 };

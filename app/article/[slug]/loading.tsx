@@ -1,5 +1,3 @@
-'use client';
-
 const ArticleLoading = () => {
   return <div>ArticleLoading</div>;
 };

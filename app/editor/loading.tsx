@@ -1,5 +1,3 @@
-'use client';
-
 const EditorLoading = () => {
   return <div>EditorLoading</div>;
 };
