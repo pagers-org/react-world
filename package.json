@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
   "main": "index.js",
+  "scripts": {
+    "prepare": "cd libs/vite-react-component && npm run build",
+    "next13:dev": "npm run prepare && cd packages/next13 && npm run dev"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
