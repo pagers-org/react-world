@@ -1,6 +1,5 @@
 {
   "name": "react-world",
-  "packageManager": "yarn@3.6.3",
   "private": true,
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
@@ -15,9 +14,9 @@
     "pagers"
   ],
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "react-world-7",
+    "email": "tmdah900@gmail.com",
+    "url": "https://github.com/pagers-org/react-world/tree/team7/project"
   },
   "packageManager": "pnpm@7.26.3",
   "devEngines": {
