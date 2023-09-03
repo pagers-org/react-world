@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import ArticleList from './pages/ArticleList';
+import Article from './pages/article';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -15,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/article/:id',
-    element: <ArticleList />,
+    element: <Article />,
   },
   {
     path: '/login',
