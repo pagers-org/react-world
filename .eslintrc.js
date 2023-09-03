@@ -10,6 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:tailwindcss/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -25,4 +26,4 @@ module.exports = {
     'react/self-closing-comp': 'warn', // 셀프 클로징 태그 가능하면 적용
     'no-console': 'warn',
   },
-}
+};
