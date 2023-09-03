@@ -10,3 +10,16 @@ export type Input = {
   size: string;
   placeholder: string;
 };
+
+export type User = {
+  userName: string;
+  email: string;
+  password: string;
+};
+
+export type UserAction = {
+  login: () => void;
+  updateUser: () => void;
+  logout: () => void;
+  reset: () => void;
+};

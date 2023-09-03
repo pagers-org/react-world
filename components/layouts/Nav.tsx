@@ -1,7 +1,22 @@
 import Link from 'next/link';
-import React from 'react';
+import * as styles from '@/styles/layout.css';
 
-const nav = [
+const nonLoginNav = [
+  {
+    href: '/',
+    name: 'Home',
+  },
+  {
+    href: '/login',
+    name: 'Sign in',
+  },
+  {
+    href: '/register',
+    name: 'Sign up',
+  },
+];
+
+const loginNav = [
   {
     href: '/',
     name: 'Home',
@@ -17,9 +32,11 @@ const nav = [
 ];
 
 const Nav = () => {
+  const isLogin = false;
+  const nav = isLogin ? loginNav : nonLoginNav;
   return (
-    <nav>
-      {nav.map((item, index) => (
+    <nav className={styles.nav}>
+      {nav?.map((item, index) => (
         <Link key={index} href={item.href}>
           {item.name}
         </Link>

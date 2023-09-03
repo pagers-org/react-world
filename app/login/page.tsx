@@ -1,16 +1,21 @@
 import Button from '@/composables/Button';
 import Input from '@/composables/Input';
-import * as style from '@/styles/account.css';
+import { question, title } from '@/styles/account.css';
+import { buttonBox, container, flexBox } from '@/styles/layout.css';
 
 const LoginPage = () => {
   return (
-    <div>
-      <div className={style.title}>Sign in</div>
-      <div className={style.question}>Need an account?</div>
-      <Input placeholder="Email" />
-      <Input placeholder="Password" />
-      <Button>Sign in</Button>
-    </div>
+    <main className={container}>
+      <div className={title}>Sign in</div>
+      <div className={question}>Need an account?</div>
+      <div className={flexBox}>
+        <Input placeholder="Email" />
+        <Input placeholder="Password" />
+        <div className={buttonBox}>
+          <Button>Sign in</Button>
+        </div>
+      </div>
+    </main>
   );
 };
 
