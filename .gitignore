@@ -131,3 +131,6 @@ dist
 
 # intellij
 .idea
+
+# next13 packages ignore
+next-env.d.ts

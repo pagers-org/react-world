@@ -1,7 +1,7 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -13,14 +13,8 @@
     "simple-import-sort"
   ],
   "extends": [
-    "prettier",
-    "prettier/react",
-    "react-app",
     "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "prettier"
   ],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
