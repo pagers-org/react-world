@@ -1,3 +1,9 @@
+import HomeBanner from "@/components/HomeBanner";
+
 export default function Home() {
-  return <main>Hello Next!</main>;
+  return (
+    <main>
+      <HomeBanner />
+    </main>
+  );
 }
