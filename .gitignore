@@ -140,3 +140,6 @@ dist
 next-env.d.ts
 
 /storybook-static
+/test-results/
+/playwright-report/
+/playwright/.cache/
