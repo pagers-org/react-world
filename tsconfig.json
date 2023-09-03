@@ -2,27 +2,22 @@
   "compilerOptions": {
     /* Language and Environment */
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "preserve",
     /* Modules */
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/public/*": [
-        "./public/*"
-      ],
-      "@/assets/*": [
-        "./assets/*"
-      ]
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"],
+      "@/assets/*": ["./assets/*"]
     },
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"],
+      "@/assets/*": ["./assets/*"]
+    },
     "resolveJsonModule": true /* Enable importing .json files. */,
     "plugins": [
       {
@@ -87,15 +82,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "incremental": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/api/app.js",
-    "src/api/api.js",
-    ".next/types/**/*.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/api/app.js", "src/api/api.js", ".next/types/**/*.ts"]
 }
