@@ -42,6 +42,7 @@ specifiers:
   ts-jest: ^29.1.1
   typescript: ^5.1.6
   webpack: ^5.88.2
+  zod: ^3.22.2
   zustand: ^4.4.1
 
 dependencies:
@@ -57,6 +58,7 @@ dependencies:
   react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
   tailwindcss: 3.3.3
   webpack: 5.88.2
+  zod: 3.22.2
   zustand: 4.4.1_gq4reeurwxuj4hvyerswzzqthy
 
 devDependencies:
@@ -5973,6 +5975,10 @@ packages:
 
   /zod/3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  /zod/3.22.2:
+    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
     dev: false
 
   /zustand/4.4.1_gq4reeurwxuj4hvyerswzzqthy:
