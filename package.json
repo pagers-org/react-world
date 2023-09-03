@@ -3,16 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "docker:build": "pnpm build && docker build --file ./Dockerfile.dev -t react-world .",
-    "docker:run": "docker run -p 3000:3000 react-world",
-    "docker:start": "pnpm docker:build && pnpm docker:run"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
@@ -27,39 +17,26 @@
     "email": "goflvhxj2547@gmail.com",
     "url": "https://github.com/inseong-so"
   },
-  "devEngines": {
-    "node": "16.x || 18.x || 19.x || 20.x"
-  },
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
-  "dependencies": {
-    "@tanstack/query-core": "^4.33.0",
-    "@tanstack/react-query": "^4.33.0",
-    "next": "13.4.19",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+  "devEngines": {
+    "node": "16.x || 18.x || 19.x || 20.x"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^4.34.1",
-    "@tanstack/react-query-devtools": "^4.33.0",
-    "@types/node": "20.5.7",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.4.1",
-    "@typescript-eslint/parser": "^6.4.1",
-    "@vanilla-extract/css": "^1.13.0",
-    "@vanilla-extract/next-plugin": "^2.3.0",
-    "eslint": "8.48.0",
-    "eslint-config-next": "13.4.19",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^3.0.2",
-    "typescript": "5.1.6",
-    "webpack": "^5.20.2"
-  }
+    "prettier": "^3.0.3",
+    "tsconfig": "workspace:*",
+    "turbo": "latest",
+    "eslint": "^8.48.0",
+    "typescript": "^4.8.0"
+  },
+  "packageManager": "pnpm@8.6.10"
 }
