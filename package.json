@@ -6,7 +6,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pagers-org/react-world.git"
+    "url": "git+https://github.com/pagers-e3i1/react-world.git"
   },
   "keywords": [
     "real-world",
@@ -14,9 +14,9 @@
     "pagers"
   ],
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "pagers-e3i1",
+    "email": "sgsg9447@gmail.com",
+    "url": "https://github.com/pagers-e3i1/react-world"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
@@ -25,5 +25,22 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "scripts": {
+    "prepare": "husky install",
+    "ds": "pnpm -F design-system",
+    "app": "pnpm -F app"
+  },
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.3"
+  }
 }
