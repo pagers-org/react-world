@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "preinstall": "pnpm dlx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm"
   },
   "engines": {
     "node": ">16.14.2",
