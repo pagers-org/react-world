@@ -1,6 +1,7 @@
 {
-  "name": "react-world",
+  "name": "@rw/root",
   "private": true,
+  "packageManager": "yarn@3.6.3",
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
   "main": "index.js",
@@ -16,6 +17,10 @@
   "scripts": {
     "lint": "eslint ."
   },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "author": {
     "name": "InSeong-So",
     "email": "goflvhxj2547@gmail.com",
@@ -33,20 +38,15 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "devDependencies": {
-    "@types/node": "^20.5.6",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "eslint": "^8.48.0",
-    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "typescript": "^5.1.6"
-  },
-  "packageManager": "yarn@3.6.3"
+  }
 }
