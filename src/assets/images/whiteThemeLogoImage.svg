@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1377.84 239.51">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .1em;
+      }
+
+      .cls-2 {
+        font-family: BMHANNAProOTF-KSCpc-EUC-H, 'BM Hanna Pro';
+        font-size: 140px;
+      }
+
+      .cls-3 {
+        letter-spacing: .08em;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(238.62 160.83)"><tspan class="cls-1" x="0" y="0">React-</tspan><tspan class="cls-3" x="502.31" y="0">w</tspan><tspan class="cls-1" x="619.35" y="0">orld</tspan></text>
+</svg>
