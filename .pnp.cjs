@@ -834,6 +834,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/react-world/",\
           "packageDependencies": [\
             ["@rw/app", "workspace:apps/react-world"],\
+            ["@types/axios", "npm:0.14.0"],\
             ["@types/react", "npm:18.2.21"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@vitejs/plugin-react", "virtual:9f395fa13a0306a88172707233a57b0463709f8d0c6fafccd31777e7b559a7bffcfaed6b01e537df56cab54631070b9e7fcb055b86a7f3699567a3415e20f36a#npm:4.0.4"],\
@@ -872,6 +873,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@tootallnate-once-npm-2.0.0-e36cf4f140-ad87447820.zip/node_modules/@tootallnate/once/",\
           "packageDependencies": [\
             ["@tootallnate/once", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/axios", [\
+        ["npm:0.14.0", {\
+          "packageLocation": "./.yarn/cache/@types-axios-npm-0.14.0-42f41917ea-12a230b940.zip/node_modules/@types/axios/",\
+          "packageDependencies": [\
+            ["@types/axios", "npm:0.14.0"],\
+            ["axios", "npm:1.5.0"]\
           ],\
           "linkType": "HARD"\
         }]\
