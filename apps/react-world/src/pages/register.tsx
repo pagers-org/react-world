@@ -1,7 +1,8 @@
 import useRegister from '../hooks/useRegister';
 
 export const RegisterPage: React.FC = () => {
-  const { userData, error, handleInputChange, handleSubmit } = useRegister();
+  const { userData, error, isLoading, handleInputChange, handleSubmit } =
+    useRegister();
 
   return (
     <>
@@ -81,8 +82,9 @@ export const RegisterPage: React.FC = () => {
                 <button
                   type="submit"
                   className="btn btn-lg btn-primary pull-xs-right"
+                  disabled={isLoading}
                 >
-                  Sign up
+                  {isLoading ? 'Signing up...' : 'Sign up'}
                 </button>
               </form>
             </div>
