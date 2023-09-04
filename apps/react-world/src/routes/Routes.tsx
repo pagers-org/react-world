@@ -3,6 +3,7 @@ import { HomePage } from '../pages/home';
 import { LoginPage } from '../pages/login';
 import { RegisterPage } from '../pages/register';
 import { ArticlePage } from '../pages/article';
+import { EditorPage } from '../pages/editor';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: '/article/:articleSlug',
+    path: '/editor/:articleSlug?', // 새 아티클 작성 | 아티클 수정
+    element: <EditorPage />,
+  },
+  {
+    path: '/article/:slug',
     element: <ArticlePage />,
   },
 ]);
