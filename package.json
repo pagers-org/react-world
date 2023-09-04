@@ -28,6 +28,7 @@
   "homepage": "https://github.com/her0707/react-world#readme",
   "dependencies": {
     "@astrojs/react": "^3.0.0",
+    "@astrojs/ts-plugin": "^1.1.3",
     "astro": "^3.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
