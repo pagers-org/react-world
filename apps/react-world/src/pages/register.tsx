@@ -1,4 +1,8 @@
-export const RegisterPage = () => {
+import useRegister from '../hooks/useRegister';
+
+export const RegisterPage: React.FC = () => {
+  const { userData, error, handleInputChange, handleSubmit } = useRegister();
+
   return (
     <>
       <nav className="navbar navbar-light">
@@ -34,17 +38,24 @@ export const RegisterPage = () => {
               <p className="text-xs-center">
                 <a href="/login">Have an account?</a>
               </p>
-
-              <ul className="error-messages">
-                <li>That email is already taken</li>
-              </ul>
-
-              <form>
+              {error && (
+                <ul className="error-messages">
+                  {Object.entries(error).map(([key, value]) => (
+                    <li key={key}>
+                      {key} {value.join(' ')}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <form onSubmit={handleSubmit}>
                 <fieldset className="form-group">
                   <input
                     className="form-control form-control-lg"
                     type="text"
                     placeholder="Username"
+                    name="username"
+                    value={userData.username}
+                    onChange={handleInputChange}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -52,6 +63,9 @@ export const RegisterPage = () => {
                     className="form-control form-control-lg"
                     type="text"
                     placeholder="Email"
+                    name="email"
+                    value={userData.email}
+                    onChange={handleInputChange}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -59,9 +73,15 @@ export const RegisterPage = () => {
                     className="form-control form-control-lg"
                     type="password"
                     placeholder="Password"
+                    name="password"
+                    value={userData.password}
+                    onChange={handleInputChange}
                   />
                 </fieldset>
-                <button className="btn btn-lg btn-primary pull-xs-right">
+                <button
+                  type="submit"
+                  className="btn btn-lg btn-primary pull-xs-right"
+                >
                   Sign up
                 </button>
               </form>
