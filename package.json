@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
@@ -17,6 +16,9 @@
     "name": "InSeong-So",
     "email": "goflvhxj2547@gmail.com",
     "url": "https://github.com/inseong-so"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
   },
   "devEngines": {
     "node": "16.x || 18.x || 19.x || 20.x"
