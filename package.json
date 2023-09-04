@@ -31,7 +31,8 @@
         "server": "yarn workspace server"
     },
     "workspaces": [
-        "apps/*"
+        "apps/*",
+        "packages/*"
     ],
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "latest",

@@ -1,0 +1,10 @@
+{
+    "name": "@packages/lib",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./src/index.ts",
+    "packageManager": "yarn@3.6.3",
+    "devDependencies": {
+        "typescript": "^5.2.2"
+    }
+}

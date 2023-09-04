@@ -176,6 +176,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@packages/lib@workspace:^, @packages/lib@workspace:packages/lib":
+  version: 0.0.0-use.local
+  resolution: "@packages/lib@workspace:packages/lib"
+  dependencies:
+    typescript: ^5.2.2
+  languageName: unknown
+  linkType: soft
+
 "@swc/helpers@npm:0.5.1":
   version: 0.5.1
   resolution: "@swc/helpers@npm:0.5.1"
@@ -592,13 +600,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "client@workspace:apps/client"
   dependencies:
+    "@packages/lib": "workspace:^"
     "@types/node": 20.5.9
     "@types/react": 18.2.21
     "@types/react-dom": 18.2.7
     next: 13.4.19
     react: 18.2.0
     react-dom: 18.2.0
-    typescript: 5.2.2
+    typescript: ^5.2.2
   languageName: unknown
   linkType: soft
 
@@ -2394,7 +2403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.2.2":
+"typescript@npm:^5.2.2":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
   bin:
@@ -2404,7 +2413,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.2.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
   version: 5.2.2
   resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
   bin:
