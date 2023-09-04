@@ -4,6 +4,7 @@ import { LoginPage } from '../pages/login';
 import { RegisterPage } from '../pages/register';
 import { ArticlePage } from '../pages/article';
 import { EditorPage } from '../pages/editor';
+import { SettingsPage } from '../pages/settings';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/article/:slug',
     element: <ArticlePage />,
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />,
   },
 ]);
 
