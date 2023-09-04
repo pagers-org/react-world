@@ -1,15 +1,31 @@
+import { getThemeCookieValue } from "@/utils/getThemeCookieValue";
+import { generateThemeScript } from "@/utils/generateThemeScript";
+import Card from "@/components/composables/Card/Card";
+import Header from "@/components/Header/Header";
+import ContentCard from "@/components/composables/Card/ContentCard";
+import Footer from "@/components/composables/Footer/Footer";
+import "./global.css";
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentTheme = getThemeCookieValue();
+  const themeInitializerScript = generateThemeScript(currentTheme);
+
   return (
     <html lang="en">
       <head />
-      <body>
-        <script></script>
+      <body suppressHydrationWarning={true}>
+        <script
+          dangerouslySetInnerHTML={{ __html: themeInitializerScript }}
+        ></script>
 
-        {children}
+        <Card>
+          <Header currentTheme={currentTheme} />
+          <ContentCard>{children}</ContentCard>
+          <Footer />
+        </Card>
       </body>
     </html>
   );
