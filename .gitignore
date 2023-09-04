@@ -119,6 +119,9 @@ dist
 # TernJS port file
 .tern-port
 
+# vscode prettier
+.vscode/settings.json
+
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
@@ -137,3 +140,6 @@ dist
 next-env.d.ts
 
 /storybook-static
+/test-results/
+/playwright-report/
+/playwright/.cache/

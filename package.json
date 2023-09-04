@@ -14,9 +14,9 @@
     "pagers"
   ],
   "author": {
-    "name": "InSeong-So",
-    "email": "goflvhxj2547@gmail.com",
-    "url": "https://github.com/inseong-so"
+    "name": "react-world-7",
+    "email": "tmdah900@gmail.com",
+    "url": "https://github.com/pagers-org/react-world/tree/team7/project"
   },
   "packageManager": "pnpm@7.26.3",
   "devEngines": {
@@ -45,13 +45,23 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.22.11",
+    "autoprefixer": "^10.4.15",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "next": "^13.4.7",
+    "postcss": "^8.4.29",
+    "postcss-loader": "^7.3.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
+    "tailwindcss": "^3.3.3",
+    "webpack": "^5.88.2",
+    "zod": "^3.22.2",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.37.1",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
