@@ -1,16 +1,20 @@
+import ArticleCard from "@/components/ArticleCard";
 import HomeBanner from "@/components/HomeBanner";
-import Profile from "@/components/common/Profile";
-
-const tempImgUrl = "/excitedPenguin.jpeg";
-const tempName = "Anah Benesova";
-const tempDate = "December 9, 2022";
 
 export default function Home() {
   return (
     <main>
       <HomeBanner />
-      <section>
-        <Profile src={tempImgUrl} name={tempName} date={tempDate} />
+      <section className="p-10">
+        <ul className="flex">
+          <li className="border-b-2 border-b-primary p-2 text-primary">Global Feed</li>
+        </ul>
+        <ul>
+          <ArticleCard />
+          <ArticleCard />
+          <ArticleCard />
+          <ArticleCard />
+        </ul>
       </section>
     </main>
   );
