@@ -31,6 +31,9 @@ const useRegister = () => {
       const response = await RegisterService.registerUser(userData);
       console.log('response: ' + JSON.stringify(response, null, 2));
 
+      // TODO: 임시로 로컬 스토리지에 토큰 저장
+      localStorage.setItem('jwtToken', response.user.token);
+
       setIsLoading(false);
       return response;
     } catch (error) {
