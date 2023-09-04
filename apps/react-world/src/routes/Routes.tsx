@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HomePage } from '../pages/home';
 import { LoginPage } from '../pages/login';
 import { RegisterPage } from '../pages/register';
+import { ProfilePage } from '../pages/profile';
 import { ArticlePage } from '../pages/article';
 import { EditorPage } from '../pages/editor';
 import { SettingsPage } from '../pages/settings';
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    path: '/profile/:username',
+    element: <ProfilePage />,
   },
   {
     path: '/editor/:articleSlug?', // 새 아티클 작성 | 아티클 수정
