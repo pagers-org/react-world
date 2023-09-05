@@ -6,9 +6,9 @@ import Nav from './Nav';
 const Header = () => {
   return (
     <header className={header}>
-      <div className={logo}>
-        <Link href="/">conduit</Link>
-      </div>
+      <Link href="/" className={logo}>
+        conduit
+      </Link>
       <Nav />
     </header>
   );

@@ -3,10 +3,17 @@ import { style } from '@vanilla-extract/css';
 export const header = style({
   display: 'flex',
   justifyContent: 'space-between',
+  padding: '0.5rem, 1rem',
+  width: '80%',
+  margin: '0 auto',
 });
 
 export const logo = style({
-  fontSize: '0.8rem',
+  fontSize: '1.5rem',
+  color: '#5CB85C',
+  paddingBottom: 4,
+  lineHeight: 2,
+  fontWeight: 'bold',
 });
 
 export const footer = style({
@@ -15,7 +22,20 @@ export const footer = style({
 
 export const nav = style({
   display: 'flex',
-  gap: 5,
+  alignItems: 'center',
+  gap: 15,
+});
+
+export const navItem = style({
+  padding: '0.425rem 0px',
+});
+
+export const activate = style({
+  color: 'rgba(0, 0, 0, 0.8)',
+});
+
+export const disabled = style({
+  color: 'rgba(0, 0, 0, 0.3)',
 });
 
 export const container = style({
@@ -42,14 +62,10 @@ export const tagList = style({
 export const input = style({
   width: '300px',
   height: '50px',
-  padding: '10px 20px',
-  fontSize: '1.5rem',
-  // textAlign: 'center',
-  // display: 'flex',
-  // justifyContent: 'center',
-  // alignItems: 'center',
-  borderRadius: '5px',
-  border: '1px solid gray',
+  padding: '0.75rem 1.5rem',
+  fontSize: '1.25rem',
+  borderRadius: '0.3rem',
+  border: '1px solid rgba(0, 0, 0, 0.15);',
   boxSizing: 'border-box',
 });
 

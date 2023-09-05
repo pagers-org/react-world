@@ -1,12 +1,13 @@
 import { style } from '@vanilla-extract/css';
 
 export const title = style({
-  fontSize: '1.5rem',
+  fontSize: '2.5rem',
+  marginBottom: '0.5rem',
 });
 
 export const question = style({
-  fontSize: '1rem',
-  color: 'lightgreen',
+  color: '#5CB85C;',
+  marginBottom: '1rem',
 });
 
 export const textCenter = style({
