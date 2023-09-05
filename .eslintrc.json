@@ -43,6 +43,7 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/require-await": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
     "prefer-rest-params": "warn"
   }
 }
