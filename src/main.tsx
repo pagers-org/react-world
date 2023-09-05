@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Article from './pages/article';
 import Login from './pages/login';
 import Register from './pages/register';

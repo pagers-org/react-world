@@ -1,32 +1,6 @@
 export default function Register() {
   return (
     <>
-      <nav className="navbar navbar-light">
-        <div className="container">
-          <a className="navbar-brand" href="/">
-            conduit
-          </a>
-          <ul className="nav navbar-nav pull-xs-right">
-            <li className="nav-item">
-              -- Add "active" className when you're on that page" --
-              <a className="nav-link active" href="/">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/login">
-                Sign in
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/register">
-                Sign up
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -35,11 +9,6 @@ export default function Register() {
               <p className="text-xs-center">
                 <a href="/login">Have an account?</a>
               </p>
-
-              <ul className="error-messages">
-                <li>That email is already taken</li>
-              </ul>
-
               <form>
                 <fieldset className="form-group">
                   <input
@@ -64,18 +33,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-
-      <footer>
-        <div className="container">
-          <a href="/" className="logo-font">
-            conduit
-          </a>
-          <span className="attribution">
-            An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code
-            &amp; design licensed under MIT.
-          </span>
-        </div>
-      </footer>
     </>
   );
 }
