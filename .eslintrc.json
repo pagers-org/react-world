@@ -30,24 +30,7 @@
     "JSX": true,
     "React": true
   },
-  "settings": {
-    "import/resolver": {
-      "node": {},
-      "typescript": {
-        "directory": "./src"
-      }
-    },
-    "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] }
-  },
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": false,
-        "parser": "flow",
-        "endOfLine": "auto"
-      }
-    ],
     "@typescript-eslint/no-unsafe-call": "warn",
     "@typescript-eslint/no-unsafe-return": "warn",
     "@typescript-eslint/no-unsafe-argument": "warn",
@@ -60,26 +43,6 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/require-await": "warn",
-    "prefer-rest-params": "warn",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        },
-        "newlines-between": "never"
-      }
-    ],
-    "import/no-named-as-default": "off",
-    "import/export": "off"
+    "prefer-rest-params": "warn"
   }
 }
