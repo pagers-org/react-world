@@ -15,8 +15,7 @@
       "files": ["*.mjs", "*.cjs"],
       "extends": ["plugin:prettier/recommended"],
       "rules": {
-        "import/no-extraneous-dependencies": "off", // mjs is only used by Astro for configuration, false positive
-        "import/no-unresolved": "off" // Also false positive with mjs file
+        "import/no-extraneous-dependencies": "off" // mjs is only used by Astro for configuration, false positive
       }
     },
     {
@@ -29,8 +28,7 @@
       "extends": ["plugin:astro/recommended"],
       "rules": {
         "astro/no-conflict-set-directives": "error",
-        "astro/no-unused-define-vars-in-style": "error",
-        "import/no-unresolved": "off" // Also false positive with mjs file
+        "astro/no-unused-define-vars-in-style": "error"
       }
     },
     {
@@ -40,9 +38,9 @@
       "extends": ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended", "plugin:import/typescript"]
     }
   ],
-
   "rules": {
     "no-empty": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "import/no-unresolved": "off"
   }
 }
