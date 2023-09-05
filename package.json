@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.22.11",
+    "@tanstack/react-query": "^4.33.0",
     "autoprefixer": "^10.4.15",
     "eslint-plugin-tailwindcss": "^3.13.0",
     "next": "^13.4.7",
@@ -54,7 +55,6 @@
     "prettier-plugin-tailwindcss": "^0.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
     "tailwindcss": "^3.3.3",
     "webpack": "^5.88.2",
     "zod": "^3.22.2",
@@ -62,10 +62,12 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.37.1",
+    "@tanstack/react-query-devtools": "^4.33.0",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.5.0",
     "@types/react": "^18.2.20",
