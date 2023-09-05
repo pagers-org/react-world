@@ -32,7 +32,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
   },
   "husky": {
     "hooks": {
