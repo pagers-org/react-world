@@ -20,7 +20,7 @@ export const header_container = style({
   position: "fixed",
   margin: "auto",
   zIndex: "700",
-  width: "95%",
+  width: "75%",
   height: "4.5rem",
   boxShadow: "rgba(0, 0, 0, 0.08) 0px 0px 8px",
   display: "flex",

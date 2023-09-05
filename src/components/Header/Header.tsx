@@ -7,7 +7,7 @@ import {
   link,
 } from "@/styles/header.css";
 import { color_state } from "@/styles/container.css";
-import { useDarkMode } from "@/libs/hooks/useDarkMode";
+import { useTheme } from "@/libs/hooks/useTheme";
 import {
   toggle_label,
   toggle_input,
@@ -22,7 +22,7 @@ type HeaderProps = {
 };
 
 export default function Header({ currentTheme }: HeaderProps) {
-  const { darkTheme, themeToggleHandler } = useDarkMode(currentTheme);
+  const { darkTheme, themeToggleHandler } = useTheme(currentTheme);
 
   return (
     <div className={`${header_container} ${color_state}`}>

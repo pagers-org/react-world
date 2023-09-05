@@ -5,7 +5,7 @@ import {
 } from "./container.css";
 
 export const footer_container = style({
-  width: "95%",
+  width: "75%",
   height: "4.5rem",
   boxShadow: "rgba(0, 0, 0, 0.08) 0px 0px 8px",
   display: "flex",

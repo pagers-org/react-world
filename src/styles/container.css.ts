@@ -14,6 +14,8 @@ export const page_button_background_color_var = createVar();
 export const page_button_color_var = createVar();
 export const page_button_active_background_color_var = createVar();
 export const page_button_active_color_var = createVar();
+export const popular_tags_background_color_var = createVar();
+export const tag_background_color_var = createVar();
 
 export const color_state = style({
   vars: {
@@ -49,6 +51,8 @@ export const color_state = style({
         [page_button_color_var]: "#ececec",
         [page_button_active_background_color_var]: "#535353",
         [page_button_active_color_var]: "",
+        [popular_tags_background_color_var]: "#1b1b1b",
+        [tag_background_color_var]: "#282828",
       },
     },
   },
