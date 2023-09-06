@@ -1,7 +1,9 @@
+import Text from "../components/Text";
+
 export default function page() {
   return (
     <div>
-      루트페이지
+      <Text children="루트페이지" />
     </div>
   );
 }
