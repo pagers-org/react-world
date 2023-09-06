@@ -4,7 +4,7 @@ import { vars } from '@/src/styles/theme.css';
 
 export const articleCard = style({
   padding: '16px 0',
-  borderBottom: `1px solid ${vars.color.gray}`,
+  borderBottom: `1px solid ${vars.colors.gray}`,
 });
 
 export const top = style({
@@ -22,19 +22,19 @@ export const authorImage = style({
 });
 
 export const authorName = style({
-  color: vars.color.primary,
+  color: vars.colors.primary,
   fontWeight: 500,
 });
 
 export const createdDate = style({
   fontSize: 14,
-  color: vars.color.gray,
+  color: vars.colors.gray,
 });
 
 export const favoriteButton = style({
   padding: 4,
-  border: `1px solid ${vars.color.primary}`,
-  color: vars.color.primary,
+  border: `1px solid ${vars.colors.primary}`,
+  color: vars.colors.primary,
 });
 
 export const content = style({
@@ -50,12 +50,12 @@ export const articleTitle = style({
 });
 
 export const articleDescription = style({
-  color: vars.color.gray,
+  color: vars.colors.gray,
 });
 
 export const bottom = style({
   display: 'flex',
-  color: vars.color.gray,
+  color: vars.colors.gray,
   justifyContent: 'space-between',
   alignItems: 'center',
   marginTop: 12,
@@ -68,7 +68,7 @@ export const bottomTagList = style({
 
 export const bottomTag = style({
   padding: 6,
-  border: `1px solid ${vars.color.gray}`,
+  border: `1px solid ${vars.colors.gray}`,
   borderRadius: 12,
   fontSize: 12,
 });

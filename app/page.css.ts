@@ -10,7 +10,7 @@ export const content = style({
 
 export const tab = style({
   display: 'flex',
-  borderBottom: `1px solid ${vars.color.gray}`,
+  borderBottom: `1px solid ${vars.colors.gray}`,
   gap: 6,
 });
 
@@ -31,7 +31,7 @@ export const chipWrapper = style({
 export const chip = style({
   padding: 4,
   fontSize: 12,
-  background: vars.color.gray400,
-  color: vars.color.white,
+  background: vars.colors.gray400,
+  color: vars.colors.white,
   borderRadius: 24,
 });

@@ -9,14 +9,12 @@ import Header from '@/src/components/layout/Header';
 
 import ReactQueryProviders from '@/src/lib/ReactQueryProviders';
 
-import { themeClass } from '@/src/styles/theme.css';
-
 import './reset.css';
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko">
-      <body className={themeClass}>
+      <body>
         <ReactQueryProviders>
           <Header>
             <Header.Left>

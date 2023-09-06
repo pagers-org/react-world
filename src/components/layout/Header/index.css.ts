@@ -1,5 +1,6 @@
-import { vars } from '@/src/styles/theme.css';
 import { style } from '@vanilla-extract/css';
+
+import { vars } from '@/src/styles/theme.css';
 
 export const header = style({
   display: 'flex',
@@ -10,7 +11,7 @@ export const header = style({
 });
 
 export const headerLeft = style({
-  color: vars.color.primary,
+  color: vars.colors.primary,
   fontSize: 24,
   fontWeight: 700,
 });

@@ -3,11 +3,11 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/src/styles/theme.css';
 
 export const primary = style({
-  backgroundColor: vars.color.primary,
+  backgroundColor: vars.colors.primary,
 });
 
 export const secondary = style({
-  backgroundColor: vars.color.black,
+  backgroundColor: vars.colors.black,
 });
 
 export const bannerContainer = style({
@@ -16,7 +16,7 @@ export const bannerContainer = style({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  color: vars.color.white,
+  color: vars.colors.white,
   boxShadow:
     'inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3)',
 });
