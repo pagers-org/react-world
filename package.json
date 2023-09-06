@@ -10,6 +10,7 @@
   },
   "scripts": {
     "realworld": "yarn workspace real-world",
+    "tailwindcss-config": "yarn workspace @packages/tailwindcss-config",
     "eslint-config": "yarn workspace @packages/eslint-config",
     "ts-config": "yarn workspace @packages/ts-config",
     "ui": "yarn workspace @packages/ui"
