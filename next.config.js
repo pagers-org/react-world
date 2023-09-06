@@ -3,6 +3,10 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['api.realworld.io'],
+  },
+
   reactStrictMode: true,
 };
 
