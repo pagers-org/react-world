@@ -1,17 +1,20 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import "./styles/main.css";
+import "./styles/ionicons.min.css";
 import Providers from "../lib/providers";
+import { titillium } from "./styles/fonts";
+import Gnb from "./components/gnb";
+import Footer from "./components/footer";
 
-export const metadata: Metadata = {
-  title: "react world",
-  description: "react world by min",
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
-    <html lang="ko">
+    <html className={titillium.className} lang="ko">
       <Providers>
-        <body>{children}</body>
+        <body>
+          <Gnb />
+          {children}
+          <Footer />
+        </body>
       </Providers>
     </html>
   );
