@@ -1,9 +1,6 @@
 'use client';
 
-import Link from 'next/link';
 import { PropsWithChildren } from 'react';
-
-import * as styles from '@/app/layout.css';
 
 import Header from '@/src/components/layout/Header';
 
@@ -16,18 +13,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="ko">
       <body>
         <ReactQueryProviders>
-          <Header>
-            <Header.Left>
-              <Link className={styles.logo} href="/">
-                TECH
-              </Link>
-            </Header.Left>
-            <Header.Right>
-              <Link href="/">Home</Link>
-              <Link href="/login">Sign in</Link>
-              <Link href="/register">Sign up</Link>
-            </Header.Right>
-          </Header>
+          <Header />
           <main>{children}</main>
         </ReactQueryProviders>
       </body>

@@ -10,6 +10,10 @@ export const header = style({
   padding: '8px 16px',
 });
 
+export const logo = style({
+  color: vars.colors.primary,
+});
+
 export const headerLeft = style({
   color: vars.colors.primary,
   fontSize: 24,
