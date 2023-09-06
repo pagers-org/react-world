@@ -15,7 +15,6 @@ export const navContainer = style({
 });
 
 export const navBrand = style({
-  fontFamily: ' Titillium Web, sans-serif',
   fontSize: ' 1.5rem !important',
   paddingTop: ' 0rem !important',
   marginRight: ' 2rem !important',
@@ -42,6 +41,7 @@ export const navUl = style({
 
 export const navItem = style({
   float: 'left',
+  marginLeft: '1rem',
   listStyle: 'none',
 });
 
