@@ -1,0 +1,27 @@
+{
+  "name": "next13",
+  "version": "1.0.0",
+  "description": "realworld used next13",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "npx eslint src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2",
+    "@libs/react-component": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9",
+    "@types/react": "^18.2.21",
+    "eslint": "^8.48.0",
+    "eslint-plugin-import": "^2.28.1"
+  }
+}
