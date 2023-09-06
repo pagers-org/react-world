@@ -1,32 +1,33 @@
-import Image from 'next/image';
-import React from 'react';
-
-const ArticlePreview = () => {
+'use client';
+import { articleDescription, articleMeta, articlePreview, articleReadMore, articleTitle } from '@/styles/article.css';
+import UserBox from '../user/UserBox';
+import TagList from '../tags/TagList';
+import { flex } from '@/styles/layout.css';
+import { heart } from '@/styles/account.css';
+import { useRouter } from 'next/navigation';
+type Props = {
+  article: any;
+};
+const ArticlePreview = ({
+  article: { title, description, favorited, favoritesCount, tagList, author, createdAt, slug },
+}: Props) => {
+  const router = useRouter();
   return (
-    <div className="article-preview">
-      <div className="article-meta">
-        <a href="/profile/eric-simons">
-          <Image src={'http://i.imgur.com/Qr71crq.jpg'} />
-        </a>
-        <div className="info">
-          <a href="/profile/eric-simons" className="author">
-            Eric Simons
-          </a>
-          <span className="date">January 20th</span>
-        </div>
-        <button className="btn btn-outline-primary btn-sm pull-xs-right">
-          <i className="ion-heart"></i> 29
+    <div className={articlePreview}>
+      <div className={articleMeta}>
+        <UserBox author={author} createdAt={createdAt} />
+        <button className={heart}>
+          {favorited ? '❤' : '🤍'} {favoritesCount}
         </button>
       </div>
-      <a href="/article/how-to-build-webapps-that-scale" className="preview-link">
-        <h1>How to build webapps that scale</h1>
-        <p>This is the description for the post.</p>
-        <span>Read more...</span>
-        <ul className="tag-list">
-          <li className="tag-default tag-pill tag-outline">realworld</li>
-          <li className="tag-default tag-pill tag-outline">implementations</li>
-        </ul>
-      </a>
+      <div onClick={() => router.push(`/article/${slug}`)}>
+        <div className={articleTitle}>{title}</div>
+        <div className={articleDescription}>{description}</div>
+        <div className={flex}>
+          <span className={articleReadMore}>Read more...</span>
+          <TagList tags={tagList} />
+        </div>
+      </div>
     </div>
   );
 };

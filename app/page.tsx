@@ -1,15 +1,20 @@
 import ArticleList from '@/components/article/ArticleList';
+import ArticleTab from '@/components/article/ArticleTab';
 import Banner from '@/components/layouts/Banner';
 import SideBar from '@/components/layouts/SideBar';
-import { container } from '@/styles/layout.css';
+import { articleContainer } from '@/styles/article.css';
+import { container, flex } from '@/styles/layout.css';
 
 export default function Page() {
   return (
     <>
       <Banner />
       <main className={container}>
-        <div>
-          <ArticleList />
+        <div className={flex}>
+          <div className={articleContainer}>
+            <ArticleTab />
+            <ArticleList />
+          </div>
           <SideBar />
         </div>
       </main>

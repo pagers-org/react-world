@@ -1,13 +1,18 @@
 import React from 'react';
 import TagList from '../tags/TagList';
-import { sideBar } from '@/styles/layout.css';
+import { sideBar, sideBarText } from '@/styles/layout.css';
+import { sidePadding } from '@/styles/common.css';
+import { http } from '@/libs/http';
 
-const SideBar = () => {
+const SideBar = async () => {
+  const { tags } = await http.get('https://api.realworld.io/api/tags');
   return (
-    <article className={sideBar}>
-      <p>Popular Tags</p>
-      <TagList />
-    </article>
+    <div className={sidePadding}>
+      <article className={sideBar}>
+        <p className={sideBarText}>Popular Tags</p>
+        <TagList tags={tags} />
+      </article>
+    </div>
   );
 };
 

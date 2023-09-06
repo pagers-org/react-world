@@ -1,18 +1,22 @@
-import { tagList } from '@/styles/layout.css';
+'use client';
+import { tagFill, tagItem, tagList } from '@/styles/layout.css';
 import Link from 'next/link';
 import React from 'react';
 
-const languages = ['programming', 'javascript', 'emberjs', 'angularjs', 'react', 'mean', 'node', 'rails'];
-
-const TagList = () => {
+type Props = {
+  tags: string[];
+};
+const TagList = ({ tags }: Props) => {
   return (
-    <div className={tagList}>
-      {languages?.map((language, index) => (
-        <Link key={index} href="" className="tag-pill tag-default">
-          {language}
-        </Link>
+    <ul className={tagList}>
+      {tags?.map((tag, index) => (
+        <li key={index}>
+          <Link href="" className={`${tagItem} ${tagFill}`}>
+            {tag}
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

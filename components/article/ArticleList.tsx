@@ -1,7 +1,16 @@
-import React from 'react';
+import { fetchArticles } from '@/services/articles';
+import ArticlePreview from './ArticlePreview';
 
-const ArticleList = () => {
-  return <div>ArticleList</div>;
+const ArticleList = async () => {
+  const { articles } = await fetchArticles();
+
+  return (
+    <div>
+      {articles.map(article => (
+        <ArticlePreview key={article.slug} article={article} />
+      ))}
+    </div>
+  );
 };
 
 export default ArticleList;

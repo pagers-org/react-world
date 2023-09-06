@@ -4,7 +4,7 @@ export const header = style({
   display: 'flex',
   justifyContent: 'space-between',
   padding: '0.5rem, 1rem',
-  width: '80%',
+  width: '90%',
   margin: '0 auto',
 });
 
@@ -39,7 +39,7 @@ export const disabled = style({
 });
 
 export const container = style({
-  width: '80%',
+  width: '90%',
   height: '100%',
   margin: '0 auto',
   display: 'flex',
@@ -52,11 +52,35 @@ export const sideBar = style({
   padding: '5px 10px 10px 10px',
   background: '#f3f3f3',
   borderRadius: '4px',
+  width: 255,
+});
+
+export const sideBarText = style({
+  margin: 0,
+  marginBottom: '0.2rem',
 });
 
 export const tagList = style({
   display: 'flex',
   flexWrap: 'wrap',
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+});
+
+export const tagItem = style({
+  color: '#fff',
+  fontSize: '0.8rem',
+  padding: '0.1rem 0.6rem',
+  backgroundColor: '#818a91',
+  marginRight: '3px',
+  marginBottom: '0.2rem',
+  display: 'flex',
+  alignItems: 'center',
+});
+
+export const tagFill = style({
+  borderRadius: '0.6rem',
 });
 
 export const input = style({
@@ -94,4 +118,10 @@ export const buttonBox = style({
   display: 'flex',
   width: '100%',
   justifyContent: 'flex-end',
+});
+
+export const flex = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
 });
