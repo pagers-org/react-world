@@ -34,6 +34,20 @@
   },
   "devDependencies": {
     "typescript": "5.2.2",
-    "@types/react": "18.2.0"
+    "@types/react": "18.2.0",
+    "@types/eslint": "8.44.2",
+    "@types/eslint-config-prettier": "6.11.0",
+    "@types/eslint-plugin-prettier": "3.1.0",
+    "@types/node": "20.5.8",
+    "@typescript-eslint/parser": "6.6.0",
+    "eslint": "8.48.0",
+    "eslint-config-next": "13.4.19",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unicorn": "48.0.1",
+    "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4"
   }
 }
