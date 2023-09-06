@@ -26,7 +26,14 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
+  "homepage": "https://github.com/pagers-org/react-world#readme",
+  "dependencies": {
+    "next": "13.4.19",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
   "devDependencies": {
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "@types/react": "18.2.0"
   }
 }
