@@ -1,20 +1,31 @@
-import Button from '@/composables/Button';
-import Input from '@/composables/Input';
+'use client';
+
+import useUserStore from '@/stores/useUserStore';
 import { question, title } from '@/styles/account.css';
-import { buttonBox, container, flexBox } from '@/styles/layout.css';
+import { button, buttonBox, container, flexBox, input } from '@/styles/layout.css';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+  const { login } = useUserStore();
+  const router = useRouter();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    login(e);
+    router.push('/');
+  };
   return (
     <main className={container}>
       <div className={title}>Sign in</div>
       <div className={question}>Need an account?</div>
-      <div className={flexBox}>
-        <Input placeholder="Email" />
-        <Input placeholder="Password" />
-        <div className={buttonBox}>
-          <Button>Sign in</Button>
+      <form onSubmit={handleSubmit}>
+        <div className={flexBox}>
+          <input type="email" name="email" placeholder="Email" className={input} />
+          <input type="password" name="password" placeholder="Password" className={input} />
+          <div className={buttonBox}>
+            <input type="submit" value={'Sign in'} className={button} />
+          </div>
         </div>
-      </div>
+      </form>
     </main>
   );
 };

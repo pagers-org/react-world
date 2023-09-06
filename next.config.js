@@ -11,4 +11,7 @@ module.exports = withVanillaExtract({
       },
     ],
   },
+  experimental: {
+    serverActions: true,
+  },
 });

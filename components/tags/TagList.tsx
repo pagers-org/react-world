@@ -9,13 +9,14 @@ type Props = {
 const TagList = ({ tags }: Props) => {
   return (
     <ul className={tagList}>
-      {tags?.map((tag, index) => (
-        <li key={index}>
-          <Link href="" className={`${tagItem} ${tagFill}`}>
-            {tag}
-          </Link>
-        </li>
-      ))}
+      {tags.length > 0 &&
+        tags?.map((tag, index) => (
+          <li key={index}>
+            <Link href="" className={`${tagItem} ${tagFill}`}>
+              {tag}
+            </Link>
+          </li>
+        ))}
     </ul>
   );
 };

@@ -1,14 +1,13 @@
-import { banner, bannerDescription, bannerTitle } from '@/styles/home.css';
+import { banner } from '@/styles/home.css';
 import { container } from '@/styles/layout.css';
-import React from 'react';
-
-const Banner = () => {
+import { ReactNode } from 'react';
+type Props = {
+  children: ReactNode;
+};
+const Banner = ({ children }: Props) => {
   return (
     <div className={banner}>
-      <div className={container}>
-        <h1 className={bannerTitle}>conduit</h1>
-        <p className={bannerDescription}>A place to share your knowledge.</p>
-      </div>
+      <div className={container}>{children}</div>
     </div>
   );
 };

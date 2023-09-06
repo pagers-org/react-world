@@ -1,27 +1,21 @@
-import { User } from '@/types';
-import axios from 'axios';
+import { http } from '@/libs/http';
 
-// 로그인
-const login = () => {
-  console.log(process.env.NEXT_PUBLIC_API_URL);
-  return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`);
-};
+// // 로그인
+// const login = async (formData: FormData) => {
+//   const email = formData.get('email');
+//   const password = formData.get('password');
 
-// 회원가입
-const register = (user: User) => {
-  console.log(user);
-  console.log(process.env.NEXT_PUBLIC_API_URL);
-  return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users`, user);
-};
+//   return await http.post('https://api.realworld.io/api/users/login', { user: { email, password } });
+// };
 
 // 유저 정보 조회
 const fetchUser = () => {
-  return axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user`);
+  return http.get('https://api.realworld.io/api/user');
 };
 
 // 유저 정보 수정
 const updateUser = () => {
-  return axios.put(`${process.env.NEXT_PUBLIC_API_URL}/user`);
+  return http.put('https://api.realworld.io/api/user');
 };
 
-export { login, register, fetchUser, updateUser };
+export { fetchUser, updateUser };

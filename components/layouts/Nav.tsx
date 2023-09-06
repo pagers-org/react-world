@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import * as styles from '@/styles/layout.css';
 import { usePathname } from 'next/navigation';
+import useUserStore from '@/stores/useUserStore';
 
 const nonLoginNav = [
   {
@@ -34,8 +35,8 @@ const loginNav = [
 ];
 
 const Nav = () => {
-  const isLogin = false;
-  const nav = isLogin ? loginNav : nonLoginNav;
+  const { token } = useUserStore();
+  const nav = token ? loginNav : nonLoginNav;
   const pathname = usePathname();
 
   return (

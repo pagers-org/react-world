@@ -15,10 +15,13 @@ export type User = {
   userName: string;
   email: string;
   password: string;
+  token: string;
+  bio: string;
+  image: string;
 };
 
 export type UserAction = {
-  login: () => void;
+  login: (e: any) => void;
   updateUser: () => void;
   logout: () => void;
   reset: () => void;
