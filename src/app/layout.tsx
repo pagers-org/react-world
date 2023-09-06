@@ -26,7 +26,6 @@ export default async function RootLayout({
           <ContentCard>{children}</ContentCard>
           <Footer />
         </Card>
-        <div id="toast-root"></div>
       </body>
     </html>
   );
