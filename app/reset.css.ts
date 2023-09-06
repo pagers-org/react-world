@@ -140,3 +140,13 @@ globalStyle(
 globalStyle('input[type=number]', {
   MozAppearance: 'textfield',
 });
+
+globalStyle('*::-webkit-scrollbar', {
+  display: 'none',
+  scrollbarWidth: 'none',
+});
+
+globalStyle('*', {
+  msOverflowStyle: 'none',
+  scrollbarWidth: 'none',
+});
