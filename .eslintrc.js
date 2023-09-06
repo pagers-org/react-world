@@ -44,6 +44,9 @@ module.exports = {
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
 		"@typescript-eslint/prefer-optional-chain": "error",
-
+		"react/destructuring-assignment": "warn",
+		"react/no-direct-mutation-state": "warn",
+		"react/no-unused-state": "warn",
+		"react/self-closing-comp": "warn",
 	  }
 };
