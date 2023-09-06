@@ -27,6 +27,9 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "devDependencies": {
@@ -39,5 +42,10 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "next": "^13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
