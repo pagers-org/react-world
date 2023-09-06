@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import Article from './pages/article';
-import Login from './pages/login';
-import Register from './pages/register';
-import ErrorPage from './pages/errorpage';
+import ErrorPage from './pages/ErrorPage';
+import Article from './pages/Article';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 const router = createBrowserRouter([
   {

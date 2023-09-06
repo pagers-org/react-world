@@ -16,7 +16,7 @@ export const [themeClass, vars] = createTheme({
   },
 });
 
-export const navbar = style({
+export const loginContainer = style({
   display: 'none',
   color: 'rgba(0, 0, 0, 0.8)',
   backgroundColor: vars.color.yellow,

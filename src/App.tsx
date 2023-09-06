@@ -1,9 +1,9 @@
-import './App.css';
+import Navbar from './components/Navbar';
 
 export default function App() {
   return (
     <div>
-      <h1>메인페이지입니다</h1>
+      <Navbar />
     </div>
   );
 }
