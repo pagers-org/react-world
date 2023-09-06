@@ -21,7 +21,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <Header>
             <Header.Left>
               <Link className={logo} href="/">
-                conduit
+                TECH
               </Link>
             </Header.Left>
             <Header.Right>
