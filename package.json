@@ -5,6 +5,22 @@
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
   "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write --ignore-unknown .",
+    "prettier:check": "prettier --check --ignore-unknown .",
+    "test": "pnpm lint && pnpm prettier:check"
+  },
+  "git": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pagers-org/react-world.git"
