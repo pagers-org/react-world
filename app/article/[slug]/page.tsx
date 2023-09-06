@@ -1,40 +1,24 @@
+import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
 import { format } from 'date-fns';
 
 import Banner from '@/src/components/layout/Banner';
 
 import { DUMMY_ARTICLES } from '@/src/fixtures/article';
 
-import {
-  author,
-  authorImage,
-  bannerContent,
-  body,
-  chip,
-  content,
-  createdDate,
-  favoriteButton,
-  followButton,
-  footerContent,
-  footerDescription,
-  horizontalLine,
-  linkText,
-  tag,
-} from '@/app/article/[slug]/page.css';
-import Link from 'next/link';
+import * as styles from '@/app/article/[slug]/page.css';
 
 export default function ArticleDetail() {
   const article = DUMMY_ARTICLES.articles[0];
 
   return (
     <div>
-      <Banner style="secondary" title={article.title}>
-        <div className={bannerContent}>
-          <div className={author}>
+      <Banner title={article.title} background="black">
+        <div className={styles.bannerContent}>
+          <div className={styles.author}>
             <div>
               <Image
-                className={authorImage}
+                className={styles.authorImage}
                 src={article.author.image}
                 alt="author"
                 width={32}
@@ -43,43 +27,43 @@ export default function ArticleDetail() {
             </div>
             <div>
               <div>{article.author.username}</div>
-              <div className={createdDate}>
+              <div className={styles.createdDate}>
                 {format(new Date(article.createdAt), 'yyyy-MM-dd')}
               </div>
             </div>
           </div>
 
           <div>
-            <button className={followButton} type="button">
+            <button className={styles.followButton} type="button">
               + Follow {article.author.username}
             </button>
-            <button className={favoriteButton} type="button">
+            <button className={styles.favoriteButton} type="button">
               ♥ Favorite Article {article.favoritesCount}
             </button>
           </div>
         </div>
       </Banner>
 
-      <div className={body}>
-        <div className={content}>{article.body}</div>
+      <div className={styles.body}>
+        <div className={styles.content}>{article.body}</div>
 
-        <div className={tag}>
+        <div className={styles.tag}>
           {article.tagList.map((tag) => {
             return (
-              <button type="button" className={chip} key={tag}>
+              <button type="button" className={styles.chip} key={tag}>
                 {tag}
               </button>
             );
           })}
         </div>
 
-        <div className={horizontalLine} />
+        <div className={styles.horizontalLine} />
 
-        <div className={footerContent}>
-          <div className={author}>
+        <div className={styles.footerContent}>
+          <div className={styles.author}>
             <div>
               <Image
-                className={authorImage}
+                className={styles.authorImage}
                 src={article.author.image}
                 alt="author"
                 width={32}
@@ -88,28 +72,28 @@ export default function ArticleDetail() {
             </div>
             <div>
               <div>{article.author.username}</div>
-              <div className={createdDate}>
+              <div className={styles.createdDate}>
                 {format(new Date(article.createdAt), 'yyyy-MM-dd')}
               </div>
             </div>
           </div>
 
           <div>
-            <button className={followButton} type="button">
+            <button className={styles.followButton} type="button">
               + Follow {article.author.username}
             </button>
-            <button className={favoriteButton} type="button">
+            <button className={styles.favoriteButton} type="button">
               ♥ Favorite Article {article.favoritesCount}
             </button>
           </div>
         </div>
 
-        <div className={footerDescription}>
-          <Link href="/login" className={linkText}>
+        <div className={styles.footerDescription}>
+          <Link href="/login" className={styles.linkText}>
             Sign in
           </Link>
           or
-          <Link href="/register" className={linkText}>
+          <Link href="/register" className={styles.linkText}>
             sign up
           </Link>
           to add comments on this article.

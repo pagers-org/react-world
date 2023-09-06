@@ -1,37 +1,30 @@
 import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import {
-  bannerContainer,
-  bannerContent,
-  bannerDescription,
-  bannerTitle,
-  primary,
-  secondary,
-} from '@/src/components/layout/Banner/index.css';
+import * as styles from '@/src/components/layout/Banner/index.css';
 
 interface Props extends PropsWithChildren {
-  style?: 'primary' | 'secondary';
   title: string;
   description?: string;
+  background: keyof typeof styles.background;
 }
 
 export default function Banner({
-  style = 'primary',
   title,
   description,
+  background,
   children,
 }: Props) {
   return (
     <div
-      className={classNames(bannerContainer, {
-        [primary]: style === 'primary',
-        [secondary]: style === 'secondary',
-      })}
+      className={classNames(
+        styles.bannerContainer,
+        styles.background[background],
+      )}
     >
-      <div className={bannerContent}>
-        <div className={bannerTitle}>{title}</div>
-        <p className={bannerDescription}>{description}</p>
+      <div className={styles.bannerContent}>
+        <div className={styles.bannerTitle}>{title}</div>
+        <p className={styles.bannerDescription}>{description}</p>
         {children}
       </div>
     </div>

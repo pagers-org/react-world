@@ -17,26 +17,26 @@ export const authorImage = style({
 });
 
 export const authorName = style({
-  color: vars.color.primary,
+  color: vars.colors.primary,
   fontWeight: 500,
 });
 
 export const createdDate = style({
   fontSize: 14,
-  color: vars.color.gray,
+  color: vars.colors.gray,
 });
 
 export const followButton = style({
-  border: `1px solid ${vars.color.gray}`,
+  border: `1px solid ${vars.colors.gray}`,
   padding: 4,
-  color: vars.color.gray,
+  color: vars.colors.gray,
 });
 
 export const favoriteButton = style({
-  border: `1px solid ${vars.color.primary}`,
+  border: `1px solid ${vars.colors.primary}`,
   marginLeft: 4,
   padding: 4,
-  color: vars.color.primary,
+  color: vars.colors.primary,
 });
 
 export const body = style({
@@ -60,14 +60,14 @@ export const tag = style({
 
 export const chip = style({
   padding: 6,
-  border: `1px solid ${vars.color.gray}`,
-  color: vars.color.gray400,
+  border: `1px solid ${vars.colors.gray}`,
+  color: vars.colors.gray400,
   borderRadius: 12,
   fontSize: 12,
 });
 
 export const horizontalLine = style({
-  borderBottom: `1px solid ${vars.color.gray}`,
+  borderBottom: `1px solid ${vars.colors.gray}`,
 });
 
 export const footerContent = style({
@@ -83,5 +83,5 @@ export const footerDescription = style({
 });
 
 export const linkText = style({
-  color: vars.color.primary,
+  color: vars.colors.primary,
 });

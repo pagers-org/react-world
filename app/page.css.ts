@@ -1,5 +1,6 @@
-import { vars } from '@/src/styles/theme.css';
 import { style } from '@vanilla-extract/css';
+
+import { vars } from '@/src/styles/theme.css';
 
 export const content = style({
   display: 'flex',

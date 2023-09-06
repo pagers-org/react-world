@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 
-import { logo } from '@/app/layout.css';
+import * as styles from '@/app/layout.css';
 
 import Header from '@/src/components/layout/Header';
 
-import ReactQueryProviders from '@/src/lib/ReactQueryProviders';
+import ReactQueryProviders from '@/src/lib/react-query/ReactQueryProviders';
 
-import './reset.css';
+import '@/src/styles/reset.css';
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ReactQueryProviders>
           <Header>
             <Header.Left>
-              <Link className={logo} href="/">
+              <Link className={styles.logo} href="/">
                 TECH
               </Link>
             </Header.Left>

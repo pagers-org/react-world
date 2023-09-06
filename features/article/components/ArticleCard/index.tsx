@@ -1,11 +1,11 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { format } from 'date-fns';
 
-import * as styles from '@/features/article/components/ArticleCard/index.css';
-
 import { Article } from '@/features/article/types';
-import Link from 'next/link';
+
+import * as styles from '@/features/article/components/ArticleCard/index.css';
 
 interface Props extends Article {}
 

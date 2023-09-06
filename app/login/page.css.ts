@@ -16,25 +16,25 @@ export const loginText = style({
 });
 
 export const descriptionText = style({
-  color: vars.color.primary,
+  color: vars.colors.primary,
 });
 
 export const input = style({
   width: 330,
   height: 50,
   padding: '12px 8px',
-  border: `1px solid ${vars.color.gray}`,
+  border: `1px solid ${vars.colors.gray}`,
 
   '::placeholder': {
-    color: vars.color.gray,
+    color: vars.colors.gray,
   },
 });
 
 export const loginButton = style({
   width: 330,
   height: 50,
-  backgroundColor: vars.color.primary,
-  color: vars.color.white,
+  backgroundColor: vars.colors.primary,
+  color: vars.colors.white,
   fontSize: 20,
   fontWeight: 400,
 });
