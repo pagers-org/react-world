@@ -1,3 +1,3 @@
-import GNB from './ui';
+import GNB from './ui/GNB/GNB';
 
 export { GNB };

@@ -1,4 +1,4 @@
-const { colors } = require("./theme");
+const { colors, breakpoints } = require("./theme");
 
 const range = (start = 0, end) => {
   const arr = [];
@@ -18,6 +18,7 @@ module.exports = {
   theme: {
     extend: {
       colors,
+      screens: breakpoints,
       inset: {
         ...range(1, 1880).reduce((acc, px) => {
           acc[`${px}`] = `${px}px`;
