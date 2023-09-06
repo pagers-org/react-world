@@ -1,6 +1,7 @@
 {
   "name": "react-world",
   "private": true,
+  "packageManager": "pnpm@8.7.1",
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
   "main": "index.js",
@@ -25,5 +26,7 @@
   "bugs": {
     "url": "https://github.com/pagers-org/react-world/issues"
   },
-  "homepage": "https://github.com/pagers-org/react-world#readme"
+  "devDependencies": {
+    "typescript": "5.2.2"
+  }
 }
