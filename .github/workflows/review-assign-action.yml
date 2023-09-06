@@ -1,0 +1,36 @@
+name: Review Assign
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.base_ref == 'main' # base branch name is 'master'
+        run: echo REVIEWERS=inseong-so >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team1')
+        run: echo REVIEWERS=headring, KimHunJin, hyjoong her0707 >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team2')
+        run: echo REVIEWERS=Bsfla, SeolJaeHyeok, choisy9619, kyung-jun >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team3')
+        run: echo REVIEWERS=sgsg9447, kingyong9169, 2dowon, jqkk >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team4')
+        run: echo REVIEWERS=kimseongchan-kr, cham0287, hyeon9782 >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team5')
+        run: echo REVIEWERS=2-NOW, hyew-kim, geeonie >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team6')
+        run: echo REVIEWERS=areumsheep, ludacirs, innocarpe >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team7')
+        run: echo REVIEWERS=endmoseung, steven-yn, ding-co, mandarin-sep >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team8')
+        run: echo REVIEWERS=HOJOON07, jiji-hoon96, 71summernight, seung-wan >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team9')
+        run: echo REVIEWERS=Siihyun, hhhminme, 0uizi0, brgndyy >> $GITHUB_ENV
+      - if: startsWith(github.base_ref, 'team10')
+        run: echo REVIEWERS=Leejha, steadily-worked >> $GITHUB_ENV
+      - uses: hkusu/review-assign-action@v1
+        with:
+          assignees: ${{ github.actor }}
+          reviewers: ${{ env.REVIEWERS }}
