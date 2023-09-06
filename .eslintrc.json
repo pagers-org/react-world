@@ -2,6 +2,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended",
     "next/core-web-vitals",
     "prettier"
   ],
@@ -11,7 +12,6 @@
       "warn",
       { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
     ],
-
     "import/newline-after-import": "warn",
     "import/no-unresolved": ["warn", { "ignore": ["^@/"] }],
     "import/order": [

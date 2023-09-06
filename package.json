@@ -22,7 +22,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@types/node": "20.5.7",
@@ -46,10 +48,20 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.4.0",
+    "@storybook/addon-interactions": "^7.4.0",
+    "@storybook/addon-links": "^7.4.0",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.4.0",
+    "@storybook/nextjs": "^7.4.0",
+    "@storybook/react": "^7.4.0",
+    "@storybook/testing-library": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@vanilla-extract/next-plugin": "^2.3.0",
     "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.3"
+    "eslint-plugin-storybook": "^0.6.13",
+    "prettier": "^3.0.3",
+    "storybook": "^7.4.0"
   }
 }
