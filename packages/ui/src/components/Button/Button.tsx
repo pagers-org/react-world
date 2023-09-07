@@ -1,17 +1,31 @@
-import React, { forwardRef, HTMLAttributes, ReactNode, Ref } from "react";
-
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+import { forwardRef, HTMLAttributes, ReactNode } from "react";
+import { getColorStyle } from "./util";
+import { sizeStyle } from "./style";
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  className?: string;
-  disabled?: boolean;
-  type?: "button" | "submit" | "reset";
-  isLoading?: boolean;
+  icon?: {
+    start: ReactNode;
+  };
+  variant: "outlined" | "fill";
+  color: "primary" | "gray" | "error";
+  size: "s" | "m" | "lg";
 }
 
-const Button = forwardRef(
-  ({ children, className, color }: ButtonProps, fowardRef) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      color = "primary",
+      variant = "outlined",
+      size = "m",
+      icon,
+    }: ButtonProps,
+    ref
+  ) => {
+    const colorStyle = getColorStyle({ color, variant });
+
     return (
-      <button ref={fowardRef as Ref<HTMLButtonElement> | undefined}>
+      <button className={`${sizeStyle[size]} ${colorStyle}`} ref={ref}>
         {children}
       </button>
     );
