@@ -23,7 +23,6 @@ module.exports = {
     ],
     "unicorn/filename-case": "off",
     "unicorn/prevent-abbreviations": "off",
-    "unicorn/prevent-abbreviations": "off",
     "unicorn/no-null": "off",
     "unicorn/prefer-query-selector": "off",
     "unicorn/better-regex": "off",
