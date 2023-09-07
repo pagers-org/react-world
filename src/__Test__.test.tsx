@@ -1,8 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import TestComponentForTest from "./TestComponentForTest";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
 
-test("renders greeting message", () => {
+import TestComponentForTest from './TestComponentForTest';
+
+test('renders greeting message', () => {
   render(<TestComponentForTest />);
-  expect(screen.getByText("yoon0cean starterKit")).toBeDefined();
+  expect(screen.getByText('yoon0cean starterKit')).toBeDefined();
 });
