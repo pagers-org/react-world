@@ -42,7 +42,7 @@
     "eslint-plugin-react": "latest",
     "typescript": "^5.2.2"
   },
-  "packageManager": "yarn@3.6.3",
+  "packageManager": "pnpm@7.26.3",
   "eslintConfig": {
     "extends": [
       "react-app",
