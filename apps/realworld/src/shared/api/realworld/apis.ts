@@ -5,9 +5,9 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import axios from "axios";
-import type { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import defaultAxios from 'axios';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import type {
   UseQueryOptions,
   UseMutationOptions,
@@ -15,7 +15,7 @@ import type {
   MutationFunction,
   UseQueryResult,
   QueryKey,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 import type {
   UserResponse,
   GenericErrorModel,
@@ -33,10 +33,17 @@ import type {
   SingleCommentResponse,
   NewCommentRequest,
   TagsResponse,
-} from "./models";
-import { rest } from "msw";
-import { faker } from "@faker-js/faker";
+} from './models';
+import { rest } from 'msw';
+import { faker } from '@faker-js/faker';
 
+const axios = defaultAxios.create({
+  baseURL: 'https://api.realworld.io/api/',
+  headers: {
+    'Content-Type': 'application/json; charset=UTF-8',
+    accept: 'application/json',
+  },
+});
 /**
  * Login for existing user
  * @summary Existing user login
@@ -48,29 +55,13 @@ export const login = (
   return axios.post(`/users/login`, loginUserRequest, options);
 };
 
-export const getLoginMutationOptions = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof login>>,
-    TError,
-    { data: LoginUserRequest },
-    TContext
-  >;
+export const getLoginMutationOptions = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof login>>, TError, { data: LoginUserRequest }, TContext>;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof login>>,
-  TError,
-  { data: LoginUserRequest },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof login>>, TError, { data: LoginUserRequest }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof login>>,
-    { data: LoginUserRequest }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof login>>, { data: LoginUserRequest }> = props => {
     const { data } = props ?? {};
 
     return login(data, axiosOptions);
@@ -79,25 +70,15 @@ export const getLoginMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type LoginMutationResult = NonNullable<
-  Awaited<ReturnType<typeof login>>
->;
+export type LoginMutationResult = NonNullable<Awaited<ReturnType<typeof login>>>;
 export type LoginMutationBody = LoginUserRequest;
 export type LoginMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Existing user login
  */
-export const useLogin = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof login>>,
-    TError,
-    { data: LoginUserRequest },
-    TContext
-  >;
+export const useLogin = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof login>>, TError, { data: LoginUserRequest }, TContext>;
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getLoginMutationOptions(options);
@@ -116,29 +97,13 @@ export const createUser = (
   return axios.post(`/users`, newUserRequest, options);
 };
 
-export const getCreateUserMutationOptions = <
-  TError = AxiosError<GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof createUser>>,
-    TError,
-    { data: NewUserRequest },
-    TContext
-  >;
+export const getCreateUserMutationOptions = <TError = AxiosError<GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof createUser>>, TError, { data: NewUserRequest }, TContext>;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof createUser>>,
-  TError,
-  { data: NewUserRequest },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof createUser>>, TError, { data: NewUserRequest }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof createUser>>,
-    { data: NewUserRequest }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof createUser>>, { data: NewUserRequest }> = props => {
     const { data } = props ?? {};
 
     return createUser(data, axiosOptions);
@@ -147,25 +112,15 @@ export const getCreateUserMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type CreateUserMutationResult = NonNullable<
-  Awaited<ReturnType<typeof createUser>>
->;
+export type CreateUserMutationResult = NonNullable<Awaited<ReturnType<typeof createUser>>>;
 export type CreateUserMutationBody = NewUserRequest;
 export type CreateUserMutationError = AxiosError<GenericErrorModel>;
 
 /**
  * @summary Register a new user
  */
-export const useCreateUser = <
-  TError = AxiosError<GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof createUser>>,
-    TError,
-    { data: NewUserRequest },
-    TContext
-  >;
+export const useCreateUser = <TError = AxiosError<GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof createUser>>, TError, { data: NewUserRequest }, TContext>;
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getCreateUserMutationOptions(options);
@@ -177,9 +132,7 @@ export const useCreateUser = <
  * Gets the currently logged-in user
  * @summary Get current user
  */
-export const getCurrentUser = (
-  options?: AxiosRequestConfig,
-): Promise<AxiosResponse<UserResponse>> => {
+export const getCurrentUser = (options?: AxiosRequestConfig): Promise<AxiosResponse<UserResponse>> => {
   return axios.get(`/user`, options);
 };
 
@@ -189,31 +142,20 @@ export const getGetCurrentUserQueryOptions = <
   TData = Awaited<ReturnType<typeof getCurrentUser>>,
   TError = AxiosError<void | GenericErrorModel>,
 >(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getCurrentUser>>,
-    TError,
-    TData
-  >;
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getCurrentUser>>, TError, TData>;
   axios?: AxiosRequestConfig;
-}): UseQueryOptions<
-  Awaited<ReturnType<typeof getCurrentUser>>,
-  TError,
-  TData
-> & { queryKey: QueryKey } => {
+}): UseQueryOptions<Awaited<ReturnType<typeof getCurrentUser>>, TError, TData> & { queryKey: QueryKey } => {
   const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetCurrentUserQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrentUser>>> = ({
-    signal,
-  }) => getCurrentUser({ signal, ...axiosOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCurrentUser>>> = ({ signal }) =>
+    getCurrentUser({ signal, ...axiosOptions });
 
   return { queryKey, queryFn, ...queryOptions };
 };
 
-export type GetCurrentUserQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getCurrentUser>>
->;
+export type GetCurrentUserQueryResult = NonNullable<Awaited<ReturnType<typeof getCurrentUser>>>;
 export type GetCurrentUserQueryError = AxiosError<void | GenericErrorModel>;
 
 /**
@@ -223,11 +165,7 @@ export const useGetCurrentUser = <
   TData = Awaited<ReturnType<typeof getCurrentUser>>,
   TError = AxiosError<void | GenericErrorModel>,
 >(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getCurrentUser>>,
-    TError,
-    TData
-  >;
+  query?: UseQueryOptions<Awaited<ReturnType<typeof getCurrentUser>>, TError, TData>;
   axios?: AxiosRequestConfig;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getGetCurrentUserQueryOptions(options);
@@ -274,7 +212,7 @@ export const getUpdateCurrentUserMutationOptions = <
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof updateCurrentUser>>,
     { data: UpdateUserRequest }
-  > = (props) => {
+  > = props => {
     const { data } = props ?? {};
 
     return updateCurrentUser(data, axiosOptions);
@@ -283,20 +221,14 @@ export const getUpdateCurrentUserMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type UpdateCurrentUserMutationResult = NonNullable<
-  Awaited<ReturnType<typeof updateCurrentUser>>
->;
+export type UpdateCurrentUserMutationResult = NonNullable<Awaited<ReturnType<typeof updateCurrentUser>>>;
 export type UpdateCurrentUserMutationBody = UpdateUserRequest;
-export type UpdateCurrentUserMutationError =
-  AxiosError<void | GenericErrorModel>;
+export type UpdateCurrentUserMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Update current user
  */
-export const useUpdateCurrentUser = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useUpdateCurrentUser = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateCurrentUser>>,
     TError,
@@ -321,8 +253,7 @@ export const getProfileByUsername = (
   return axios.get(`/profiles/${username}`, options);
 };
 
-export const getGetProfileByUsernameQueryKey = (username: string) =>
-  [`/profiles/${username}`] as const;
+export const getGetProfileByUsernameQueryKey = (username: string) => [`/profiles/${username}`] as const;
 
 export const getGetProfileByUsernameQueryOptions = <
   TData = Awaited<ReturnType<typeof getProfileByUsername>>,
@@ -330,36 +261,22 @@ export const getGetProfileByUsernameQueryOptions = <
 >(
   username: string,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getProfileByUsername>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getProfileByUsername>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
-): UseQueryOptions<
-  Awaited<ReturnType<typeof getProfileByUsername>>,
-  TError,
-  TData
-> & { queryKey: QueryKey } => {
+): UseQueryOptions<Awaited<ReturnType<typeof getProfileByUsername>>, TError, TData> & { queryKey: QueryKey } => {
   const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetProfileByUsernameQueryKey(username);
+  const queryKey = queryOptions?.queryKey ?? getGetProfileByUsernameQueryKey(username);
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getProfileByUsername>>
-  > = ({ signal }) =>
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProfileByUsername>>> = ({ signal }) =>
     getProfileByUsername(username, { signal, ...axiosOptions });
 
   return { queryKey, queryFn, enabled: !!username, ...queryOptions };
 };
 
-export type GetProfileByUsernameQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getProfileByUsername>>
->;
-export type GetProfileByUsernameQueryError =
-  AxiosError<void | GenericErrorModel>;
+export type GetProfileByUsernameQueryResult = NonNullable<Awaited<ReturnType<typeof getProfileByUsername>>>;
+export type GetProfileByUsernameQueryError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Get a profile
@@ -370,11 +287,7 @@ export const useGetProfileByUsername = <
 >(
   username: string,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getProfileByUsername>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getProfileByUsername>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
@@ -411,18 +324,13 @@ export const getFollowUserByUsernameMutationOptions = <
     TContext
   >;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof followUserByUsername>>,
-  TError,
-  { username: string },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof followUserByUsername>>, TError, { username: string }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof followUserByUsername>>,
     { username: string }
-  > = (props) => {
+  > = props => {
     const { username } = props ?? {};
 
     return followUserByUsername(username, axiosOptions);
@@ -431,20 +339,14 @@ export const getFollowUserByUsernameMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type FollowUserByUsernameMutationResult = NonNullable<
-  Awaited<ReturnType<typeof followUserByUsername>>
->;
+export type FollowUserByUsernameMutationResult = NonNullable<Awaited<ReturnType<typeof followUserByUsername>>>;
 
-export type FollowUserByUsernameMutationError =
-  AxiosError<void | GenericErrorModel>;
+export type FollowUserByUsernameMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Follow a user
  */
-export const useFollowUserByUsername = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useFollowUserByUsername = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof followUserByUsername>>,
     TError,
@@ -480,18 +382,13 @@ export const getUnfollowUserByUsernameMutationOptions = <
     TContext
   >;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof unfollowUserByUsername>>,
-  TError,
-  { username: string },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof unfollowUserByUsername>>, TError, { username: string }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof unfollowUserByUsername>>,
     { username: string }
-  > = (props) => {
+  > = props => {
     const { username } = props ?? {};
 
     return unfollowUserByUsername(username, axiosOptions);
@@ -500,20 +397,14 @@ export const getUnfollowUserByUsernameMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type UnfollowUserByUsernameMutationResult = NonNullable<
-  Awaited<ReturnType<typeof unfollowUserByUsername>>
->;
+export type UnfollowUserByUsernameMutationResult = NonNullable<Awaited<ReturnType<typeof unfollowUserByUsername>>>;
 
-export type UnfollowUserByUsernameMutationError =
-  AxiosError<void | GenericErrorModel>;
+export type UnfollowUserByUsernameMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Unfollow a user
  */
-export const useUnfollowUserByUsername = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useUnfollowUserByUsername = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof unfollowUserByUsername>>,
     TError,
@@ -550,32 +441,21 @@ export const getGetArticlesFeedQueryOptions = <
 >(
   params?: GetArticlesFeedParams,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticlesFeed>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticlesFeed>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
-): UseQueryOptions<
-  Awaited<ReturnType<typeof getArticlesFeed>>,
-  TError,
-  TData
-> & { queryKey: QueryKey } => {
+): UseQueryOptions<Awaited<ReturnType<typeof getArticlesFeed>>, TError, TData> & { queryKey: QueryKey } => {
   const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetArticlesFeedQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticlesFeed>>> = ({
-    signal,
-  }) => getArticlesFeed(params, { signal, ...axiosOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticlesFeed>>> = ({ signal }) =>
+    getArticlesFeed(params, { signal, ...axiosOptions });
 
   return { queryKey, queryFn, ...queryOptions };
 };
 
-export type GetArticlesFeedQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getArticlesFeed>>
->;
+export type GetArticlesFeedQueryResult = NonNullable<Awaited<ReturnType<typeof getArticlesFeed>>>;
 export type GetArticlesFeedQueryError = AxiosError<void | GenericErrorModel>;
 
 /**
@@ -587,11 +467,7 @@ export const useGetArticlesFeed = <
 >(
   params?: GetArticlesFeedParams,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticlesFeed>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticlesFeed>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
@@ -629,11 +505,7 @@ export const getGetArticlesQueryOptions = <
 >(
   params?: GetArticlesParams,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticles>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticles>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryOptions<Awaited<ReturnType<typeof getArticles>>, TError, TData> & {
@@ -643,16 +515,13 @@ export const getGetArticlesQueryOptions = <
 
   const queryKey = queryOptions?.queryKey ?? getGetArticlesQueryKey(params);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticles>>> = ({
-    signal,
-  }) => getArticles(params, { signal, ...axiosOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticles>>> = ({ signal }) =>
+    getArticles(params, { signal, ...axiosOptions });
 
   return { queryKey, queryFn, ...queryOptions };
 };
 
-export type GetArticlesQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getArticles>>
->;
+export type GetArticlesQueryResult = NonNullable<Awaited<ReturnType<typeof getArticles>>>;
 export type GetArticlesQueryError = AxiosError<void | GenericErrorModel>;
 
 /**
@@ -664,11 +533,7 @@ export const useGetArticles = <
 >(
   params?: GetArticlesParams,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticles>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticles>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
@@ -705,18 +570,13 @@ export const getCreateArticleMutationOptions = <
     TContext
   >;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof createArticle>>,
-  TError,
-  { data: NewArticleRequest },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof createArticle>>, TError, { data: NewArticleRequest }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof createArticle>>,
     { data: NewArticleRequest }
-  > = (props) => {
+  > = props => {
     const { data } = props ?? {};
 
     return createArticle(data, axiosOptions);
@@ -725,19 +585,14 @@ export const getCreateArticleMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type CreateArticleMutationResult = NonNullable<
-  Awaited<ReturnType<typeof createArticle>>
->;
+export type CreateArticleMutationResult = NonNullable<Awaited<ReturnType<typeof createArticle>>>;
 export type CreateArticleMutationBody = NewArticleRequest;
 export type CreateArticleMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Create an article
  */
-export const useCreateArticle = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useCreateArticle = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticle>>,
     TError,
@@ -762,8 +617,7 @@ export const getArticle = (
   return axios.get(`/articles/${slug}`, options);
 };
 
-export const getGetArticleQueryKey = (slug: string) =>
-  [`/articles/${slug}`] as const;
+export const getGetArticleQueryKey = (slug: string) => [`/articles/${slug}`] as const;
 
 export const getGetArticleQueryOptions = <
   TData = Awaited<ReturnType<typeof getArticle>>,
@@ -771,11 +625,7 @@ export const getGetArticleQueryOptions = <
 >(
   slug: string,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticle>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticle>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryOptions<Awaited<ReturnType<typeof getArticle>>, TError, TData> & {
@@ -785,32 +635,22 @@ export const getGetArticleQueryOptions = <
 
   const queryKey = queryOptions?.queryKey ?? getGetArticleQueryKey(slug);
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticle>>> = ({
-    signal,
-  }) => getArticle(slug, { signal, ...axiosOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticle>>> = ({ signal }) =>
+    getArticle(slug, { signal, ...axiosOptions });
 
   return { queryKey, queryFn, enabled: !!slug, ...queryOptions };
 };
 
-export type GetArticleQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getArticle>>
->;
+export type GetArticleQueryResult = NonNullable<Awaited<ReturnType<typeof getArticle>>>;
 export type GetArticleQueryError = AxiosError<GenericErrorModel>;
 
 /**
  * @summary Get an article
  */
-export const useGetArticle = <
-  TData = Awaited<ReturnType<typeof getArticle>>,
-  TError = AxiosError<GenericErrorModel>,
->(
+export const useGetArticle = <TData = Awaited<ReturnType<typeof getArticle>>, TError = AxiosError<GenericErrorModel>>(
   slug: string,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticle>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticle>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
@@ -859,7 +699,7 @@ export const getUpdateArticleMutationOptions = <
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof updateArticle>>,
     { slug: string; data: UpdateArticleRequest }
-  > = (props) => {
+  > = props => {
     const { slug, data } = props ?? {};
 
     return updateArticle(slug, data, axiosOptions);
@@ -868,19 +708,14 @@ export const getUpdateArticleMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type UpdateArticleMutationResult = NonNullable<
-  Awaited<ReturnType<typeof updateArticle>>
->;
+export type UpdateArticleMutationResult = NonNullable<Awaited<ReturnType<typeof updateArticle>>>;
 export type UpdateArticleMutationBody = UpdateArticleRequest;
 export type UpdateArticleMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Update an article
  */
-export const useUpdateArticle = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useUpdateArticle = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateArticle>>,
     TError,
@@ -898,36 +733,17 @@ export const useUpdateArticle = <
  * Delete an article. Auth is required
  * @summary Delete an article
  */
-export const deleteArticle = (
-  slug: string,
-  options?: AxiosRequestConfig,
-): Promise<AxiosResponse<void>> => {
+export const deleteArticle = (slug: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> => {
   return axios.delete(`/articles/${slug}`, options);
 };
 
-export const getDeleteArticleMutationOptions = <
-  TError = AxiosError<GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteArticle>>,
-    TError,
-    { slug: string },
-    TContext
-  >;
+export const getDeleteArticleMutationOptions = <TError = AxiosError<GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteArticle>>, TError, { slug: string }, TContext>;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteArticle>>,
-  TError,
-  { slug: string },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof deleteArticle>>, TError, { slug: string }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteArticle>>,
-    { slug: string }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteArticle>>, { slug: string }> = props => {
     const { slug } = props ?? {};
 
     return deleteArticle(slug, axiosOptions);
@@ -936,25 +752,15 @@ export const getDeleteArticleMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type DeleteArticleMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteArticle>>
->;
+export type DeleteArticleMutationResult = NonNullable<Awaited<ReturnType<typeof deleteArticle>>>;
 
 export type DeleteArticleMutationError = AxiosError<GenericErrorModel>;
 
 /**
  * @summary Delete an article
  */
-export const useDeleteArticle = <
-  TError = AxiosError<GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteArticle>>,
-    TError,
-    { slug: string },
-    TContext
-  >;
+export const useDeleteArticle = <TError = AxiosError<GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteArticle>>, TError, { slug: string }, TContext>;
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getDeleteArticleMutationOptions(options);
@@ -973,8 +779,7 @@ export const getArticleComments = (
   return axios.get(`/articles/${slug}/comments`, options);
 };
 
-export const getGetArticleCommentsQueryKey = (slug: string) =>
-  [`/articles/${slug}/comments`] as const;
+export const getGetArticleCommentsQueryKey = (slug: string) => [`/articles/${slug}/comments`] as const;
 
 export const getGetArticleCommentsQueryOptions = <
   TData = Awaited<ReturnType<typeof getArticleComments>>,
@@ -982,33 +787,21 @@ export const getGetArticleCommentsQueryOptions = <
 >(
   slug: string,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticleComments>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticleComments>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
-): UseQueryOptions<
-  Awaited<ReturnType<typeof getArticleComments>>,
-  TError,
-  TData
-> & { queryKey: QueryKey } => {
+): UseQueryOptions<Awaited<ReturnType<typeof getArticleComments>>, TError, TData> & { queryKey: QueryKey } => {
   const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getGetArticleCommentsQueryKey(slug);
+  const queryKey = queryOptions?.queryKey ?? getGetArticleCommentsQueryKey(slug);
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getArticleComments>>
-  > = ({ signal }) => getArticleComments(slug, { signal, ...axiosOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getArticleComments>>> = ({ signal }) =>
+    getArticleComments(slug, { signal, ...axiosOptions });
 
   return { queryKey, queryFn, enabled: !!slug, ...queryOptions };
 };
 
-export type GetArticleCommentsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getArticleComments>>
->;
+export type GetArticleCommentsQueryResult = NonNullable<Awaited<ReturnType<typeof getArticleComments>>>;
 export type GetArticleCommentsQueryError = AxiosError<void | GenericErrorModel>;
 
 /**
@@ -1020,11 +813,7 @@ export const useGetArticleComments = <
 >(
   slug: string,
   options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getArticleComments>>,
-      TError,
-      TData
-    >;
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getArticleComments>>, TError, TData>;
     axios?: AxiosRequestConfig;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
@@ -1073,7 +862,7 @@ export const getCreateArticleCommentMutationOptions = <
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof createArticleComment>>,
     { slug: string; data: NewCommentRequest }
-  > = (props) => {
+  > = props => {
     const { slug, data } = props ?? {};
 
     return createArticleComment(slug, data, axiosOptions);
@@ -1082,20 +871,14 @@ export const getCreateArticleCommentMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type CreateArticleCommentMutationResult = NonNullable<
-  Awaited<ReturnType<typeof createArticleComment>>
->;
+export type CreateArticleCommentMutationResult = NonNullable<Awaited<ReturnType<typeof createArticleComment>>>;
 export type CreateArticleCommentMutationBody = NewCommentRequest;
-export type CreateArticleCommentMutationError =
-  AxiosError<void | GenericErrorModel>;
+export type CreateArticleCommentMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Create a comment for an article
  */
-export const useCreateArticleComment = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useCreateArticleComment = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createArticleComment>>,
     TError,
@@ -1143,7 +926,7 @@ export const getDeleteArticleCommentMutationOptions = <
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteArticleComment>>,
     { slug: string; id: number }
-  > = (props) => {
+  > = props => {
     const { slug, id } = props ?? {};
 
     return deleteArticleComment(slug, id, axiosOptions);
@@ -1152,19 +935,14 @@ export const getDeleteArticleCommentMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type DeleteArticleCommentMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteArticleComment>>
->;
+export type DeleteArticleCommentMutationResult = NonNullable<Awaited<ReturnType<typeof deleteArticleComment>>>;
 
 export type DeleteArticleCommentMutationError = AxiosError<GenericErrorModel>;
 
 /**
  * @summary Delete a comment for an article
  */
-export const useDeleteArticleComment = <
-  TError = AxiosError<GenericErrorModel>,
-  TContext = unknown,
->(options?: {
+export const useDeleteArticleComment = <TError = AxiosError<GenericErrorModel>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteArticleComment>>,
     TError,
@@ -1193,25 +971,12 @@ export const getCreateArticleFavoriteMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
   TContext = unknown,
 >(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof createArticleFavorite>>,
-    TError,
-    { slug: string },
-    TContext
-  >;
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof createArticleFavorite>>, TError, { slug: string }, TContext>;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof createArticleFavorite>>,
-  TError,
-  { slug: string },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof createArticleFavorite>>, TError, { slug: string }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof createArticleFavorite>>,
-    { slug: string }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof createArticleFavorite>>, { slug: string }> = props => {
     const { slug } = props ?? {};
 
     return createArticleFavorite(slug, axiosOptions);
@@ -1220,26 +985,15 @@ export const getCreateArticleFavoriteMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type CreateArticleFavoriteMutationResult = NonNullable<
-  Awaited<ReturnType<typeof createArticleFavorite>>
->;
+export type CreateArticleFavoriteMutationResult = NonNullable<Awaited<ReturnType<typeof createArticleFavorite>>>;
 
-export type CreateArticleFavoriteMutationError =
-  AxiosError<void | GenericErrorModel>;
+export type CreateArticleFavoriteMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Favorite an article
  */
-export const useCreateArticleFavorite = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof createArticleFavorite>>,
-    TError,
-    { slug: string },
-    TContext
-  >;
+export const useCreateArticleFavorite = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof createArticleFavorite>>, TError, { slug: string }, TContext>;
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getCreateArticleFavoriteMutationOptions(options);
@@ -1262,25 +1016,12 @@ export const getDeleteArticleFavoriteMutationOptions = <
   TError = AxiosError<void | GenericErrorModel>,
   TContext = unknown,
 >(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteArticleFavorite>>,
-    TError,
-    { slug: string },
-    TContext
-  >;
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteArticleFavorite>>, TError, { slug: string }, TContext>;
   axios?: AxiosRequestConfig;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteArticleFavorite>>,
-  TError,
-  { slug: string },
-  TContext
-> => {
+}): UseMutationOptions<Awaited<ReturnType<typeof deleteArticleFavorite>>, TError, { slug: string }, TContext> => {
   const { mutation: mutationOptions, axios: axiosOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteArticleFavorite>>,
-    { slug: string }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteArticleFavorite>>, { slug: string }> = props => {
     const { slug } = props ?? {};
 
     return deleteArticleFavorite(slug, axiosOptions);
@@ -1289,26 +1030,15 @@ export const getDeleteArticleFavoriteMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
-export type DeleteArticleFavoriteMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteArticleFavorite>>
->;
+export type DeleteArticleFavoriteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteArticleFavorite>>>;
 
-export type DeleteArticleFavoriteMutationError =
-  AxiosError<void | GenericErrorModel>;
+export type DeleteArticleFavoriteMutationError = AxiosError<void | GenericErrorModel>;
 
 /**
  * @summary Unfavorite an article
  */
-export const useDeleteArticleFavorite = <
-  TError = AxiosError<void | GenericErrorModel>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteArticleFavorite>>,
-    TError,
-    { slug: string },
-    TContext
-  >;
+export const useDeleteArticleFavorite = <TError = AxiosError<void | GenericErrorModel>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteArticleFavorite>>, TError, { slug: string }, TContext>;
   axios?: AxiosRequestConfig;
 }) => {
   const mutationOptions = getDeleteArticleFavoriteMutationOptions(options);
@@ -1320,9 +1050,7 @@ export const useDeleteArticleFavorite = <
  * Get tags. Auth not required
  * @summary Get tags
  */
-export const getTags = (
-  options?: AxiosRequestConfig,
-): Promise<AxiosResponse<TagsResponse>> => {
+export const getTags = (options?: AxiosRequestConfig): Promise<AxiosResponse<TagsResponse>> => {
   return axios.get(`/tags`, options);
 };
 
@@ -1341,16 +1069,13 @@ export const getGetTagsQueryOptions = <
 
   const queryKey = queryOptions?.queryKey ?? getGetTagsQueryKey();
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTags>>> = ({
-    signal,
-  }) => getTags({ signal, ...axiosOptions });
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTags>>> = ({ signal }) =>
+    getTags({ signal, ...axiosOptions });
 
   return { queryKey, queryFn, ...queryOptions };
 };
 
-export type GetTagsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getTags>>
->;
+export type GetTagsQueryResult = NonNullable<Awaited<ReturnType<typeof getTags>>>;
 export type GetTagsQueryError = AxiosError<GenericErrorModel>;
 
 /**
@@ -1442,20 +1167,16 @@ export const getUnfollowUserByUsernameMock = () => ({
 });
 
 export const getGetArticlesFeedMock = () => ({
-  articles: Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1,
-  ).map(() => ({
+  articles: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
     slug: faker.random.word(),
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1469,20 +1190,16 @@ export const getGetArticlesFeedMock = () => ({
 });
 
 export const getGetArticlesMock = () => ({
-  articles: Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1,
-  ).map(() => ({
+  articles: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
     slug: faker.random.word(),
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1501,12 +1218,11 @@ export const getCreateArticleMock = () => ({
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1524,12 +1240,11 @@ export const getGetArticleMock = () => ({
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1547,12 +1262,11 @@ export const getUpdateArticleMock = () => ({
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1565,13 +1279,10 @@ export const getUpdateArticleMock = () => ({
 });
 
 export const getGetArticleCommentsMock = () => ({
-  comments: Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1,
-  ).map(() => ({
+  comments: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
     id: faker.datatype.number({ min: undefined, max: undefined }),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     body: faker.random.word(),
     author: {
       username: faker.random.word(),
@@ -1585,8 +1296,8 @@ export const getGetArticleCommentsMock = () => ({
 export const getCreateArticleCommentMock = () => ({
   comment: {
     id: faker.datatype.number({ min: undefined, max: undefined }),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     body: faker.random.word(),
     author: {
       username: faker.random.word(),
@@ -1603,12 +1314,11 @@ export const getCreateArticleFavoriteMock = () => ({
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1626,12 +1336,11 @@ export const getDeleteArticleFavoriteMock = () => ({
     title: faker.random.word(),
     description: faker.random.word(),
     body: faker.random.word(),
-    tagList: Array.from(
-      { length: faker.datatype.number({ min: 1, max: 10 }) },
-      (_, i) => i + 1,
-    ).map(() => faker.random.word()),
-    createdAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
-    updatedAt: `${faker.date.past().toISOString().split(".")[0]}Z`,
+    tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+      faker.random.word(),
+    ),
+    createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
+    updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`,
     favorited: faker.datatype.boolean(),
     favoritesCount: faker.datatype.number({ min: undefined, max: undefined }),
     author: {
@@ -1644,136 +1353,67 @@ export const getDeleteArticleFavoriteMock = () => ({
 });
 
 export const getGetTagsMock = () => ({
-  tags: Array.from(
-    { length: faker.datatype.number({ min: 1, max: 10 }) },
-    (_, i) => i + 1,
-  ).map(() => faker.random.word()),
+  tags: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() =>
+    faker.random.word(),
+  ),
 });
 
 export const getConduitAPIMSW = () => [
-  rest.post("*/users/login", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getLoginMock()),
-    );
+  rest.post('*/users/login', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getLoginMock()));
   }),
-  rest.post("*/users", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getCreateUserMock()),
-    );
+  rest.post('*/users', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getCreateUserMock()));
   }),
-  rest.get("*/user", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetCurrentUserMock()),
-    );
+  rest.get('*/user', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetCurrentUserMock()));
   }),
-  rest.put("*/user", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getUpdateCurrentUserMock()),
-    );
+  rest.put('*/user', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getUpdateCurrentUserMock()));
   }),
-  rest.get("*/profiles/:username", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetProfileByUsernameMock()),
-    );
+  rest.get('*/profiles/:username', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetProfileByUsernameMock()));
   }),
-  rest.post("*/profiles/:username/follow", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getFollowUserByUsernameMock()),
-    );
+  rest.post('*/profiles/:username/follow', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getFollowUserByUsernameMock()));
   }),
-  rest.delete("*/profiles/:username/follow", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getUnfollowUserByUsernameMock()),
-    );
+  rest.delete('*/profiles/:username/follow', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getUnfollowUserByUsernameMock()));
   }),
-  rest.get("*/articles/feed", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticlesFeedMock()),
-    );
+  rest.get('*/articles/feed', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetArticlesFeedMock()));
   }),
-  rest.get("*/articles", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticlesMock()),
-    );
+  rest.get('*/articles', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetArticlesMock()));
   }),
-  rest.post("*/articles", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getCreateArticleMock()),
-    );
+  rest.post('*/articles', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getCreateArticleMock()));
   }),
-  rest.get("*/articles/:slug", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticleMock()),
-    );
+  rest.get('*/articles/:slug', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetArticleMock()));
   }),
-  rest.put("*/articles/:slug", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getUpdateArticleMock()),
-    );
+  rest.put('*/articles/:slug', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getUpdateArticleMock()));
   }),
-  rest.delete("*/articles/:slug", (_req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
+  rest.delete('*/articles/:slug', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'));
   }),
-  rest.get("*/articles/:slug/comments", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetArticleCommentsMock()),
-    );
+  rest.get('*/articles/:slug/comments', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetArticleCommentsMock()));
   }),
-  rest.post("*/articles/:slug/comments", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getCreateArticleCommentMock()),
-    );
+  rest.post('*/articles/:slug/comments', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getCreateArticleCommentMock()));
   }),
-  rest.delete("*/articles/:slug/comments/:id", (_req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200, "Mocked status"));
+  rest.delete('*/articles/:slug/comments/:id', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'));
   }),
-  rest.post("*/articles/:slug/favorite", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getCreateArticleFavoriteMock()),
-    );
+  rest.post('*/articles/:slug/favorite', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getCreateArticleFavoriteMock()));
   }),
-  rest.delete("*/articles/:slug/favorite", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getDeleteArticleFavoriteMock()),
-    );
+  rest.delete('*/articles/:slug/favorite', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getDeleteArticleFavoriteMock()));
   }),
-  rest.get("*/tags", (_req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.status(200, "Mocked status"),
-      ctx.json(getGetTagsMock()),
-    );
+  rest.get('*/tags', (_req, res, ctx) => {
+    return res(ctx.delay(1000), ctx.status(200, 'Mocked status'), ctx.json(getGetTagsMock()));
   }),
 ];
