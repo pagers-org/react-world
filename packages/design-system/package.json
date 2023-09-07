@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- 
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -29,6 +28,7 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@vanilla-extract/vite-plugin": "^3.9.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "chromatic": "^6.24.1",
     "eslint": "^8.45.0",
