@@ -5204,16 +5204,6 @@ footer {
 .btn .counter {
   font-size: 0.8rem !important; }
 
-.home-page .feed-toggle {
-  margin-bottom: -1px; }
-
-.home-page .sidebar {
-  padding: 5px 10px 10px 10px;
-  background: #f3f3f3;
-  border-radius: 4px; }
-  .home-page .sidebar p {
-    margin-bottom: 0.2rem; }
-
 .article-page .banner {
   padding: 2rem 0 2rem 0; }
   .article-page .banner h1 {
