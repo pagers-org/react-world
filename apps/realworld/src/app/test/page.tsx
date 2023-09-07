@@ -1,4 +1,4 @@
-import { GNB } from '@/widgets/GNB';
+import { GNB } from '@/widgets/gnb';
 import React from 'react';
 
 interface TestProps {}
