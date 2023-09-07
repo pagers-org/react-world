@@ -33,7 +33,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:unit": "jest",
-    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx}\""
   },
   "husky": {
     "hooks": {
