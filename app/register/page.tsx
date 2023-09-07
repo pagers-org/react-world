@@ -2,7 +2,8 @@
 
 import { createAccount } from '@/actions/actions';
 import { question, title } from '@/styles/account.css';
-import { button, buttonBox, container, flexBox, input } from '@/styles/layout.css';
+import { input } from '@/styles/common.css';
+import { button, buttonBox, container, flexBox } from '@/styles/layout.css';
 
 const RegisterPage = () => {
   return (

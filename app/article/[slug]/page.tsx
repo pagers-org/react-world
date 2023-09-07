@@ -2,6 +2,9 @@ import Banner from '@/components/layouts/Banner';
 import TagList from '@/components/tags/TagList';
 import UserBox from '@/components/user/UserBox';
 import { fetchArticle } from '@/services/articles';
+import { articleContent } from '@/styles/article.css';
+import { container } from '@/styles/layout.css';
+import Link from 'next/link';
 import React from 'react';
 type Props = {
   params: { slug: string };
@@ -19,9 +22,13 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
           <UserBox author={author} createdAt={createdAt} />
         </div>
       </Banner>
-      <div>{body}</div>
-      <TagList tags={tagList} />
-      <div></div>
+      <div className={container}>
+        <p className={articleContent}>{body}</p>
+        <TagList tags={tagList} />
+        <div>
+          <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this article.
+        </div>
+      </div>
     </div>
   );
 };

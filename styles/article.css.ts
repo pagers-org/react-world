@@ -61,3 +61,9 @@ export const articleReadMore = style({
   color: '#bbb',
   verticalAlign: 'middle',
 });
+
+export const articleContent = style({
+  fontSize: '1.2rem',
+  lineHeight: '1.8rem',
+  marginBottom: '2rem',
+});
