@@ -28,7 +28,8 @@
   "scripts": {
     "prepare": "husky install",
     "ds": "pnpm -F design-system",
-    "app": "pnpm -F app"
+    "app": "pnpm -F app",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "workspaces": [
@@ -39,7 +40,11 @@
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "husky": "^8.0.3",
     "prettier": "^3.0.3"
   }
