@@ -1,6 +1,10 @@
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
+
 export default function Register() {
   return (
     <>
+      <Navbar />
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -33,6 +37,7 @@ export default function Register() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

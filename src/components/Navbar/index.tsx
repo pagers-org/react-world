@@ -1,25 +1,23 @@
-import { navBrand, navContainer, navItem, navLink, navUl, navbar } from './index.css';
-
 export default function Navbar() {
   return (
-    <nav className={navbar}>
-      <div className={navContainer}>
-        <a className={navBrand} href="/">
+    <nav className="navbar navbar-light">
+      <div className="container">
+        <a className="navbar-brand" href="/">
           conduit
         </a>
-        <ul className={navUl}>
-          <li className={navItem}>
-            <a className={navLink} href="/">
+        <ul className="nav navbar-nav pull-xs-right">
+          <li className="nav-item">
+            <a className="nav-link active" href="/">
               Home
             </a>
           </li>
-          <li className={navItem}>
-            <a className={navLink} href="/login">
+          <li className="nav-item">
+            <a className="nav-link" href="/login">
               Sign in
             </a>
           </li>
-          <li className={navItem}>
-            <a className={navLink} href="/register">
+          <li className="nav-item">
+            <a className="nav-link" href="/register">
               Sign up
             </a>
           </li>
