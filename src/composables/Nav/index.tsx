@@ -4,6 +4,21 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+const navLinks = [
+  {
+    name: 'Home',
+    link: '/',
+  },
+  {
+    name: 'Sign in',
+    link: '/login',
+  },
+  {
+    name: 'Sign up',
+    link: '/register',
+  },
+];
+
 const Nav = () => {
   const pathname = usePathname();
 
@@ -14,36 +29,18 @@ const Nav = () => {
           conduit
         </Link>
         <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${classNames({
-                active: pathname === '/',
-              })}`}
-              href="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${classNames({
-                active: pathname === '/login',
-              })}`}
-              href="/login"
-            >
-              Sign in
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${classNames({
-                active: pathname === '/register',
-              })}`}
-              href="/register"
-            >
-              Sign up
-            </Link>
-          </li>
+          {navLinks.map(({ name, link }) => (
+            <li className="nav-item" key={name}>
+              <Link
+                className={`nav-link ${classNames({
+                  active: pathname === link,
+                })}`}
+                href={link}
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
