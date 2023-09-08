@@ -13,7 +13,7 @@ export default function Login() {
       </Link>
       <div>
         <input
-          className={styles.input}
+          className={styles.loginInput}
           type="email"
           placeholder="이메일을 입력해주세요."
           autoFocus
@@ -21,7 +21,7 @@ export default function Login() {
       </div>
       <div>
         <input
-          className={styles.input}
+          className={styles.loginInput}
           type="password"
           placeholder="비밀번호를 입력해주세요."
         />

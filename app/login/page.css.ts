@@ -19,7 +19,7 @@ export const descriptionText = style({
   color: vars.colors.primary,
 });
 
-export const input = style({
+export const loginInput = style({
   width: 330,
   height: 50,
   padding: '12px 8px',
