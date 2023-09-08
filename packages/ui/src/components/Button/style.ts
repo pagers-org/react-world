@@ -1,5 +1,5 @@
 export const sizeStyle = {
-  s: "text-[0.875rem] py-[0.25rem] px-[0.5rem] rounded-[0.2rem]",
+  s: "text-[0.875rem] h-27 px-[0.5rem] rounded-[0.2rem]",
   m: "text-[1rem] py-[0.5rem] px-[1rem] rounded-[0.25rem]",
   lg: "text-[1.25rem] py-[0.75rem] px-[1.5rem] rounded-[0.3rem]",
 };
