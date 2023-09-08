@@ -1,5 +1,7 @@
+import ProfileUserPageMain from '@/pageComponents/profile/[username]/ProfileUserPageMain';
+
 const ProfileUserPage = () => {
-  return <div>유저 프로필 페이지입니다.</div>;
+  return <ProfileUserPageMain />;
 };
 
 export default ProfileUserPage;
