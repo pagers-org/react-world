@@ -11,6 +11,13 @@ export type Input = {
   placeholder: string;
 };
 
+export type Article = {
+  title: string;
+  description: string;
+  body: string;
+  tagList: string[];
+};
+
 export type User = {
   userName: string;
   email: string;

@@ -5,17 +5,18 @@ import React from 'react';
 
 type Props = {
   tags: string[];
+  onClick: (tag: string) => void;
 };
-const TagList = ({ tags }: Props) => {
-  const handleTagClick = async (tag: string) => {
-    const res = await http.get(`http://localhost:3000/api/articles?tag=${tag}`);
-    console.log(res);
-  };
+const TagList = ({ tags, onClick }: Props) => {
+  // const handleTagClick = async (tag: string) => {
+  //   const res = await http.get(`http://localhost:3000/api/articles?tag=${tag}`);
+  //   console.log(res);
+  // };
   return (
     <ul className={tagList}>
       {tags.length > 0 &&
         tags?.map((tag, index) => (
-          <li key={index} className={`${tagItem} ${tagFill}`} onClick={() => handleTagClick(tag)}>
+          <li key={index} className={`${tagItem} ${tagFill}`} onClick={() => onClick(tag)}>
             {tag}
           </li>
         ))}
