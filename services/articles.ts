@@ -1,5 +1,5 @@
 import { http } from '@/libs/http';
-import { Article } from '@/types';
+import { NewArticle } from '@/types';
 
 // 전제 Article 조회
 const fetchArticles = (limit = 20) => {
@@ -12,7 +12,7 @@ const fetchArticlesWithTag = (tag: string, limit = 20) => {
 };
 
 // Article 작성
-const registerArticle = (article: Article) => {
+const registerArticle = (article: NewArticle) => {
   return http.post('https://api.realworld.io/api/articles', article);
 };
 
