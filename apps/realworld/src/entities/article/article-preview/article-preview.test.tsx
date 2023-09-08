@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ArticleListItem from './article-list-item';
+import ArticleListItem from './article-preview';
 
 describe('ArticleListItem', () => {
   it('ArticleListItem에 props로 내려준 title과 description이 표시된다.', () => {
