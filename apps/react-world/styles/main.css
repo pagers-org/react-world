@@ -3046,17 +3046,6 @@ input[type="button"].btn-block {
     .navbar-sticky-top {
       border-radius: 0; } }
 
-.navbar-brand {
-  float: left;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  margin-right: 1rem;
-  font-size: 1.25rem; }
-  .navbar-brand:focus, .navbar-brand:hover {
-    text-decoration: none; }
-  .navbar-brand > img {
-    display: block; }
-
 .navbar-divider {
   float: left;
   width: 1px;
@@ -3090,23 +3079,6 @@ input[type="button"].btn-block {
   .navbar-toggleable-md {
     display: block !important; } }
 
-.navbar-nav .nav-item {
-  float: left; }
-
-.navbar-nav .nav-link {
-  display: block;
-  padding-top: .425rem;
-  padding-bottom: .425rem; }
-  .navbar-nav .nav-link + .nav-link {
-    margin-left: 1rem; }
-
-.navbar-nav .nav-item + .nav-item {
-  margin-left: 1rem; }
-
-.navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.8); }
-  .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
-    color: rgba(0, 0, 0, 0.8); }
 
 .navbar-light .navbar-nav .nav-link {
   color: rgba(0, 0, 0, 0.3); }
@@ -5079,13 +5051,6 @@ ul.tag-list {
   list-style: none !important; }
   ul.tag-list li {
     display: inline-block !important; }
-
-.navbar-brand {
-  font-family: "Titillium Web", sans-serif;
-  font-size: 1.5rem !important;
-  padding-top: 0rem !important;
-  margin-right: 2rem !important;
-  color: #5CB85C !important; }
 
 .nav-link .user-pic {
   height: 26px;
