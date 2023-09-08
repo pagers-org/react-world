@@ -92,12 +92,12 @@ export const tagFill = style({
 });
 
 export const button = style({
-  width: '100px',
   height: '40px',
   backgroundColor: 'white',
   borderRadius: '5px',
   border: '1px solid black',
   cursor: 'pointer',
+
   ':hover': {
     boxShadow: 'none',
     background: 'transparent',
