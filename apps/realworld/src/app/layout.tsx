@@ -1,8 +1,8 @@
 import './main.css';
 import type { Metadata } from 'next';
 import { GNB } from '@/widgets/gnb';
-import Link from 'next/link';
 import Provider from '../providers/Providers';
+import { Footer } from '@/widgets/footer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,20 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Provider>
           <GNB />
           {children}
-          <footer className="absolute bottom-0 w-full py-16 mt-24 bg-gray500">
-            <div className="flex items-center justify-center">
-              <Link href="/" className="align-middle">
-                <p className="text-green600">conduit</p>
-              </Link>
-              <span className="ml-10 text-xs font-light text-gray1100">
-                An interactive learning project from
-                <a className="text-green600" href="https://thinkster.io">
-                  Thinkster
-                </a>
-                . Code &amp; design licensed under MIT.
-              </span>
-            </div>
-          </footer>
+          <Footer />
         </Provider>
       </body>
     </html>
