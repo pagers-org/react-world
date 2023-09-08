@@ -1,59 +1,12 @@
 'use client';
-import Link from 'next/link';
 import * as styles from '@/styles/layout.css';
-import { usePathname } from 'next/navigation';
 import useUserStore from '@/stores/useUserStore';
-
-const nonLoginNav = [
-  {
-    href: '/',
-    name: 'Home',
-  },
-  {
-    href: '/login',
-    name: 'Sign in',
-  },
-  {
-    href: '/register',
-    name: 'Sign up',
-  },
-];
-
-const loginNav = [
-  {
-    href: '/',
-    name: 'Home',
-  },
-  {
-    href: '/editor',
-    name: 'New Article',
-  },
-  {
-    href: '/settings',
-    name: 'Settings',
-  },
-];
+import LoginNav from './LoginNav';
+import NonLoginNav from './NonLoginNav';
 
 const Nav = () => {
   const { token } = useUserStore();
-  const nav = token ? loginNav : nonLoginNav;
-  const pathname = usePathname();
-
-  return (
-    <nav className={styles.nav}>
-      {nav?.map((item, index) => (
-        <Link
-          key={index}
-          href={item.href}
-          className={
-            pathname === item.href ? `${styles.navItem} ${styles.activate}` : `${styles.navItem} ${styles.disabled}`
-          }
-        >
-          {item.name}
-        </Link>
-      ))}
-    </nav>
-  );
+  return <nav className={styles.nav}>{token ? <LoginNav /> : <NonLoginNav />}</nav>;
 };
 
 export default Nav;

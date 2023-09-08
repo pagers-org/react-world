@@ -5,6 +5,7 @@ import TagList from '../tags/TagList';
 import { flex } from '@/styles/layout.css';
 import { heart } from '@/styles/account.css';
 import { useRouter } from 'next/navigation';
+import { FillHeartIcon } from '@/composables/icons';
 type Props = {
   article: any;
 };
@@ -16,8 +17,8 @@ const ArticlePreview = ({
     <div className={articlePreview}>
       <div className={articleMeta}>
         <UserBox author={author} createdAt={createdAt} />
-        <button className={heart}>
-          {favorited ? '❤' : '🤍'} {favoritesCount}
+        <button className={favorited ? `${heart}` : `${heart}`}>
+          <FillHeartIcon /> {favoritesCount}
         </button>
       </div>
       <div onClick={() => router.push(`/article/${slug}`)}>

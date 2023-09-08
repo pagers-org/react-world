@@ -1,7 +1,7 @@
-import React from 'react';
+import { container } from '@/styles/common.css';
 
 const SettingsPage = () => {
-  return <div>page</div>;
+  return <main className={container}>page</main>;
 };
 
 export default SettingsPage;

@@ -1,6 +1,5 @@
 'use client';
 import { tagFill, tagItem, tagList } from '@/styles/layout.css';
-import Link from 'next/link';
 import React from 'react';
 
 type Props = {
@@ -11,10 +10,8 @@ const TagList = ({ tags }: Props) => {
     <ul className={tagList}>
       {tags.length > 0 &&
         tags?.map((tag, index) => (
-          <li key={index}>
-            <Link href="" className={`${tagItem} ${tagFill}`}>
-              {tag}
-            </Link>
+          <li key={index} className={`${tagItem} ${tagFill}`}>
+            {tag}
           </li>
         ))}
     </ul>

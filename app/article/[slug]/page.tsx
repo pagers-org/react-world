@@ -3,7 +3,7 @@ import TagList from '@/components/tags/TagList';
 import UserBox from '@/components/user/UserBox';
 import { fetchArticle } from '@/services/articles';
 import { articleContent } from '@/styles/article.css';
-import { container } from '@/styles/layout.css';
+import { container } from '@/styles/common.css';
 import Link from 'next/link';
 import React from 'react';
 type Props = {

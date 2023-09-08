@@ -1,5 +1,20 @@
 import { style } from '@vanilla-extract/css';
 
+const responsiveStyle = ({ tablet, desktop }) => ({
+  '@media': {
+    'screen and (min-width: 768px)': tablet,
+    'screen and (min-width: 1024px)': desktop,
+  },
+});
+
+export const container = style([
+  { margin: '0 auto', padding: '0 15px' },
+  responsiveStyle({
+    tablet: { maxWidth: '768px' },
+    desktop: { maxWidth: '1140px' },
+  }),
+]);
+
 export const sidePadding = style({
   padding: '0 15px',
 });

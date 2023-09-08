@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import './normalize.css';
 import Header from '@/components/layouts/Header';
+import Footer from '@/components/layouts/Footer';
 
 export const metadata: Metadata = {
   title: 'next world',
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

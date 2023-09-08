@@ -1,5 +1,5 @@
+import { container } from '@/styles/common.css';
 import { banner } from '@/styles/home.css';
-import { container } from '@/styles/layout.css';
 import { ReactNode } from 'react';
 type Props = {
   children: ReactNode;

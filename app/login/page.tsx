@@ -2,8 +2,8 @@
 
 import useUserStore from '@/stores/useUserStore';
 import { question, title } from '@/styles/account.css';
-import { input } from '@/styles/common.css';
-import { button, buttonBox, container, flexBox } from '@/styles/layout.css';
+import { input, container } from '@/styles/common.css';
+import { button, buttonBox, flexBox } from '@/styles/layout.css';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {

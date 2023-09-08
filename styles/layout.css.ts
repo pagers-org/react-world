@@ -17,7 +17,25 @@ export const logo = style({
 });
 
 export const footer = style({
-  backgroundColor: 'black',
+  background: 'linear-gradient(#485563, #29323c)',
+  position: 'fixed',
+  bottom: 0,
+  color: '#fff',
+  width: '100%',
+  textAlign: 'center',
+  padding: '15px',
+  boxShadow: '0 5px 5px 5px rgba(0,0,0,0.4)',
+  zIndex: '999',
+  fontSize: '1.5rem',
+});
+
+export const footerLink = style({
+  color: '#fff',
+  paddingLeft: 10,
+});
+
+export const footerIcon = style({
+  fontSize: '22px',
 });
 
 export const nav = style({
@@ -36,16 +54,6 @@ export const activate = style({
 
 export const disabled = style({
   color: 'rgba(0, 0, 0, 0.3)',
-});
-
-export const container = style({
-  width: '90%',
-  height: '100%',
-  margin: '0 auto',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  boxSizing: 'border-box',
 });
 
 export const sideBar = style({

@@ -1,10 +1,10 @@
-import { input } from '@/styles/common.css';
+import { container, input } from '@/styles/common.css';
 import { editorForm } from '@/styles/editor.css';
 import React from 'react';
 
 const EditorPage = () => {
   return (
-    <div className="">
+    <div className={container}>
       <form className={editorForm}>
         <input type="text" className={input} placeholder="Article Title" />
         <input type="text" className={input} placeholder="What's this article about?" />
