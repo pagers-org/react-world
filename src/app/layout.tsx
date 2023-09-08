@@ -1,4 +1,5 @@
 import Footer from '@/composables/Footer';
+import Nav from '@/composables/Nav';
 
 import '@/styles/globals.css';
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body
         className={`${titilliumWeb.variable} ${sourceSerif4.variable} ${merriweatherSans.variable} ${sourceSansPro.variable}`}
       >
+        <Nav />
         {children}
         <Footer />
       </body>
