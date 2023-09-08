@@ -6,12 +6,17 @@ import React from 'react';
 
 interface ClickToMoveTagProps {
   label: string;
-  onClick: () => void;
 }
 
-const ClickToMoveTag = ({ label, onClick }: ClickToMoveTagProps) => {
+const ClickToMoveTag = ({ label }: ClickToMoveTagProps) => {
+  const { push } = useRouter();
+
+  const handleClickTag = () => {
+    push(`?tag=${label}`, { scroll: false });
+  };
+
   return (
-    <li className="hover:cursor-pointer" onClick={onClick}>
+    <li className="hover:cursor-pointer" onClick={handleClickTag}>
       <Tag label={label} variant={'pill'} />
     </li>
   );
