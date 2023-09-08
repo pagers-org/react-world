@@ -4,3 +4,4 @@ jest.setup.ts
 jest.config.js
 node_modules/*
 node_modules
+tailwind.config.ts
