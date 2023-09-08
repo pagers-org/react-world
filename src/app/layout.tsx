@@ -1,3 +1,5 @@
+import Footer from '@/composables/Footer';
+
 import '@/styles/globals.css';
 
 import {
@@ -18,6 +20,7 @@ export default function RootLayout({
         className={`${titilliumWeb.variable} ${sourceSerif4.variable} ${merriweatherSans.variable} ${sourceSansPro.variable}`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
