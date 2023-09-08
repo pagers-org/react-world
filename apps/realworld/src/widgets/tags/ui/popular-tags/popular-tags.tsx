@@ -1,7 +1,7 @@
 'use client';
 
-import ClikcToMoveTag from '@/features/tags/ui/clikc-to-move-tag/click-to-move-tag';
 import { useGetTags } from '@/shared/api/realworld/apis';
+import { ClickToMoveTag } from '@/entities/tag';
 import React from 'react';
 
 const PopularTags = () => {
@@ -13,7 +13,7 @@ const PopularTags = () => {
     },
   });
 
-  return <ul className="flex flex-wrap gap-4">{tags?.map(label => <ClikcToMoveTag key={label} label={label} />)}</ul>;
+  return <ul className="flex flex-wrap gap-4">{tags?.map(label => <ClickToMoveTag key={label} label={label} />)}</ul>;
 };
 
 export default PopularTags;
