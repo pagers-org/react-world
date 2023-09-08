@@ -7,7 +7,7 @@ describe('ArticleListItem', () => {
     const title = 'title';
     const description = 'description';
 
-    render(<ArticleListItem title={title} description={description} id={'1'} />);
+    render(<ArticleListItem title={title} description={description} slug={'1'} />);
 
     const $title = screen.getByText(title);
     const $description = screen.getByText(description);
