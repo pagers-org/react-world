@@ -13,6 +13,8 @@ export default function ArticleCard(props: Props) {
   const { title, description, tagList, favoritesCount, createdAt, author } =
     props;
 
+  const createdDate = format(new Date(createdAt), 'yyyy-MM-dd');
+
   return (
     <div className={styles.articleCard}>
       <div className={styles.top}>
@@ -28,9 +30,7 @@ export default function ArticleCard(props: Props) {
           </div>
           <div>
             <div className={styles.authorName}>{author.username}</div>
-            <div className={styles.createdDate}>
-              {format(new Date(createdAt), 'yyyy-MM-dd')}
-            </div>
+            <div className={styles.createdDate}>{createdDate}</div>
           </div>
         </div>
         <div>
