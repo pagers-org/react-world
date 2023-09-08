@@ -1,7 +1,13 @@
-{
-    "printWidth": 80,
-    "tabWidth": 2, 
-           "endOfLine": "lf",
-    "arrowParens": "always", 
-    "singleQuote": true
-  }
+ {
+       "printWidth": 80,
+       "tabWidth": 4,
+       "trailingComma": "all",
+       "singleQuote": true,
+       "semi": true,
+       "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+       "importOrderSeparation": true,
+       "importOrderSortSpecifiers": true,
+       "endOfLine": "lf",
+       "arrowParens": "always"
+     }
+     

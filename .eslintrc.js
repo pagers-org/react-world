@@ -33,16 +33,20 @@ module.exports = {
 	plugins: [
 		'react',
 		'@typescript-eslint',
-		'eslint-plugin-simple-import-sort',
-		'unused-imports'
+		'prettier',
+		'unused-imports',
+		'react-hooks',
 	],
 	rules: {
 		"no-console": "error",
 		"prettier/prettier": "error",
 		"unused-imports/no-unused-imports": "error",
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
 		"@typescript-eslint/prefer-optional-chain": "error",
-
+		"react/destructuring-assignment": "warn",
+		"react/no-direct-mutation-state": "warn",
+		"react/no-unused-state": "warn",
+		"react/self-closing-comp": "warn",
 	  }
 };
