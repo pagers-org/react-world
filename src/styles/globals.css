@@ -1,0 +1,8 @@
+/* Template provided external styles */
+@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+@import url('https://demo.productionready.io/main.css');
+
+/* Tailwind basic styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
