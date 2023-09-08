@@ -1,9 +1,7 @@
-import Image from 'next/image';
-import styles from './page.module.css';
 import { PopularTags } from '@/widgets/tags';
-import { Suspense } from 'react';
-import { Tabs } from '@packages/ui';
 import { FeedToggle } from '@/widgets/tab';
+import { ArticleList } from '@/widgets/article';
+import { ArticleListPagination } from '@/features/article';
 
 export default function Home() {
   return (
@@ -15,75 +13,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full mx-auto max-w-940 max-tablet:max-w-720 max-mobile:max-w-554">
-        <div className="flex">
+      <div className="w-[calc(100%_-_30px)] mx-auto max-w-1140 max-desktop:max-w-940 max-tablet:max-w-720 ">
+        <div className="flex gap-30">
           <div className="flex-[0_0_75%]">
             <FeedToggle />
 
-            <div className="article-preview">
-              <div className="article-meta">
-                <a href="/profile/eric-simons">
-                  <img src="http://i.imgur.com/Qr71crq.jpg" />
-                </a>
-                <div className="info">
-                  <a href="/profile/eric-simons" className="author">
-                    Eric Simons
-                  </a>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 29
-                </button>
-              </div>
-              <a href="/article/how-to-build-webapps-that-scale" className="preview-link">
-                <h1>How to build webapps that scale</h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">realworld</li>
-                  <li className="tag-default tag-pill tag-outline">implementations</li>
-                </ul>
-              </a>
-            </div>
-
-            <div className="article-preview">
-              <div className="article-meta">
-                <a href="/profile/albert-pai">
-                  <img src="http://i.imgur.com/N4VcUeJ.jpg" />
-                </a>
-                <div className="info">
-                  <a href="/profile/albert-pai" className="author">
-                    Albert Pai
-                  </a>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 32
-                </button>
-              </div>
-              <a href="/article/the-song-you" className="preview-link">
-                <h1>The song you won&aops;t ever stop singing. No matter how hard you try.</h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">realworld</li>
-                  <li className="tag-default tag-pill tag-outline">implementations</li>
-                </ul>
-              </a>
-            </div>
-
-            <ul className="pagination">
-              <li className="page-item active">
-                <a className="page-link" href="">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="">
-                  2
-                </a>
-              </li>
-            </ul>
+            <ArticleList />
           </div>
 
           <div className="flex-[0_0_25%]">
