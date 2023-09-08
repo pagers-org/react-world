@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { ROUTES } from '@/src/constants/route';
+
 import * as styles from '@/src/components/layout/Header/index.css';
 
 export default function Header() {
@@ -11,9 +13,9 @@ export default function Header() {
         </Link>
       </div>
       <div className={styles.headerRight}>
-        <Link href="/">Home</Link>
-        <Link href="/login">Sign in</Link>
-        <Link href="/register">Sign up</Link>
+        <Link href={ROUTES.HOME}>Home</Link>
+        <Link href={ROUTES.LOGIN}>Sign in</Link>
+        <Link href={ROUTES.REGISTER}>Sign up</Link>
       </div>
     </header>
   );

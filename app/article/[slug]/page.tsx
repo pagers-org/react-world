@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 
+import { ROUTES } from '@/src/constants/route';
+
 import Banner from '@/src/components/layout/Banner';
 
 import { DUMMY_ARTICLES } from '@/src/fixtures/article';
@@ -89,11 +91,11 @@ export default function ArticleDetail() {
         </div>
 
         <div className={styles.footerDescription}>
-          <Link href="/login" className={styles.linkText}>
+          <Link href={ROUTES.LOGIN} className={styles.linkText}>
             Sign in
           </Link>
           or
-          <Link href="/register" className={styles.linkText}>
+          <Link href={ROUTES.REGISTER} className={styles.linkText}>
             sign up
           </Link>
           to add comments on this article.
