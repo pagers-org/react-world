@@ -27,7 +27,6 @@
     "no-console": "error",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "prettier/prettier": "off",
-    "testing-library/prefer-screen-queries": "off"
+    "prettier/prettier": "off"
   }
 }
