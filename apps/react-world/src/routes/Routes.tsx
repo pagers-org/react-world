@@ -7,6 +7,8 @@ import { ProfilePage } from '../pages/profile';
 import { ArticlePage } from '../pages/article';
 import { EditorPage } from '../pages/editor';
 import { SettingsPage } from '../pages/settings';
+import { Global } from '@emotion/react';
+import globalStyles from '../../styles/globalStyles';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,7 @@ const router = createBrowserRouter([
 export const Routes = () => {
   return (
     <Layout>
+      <Global styles={globalStyles} />
       <RouterProvider router={router} />;
     </Layout>
   );
