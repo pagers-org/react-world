@@ -1,4 +1,4 @@
-export const Footer: React.FC = () => {
+export const Footer = () => {
   return (
     <footer>
       <div className="container">

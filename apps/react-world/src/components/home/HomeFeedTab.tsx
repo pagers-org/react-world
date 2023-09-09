@@ -2,7 +2,7 @@ interface HomeFeedTabProps {
   activeFeed: 'my_feed' | 'global_feed';
 }
 
-const HomeFeedTab: React.FC<HomeFeedTabProps> = ({ activeFeed }) => (
+const HomeFeedTab = ({ activeFeed }: HomeFeedTabProps) => (
   <div className="feed-toggle">
     <ul className="nav nav-pills outline-active">
       <li className="nav-item">

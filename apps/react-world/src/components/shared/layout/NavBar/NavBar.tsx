@@ -1,11 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { Container } from '../../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   return (
     <NavbarContainer>
       <Container>

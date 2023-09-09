@@ -7,7 +7,7 @@ interface NavItemProps {
   title: string;
 }
 
-export const NavItem: React.FC<NavItemProps> = ({ href, isActive, title }) => (
+export const NavItem = ({ href, isActive, title }: NavItemProps) => (
   <li className="nav-item">
     <NavLink className={`nav-link ${isActive ? 'active' : ''}`} href={href}>
       {title}

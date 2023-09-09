@@ -10,7 +10,7 @@ interface ArticlePreviewProps {
   tags: string[];
 }
 
-const ArticlePreview: React.FC<ArticlePreviewProps> = ({
+const ArticlePreview = ({
   authorProfileLink,
   authorProfileImageUrl,
   authorName,
@@ -20,7 +20,7 @@ const ArticlePreview: React.FC<ArticlePreviewProps> = ({
   articleTitle,
   articleDescription,
   tags,
-}) => (
+}: ArticlePreviewProps) => (
   <div className="article-preview">
     <div className="article-meta">
       <a href={authorProfileLink}>

@@ -4,7 +4,7 @@ import {
   HomeBannerTitle,
 } from './HomeBanner.styled';
 
-export const HomeBanner: React.FC = () => {
+export const HomeBanner = () => {
   return (
     <HomeBannerContainer>
       <HomeBannerTitle>conduit</HomeBannerTitle>

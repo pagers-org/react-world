@@ -2,7 +2,7 @@ interface ArticleTagListProps {
   tags: string[];
 }
 
-const ArticleTagList: React.FC<ArticleTagListProps> = ({ tags }) => (
+const ArticleTagList = ({ tags }: ArticleTagListProps) => (
   <div className="col-md-3">
     <div className="sidebar">
       <p>Popular Tags</p>

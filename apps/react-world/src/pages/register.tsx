@@ -1,6 +1,6 @@
 import useRegister from '../hooks/useRegister';
 
-export const RegisterPage: React.FC = () => {
+export const RegisterPage = () => {
   const { userData, error, isLoading, handleInputChange, handleSubmit } =
     useRegister();
 
