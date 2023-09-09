@@ -1,46 +1,20 @@
 {
-  "root": true,
-  "env": {
-    "node": true,
-    "es6": true
-  },
-  "parserOptions": { "ecmaVersion": 8 },
-  "ignorePatterns": ["node_modules/*", ".next/*", ".out/*", "!.prettierrc", "custom-libs/*"],
-  "extends": "next/core-web-vitals",
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "@typescript-eslint/parser",
-      "settings": { "react": { "version": "detect" } },
-      "env": {
+    "env": {
         "browser": true,
-        "node": true,
-        "es6": true
-      },
-      "extends": [
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
-        "plugin:prettier/recommended"
-      ],
-      "rules": {
-        "react/react-in-jsx-scope": "off",
-        "jsx-a11y/anchor-is-valid": "off",
-        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-        "@typescript-eslint/explicit-function-return-type": [
-          "warn",
-          {
-            "allowExpressions": true,
-            "allowConciseArrowFunctionExpressionsStartingWithVoid": true
-          }
-        ],
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-console": ["error"],
-        "camelcase": "error",
-        "react/prop-types": "off"
-      }
-    }
-  ]
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "react"],
+    "rules": {}
 }
