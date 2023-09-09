@@ -2,9 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import ArticleList from "@/feature/article/ArticleList.astro";
 import type { Articles } from "@/types/article";
+import HttpClient from "@/services/http-client";
 
-const response = await fetch(`${import.meta.env.PUBLIC_BASE_URL}/articles`);
-const data: Articles = await response.json();
+const data: Articles = await HttpClient.get(`/articles`);
 ---
 
 <Layout>
