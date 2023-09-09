@@ -13,6 +13,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:testing-library/react',
     'plugin:jest-dom/recommended',
+    'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/p arser',
   parserOptions: {
