@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,14 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.4.0",
+    "@storybook/addon-interactions": "^7.4.0",
+    "@storybook/addon-links": "^7.4.0",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.4.0",
+    "@storybook/nextjs": "^7.4.0",
+    "@storybook/react": "^7.4.0",
+    "@storybook/testing-library": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -55,9 +65,11 @@
     "eslint-import-resolver-typescript": "^3.6.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jest-dom": "^5.0.2",
+    "eslint-plugin-storybook": "^0.6.13",
     "eslint-plugin-testing-library": "^6.0.0",
     "jest": "^29.6.4",
     "jest-environment-jsdom": "^29.6.4",
+    "storybook": "^7.4.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2"
   }
