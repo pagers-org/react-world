@@ -5074,22 +5074,6 @@ ul.tag-list {
     border-bottom: 2px solid #5CB85C !important;
     color: #5CB85C !important; }
 
-footer {
-  background: #f3f3f3;
-  margin-top: 3rem;
-  padding: 1rem 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%; }
-  footer .logo-font {
-    vertical-align: middle; }
-  footer .attribution {
-    vertical-align: middle;
-    margin-left: 10px;
-    font-size: 0.8rem;
-    color: #bbb;
-    font-weight: 300; }
-
 .error-messages {
   color: #B85C5C !important;
   font-weight: bold; }
