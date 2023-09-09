@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Layout } from '../components/Layout';
 import { HomePage } from '../pages/home';
 import { LoginPage } from '../pages/login';
 import { RegisterPage } from '../pages/register';
@@ -39,5 +40,9 @@ const router = createBrowserRouter([
 ]);
 
 export const Routes = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <Layout>
+      <RouterProvider router={router} />;
+    </Layout>
+  );
 };
