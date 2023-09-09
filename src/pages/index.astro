@@ -1,15 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ArticleList from "@/feature/article/ArticleList.astro";
-import type { Articles } from "@/types/article";
+import Main from "@/feature/content/Main";
 import HttpClient from "@/services/http-client";
+import type { Articles } from "@/types/article";
 
 const data: Articles = await HttpClient.get(`/articles`);
 ---
 
 <Layout>
   <div class="container">
-    <ArticleList data={data} />
+    <Main client:load data={data} />
   </div>
 </Layout>
 

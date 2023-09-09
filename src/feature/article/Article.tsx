@@ -18,6 +18,7 @@ import SvgIcon from "@/components/SvgIcon";
 import LikeIcon from "@/assets/icons/like-icon.svg";
 
 import { formatDate } from "@/utils/date-format";
+import type { ReactNode } from "react";
 
 interface Props {
   imgSrc: string;
@@ -27,7 +28,7 @@ interface Props {
   description: string;
   favorited: boolean;
   favoritesCounts: number;
-  children: any;
+  tagComponent: ReactNode;
 }
 
 const Article = ({
@@ -38,7 +39,7 @@ const Article = ({
   description,
   favorited,
   favoritesCounts,
-  children,
+  tagComponent,
 }: Props) => {
   return (
     <div className={container}>
@@ -61,7 +62,7 @@ const Article = ({
         <p className={articleContent}>{description}</p>
       </a>
 
-      <div className={articleTagContainer}>{children}</div>
+      <div className={articleTagContainer}>{tagComponent}</div>
     </div>
   );
 };
