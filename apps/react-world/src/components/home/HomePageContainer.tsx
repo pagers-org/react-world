@@ -1,9 +1,28 @@
-interface HomePageContainerProps {
-  children: React.ReactNode;
-}
+import { ReactNode } from 'react';
+import styled from '@emotion/styled';
 
-const HomePageContainer: React.FC<HomePageContainerProps> = ({ children }) => {
-  return <div className="home-page">{children}</div>;
+type ContainerProps = {
+  children?: ReactNode;
 };
+
+export const HomePageContainer = ({ children }: ContainerProps) => {
+  return <Container>{children}</Container>;
+};
+
+const Container = styled.div`
+  &.home-page .feed-toggle {
+    margin-bottom: -1px;
+  }
+
+  &.home-page .sidebar {
+    padding: 5px 10px 10px 10px;
+    background: #f3f3f3;
+    border-radius: 4px;
+  }
+
+  &.home-page .sidebar p {
+    margin-bottom: 0.2rem;
+  }
+`;
 
 export default HomePageContainer;
