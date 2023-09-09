@@ -3,10 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "description": "리액트로 구현하는 리얼 월드 프로젝트",
-  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pagers-org/react-world.git"
+    "url": "git+https://~github.com/pagers-org/react-world.git"
   },
   "keywords": [
     "real-world",
