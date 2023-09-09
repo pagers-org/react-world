@@ -3,11 +3,12 @@ import { dehydrate } from '@tanstack/react-query';
 import * as styles from '@/app/page.css';
 
 import Articles from '@/features/article/components/Articles';
-import { articleApiService } from '@/features/article/services/ApiService';
+import { articleApiService } from '@/features/article/services/ArticleApiService';
+
+import Tags from '@/features/tag/components/Tags';
+import { tagApiService } from '@/features/tag/services/TagApiService';
 
 import Banner from '@/src/components/layout/Banner';
-
-import { DUMMY_TAGS } from '@/src/fixtures/tag';
 
 import { getQueryClient } from '@/src/lib/react-query/getQueryClient';
 import Hydrate from '@/src/lib/react-query/hydrate.client';
@@ -17,6 +18,8 @@ export default async function MainPage() {
   await queryClient.prefetchQuery(['article', 1], () =>
     articleApiService.getArticles(1),
   );
+  await queryClient.prefetchQuery(['tags'], () => tagApiService.getTags());
+
   const dehydratedState = dehydrate(queryClient);
 
   return (
@@ -37,15 +40,7 @@ export default async function MainPage() {
 
         <div className={styles.tag}>
           popular tags
-          <div className={styles.chipWrapper}>
-            {DUMMY_TAGS.map((tag) => {
-              return (
-                <button className={styles.chip} key={tag} type="button">
-                  {tag}
-                </button>
-              );
-            })}
-          </div>
+          <Tags />
         </div>
       </div>
     </Hydrate>

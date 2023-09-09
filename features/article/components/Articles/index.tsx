@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ARTICLE_LIMIT_PER_PAGE } from '@/features/article/constants';
 import ArticleCard from '@/features/article/components/ArticleCard';
-import { articleApiService } from '@/features/article/services/ApiService';
+import { articleApiService } from '@/features/article/services/ArticleApiService';
 
 import Pagination from '@/src/components/Pagination';
 

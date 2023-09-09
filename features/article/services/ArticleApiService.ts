@@ -3,20 +3,14 @@ import ky from 'ky';
 import { ARTICLE_LIMIT_PER_PAGE } from '@/features/article/constants';
 import { Article } from '@/features/article/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+import { ApiService } from '@/src/services/ApiService';
 
 interface GetArticlesResponse {
   articles: Article[];
   articlesCount: number;
 }
 
-class ArticleApiService {
-  private readonly instance;
-
-  constructor() {
-    this.instance = ky.create({ prefixUrl: API_BASE_URL });
-  }
-
+class ArticleApiService extends ApiService {
   async getArticles(page = 1): Promise<GetArticlesResponse> {
     const searchParams = new URLSearchParams();
     searchParams.set('offset', String(page * ARTICLE_LIMIT_PER_PAGE));
