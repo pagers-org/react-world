@@ -11,8 +11,10 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended',
   ],
-  parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/p arser',
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
