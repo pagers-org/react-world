@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { Navbar } from './NavBar';
 import { Footer } from './Footer';
+import { Navbar } from './NavBar/NavBar';
 
 type LayoutProps = {
   children?: ReactNode;
