@@ -4,8 +4,14 @@
     "node": true,
     "browser": true
   },
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
-  "plugins": ["unicorn"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "unicorn"
+  ],
   "rules": {
     "no-unused-vars": [
       "error",
