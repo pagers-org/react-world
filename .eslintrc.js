@@ -15,7 +15,7 @@ module.exports = {
     'plugin:jest-dom/recommended',
     'plugin:storybook/recommended',
   ],
-  parser: '@typescript-eslint/p arser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
