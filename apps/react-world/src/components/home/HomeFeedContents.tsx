@@ -3,7 +3,7 @@ import ArticleTagList from './ArticleTagList';
 import HomeFeedTab from './HomeFeedTab';
 import Pagination from './Pagination';
 
-const HomeFeedContents: React.FC = () => (
+const HomeFeedContents = () => (
   <div className="container page">
     <div className="row">
       <div className="col-md-9">

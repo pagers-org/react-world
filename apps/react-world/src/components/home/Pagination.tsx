@@ -3,7 +3,7 @@ interface PaginationProps {
   activePage: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ pages, activePage }) => {
+const Pagination = ({ pages, activePage }: PaginationProps) => {
   return (
     <ul className="pagination">
       {pages.map(page => (
