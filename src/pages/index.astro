@@ -1,5 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ArticleList from "@/feature/article/ArticleList.astro";
+import type { Articles } from "@/types/article";
+
+const response = await fetch(`${import.meta.env.PUBLIC_BASE_URL}/articles`);
+const data: Articles = await response.json();
 ---
 
-<Layout />
+<Layout>
+  <div class="container">
+    <ArticleList data={data} />
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1280px;
+    margin: 50px auto;
+  }
+</style>

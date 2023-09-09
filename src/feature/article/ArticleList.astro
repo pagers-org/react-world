@@ -1,0 +1,37 @@
+---
+import Article from "./Article";
+import type { Articles } from "@/types/article";
+import TagList from "./TagList.astro";
+
+interface Props {
+  data: Articles;
+}
+
+const data = Astro.props.data;
+---
+
+<div class="container">
+  {
+    data.articles.map(v => (
+      <Article
+        favorited={v.favorited}
+        favoritesCounts={v.favoritesCount}
+        imgSrc={v.author.image}
+        authorName={v.author.username}
+        createDate={v.createdAt}
+        title={v.title}
+        description={v.description}
+      >
+        <TagList tagList={v.tagList} />
+      </Article>
+    ))
+  }
+</div>
+
+<style>
+  .container {
+    display: flex;
+    row-gap: 10px;
+    flex-direction: column;
+  }
+</style>

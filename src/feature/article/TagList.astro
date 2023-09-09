@@ -1,0 +1,12 @@
+---
+import Label from "@/components/label.astro";
+
+interface Props {
+  tagList: string[];
+}
+const { tagList } = Astro.props;
+---
+
+<Fragment>
+  {tagList.map(v => <Label text={v} />)}
+</Fragment>
