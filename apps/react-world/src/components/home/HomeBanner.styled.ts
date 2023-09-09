@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Banner, BannerTitle } from '../shared/banner/Banner.styled';
+import { Banner, BannerTitle } from '../shared/Banner/Banner.styled';
 
 export const HomeBannerContainer = styled(Banner)`
   background: #5cb85c;
