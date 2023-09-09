@@ -1,8 +1,10 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 import { Navbar } from './NavBar';
 import { Footer } from './Footer';
 
-type LayoutProps = PropsWithChildren;
+type LayoutProps = {
+  children?: ReactNode;
+};
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
