@@ -29,9 +29,6 @@ module.exports = {
   ignorePatterns: ["node_modules/", "dist/"],
   rules: {
     "import/no-default-export": "off",
-    "eslint-comments/require-description": [
-      "error",
-      { ignore: ["eslint-disable-next-line"] },
-    ],
+    "eslint-comments/require-description": ["error", { ignore: ["eslint-disable-next-line"] }],
   },
 };
