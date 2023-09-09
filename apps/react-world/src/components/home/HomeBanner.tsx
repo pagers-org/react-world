@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { Banner } from '../shared/banner/Banner';
-import { BannerTitle } from '../shared/banner/BannerTitle';
+import { Banner, BannerTitle } from '../shared/banner/Banner.styled';
 
 export const HomeBanner: React.FC = () => {
   return (
