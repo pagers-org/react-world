@@ -35,7 +35,14 @@
       "parser": "@typescript-eslint/parser",
       "files": ["*.ts", "*.tsx"],
       "plugins": ["@typescript-eslint", "react"],
-      "extends": ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended", "plugin:import/typescript"]
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:import/typescript"
+      ],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
     }
   ],
   "rules": {
