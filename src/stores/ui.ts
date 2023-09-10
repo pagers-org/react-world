@@ -30,7 +30,7 @@ export const breakPoint = computed(windowWidth, width => {
 });
 
 export const isMobile = computed(breakPoint, breakPoint => {
-  if (["xl", "lg"].indexOf(breakPoint) === -1) {
+  if (["xl", "lg", "md"].indexOf(breakPoint) === -1) {
     return true;
   }
 

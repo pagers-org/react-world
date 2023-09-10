@@ -105,25 +105,35 @@ import { Image } from "astro:assets";
   import { isMobile } from "@/stores/ui";
 
   function render() {
+    console.log(isMobile.get());
     if (isMobile.get()) {
       document.getElementById("desktop_menu")?.classList.add("hidden");
       document.getElementById("mobile_menu")?.classList.remove("hidden");
-      mobileSideMenuEvent();
+      mobileSideMenuAddEvent();
     } else {
       document.getElementById("mobile_menu")?.classList.add("hidden");
       document.getElementById("desktop_menu")?.classList.remove("hidden");
+      mobileSideMenuRemoveEvent();
     }
   }
 
   render();
   window.addEventListener("resize", render);
 
-  function mobileSideMenuEvent() {
+  function mobileSideMenuAddEvent() {
     document.getElementById("mobile_menu_link")?.addEventListener("click", toggleMenu);
 
     document.getElementById("mobile_menu_overlay")?.addEventListener("click", toggleMenu);
 
     document.getElementById("mobile_menu_x_mark")?.addEventListener("click", toggleMenu);
+  }
+
+  function mobileSideMenuRemoveEvent() {
+    document.getElementById("mobile_menu_link")?.removeEventListener("click", toggleMenu);
+
+    document.getElementById("mobile_menu_overlay")?.removeEventListener("click", toggleMenu);
+
+    document.getElementById("mobile_menu_x_mark")?.removeEventListener("click", toggleMenu);
   }
 
   function toggleMenu() {
