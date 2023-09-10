@@ -5,27 +5,25 @@ export const tabContainer = style({
   zIndex: 20,
   width: "100%",
   textAlign: "center",
-  fontSize: "0.8rem",
-  fontWeight: "400",
   overflowX: "auto",
   display: "flex",
   flexDirection: "row",
-  height: "100%",
-  marginBottom: "20px",
+  height: "60px",
   columnGap: 4,
+  alignItems: "center",
+  marginBottom: "10px",
 });
 
 export const tabItem = style({
   display: "flex",
   alignItems: "center",
-  height: "100%",
   minWidth: "100px",
-  flex: "none",
   cursor: "pointer",
   borderRadius: "20px",
-  padding: "10px 16px",
   backgroundColor: "#fff",
   justifyContent: "center",
+  height: "40px",
+  flex: "none",
 
   selectors: {
     "&.active": {
@@ -37,6 +35,9 @@ export const tabItem = style({
 
 export const tabItemText = style({
   fontWeight: "bold",
+  fontSize: "0.8rem",
+  margin: "0 16px",
+  lineHeight: 1,
   selectors: {
     [`${tabItem}:hover &`]: {
       textDecoration: "underline",

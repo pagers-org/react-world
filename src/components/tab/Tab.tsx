@@ -9,12 +9,8 @@ interface Tab {
 
 interface Props {
   tabArr: Tab[];
-  topBorder?: boolean;
-  tabMargin?: number;
   defaultTab?: number;
-  currentTab?: number;
-  callbacks?: () => void;
-  rootStyles?: string;
+  callbacks?: (index: number) => void;
   containerStyle?: string;
 }
 
