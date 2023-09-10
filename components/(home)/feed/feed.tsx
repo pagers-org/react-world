@@ -5,7 +5,7 @@ import { ArticleListItem } from "../article-list-item";
 
 export const Feed = () => {
   return (
-    <div className="col-md-9">
+    <div className="pt-4">
       <Tabs.Root defaultValue="2">
         <Tabs.List>
           <Tabs.Trigger value="1">Your Feed</Tabs.Trigger>
@@ -25,7 +25,9 @@ export const Feed = () => {
         </Tabs.Content>
       </Tabs.Root>
 
-      <Pagination total={10} />
+      <div className="flex w-full justify-center py-10">
+        <Pagination total={10} currentPage={1} />
+      </div>
     </div>
   );
 };
