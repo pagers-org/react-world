@@ -18,14 +18,14 @@ const RegisterPageMain = () => {
     email: '',
     password: '',
   });
-  const [isError, setIsError] = useState<boolean>(false);
+  const [errorTypes, setErrorTypes] = useState<string[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (event: FormEvent<HTMLElement>) => {
     event.preventDefault();
 
     setIsLoading(true);
-    setIsError(false);
+    setErrorTypes(null);
 
     postUserRegister({
       user: {
@@ -33,7 +33,8 @@ const RegisterPageMain = () => {
       },
     }).then((res) => {
       if (res?.errors) {
-        setIsError(true);
+        const errorTypes = Object.keys(res.errors);
+        setErrorTypes(errorTypes);
       } else {
         router.push('/');
       }
@@ -57,9 +58,13 @@ const RegisterPageMain = () => {
               <Link href="/login">Have an account?</Link>
             </p>
 
-            {isError && (
+            {errorTypes && (
               <ul className="error-messages">
-                <li>That email is already taken</li>
+                {errorTypes.map((errorType) => (
+                  <li key={errorType}>
+                    {`That ${errorType} is already taken`}
+                  </li>
+                ))}
               </ul>
             )}
 
