@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 import type { Articles } from "@/types/article";
 import httpClient from "@/services/http-client";
@@ -13,6 +13,7 @@ interface Props {
 const useArticles = ({ data, page }: Props) => {
   const [articles, setArticles] = useState<Articles>(data);
   const [isLoading, setLoading] = useState(false);
+  const isMounted = useRef(false);
 
   const getArticles = useCallback(async () => {
     try {
@@ -33,8 +34,16 @@ const useArticles = ({ data, page }: Props) => {
   }, [page]);
 
   useEffect(() => {
-    getArticles();
+    if (isMounted.current) {
+      getArticles();
+    }
   }, [page, getArticles]);
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+    }
+  }, []);
 
   return { articles, isLoading };
 };
