@@ -13,7 +13,7 @@ export const FooterLogo = styled.a`
   vertical-align: middle;
 `;
 
-export const AttributedText = styled.span`
+export const FooterIntroduceText = styled.span`
   vertical-align: middle;
   margin-left: 10px;
   font-size: 0.8rem;
