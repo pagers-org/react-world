@@ -5,19 +5,34 @@ import type { Articles } from "@/types/article";
 import Pagination from "@/components/pagination/Pagination";
 import { CONTENT_LIMIT, PAGE_OFFSET } from "@/constants/pagination";
 import useArticles from "@/hooks/useArticles";
+import type { Tags } from "@/types/tags";
+import Tab from "@/components/tab/Tab";
+import { DEFAULT_TAGS } from "@/constants/tag";
 
 interface Props {
   data: Articles;
+  tagsData: Tags;
 }
 
-const Main = ({ data }: Props) => {
+const Main = ({ data, tagsData }: Props) => {
   const [page, setPage] = useState(0);
-  const { articles, isLoading } = useArticles({ page, data });
+  const [activeTab, setActiveTab] = useState(0);
 
+  const tagsArray = tagsData.tags.map(v => ({ text: v, id: v }));
+  const tabArr = [...DEFAULT_TAGS, ...tagsArray];
+
+  const handleTabClick = (index: number) => {
+    setActiveTab(index);
+  };
+
+  const currentTag = tabArr.find((_, i) => i === activeTab)?.id || "";
+
+  const { articles, isLoading } = useArticles({ page, data, tag: currentTag });
   const totalPage = Math.ceil(articles.articlesCount / CONTENT_LIMIT);
 
   return (
     <>
+      <Tab tabArr={tabArr} defaultTab={activeTab} callbacks={handleTabClick}></Tab>
       <ArticleList data={articles} isLoading={isLoading} />
       <Pagination offset={PAGE_OFFSET} totalPage={totalPage} page={page} setPage={setPage} />
     </>

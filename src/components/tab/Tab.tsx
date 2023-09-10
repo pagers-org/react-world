@@ -19,7 +19,7 @@ const Tab = ({ tabArr, containerStyle = "", defaultTab, callbacks }: Props) => {
 
   const onTabClick = (index: number) => {
     setClickedTab(index);
-    callbacks && callbacks();
+    callbacks && callbacks(index);
   };
 
   return (

@@ -8,9 +8,10 @@ import { CONTENT_LIMIT } from "@/constants/pagination";
 interface Props {
   data: Articles;
   page: number;
+  tag: string;
 }
 
-const useArticles = ({ data, page }: Props) => {
+const useArticles = ({ data, page, tag }: Props) => {
   const [articles, setArticles] = useState<Articles>(data);
   const [isLoading, setLoading] = useState(false);
   const isMounted = useRef(false);
@@ -22,6 +23,7 @@ const useArticles = ({ data, page }: Props) => {
         `/articles?${makeSearchParams({
           offset: `${page * CONTENT_LIMIT}`,
           limit: `${CONTENT_LIMIT}`,
+          ...(tag !== "global" && { tag }),
         })}`,
       );
 
@@ -31,13 +33,13 @@ const useArticles = ({ data, page }: Props) => {
     } finally {
       setLoading(false);
     }
-  }, [page]);
+  }, [page, tag]);
 
   useEffect(() => {
     if (isMounted.current) {
       getArticles();
     }
-  }, [page, getArticles]);
+  }, [page, getArticles, tag]);
 
   useEffect(() => {
     if (!isMounted.current) {
