@@ -1,11 +1,5 @@
 import { style } from "@vanilla-extract/css";
 
-export const icon = style({
-  width: "20px",
-  height: "20px",
-  color: "#b2b2b2",
-});
-
 export const paginationContainer = style({
   display: "flex",
   justifyContent: "center",
@@ -25,8 +19,29 @@ export const pageButton = style({
     "&:hover:not(:disabled)": {
       backgroundColor: "#ddd",
     },
-    "&.active": {
+    "&:disabled": {
+      cursor: "not-allowed",
+    },
+  },
+});
+
+export const pageButtonText = style({
+  lineHeight: 1,
+
+  selectors: {
+    [`${pageButton}.active > &`]: {
       fontWeight: "bold",
+    },
+  },
+});
+
+export const icon = style({
+  width: "20px",
+  height: "20px",
+
+  selectors: {
+    [`${pageButton}:disabled > &`]: {
+      color: "#b2b2b2",
     },
   },
 });

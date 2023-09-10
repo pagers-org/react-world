@@ -25,6 +25,11 @@ const Main = ({ data, tagsData }: Props) => {
     setActiveTab(index);
   };
 
+  const handlePageChange = (page: number) => {
+    setPage(page);
+    window.scrollTo({ top: 0, left: 0 });
+  };
+
   const currentTag = tabArr.find((_, i) => i === activeTab)?.id || "";
 
   const { articles, isLoading } = useArticles({ page, data, tag: currentTag });
@@ -34,7 +39,7 @@ const Main = ({ data, tagsData }: Props) => {
     <>
       <Tab tabArr={tabArr} defaultTab={activeTab} callbacks={handleTabClick}></Tab>
       <ArticleList data={articles} isLoading={isLoading} />
-      <Pagination offset={PAGE_OFFSET} totalPage={totalPage} page={page} setPage={setPage} />
+      <Pagination offset={PAGE_OFFSET} totalPage={totalPage} page={page} setPage={handlePageChange} />
     </>
   );
 };
