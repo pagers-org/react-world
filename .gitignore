@@ -131,3 +131,6 @@ dist
 
 # generated TS files
 src/server/proto/*.ts
+
+# local TODO
+TODO.*
