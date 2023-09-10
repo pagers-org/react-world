@@ -8,40 +8,7 @@ importers:
 
   .: {}
 
-  packages/my-app:
-    dependencies:
-      '@react-world/ui':
-        specifier: workspace:^
-        version: link:../vite-project
-      '@types/node':
-        specifier: 20.5.9
-        version: 20.5.9
-      '@types/react':
-        specifier: 18.2.21
-        version: 18.2.21
-      '@types/react-dom':
-        specifier: 18.2.7
-        version: 18.2.7
-      eslint:
-        specifier: 8.48.0
-        version: 8.48.0
-      eslint-config-next:
-        specifier: 13.4.19
-        version: 13.4.19(eslint@8.48.0)(typescript@5.2.2)
-      next:
-        specifier: 13.4.19
-        version: 13.4.19(react-dom@18.2.0)(react@18.2.0)
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
-      typescript:
-        specifier: 5.2.2
-        version: 5.2.2
-
-  packages/vite-project:
+  packages/ui:
     dependencies:
       react:
         specifier: ^18.2.0
@@ -86,6 +53,39 @@ importers:
       vite-tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0(typescript@5.2.2)(vite@4.4.9)
+
+  packages/web:
+    dependencies:
+      '@react-world/ui':
+        specifier: workspace:^
+        version: link:../ui
+      '@types/node':
+        specifier: 20.5.9
+        version: 20.5.9
+      '@types/react':
+        specifier: 18.2.21
+        version: 18.2.21
+      '@types/react-dom':
+        specifier: 18.2.7
+        version: 18.2.7
+      eslint:
+        specifier: 8.48.0
+        version: 8.48.0
+      eslint-config-next:
+        specifier: 13.4.19
+        version: 13.4.19(eslint@8.48.0)(typescript@5.2.2)
+      next:
+        specifier: 13.4.19
+        version: 13.4.19(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
 
 packages:
 
