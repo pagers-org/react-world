@@ -1,7 +1,13 @@
+'use client';
+
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const HomePageMain = () => {
+  const [feedType, setFeedType] = useState<'Your' | 'Global'>('Your');
+
   return (
     <div className="home-page">
       <div className="banner">
@@ -17,12 +23,24 @@ const HomePageMain = () => {
             <div className="feed-toggle">
               <ul className="nav nav-pills outline-active">
                 <li className="nav-item">
-                  <Link className="nav-link" href="">
+                  <Link
+                    className={`nav-link ${classNames({
+                      active: feedType === 'Your',
+                    })}`}
+                    href=""
+                    onClick={() => setFeedType('Your')}
+                  >
                     Your Feed
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link active" href="">
+                  <Link
+                    className={`nav-link ${classNames({
+                      active: feedType === 'Global',
+                    })}`}
+                    href=""
+                    onClick={() => setFeedType('Global')}
+                  >
                     Global Feed
                   </Link>
                 </li>
