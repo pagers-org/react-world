@@ -1,5 +1,6 @@
 'use client';
 
+import { useUserStore } from '@/stores/users';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
@@ -8,6 +9,7 @@ import { postUserRegister } from '@/api/users';
 
 const RegisterPageMain = () => {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
 
   const [form, setForm] = useState<{
     username: string;
@@ -36,6 +38,14 @@ const RegisterPageMain = () => {
         const errorTypes = Object.keys(res.errors);
         setErrorTypes(errorTypes);
       } else {
+        const user = res.user;
+        setUser({
+          email: user.email,
+          username: user.username,
+          bio: user.bio,
+          image: user.image,
+        });
+        localStorage.setItem('access-token', res.user.token);
         router.push('/');
       }
       setIsLoading(false);

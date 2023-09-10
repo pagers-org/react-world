@@ -1,5 +1,6 @@
 'use client';
 
+import { useUserStore } from '@/stores/users';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
@@ -8,6 +9,7 @@ import { postUserLogin } from '@/api/users';
 
 const LoginPageMain = () => {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
 
   const [form, setForm] = useState<{
     email: string;
@@ -31,13 +33,19 @@ const LoginPageMain = () => {
       if (res?.errors) {
         alert('올바른 이메일과 비밀번호를 입력해주세요!');
       } else {
+        const user = res.user;
+        setUser({
+          email: user.email,
+          username: user.username,
+          bio: user.bio,
+          image: user.image,
+        });
+        localStorage.setItem('access-token', res.user.token);
         router.push('/');
       }
       setIsLoading(false);
     });
   };
-
-  console.log(isLoading);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
