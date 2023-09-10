@@ -1,4 +1,4 @@
-import { Button } from "@react-world/vite-project";
+import { Button } from "@react-world/ui";
 
 export default function Home() {
   return <Button></Button>;
