@@ -1,14 +1,16 @@
-import { createResource, Show } from 'solid-js';
+import { useSearchParams } from '@solidjs/router';
+import { createResource, For, Show } from 'solid-js';
 import { getArticleList } from '@/api/article';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { Pagination } from '@/components/Pagination';
-import { LoadingSpinnerContainer } from '@/templates/home.css';
+import { LoadingSpinner, LoadingSpinnerContainer } from '@/components/loading-spinner';
+import { Pagination } from '@/components/pagination';
+import { Sidebar } from '@/templates/home/sidebar';
 import { Motion } from '@motionone/solid';
 
 // TOOD-REF: https://blog.logrocket.com/animating-solidjs-apps-motion-one/
 
 const HomePage = () => {
-  const [data] = createResource(getArticleList);
+  const [params] = useSearchParams<{ offset: string; limit: string }>();
+  const [data] = createResource(params, getArticleList);
 
   return (
     <Motion.div
@@ -75,95 +77,43 @@ const HomePage = () => {
                 }
               >
                 <div class="article-preview-list">
-                  <div class="article-preview">
-                    <div class="article-meta">
-                      <a href="/profile/eric-simons">
-                        <img src="http://i.imgur.com/Qr71crq.jpg" />
-                      </a>
-                      <div class="info">
-                        <a href="/profile/eric-simons" class="author">
-                          Eric Simons
+                  <For each={data()?.articles}>
+                    {(article) => (
+                      <div class="article-preview">
+                        <div class="article-meta">
+                          <a href={`/profile/${article.author.username}`}>
+                            <img src={article.author.image} />
+                          </a>
+                          <div class="info">
+                            <a href={`/profile/${article.author.username}`} class="author">
+                              {article.author.username}
+                            </a>
+                            <span class="date">{article.updatedAt}</span>
+                          </div>
+                          <button class="btn btn-outline-primary btn-sm pull-xs-right">
+                            <i class="ion-heart" /> {article.favoritesCount}
+                          </button>
+                        </div>
+                        <a href={`/article/${article.slug}`} class="preview-link">
+                          <h1>{article.title}</h1>
+                          <p>{article.description}</p>
+                          <span>Read more...</span>
+                          <ul class="tag-list">
+                            <For each={article.tagList}>
+                              {(tag) => <li class="tag-default tag-pill tag-outline">{tag}</li>}
+                            </For>
+                          </ul>
                         </a>
-                        <span class="date">January 20th</span>
                       </div>
-                      <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                        <i class="ion-heart" /> 29
-                      </button>
-                    </div>
-                    <a href="/article/how-to-build-webapps-that-scale" class="preview-link">
-                      <h1>How to build webapps that scale</h1>
-                      <p>This is the description for the post.</p>
-                      <span>Read more...</span>
-                      <ul class="tag-list">
-                        <li class="tag-default tag-pill tag-outline">realworld</li>
-                        <li class="tag-default tag-pill tag-outline">implementations</li>
-                      </ul>
-                    </a>
-                  </div>
-
-                  <div class="article-preview">
-                    <div class="article-meta">
-                      <a href="/profile/albert-pai">
-                        <img src="http://i.imgur.com/N4VcUeJ.jpg" />
-                      </a>
-                      <div class="info">
-                        <a href="/profile/albert-pai" class="author">
-                          Albert Pai
-                        </a>
-                        <span class="date">January 20th</span>
-                      </div>
-                      <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                        <i class="ion-heart" /> 32
-                      </button>
-                    </div>
-                    <a href="/article/the-song-you" class="preview-link">
-                      <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-                      <p>This is the description for the post.</p>
-                      <span>Read more...</span>
-                      <ul class="tag-list">
-                        <li class="tag-default tag-pill tag-outline">realworld</li>
-                        <li class="tag-default tag-pill tag-outline">implementations</li>
-                      </ul>
-                    </a>
-                  </div>
+                    )}
+                  </For>
                 </div>
 
-                <Pagination pages={13} maxPages={5} />
+                <Pagination pages={5} maxPages={data()!.articlesCount} />
               </Show>
             </div>
 
-            <div class="col-md-3">
-              <div class="sidebar">
-                <p>Popular Tags</p>
-
-                <div class="tag-list">
-                  <a href="" class="tag-pill tag-default">
-                    programming
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    javascript
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    emberjs
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    angularjs
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    react
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    mean
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    node
-                  </a>
-                  <a href="" class="tag-pill tag-default">
-                    rails
-                  </a>
-                </div>
-              </div>
-            </div>
+            <Sidebar />
           </div>
         </div>
       </div>
