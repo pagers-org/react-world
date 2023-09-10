@@ -11,6 +11,7 @@ export type UserRegisterPayload = {
     email: string;
     password: string;
   };
+  errors?: unknown;
 };
 
 export type CurrentUserPayload = {
