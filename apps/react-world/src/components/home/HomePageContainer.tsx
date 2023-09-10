@@ -5,7 +5,7 @@ type ContainerProps = {
   children?: ReactNode;
 };
 
-export const HomePageContainer = ({ children }: ContainerProps) => {
+const HomePageContainer = ({ children }: ContainerProps) => {
   return <Container>{children}</Container>;
 };
 
