@@ -2,13 +2,13 @@ import { UserResponse } from '@/types/api/users';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type Store = {
+export type UserStoreState = {
   user: Omit<UserResponse['user'], 'token'>;
   setUser: (user: Omit<UserResponse['user'], 'token'>) => void;
 };
 
 export const useUserStore = create(
-  persist<Store>(
+  persist<UserStoreState>(
     (set) => ({
       user: {
         email: '',
