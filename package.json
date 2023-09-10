@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "scripts": {
+    "server": "ts-node ./src/server/server.ts",
     "proto-gen-types": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ ./src/server/proto/*.proto",
     "prepare": "husky install"
   },
@@ -34,6 +35,7 @@
     "@grpc/grpc-js": "^1.9.2",
     "@grpc/proto-loader": "^0.7.9",
     "next": "^13.4.19",
+    "protobufjs": "^7.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -50,6 +52,7 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "husky": "^8.0.3",
     "prettier": "^3.0.2",
+    "ts-node": "^10.9.1",
     "ts-proto": "^1.157.0",
     "typescript": "^5.2.2"
   },

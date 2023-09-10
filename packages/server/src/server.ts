@@ -4,7 +4,7 @@ import { ClientRequest } from './proto/generated/clientService/ClientRequest';
 import { ProtoGrpcType } from './proto/generated/clientService';
 import { ClientResponse } from './proto/generated/clientService/ClientResponse';
 
-const PROTO_PATH = './dist/proto/clientService.proto';
+const PROTO_PATH = __dirname + '/proto/clientService.proto';
 
 /**
  * Suggested options for similarity to loading grpc.load behavior.
@@ -58,7 +58,9 @@ class gRPC extends grpc.Server {
     callback: grpc.sendUnaryData<ClientResponse>
   ) {
     const id = call.request.id;
+    console.log('input id: ', id);
     const client = clients?.find((client) => client.id === id);
+    console.log('selected Client: ', client)
     callback(null, client);
   }
 }
