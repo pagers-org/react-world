@@ -1,27 +1,22 @@
-import axios, { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import {
   RegisterUserParams,
-  RegisterUserErrors,
   RegisterUserResponse,
 } from './RegisterService.types';
-import { BASE_URL, API_PATH } from '../ApiConstants';
+import { api } from '../apiInstances';
 
 class RegisterService {
   static async registerUser(
     userData: RegisterUserParams,
   ): Promise<RegisterUserResponse> {
-    const ENDPOINT = `${BASE_URL}${API_PATH.USERS.REGISTER}`;
-
     try {
-      const response = await axios.post(ENDPOINT, {
+      const response = await api.post('/users', {
         user: userData,
       });
       return response.data;
     } catch (error) {
-      const axiosError = error as AxiosError<RegisterUserErrors>;
-
-      if (axiosError && axiosError.response) {
-        throw axiosError.response.data;
+      if (isAxiosError(error) && error.response) {
+        throw error.response.data;
       }
       throw error;
     }
