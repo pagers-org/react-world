@@ -7,7 +7,7 @@ type Props = ComponentPropsWithoutRef<"span">;
 
 export const Name = forwardRef<HTMLSpanElement, Props>(({ children, className, ...rest }, ref) => {
   return (
-    <span ref={ref} {...rest} className={clsx("author", className)}>
+    <span ref={ref} {...rest} className={clsx("text-sm font-normal text-zinc-800", className)}>
       {children}
     </span>
   );
