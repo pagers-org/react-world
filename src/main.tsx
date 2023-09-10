@@ -11,24 +11,40 @@ import ErrorPage from './pages/ErrorPage';
 import Article from './pages/Article';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+const HeaderLayout = () => (
+  <>
+    <header>
+      <Navbar />
+    </header>
+    <Footer />
+  </>
+);
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/article/:id',
-    element: <Article />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/register',
-    element: <Register />,
+    element: <HeaderLayout />,
+    children: [
+      {
+        path: '/',
+        element: <App />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/article/:id',
+        element: <Article />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+      },
+    ],
   },
 ]);
 

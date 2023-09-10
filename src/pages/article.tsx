@@ -1,10 +1,6 @@
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
-
 export default function Article() {
   return (
     <>
-      <Navbar />
       <div className="article-page">
         <div className="banner">
           <div className="container">
@@ -150,7 +146,6 @@ export default function Article() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

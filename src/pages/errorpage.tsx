@@ -7,7 +7,9 @@ export default function ErrorPage() {
   };
   return (
     <div>
-      <button onClick={onClick}>잘못된 경로입니다</button>
+      <button type="button" onClick={onClick}>
+        잘못된 경로입니다
+      </button>
     </div>
   );
 }
