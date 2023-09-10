@@ -13,35 +13,34 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { ROUTES } from './routes';
 
-const HeaderLayout = () => (
+const DefaultLayout = () => (
   <>
-    <header>
-      <Navbar />
-    </header>
+    <Navbar />
     <Footer />
   </>
 );
 
 const router = createBrowserRouter([
   {
-    element: <HeaderLayout />,
+    element: <DefaultLayout />,
     children: [
       {
-        path: '/',
+        path: ROUTES.ROOT,
         element: <App />,
         errorElement: <ErrorPage />,
       },
       {
-        path: '/article/:id',
+        path: ROUTES.ARTICLE,
         element: <Article />,
       },
       {
-        path: '/login',
+        path: ROUTES.LOGIN,
         element: <Login />,
       },
       {
-        path: '/register',
+        path: ROUTES.REGISTER,
         element: <Register />,
       },
     ],
