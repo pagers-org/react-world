@@ -1,9 +1,12 @@
 import '../public/styles/main.css';
 import '../public/styles/ionicons.min.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import App from './App';
+
 import ErrorPage from './pages/ErrorPage';
 import Article from './pages/Article';
 import Login from './pages/Login';
