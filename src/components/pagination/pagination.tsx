@@ -1,16 +1,16 @@
 import { type Component, createEffect, For } from 'solid-js';
-import { createPagination } from './Pagination.hooks';
-import type { PaginationOptions } from './Pagination.types';
+import { createPagination } from './pagination.hooks';
+import type { PaginationOptions } from './pagination.types';
 
 export const Pagination: Component<PaginationOptions> = (props) => {
-  const [paginationProps, page, setPage] = createPagination({ ...props });
+  const [paginationProps, page] = createPagination({ ...props });
 
   createEffect(() => {
     page();
   });
 
   return (
-    <nav>
+    <nav class="pagination-container">
       <ul class="pagination cursor-pointer">
         <For each={paginationProps()}>
           {(pageProps) => (
