@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
   width: 100%;
 `;
 
-export const Logo = styled.a`
+export const FooterLogo = styled.a`
   vertical-align: middle;
 `;
 
