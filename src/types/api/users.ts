@@ -31,4 +31,5 @@ export type UserResponse = {
     bio: string;
     image: string;
   };
+  errors?: unknown;
 };
