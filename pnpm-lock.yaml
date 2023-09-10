@@ -10,6 +10,9 @@ importers:
 
   packages/my-app:
     dependencies:
+      '@react-world/ui':
+        specifier: workspace:^
+        version: link:../vite-project
       '@types/node':
         specifier: 20.5.9
         version: 20.5.9
