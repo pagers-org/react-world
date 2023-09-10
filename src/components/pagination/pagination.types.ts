@@ -3,7 +3,7 @@ import type { JSX } from 'solid-js';
 export type PaginationProps = {
   'aria-current'?: boolean;
   disabled?: boolean;
-  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
+  onClick?: JSX.EventHandlerUnion<HTMLButtonElement | HTMLAnchorElement, MouseEvent>;
   children: JSX.Element;
   /** page number this refers to, not enumerable, allows to use props.page to get the page number */
   readonly page?: number;

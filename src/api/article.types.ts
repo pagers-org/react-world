@@ -3,6 +3,11 @@ export interface MultipleArticles {
   articlesCount: number;
 }
 
+export type GetArticleList = (params: {
+  offset: string;
+  limit: string;
+}) => Promise<MultipleArticles>;
+
 export interface Article {
   slug: string;
   title: string;

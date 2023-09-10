@@ -1,8 +1,8 @@
 import { type Accessor, createMemo, createSignal, type Setter } from 'solid-js';
 import { noop } from '@/utils';
-import { 페이지네이션_기본_옵션 } from './Pagination.const';
-import type { PaginationOptions, PaginationProps } from './Pagination.types';
-import { access, normalizeOption } from './Pagination.utils';
+import { 페이지네이션_기본_옵션 } from './pagination.const';
+import type { PaginationOptions, PaginationProps } from './pagination.types';
+import { access, normalizeOption } from './pagination.utils';
 import type { MaybeAccessor } from '@global/solid-util-types';
 
 export const createPagination = (
@@ -48,9 +48,9 @@ export const createPagination = (
       onClick: () => setPage(1),
     } as unknown as PaginationProps[number],
     {
-      disabled: { get: () => page() <= 1, set: noop, enumerable: true },
+      'data-disabled': { get: () => page() <= 1, set: noop, enumerable: true },
       children: { get: () => opts().firstContent, set: noop, enumerable: true },
-      page: { get: () => undefined, enumerable: false },
+      page: { get: noop, enumerable: false },
     },
   );
   const back = Object.defineProperties(
@@ -58,7 +58,7 @@ export const createPagination = (
       onClick: () => setPage((p) => (p > 1 ? p - 1 : p)),
     } as unknown as PaginationProps[number],
     {
-      disabled: { get: () => page() <= 1, set: noop, enumerable: true },
+      'data-disabled': { get: () => page() <= 1, set: noop, enumerable: true },
       children: { get: () => opts().prevContent, set: noop, enumerable: true },
       page: { get: () => Math.min(1, page() - 1), enumerable: false },
     },
@@ -69,7 +69,7 @@ export const createPagination = (
       onClick: () => setPage((p) => (p < opts().pages ? p + 1 : p)),
     } as unknown as PaginationProps[number],
     {
-      disabled: { get: () => page() >= opts().pages, set: noop, enumerable: true },
+      'data-disabled': { get: () => page() >= opts().pages, set: noop, enumerable: true },
       children: { get: () => opts().nextContent, set: noop, enumerable: true },
       page: { get: () => Math.max(opts().pages, page() + 1), enumerable: false },
     },
@@ -79,9 +79,9 @@ export const createPagination = (
       onClick: () => setPage(opts().pages),
     } as unknown as PaginationProps[number],
     {
-      disabled: { get: () => page() >= opts().pages, set: noop, enumerable: true },
+      'data-disabled': { get: () => page() >= opts().pages, set: noop, enumerable: true },
       children: { get: () => opts().lastContent, set: noop, enumerable: true },
-      page: { get: () => opts().pages, enumerable: false },
+      page: { get: noop, enumerable: false },
     },
   );
   const start = createMemo(() =>

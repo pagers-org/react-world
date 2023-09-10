@@ -1,5 +1,5 @@
-import { 페이지네이션_기본_옵션 } from './Pagination.const';
-import type { NormalizeOptionTypes } from './Pagination.types';
+import { 페이지네이션_기본_옵션 } from './pagination.const';
+import type { NormalizeOptionTypes } from './pagination.types';
 import type { MaybeAccessor, MaybeAccessorValue } from '@global/solid-util-types';
 
 /**
@@ -17,5 +17,5 @@ export const normalizeOption = ({ key, value, page, pages }: NormalizeOptionType
   typeof value === 'boolean'
     ? value
     : typeof value === 'function'
-    ? value(page, pages)
+    ? value(Number(page), Number(pages))
     : 페이지네이션_기본_옵션[key];

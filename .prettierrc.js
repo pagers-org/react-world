@@ -9,7 +9,7 @@ module.exports = {
   bracketSpacing: true,
   arrowParens: 'always',
   endOfLine: 'auto',
-  importOrder: ['solidjs', '<THIRD_PARTY_MODULES>', '^@/(.*)$', '^./(.*)$', '^[@global/(./)$]'],
+  importOrder: ['^solidjs', '<THIRD_PARTY_MODULES>', '^@/(.*)$', '^./(.*)$', '^[@global/(./)$]'],
   importOrderSortSpecifiers: true,
   importOrderGroupNamespaceSpecifiers: true,
   importOrderCaseInsensitive: true,
