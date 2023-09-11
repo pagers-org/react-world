@@ -5,27 +5,13 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type {
-  TagsResponse
-} from '../../models'
+import type { TagsResponse } from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
 
-
-
-  /**
+/**
  * Get tags. Auth not required
  * @summary Get tags
  */
-export const getTags = (
-    
- ) => {
-      return customInstance<TagsResponse>(
-      {url: `/tags`, method: 'get'
-    },
-      );
-    }
-  
-type AwaitedInput<T> = PromiseLike<T> | T;
-
-    type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
-
+export const getTags = () => {
+  return customInstance<TagsResponse>({ url: `/tags`, method: 'get' });
+};

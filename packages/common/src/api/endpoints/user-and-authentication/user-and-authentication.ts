@@ -9,68 +9,50 @@ import type {
   UserResponse,
   LoginUserRequest,
   NewUserRequest,
-  UpdateUserRequest
-} from '../../models'
+  UpdateUserRequest,
+} from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
 
-
-
-  /**
+/**
  * Login for existing user
  * @summary Existing user login
  */
-export const login = (
-    loginUserRequest: LoginUserRequest,
- ) => {
-      return customInstance<UserResponse>(
-      {url: `/users/login`, method: 'post',
-      headers: {'Content-Type': 'application/json', },
-      data: loginUserRequest
-    },
-      );
-    }
-  /**
+export const login = (loginUserRequest: LoginUserRequest) => {
+  return customInstance<UserResponse>({
+    url: `/users/login`,
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    data: loginUserRequest,
+  });
+};
+/**
  * Register a new user
  * @summary Register a new user
  */
-export const createUser = (
-    newUserRequest: NewUserRequest,
- ) => {
-      return customInstance<UserResponse>(
-      {url: `/users`, method: 'post',
-      headers: {'Content-Type': 'application/json', },
-      data: newUserRequest
-    },
-      );
-    }
-  /**
+export const createUser = (newUserRequest: NewUserRequest) => {
+  return customInstance<UserResponse>({
+    url: `/users`,
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    data: newUserRequest,
+  });
+};
+/**
  * Gets the currently logged-in user
  * @summary Get current user
  */
-export const getCurrentUser = (
-    
- ) => {
-      return customInstance<UserResponse>(
-      {url: `/user`, method: 'get'
-    },
-      );
-    }
-  /**
+export const getCurrentUser = () => {
+  return customInstance<UserResponse>({ url: `/user`, method: 'get' });
+};
+/**
  * Updated user information for current user
  * @summary Update current user
  */
-export const updateCurrentUser = (
-    updateUserRequest: UpdateUserRequest,
- ) => {
-      return customInstance<UserResponse>(
-      {url: `/user`, method: 'put',
-      headers: {'Content-Type': 'application/json', },
-      data: updateUserRequest
-    },
-      );
-    }
-  
-type AwaitedInput<T> = PromiseLike<T> | T;
-
-    type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
-
+export const updateCurrentUser = (updateUserRequest: UpdateUserRequest) => {
+  return customInstance<UserResponse>({
+    url: `/user`,
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    data: updateUserRequest,
+  });
+};

@@ -5,51 +5,36 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type {
-  ProfileResponse
-} from '../../models'
+import type { ProfileResponse } from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
 
-
-
-  /**
+/**
  * Get a profile of a user of the system. Auth is optional
  * @summary Get a profile
  */
-export const getProfileByUsername = (
-    username: string,
- ) => {
-      return customInstance<ProfileResponse>(
-      {url: `/profiles/${username}`, method: 'get'
-    },
-      );
-    }
-  /**
+export const getProfileByUsername = (username: string) => {
+  return customInstance<ProfileResponse>({
+    url: `/profiles/${username}`,
+    method: 'get',
+  });
+};
+/**
  * Follow a user by username
  * @summary Follow a user
  */
-export const followUserByUsername = (
-    username: string,
- ) => {
-      return customInstance<ProfileResponse>(
-      {url: `/profiles/${username}/follow`, method: 'post'
-    },
-      );
-    }
-  /**
+export const followUserByUsername = (username: string) => {
+  return customInstance<ProfileResponse>({
+    url: `/profiles/${username}/follow`,
+    method: 'post',
+  });
+};
+/**
  * Unfollow a user by username
  * @summary Unfollow a user
  */
-export const unfollowUserByUsername = (
-    username: string,
- ) => {
-      return customInstance<ProfileResponse>(
-      {url: `/profiles/${username}/follow`, method: 'delete'
-    },
-      );
-    }
-  
-type AwaitedInput<T> = PromiseLike<T> | T;
-
-    type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
-
+export const unfollowUserByUsername = (username: string) => {
+  return customInstance<ProfileResponse>({
+    url: `/profiles/${username}/follow`,
+    method: 'delete',
+  });
+};

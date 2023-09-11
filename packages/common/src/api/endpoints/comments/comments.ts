@@ -8,54 +8,42 @@
 import type {
   MultipleCommentsResponse,
   SingleCommentResponse,
-  NewCommentRequest
-} from '../../models'
+  NewCommentRequest,
+} from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
 
-
-
-  /**
+/**
  * Get the comments for an article. Auth is optional
  * @summary Get comments for an article
  */
-export const getArticleComments = (
-    slug: string,
- ) => {
-      return customInstance<MultipleCommentsResponse>(
-      {url: `/articles/${slug}/comments`, method: 'get'
-    },
-      );
-    }
-  /**
+export const getArticleComments = (slug: string) => {
+  return customInstance<MultipleCommentsResponse>({
+    url: `/articles/${slug}/comments`,
+    method: 'get',
+  });
+};
+/**
  * Create a comment for an article. Auth is required
  * @summary Create a comment for an article
  */
 export const createArticleComment = (
-    slug: string,
-    newCommentRequest: NewCommentRequest,
- ) => {
-      return customInstance<SingleCommentResponse>(
-      {url: `/articles/${slug}/comments`, method: 'post',
-      headers: {'Content-Type': 'application/json', },
-      data: newCommentRequest
-    },
-      );
-    }
-  /**
+  slug: string,
+  newCommentRequest: NewCommentRequest
+) => {
+  return customInstance<SingleCommentResponse>({
+    url: `/articles/${slug}/comments`,
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    data: newCommentRequest,
+  });
+};
+/**
  * Delete a comment for an article. Auth is required
  * @summary Delete a comment for an article
  */
-export const deleteArticleComment = (
-    slug: string,
-    id: number,
- ) => {
-      return customInstance<void>(
-      {url: `/articles/${slug}/comments/${id}`, method: 'delete'
-    },
-      );
-    }
-  
-type AwaitedInput<T> = PromiseLike<T> | T;
-
-    type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
-
+export const deleteArticleComment = (slug: string, id: number) => {
+  return customInstance<void>({
+    url: `/articles/${slug}/comments/${id}`,
+    method: 'delete',
+  });
+};

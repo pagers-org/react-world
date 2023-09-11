@@ -5,44 +5,76 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import {
-  rest
-} from 'msw'
-import {
-  faker
-} from '@faker-js/faker'
+import { rest } from 'msw';
+import { faker } from '@faker-js/faker';
 
-export const getLoginMock = () => ({user: {email: faker.random.word(), token: faker.random.word(), username: faker.random.word(), bio: faker.random.word(), image: faker.random.word()}})
+export const getLoginMock = () => ({
+  user: {
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
+    bio: faker.random.word(),
+    image: faker.random.word(),
+  },
+});
 
-export const getCreateUserMock = () => ({user: {email: faker.random.word(), token: faker.random.word(), username: faker.random.word(), bio: faker.random.word(), image: faker.random.word()}})
+export const getCreateUserMock = () => ({
+  user: {
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
+    bio: faker.random.word(),
+    image: faker.random.word(),
+  },
+});
 
-export const getGetCurrentUserMock = () => ({user: {email: faker.random.word(), token: faker.random.word(), username: faker.random.word(), bio: faker.random.word(), image: faker.random.word()}})
+export const getGetCurrentUserMock = () => ({
+  user: {
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
+    bio: faker.random.word(),
+    image: faker.random.word(),
+  },
+});
 
-export const getUpdateCurrentUserMock = () => ({user: {email: faker.random.word(), token: faker.random.word(), username: faker.random.word(), bio: faker.random.word(), image: faker.random.word()}})
+export const getUpdateCurrentUserMock = () => ({
+  user: {
+    email: faker.random.word(),
+    token: faker.random.word(),
+    username: faker.random.word(),
+    bio: faker.random.word(),
+    image: faker.random.word(),
+  },
+});
 
 export const getUserAndAuthenticationMSW = () => [
-rest.post('*/users/login', (_req, res, ctx) => {
-        return res(
-          ctx.delay(1000),
-          ctx.status(200, 'Mocked status'),
-ctx.json(getLoginMock()),
-        )
-      }),rest.post('*/users', (_req, res, ctx) => {
-        return res(
-          ctx.delay(1000),
-          ctx.status(200, 'Mocked status'),
-ctx.json(getCreateUserMock()),
-        )
-      }),rest.get('*/user', (_req, res, ctx) => {
-        return res(
-          ctx.delay(1000),
-          ctx.status(200, 'Mocked status'),
-ctx.json(getGetCurrentUserMock()),
-        )
-      }),rest.put('*/user', (_req, res, ctx) => {
-        return res(
-          ctx.delay(1000),
-          ctx.status(200, 'Mocked status'),
-ctx.json(getUpdateCurrentUserMock()),
-        )
-      }),]
+  rest.post('*/users/login', (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, 'Mocked status'),
+      ctx.json(getLoginMock())
+    );
+  }),
+  rest.post('*/users', (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, 'Mocked status'),
+      ctx.json(getCreateUserMock())
+    );
+  }),
+  rest.get('*/user', (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, 'Mocked status'),
+      ctx.json(getGetCurrentUserMock())
+    );
+  }),
+  rest.put('*/user', (_req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200, 'Mocked status'),
+      ctx.json(getUpdateCurrentUserMock())
+    );
+  }),
+];

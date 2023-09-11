@@ -5,39 +5,26 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type {
-  SingleArticleResponse
-} from '../../models'
+import type { SingleArticleResponse } from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
 
-
-
-  /**
+/**
  * Favorite an article. Auth is required
  * @summary Favorite an article
  */
-export const createArticleFavorite = (
-    slug: string,
- ) => {
-      return customInstance<SingleArticleResponse>(
-      {url: `/articles/${slug}/favorite`, method: 'post'
-    },
-      );
-    }
-  /**
+export const createArticleFavorite = (slug: string) => {
+  return customInstance<SingleArticleResponse>({
+    url: `/articles/${slug}/favorite`,
+    method: 'post',
+  });
+};
+/**
  * Unfavorite an article. Auth is required
  * @summary Unfavorite an article
  */
-export const deleteArticleFavorite = (
-    slug: string,
- ) => {
-      return customInstance<SingleArticleResponse>(
-      {url: `/articles/${slug}/favorite`, method: 'delete'
-    },
-      );
-    }
-  
-type AwaitedInput<T> = PromiseLike<T> | T;
-
-    type Awaited<O> = O extends AwaitedInput<infer T> ? T : never;
-
+export const deleteArticleFavorite = (slug: string) => {
+  return customInstance<SingleArticleResponse>({
+    url: `/articles/${slug}/favorite`,
+    method: 'delete',
+  });
+};
