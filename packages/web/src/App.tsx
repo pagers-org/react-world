@@ -1,8 +1,8 @@
-import { Global, ThemeProvider } from "@emotion/react";
-import { color } from "@miso/common";
+import { Global, ThemeProvider } from '@emotion/react';
+import { color } from '@miso/common';
 
-import { globalStyles } from "styles/globalStyles";
-import Routes from "pages/routes";
+import Routes from '@/pages/routes';
+import { globalStyles } from '@/styles/globalStyles';
 
 const App = () => {
   return (

@@ -1,7 +1,11 @@
-import { PropsWithChildren } from "react";
+import { Outlet } from 'react-router-dom';
 
-const Layout = ({ children }: PropsWithChildren) => {
-  return <div>{children}</div>;
+const Layout = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 };
 
 export default Layout;
