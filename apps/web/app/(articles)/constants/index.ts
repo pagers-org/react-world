@@ -1,0 +1,2 @@
+export const DEFAULT_ARTICLES_OFFSET = 0;
+export const DEFAULT_ARTICLES_LIMIT = 10;
