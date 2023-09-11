@@ -7,7 +7,7 @@ import {
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
-import { ACCESS_TOKEN_KEY } from '@/constants/key';
+import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
 
@@ -53,7 +53,7 @@ export const putCurrentUser = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ): Promise<UserResponse> => {
-  const accessToken = getCookie(ACCESS_TOKEN_KEY);
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
