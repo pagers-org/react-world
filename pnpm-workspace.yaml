@@ -1,0 +1,3 @@
+packages:
+  # packages 폴더 하위 폴더를 전부 패키지로 본다.
+  - "packages/*"
