@@ -6,11 +6,11 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  rest
-} from 'msw'
-import {
   faker
 } from '@faker-js/faker'
+import {
+  rest
+} from 'msw'
 
 export const getGetProfileByUsernameMock = () => ({profile: {username: faker.random.word(), bio: faker.random.word(), image: faker.random.word(), following: faker.datatype.boolean()}})
 

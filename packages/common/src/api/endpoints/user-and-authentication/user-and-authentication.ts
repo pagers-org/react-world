@@ -5,13 +5,17 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
+import { customInstance } from '../../mutator/custom-instance';
+
 import type {
-  UserResponse,
   LoginUserRequest,
   NewUserRequest,
   UpdateUserRequest,
+  UserResponse,
 } from '../../models';
-import { customInstance } from '../../mutator/custom-instance';
+
+
+
 
 /**
  * Login for existing user

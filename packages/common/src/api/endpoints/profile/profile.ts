@@ -5,8 +5,12 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { ProfileResponse } from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
+
+import type { ProfileResponse } from '../../models';
+
+
+
 
 /**
  * Get a profile of a user of the system. Auth is optional

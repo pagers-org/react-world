@@ -1,5 +1,7 @@
-import { Route, Routes as ReactRouterRoutes, Navigate } from 'react-router-dom';
+import { Navigate, Routes as ReactRouterRoutes, Route } from 'react-router-dom';
+
 import Layout from '@/components/@common/Layout';
+
 import HomePage from './HomePage';
 
 const Routes = () => {

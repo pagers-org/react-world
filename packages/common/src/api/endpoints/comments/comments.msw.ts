@@ -6,11 +6,11 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  rest
-} from 'msw'
-import {
   faker
 } from '@faker-js/faker'
+import {
+  rest
+} from 'msw'
 
 export const getGetArticleCommentsMock = () => ({comments: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, body: faker.random.word(), author: {username: faker.random.word(), bio: faker.random.word(), image: faker.random.word(), following: faker.datatype.boolean()}}))})
 

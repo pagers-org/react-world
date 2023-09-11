@@ -5,12 +5,16 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
+import { customInstance } from '../../mutator/custom-instance';
+
 import type {
   MultipleCommentsResponse,
-  SingleCommentResponse,
   NewCommentRequest,
+  SingleCommentResponse,
 } from '../../models';
-import { customInstance } from '../../mutator/custom-instance';
+
+
+
 
 /**
  * Get the comments for an article. Auth is optional

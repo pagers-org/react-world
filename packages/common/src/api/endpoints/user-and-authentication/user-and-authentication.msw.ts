@@ -5,8 +5,8 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import { rest } from 'msw';
 import { faker } from '@faker-js/faker';
+import { rest } from 'msw';
 
 export const getLoginMock = () => ({
   user: {

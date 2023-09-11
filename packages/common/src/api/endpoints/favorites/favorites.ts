@@ -5,8 +5,12 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { SingleArticleResponse } from '../../models';
 import { customInstance } from '../../mutator/custom-instance';
+
+import type { SingleArticleResponse } from '../../models';
+
+
+
 
 /**
  * Favorite an article. Auth is required

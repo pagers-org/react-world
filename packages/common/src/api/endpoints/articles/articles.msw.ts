@@ -6,11 +6,11 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  rest
-} from 'msw'
-import {
   faker
 } from '@faker-js/faker'
+import {
+  rest
+} from 'msw'
 
 export const getGetArticlesFeedMock = () => ({articles: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({slug: faker.random.word(), title: faker.random.word(), description: faker.random.word(), body: faker.random.word(), tagList: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.random.word())), createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, favorited: faker.datatype.boolean(), favoritesCount: faker.datatype.number({min: undefined, max: undefined}), author: {username: faker.random.word(), bio: faker.random.word(), image: faker.random.word(), following: faker.datatype.boolean()}})), articlesCount: faker.datatype.number({min: undefined, max: undefined})})
 
