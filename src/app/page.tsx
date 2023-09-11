@@ -5,11 +5,17 @@ import { contentContainer, tabContainer } from "./page.css";
 import { useQuery } from "@tanstack/react-query";
 import { getArticles } from "@/services/articles";
 import PopularTags from "@/components/PopularTags";
+import { useState } from "react";
 
 export default function Home() {
-  const { isLoading, data: articleResponse } = useQuery(["/api/articles"], () => getArticles(), {
-    refetchOnWindowFocus: false,
-  });
+  const [selectedTag, setSelectedTag] = useState<string>();
+  const { isLoading, data: articleResponse } = useQuery(
+    ["/api/articles", selectedTag],
+    () => getArticles(selectedTag ? { tag: selectedTag } : undefined),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
 
   return (
     <main>
@@ -28,7 +34,7 @@ export default function Home() {
             </ul>
           </div>
         )}
-        <PopularTags />
+        <PopularTags selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       </section>
     </main>
   );

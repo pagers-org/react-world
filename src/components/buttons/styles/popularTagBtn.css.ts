@@ -12,3 +12,11 @@ export const popularTagBtnStyles = style({
     },
   },
 });
+
+export const selectedPopularTagStyles = style([
+  popularTagBtnStyles,
+  {
+    backgroundColor: "#687077",
+    textDecoration: "underline",
+  },
+]);

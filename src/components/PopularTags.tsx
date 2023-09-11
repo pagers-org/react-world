@@ -1,11 +1,22 @@
+"use client";
 import { getTags } from "@/services/tags";
 import { useQuery } from "@tanstack/react-query";
 import PopularTagBtn from "./buttons/PopularTagBtn";
+import { Dispatch, SetStateAction } from "react";
 
-const PopularTags = () => {
+interface Props {
+  selectedTag?: string;
+  setSelectedTag: Dispatch<SetStateAction<string | undefined>>;
+}
+
+const PopularTags = ({ selectedTag, setSelectedTag }: Props) => {
   const { data: tags } = useQuery(["/api/tags"], () => getTags(), {
     refetchOnWindowFocus: false,
   });
+
+  const handleSelectTag = (tag: string) => {
+    setSelectedTag(tag);
+  };
 
   return (
     <div className="bg-gray-200 p-2">
@@ -13,7 +24,9 @@ const PopularTags = () => {
       {tags ? (
         <ul className="flex flex-wrap w-60 gap-1 ">
           {tags.map((tag) => (
-            <PopularTagBtn key={tag}>{tag}</PopularTagBtn>
+            <PopularTagBtn selected={selectedTag === tag} key={tag} onClick={() => handleSelectTag(tag)}>
+              {tag}
+            </PopularTagBtn>
           ))}
         </ul>
       ) : (
