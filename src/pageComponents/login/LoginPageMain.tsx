@@ -72,6 +72,7 @@ const LoginPageMain = () => {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
               </fieldset>
               <fieldset className="form-group">
@@ -82,6 +83,7 @@ const LoginPageMain = () => {
                   name="password"
                   value={form.password}
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
               </fieldset>
               <button
