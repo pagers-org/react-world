@@ -48,6 +48,13 @@ export const flexBox = style({
   gap: 10,
 });
 
+export const justifyCenter = style([
+  flex,
+  {
+    justifyContent: 'center',
+  },
+]);
+
 export const alignCenter = style([
   flex,
   {
@@ -76,4 +83,39 @@ export const backgroundGreen = style({
 
 export const backgroundBlack = style({
   background: '#333',
+});
+
+export const button = style({
+  background: 'none',
+  borderRadius: '0.2rem',
+  padding: '0.25rem 0.5rem',
+  fontSize: '0.875rem',
+});
+
+export const greenButton = style([
+  button,
+  {
+    border: '1px solid #5CB85C',
+    color: '#5CB85C',
+    ':hover': {
+      background: '#5CB85C',
+      color: '#fff',
+    },
+  },
+]);
+
+export const grayButton = style([
+  button,
+  {
+    border: '1px solid #ccc',
+    color: '#ccc',
+    ':hover': {
+      background: '#ccc',
+      color: '#fff',
+    },
+  },
+]);
+
+export const fontSize = style({
+  fontSize: '1.3rem',
 });

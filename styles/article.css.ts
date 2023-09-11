@@ -50,6 +50,7 @@ export const articleTitle = style({
 export const articleDetailTitle = style({
   fontSize: '2.8rem',
   fontWeight: '600',
+  marginBottom: 40,
 });
 
 export const articleDescription = style({

@@ -17,8 +17,8 @@ const registerArticle = (article: NewArticle) => {
 };
 
 // Article 단건 조회
-const fetchArticle = (slug: string): Promise<Article> => {
-  return http.get(`https://api.realworld.io/api/articles/${slug}`);
+const fetchArticle = async (slug: string): Promise<Article> => {
+  return http.get(`https://api.realworld.io/api/articles/${slug}`).then(res => res.article);
 };
 
 // Article 수정

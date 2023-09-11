@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 
 export type Button = {
-  size: string;
+  size?: string;
   onClick: () => void;
   children: ReactNode;
+  type: string;
 };
 
 export type Input = {
@@ -46,14 +47,14 @@ export type Profile = {
 };
 
 export type Article = {
-  slug: string;
+  slug?: string;
   title: string;
-  description: string;
+  description?: string;
   body: string;
   tagList: string[];
-  createAt: string;
-  updateAt: string;
-  favorited: boolean;
+  createdAt: string;
+  updateAt?: string;
+  favorited?: boolean;
   favoritesCount: number;
   author: Profile;
 };
