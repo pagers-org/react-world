@@ -9,6 +9,10 @@ import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
 import { ACCESS_TOKEN_KEY } from '@/constants/key';
 
+import { getCookie } from '@/utils/cookie';
+
+/* Client Side APIs */
+
 // Login for existing user
 export const postUserLogin = (
   payload: UserLoginPayload,
@@ -43,39 +47,44 @@ export const postUserRegister = (
     .catch((err) => console.error(err));
 };
 
-// Gets the currently logged-in user
-export const getCurrentUser = (
-  options: RequestInit = {},
-): Promise<UserResponse> => {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-
-  return fetch(`${API_BASE_URL}/user`, {
-    ...options,
-    method: HTTP_METHOD.GET,
-    headers: {
-      ...COMMON_HEADERS,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
-};
-
 // Updated user information for current user
 export const putCurrentUser = (
   payload: CurrentUserPayload,
+  headers: HeadersInit = {},
   options: RequestInit = {},
 ): Promise<UserResponse> => {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+  const accessToken = getCookie(ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
     method: HTTP_METHOD.PUT,
     headers: {
       ...COMMON_HEADERS,
+      ...headers,
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
+// -----------------------------------------------------------------------------------------------------
+
+/* Server Side APIs for Next 13 APP Router extended fetch api */
+
+// Gets the currently logged-in user
+export const getCurrentUser = (
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<UserResponse> => {
+  return fetch(`${API_BASE_URL}/user`, {
+    ...options,
+    method: HTTP_METHOD.GET,
+    headers: {
+      ...COMMON_HEADERS,
+      ...headers,
+    },
   })
     .then((res) => res.json())
     .catch((err) => console.error(err));
