@@ -1,7 +1,7 @@
 import { header, logo } from '@/styles/layout.css';
 import Link from 'next/link';
 import React from 'react';
-import Nav from './Nav';
+import NavBar from './NavBar';
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
       <Link href="/" className={logo}>
         conduit
       </Link>
-      <Nav />
+      <NavBar />
     </header>
   );
 };

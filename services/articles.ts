@@ -1,5 +1,5 @@
 import { http } from '@/libs/http';
-import { NewArticle } from '@/types';
+import { Article, NewArticle } from '@/types';
 
 // 전제 Article 조회
 const fetchArticles = (limit = 20) => {
@@ -17,7 +17,7 @@ const registerArticle = (article: NewArticle) => {
 };
 
 // Article 단건 조회
-const fetchArticle = (slug: string) => {
+const fetchArticle = (slug: string): Promise<Article> => {
   return http.get(`https://api.realworld.io/api/articles/${slug}`);
 };
 

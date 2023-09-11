@@ -3,9 +3,8 @@ import { User, UserAction } from '@/types';
 import { create } from 'zustand';
 
 const initialState: User = {
-  userName: '',
+  username: '',
   email: '',
-  password: '',
   token: '',
   bio: '',
   image: '',
@@ -17,9 +16,13 @@ const useUserStore = create<User | UserAction>(set => ({
     const email = e.target.email.value;
     const password = e.target.password.value;
     try {
-      const { user } = await http.post('https://api.realworld.io/api/users/login', { user: { email, password } });
-      console.log(user);
-      set(state => ({ ...state, ...user }));
+      console.log(email);
+
+      const res = await http.post('http://localhost:3000/api/auth', { user: { email, password } });
+
+      console.log(res);
+
+      // set(state => ({ ...state, ...user }));
     } catch (err) {
       console.log(err);
     }
