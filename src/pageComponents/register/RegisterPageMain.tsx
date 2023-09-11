@@ -23,7 +23,7 @@ const RegisterPageMain = () => {
   const [errorTypes, setErrorTypes] = useState<string[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSubmit = (event: FormEvent<HTMLElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsLoading(true);

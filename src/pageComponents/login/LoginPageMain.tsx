@@ -20,7 +20,7 @@ const LoginPageMain = () => {
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSubmit = (event: FormEvent<HTMLElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsLoading(true);
