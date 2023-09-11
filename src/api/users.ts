@@ -46,11 +46,14 @@ export const postUserRegister = (
 export const getCurrentUser = (
   options: RequestInit = {},
 ): Promise<UserResponse> => {
+  const accessToken = localStorage.getItem('access-token');
+
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
     method: HTTP_METHOD.GET,
     headers: {
       ...COMMON_HEADERS,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
     .then((res) => res.json())
@@ -62,11 +65,14 @@ export const putCurrentUser = (
   payload: CurrentUserPayload,
   options: RequestInit = {},
 ): Promise<UserResponse> => {
+  const accessToken = localStorage.getItem('access-token');
+
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
-    method: HTTP_METHOD.GET,
+    method: HTTP_METHOD.PUT,
     headers: {
       ...COMMON_HEADERS,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   })

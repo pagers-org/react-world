@@ -17,9 +17,9 @@ export type UserRegisterPayload = {
 export type CurrentUserPayload = {
   user: {
     email: string;
-    password: string;
+    password?: string;
     username: string;
-    bio: string;
+    bio: string | null;
     image: string;
   };
 };
