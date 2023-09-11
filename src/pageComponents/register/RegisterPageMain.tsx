@@ -87,6 +87,7 @@ const RegisterPageMain = () => {
                   name="username"
                   value={form.username}
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
               </fieldset>
               <fieldset className="form-group">
@@ -97,6 +98,7 @@ const RegisterPageMain = () => {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
               </fieldset>
               <fieldset className="form-group">
@@ -107,6 +109,7 @@ const RegisterPageMain = () => {
                   name="password"
                   value={form.password}
                   onChange={handleChange}
+                  disabled={isLoading}
                 />
               </fieldset>
               <button
