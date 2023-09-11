@@ -22,3 +22,11 @@ export interface ArticleResponseType {
   articles: Article[];
   articleCount: number;
 }
+
+export interface GetArticlesInputParams {
+  tag: string;
+  author: string;
+  favorited: string;
+  offset: number;
+  limit: number;
+}
