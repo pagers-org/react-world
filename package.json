@@ -1,11 +1,12 @@
 {
   "name": "@miso/react-world",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "private": true,
   "scripts": {
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "dev:common": "pnpm --filter @miso/common dev",
+    "dev:web": "pnpm --filter @miso/web dev",
+    "dev": "pnpm run --parallel -r dev"
   },
   "engines": {
     "node": ">16.14.2",
