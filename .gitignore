@@ -41,15 +41,12 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-/.pnp
-.pnp.js
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
-# TypeScript
+# TypeScript cache
 *.tsbuildinfo
-next-env.d.ts
 
 # Optional npm cache directory
 .npm
@@ -77,7 +74,6 @@ next-env.d.ts
 
 # dotenv environment variable files
 .env
-.env*
 .env.development.local
 .env.test.local
 .env.production.local
