@@ -1,4 +1,8 @@
 {
   "name": "server",
-  "packageManager": "yarn@3.6.3"
+  "packageManager": "yarn@3.6.3",
+  "dependencies": {
+    "graphql": "^16.8.0",
+    "graphql-yoga": "^4.0.4"
+  }
 }
