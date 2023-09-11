@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { EditIcon, SettingIcon } from '@/composables/icons';
 import Link from 'next/link';
 import { userImageSm } from '@/styles/profile.css';
+import Image from 'next/image';
 
 const NAVS = [
   {
@@ -34,8 +35,12 @@ const NAVS = [
 ];
 
 const NavBar = () => {
-  const { token, username, image } = useUserStore();
+  // const { token, username, image } = useUserStore();
   const pathname = usePathname();
+
+  const token = 'ff';
+  const username = 'hyeon';
+  const image = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
 
   return (
     <nav>
@@ -52,7 +57,7 @@ const NavBar = () => {
                 href={href}
                 className={`${styles.navItem} ${pathname === href ? styles.activate : styles.disabled}`}
               >
-                {icon && `${icon} &nbsp`}
+                {icon} {icon && ' '}
                 {name}
               </Link>
             </li>

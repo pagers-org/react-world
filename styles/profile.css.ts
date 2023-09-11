@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 export const userBlock = style({
   background: '#f3f3f3',
+  marginBottom: '30px',
 });
 
 export const userInfo = style({

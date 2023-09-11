@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-  const token = false;
+  const token = true;
 
   if (!token) {
     // 아직 보류

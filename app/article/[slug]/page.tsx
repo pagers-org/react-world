@@ -1,3 +1,4 @@
+import CommentCard from '@/components/comments/CommentCard';
 import CommentForm from '@/components/comments/CommentForm';
 import Banner from '@/components/layouts/Banner';
 import TagList from '@/components/tags/TagList';
@@ -6,7 +7,7 @@ import FollowButton from '@/components/user/FollowButton';
 import UserBox from '@/components/user/UserBox';
 import { fetchArticle } from '@/services/articles';
 import { articleContent, articleDetailTitle } from '@/styles/article.css';
-import { container, flex, justifyCenter, paddingTB, textCenter } from '@/styles/common.css';
+import { container, flex, flexCenter, flexRow, justifyCenter, paddingTB, textCenter } from '@/styles/common.css';
 import { Article } from '@/types';
 import Link from 'next/link';
 import React from 'react';
@@ -15,7 +16,7 @@ type Props = {
 };
 const ArticlePage = async ({ params: { slug } }: Props) => {
   const { title, author, createdAt, body, tagList, favoritesCount } = await fetchArticle<Article>(slug);
-  const user = false;
+  const user = true;
   return (
     <section>
       <Banner background="black">
@@ -37,7 +38,10 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
         </div>
         <div>
           {user ? (
-            <CommentForm />
+            <div className={`${flexRow} ${flexCenter}`}>
+              <CommentForm />
+              <CommentCard />
+            </div>
           ) : (
             <div className={textCenter}>
               <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this

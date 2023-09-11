@@ -1,9 +1,9 @@
 'use client';
 import { http } from '@/libs/http';
 import useUserStore from '@/stores/useUserStore';
-import { container, input } from '@/styles/common.css';
-import { button } from '@/styles/layout.css';
-import { settingBlock, settingForm, settingTitle } from '@/styles/settings.css';
+import { articleTextarea } from '@/styles/article.css';
+import { container, flex, hr, input } from '@/styles/common.css';
+import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
 import { useState } from 'react';
 
 const SettingsPage = () => {
@@ -51,7 +51,7 @@ const SettingsPage = () => {
           <textarea
             rows={8}
             name="bio"
-            className={input}
+            className={articleTextarea}
             placeholder="Short bio about you"
             value={formData.bio}
             onChange={handleChange}
@@ -72,10 +72,14 @@ const SettingsPage = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          <input type="submit" className={button} value="Update Settings" />
+          <div>
+            <input type="submit" className={updateButton} value="Update Settings" />
+          </div>
+          <div className={hr} />
+          <div className={flex}>
+            <button className={logoutButton}>Or click here to logout.</button>
+          </div>
         </form>
-        <hr />
-        <button className={button}>Or click here to logout.</button>
       </div>
     </section>
   );

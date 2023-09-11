@@ -1,6 +1,8 @@
 'use client';
 import TagInput from '@/components/editor/TagInput';
 import { registerArticle } from '@/services/articles';
+import { articleTextarea } from '@/styles/article.css';
+import { commentTextarea } from '@/styles/comments.css';
 import { container, input } from '@/styles/common.css';
 import { editorForm, editorButton } from '@/styles/editor.css';
 import React, { useState } from 'react';
@@ -15,10 +17,10 @@ const EditorPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log('들어옴');
+    // console.log('들어옴');
 
-    const res = await registerArticle();
-    console.log(res);
+    // const res = await registerArticle();
+    // console.log(res);
   };
 
   const handleChange = (e: any) => {
@@ -49,13 +51,15 @@ const EditorPage = () => {
         <textarea
           rows={8}
           name="body"
-          className={input}
+          className={articleTextarea}
           placeholder="Write your article (in markdown)"
           onChange={handleChange}
           value={formData.body}
-        />
+        ></textarea>
         <TagInput setFormData={setFormData} />
-        <input type="submit" value="Publish Article" className={editorButton} />
+        <div>
+          <input type="submit" value="Publish Article" className={editorButton} />
+        </div>
       </form>
     </section>
   );

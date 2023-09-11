@@ -5,7 +5,7 @@ export const commentForm = style({
   border: '1px solid #e5e5e5',
   borderRadius: '0.25rem',
   width: 730,
-  margin: '30px 0',
+  marginTop: '30px',
 });
 
 export const commentTextarea = style({
@@ -27,9 +27,21 @@ export const commentFormFooter = style([
     fontSize: '0.8rem',
     fontWeight: 300,
     borderTop: '1px solid #e5e5e5',
+    color: '#bbb',
   },
 ]);
 
 export const commentSubmitButton = style({
   fontWeight: 700,
+});
+
+export const commnetCard = style({
+  backgroundColor: '#fff',
+  border: '1px solid #e5e5e5',
+  borderRadius: ' 0.25rem',
+  width: 730,
+});
+
+export const commentContent = style({
+  padding: '1.25rem',
 });

@@ -73,3 +73,14 @@ export const articleContent = style({
   lineHeight: '1.8rem',
   marginBottom: '2rem',
 });
+
+export const articleTextarea = style({
+  border: '1px solid rgba(0, 0, 0, 0.15)',
+  borderRadius: '0.25rem',
+  padding: '0.5rem 0.75rem',
+  color: '#55595c',
+  ':focus': {
+    borderColor: '#66afe9',
+    outline: 'none',
+  },
+});

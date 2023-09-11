@@ -15,3 +15,7 @@ globalStyle('a', {
 globalStyle('main', {
   marginBottom: '100px',
 });
+
+globalStyle('textarea', {
+  resize: 'vertical',
+});
