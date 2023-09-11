@@ -1,5 +1,7 @@
-interface Props {
-  children: React.ReactNode;
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
 }
 
 const LikeOrFavoriteBtn = ({ children, ...props }: Props) => {
