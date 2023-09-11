@@ -7,7 +7,7 @@ type Props = ComponentPropsWithoutRef<"div">;
 
 export const Root = forwardRef<HTMLDivElement, Props>(({ children, className, ...rest }, ref) => {
   return (
-    <div ref={ref} {...rest} className={clsx("article-meta", className)}>
+    <div ref={ref} {...rest} className={clsx("flex items-center gap-2", className)}>
       {children}
     </div>
   );

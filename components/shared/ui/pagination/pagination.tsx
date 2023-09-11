@@ -1,34 +1,47 @@
 "use client";
 
-import Link from "next/link";
-
-import { forwardRef, useMemo, useState } from "react";
+import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef, useMemo } from "react";
 
 import { clsx } from "lib/clsx";
+import type { Override } from "types/utilities";
 import { array } from "utils/array";
 
-type Props = {
+type BaseProps = {
   total: number;
+  currentPage: number;
+  onPageChange?: (page: number) => void;
 };
 
-export const Pagination = forwardRef<HTMLUListElement, Props>(({ total }, ref) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+type Props = Override<ComponentPropsWithoutRef<"ul">, BaseProps>;
 
-  const pages = useMemo(() => array(total, (index) => index + 1), [total]);
+export const Pagination = forwardRef<HTMLUListElement, Props>(
+  ({ total, className, currentPage, onPageChange, ...rest }, ref) => {
+    const pages = useMemo(() => array(total, (index) => index + 1), [total]);
 
-  const handlePageClick = (page: number) => () => setCurrentPage(page);
+    const handlePageClick = (page: number) => () => {
+      onPageChange?.(page);
+    };
 
-  const isActive = (page: number) => page === currentPage;
+    const isCurrent = (page: number) => page === currentPage;
 
-  return (
-    <ul ref={ref} className="pagination">
-      {pages.map((page) => (
-        <li key={page} className={clsx("page-item", { active: isActive(page) })} onClick={handlePageClick(page)}>
-          <Link className="page-link" href="">
+    return (
+      <ul ref={ref} {...rest} className={clsx("flex", className)}>
+        {pages.map((page) => (
+          <li
+            key={page}
+            className={clsx(styles.base, { [styles.active]: isCurrent(page) })}
+            onClick={handlePageClick(page)}
+          >
             {page}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-});
+          </li>
+        ))}
+      </ul>
+    );
+  },
+);
+
+const styles = {
+  base: "text-md min-w-8 flex h-8 cursor-pointer items-center justify-center rounded-md px-3 font-normal text-zinc-500",
+  active: "bg-zinc-950 !text-white",
+} as const;

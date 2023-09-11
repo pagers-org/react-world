@@ -13,7 +13,7 @@ const Root = <T extends ElementType = "ul">({ children, className, as, ...rest }
   const Component = as ?? "ul";
 
   return (
-    <Component ref={ref} {...rest} className={clsx("tag-list", className)}>
+    <Component ref={ref} {...rest} className={clsx("flex flex-wrap", className)}>
       {children}
     </Component>
   );

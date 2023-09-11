@@ -1,18 +1,18 @@
 import { Banner } from "./banner";
-import { Feed } from "./feed/feed";
+import { Feed } from "./feed";
 import { SideBar } from "./side-bar";
 
 export const Home = () => {
   return (
-    <div className="home-page">
+    <>
       <Banner />
 
-      <div className="page container">
-        <div className="row">
+      <div className="flex justify-center">
+        <div className="page relative">
           <Feed />
           <SideBar />
         </div>
       </div>
-    </div>
+    </>
   );
 };

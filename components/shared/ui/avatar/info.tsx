@@ -7,7 +7,7 @@ type Props = ComponentPropsWithoutRef<"div">;
 
 export const Info = forwardRef<HTMLDivElement, Props>(({ children, className, ...rest }, ref) => {
   return (
-    <div ref={ref} {...rest} className={clsx("info", className)}>
+    <div ref={ref} {...rest} className={clsx("flex flex-col", className)}>
       {children}
     </div>
   );

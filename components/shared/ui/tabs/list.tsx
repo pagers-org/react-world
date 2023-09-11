@@ -9,7 +9,7 @@ type Props = ComponentPropsWithoutRef<"ul">;
 
 const List = ({ children, className, ...rest }: Props, ref: Ref<HTMLUListElement>) => {
   return (
-    <ul ref={ref} {...rest} className={clsx("feed-toggle nav nav-pills outline-active", className)}>
+    <ul ref={ref} {...rest} className={clsx("flex", className)}>
       {children}
     </ul>
   );
