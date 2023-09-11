@@ -1,5 +1,5 @@
 import { Article } from "@/types/articles";
-import LikeOrFavoriteBtn from "./atoms/LikeOrFavoriteBtn";
+import LikeOrFavoriteBtn from "./buttons/LikeOrFavoriteBtn";
 import Profile from "./common/Profile";
 import Link from "next/link";
 import Tag from "./atoms/Tag";
