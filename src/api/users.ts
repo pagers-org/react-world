@@ -7,6 +7,7 @@ import {
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
+import { ACCESS_TOKEN_KEY } from '@/constants/key';
 
 // Login for existing user
 export const postUserLogin = (
@@ -46,7 +47,7 @@ export const postUserRegister = (
 export const getCurrentUser = (
   options: RequestInit = {},
 ): Promise<UserResponse> => {
-  const accessToken = localStorage.getItem('access-token');
+  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
@@ -65,7 +66,7 @@ export const putCurrentUser = (
   payload: CurrentUserPayload,
   options: RequestInit = {},
 ): Promise<UserResponse> => {
-  const accessToken = localStorage.getItem('access-token');
+  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/user`, {
     ...options,

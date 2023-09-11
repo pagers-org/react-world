@@ -1,5 +1,6 @@
 'use client';
 
+import { useUserStore } from '@/stores/users';
 import { CurrentUserPayload } from '@/types/api/users';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -7,6 +8,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { getCurrentUser, putCurrentUser } from '@/api/users';
 
 const SettingsPageMain = () => {
+  const { logout, updateInfo } = useUserStore();
   const router = useRouter();
 
   const [form, setForm] = useState<CurrentUserPayload['user']>({
@@ -68,7 +70,9 @@ const SettingsPageMain = () => {
       user: payload,
     }).then((res) => {
       if (!res?.errors) {
-        router.push(`/profile/${res.user.username}`);
+        const user = res.user;
+        updateInfo(user);
+        router.push(`/profile/${user.username}`);
       }
       setIsLoading(false);
     });
@@ -80,11 +84,6 @@ const SettingsPageMain = () => {
     const { name, value } = event.target;
 
     setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = '/';
   };
 
   useEffect(() => {
@@ -185,7 +184,7 @@ const SettingsPageMain = () => {
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={handleLogout}
+              onClick={logout}
             >
               Or click here to logout.
             </button>
