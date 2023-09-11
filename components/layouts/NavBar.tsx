@@ -38,8 +38,8 @@ const NavBar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className={styles.nav}>
-      <ul>
+    <nav>
+      <ul className={styles.nav}>
         <li>
           <Link href="/" className={`${styles.navItem} ${pathname === '/' ? styles.activate : styles.disabled}`}>
             Home

@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
-import './normalize.css';
 import Header from '@/components/layouts/Header';
 import Footer from '@/components/layouts/Footer';
+import '@/styles/globalStyles.css';
 
 export const metadata: Metadata = {
   title: 'next world',
