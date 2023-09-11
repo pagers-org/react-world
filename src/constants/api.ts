@@ -7,5 +7,5 @@ export const HTTP_METHOD = {
 };
 
 export const COMMON_HEADERS = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json; charset=utf-8',
 };
