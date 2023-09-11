@@ -1,22 +1,21 @@
 'use client';
 
 import { useUserStore } from '@/stores/users';
-import { CurrentUserPayload } from '@/types/api/users';
-import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { CurrentUserPayload, UserResponse } from '@/types/api/users';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { getCurrentUser, putCurrentUser } from '@/api/users';
+import { putCurrentUser } from '@/api/users';
 
-const SettingsPageMain = () => {
+interface Props {
+  mySettings: UserResponse['user'];
+}
+
+const SettingsPageMain = ({ mySettings }: Props) => {
   const { logout, updateInfo } = useUserStore();
-  const router = useRouter();
 
   const [form, setForm] = useState<CurrentUserPayload['user']>({
-    email: '',
+    ...mySettings,
     password: '',
-    username: '',
-    bio: null,
-    image: '',
   });
   const [errorTypes, setErrorTypes] = useState<string[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -72,7 +71,6 @@ const SettingsPageMain = () => {
       if (!res?.errors) {
         const user = res.user;
         updateInfo(user);
-        router.push(`/profile/${user.username}`);
       }
       setIsLoading(false);
     });
@@ -85,19 +83,6 @@ const SettingsPageMain = () => {
 
     setForm((prev) => ({ ...prev, [name]: value }));
   };
-
-  useEffect(() => {
-    getCurrentUser().then((res) => {
-      const { email, username, bio, image } = res.user;
-      setForm((prev) => ({
-        ...prev,
-        email,
-        username,
-        bio,
-        image,
-      }));
-    });
-  }, []);
 
   return (
     <div className="settings-page">

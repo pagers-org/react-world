@@ -59,6 +59,7 @@ export const useUserStore = create(
             token,
             COOKIE_ACCESS_TOKEN_MAX_AGE,
           );
+          window.location.href = `/profile/${username}`;
           return {
             user: {
               email,
