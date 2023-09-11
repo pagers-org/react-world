@@ -1,4 +1,12 @@
-import { globalStyle, style } from "@vanilla-extract/css";
+import { createThemeContract, globalStyle, style } from "@vanilla-extract/css";
+
+export const themeVars = createThemeContract({
+  color: {
+    textColor: "",
+    backgroundColor: "",
+    hoverColor: "",
+  },
+});
 
 export const buttonContainer = style({
   display: "inline-flex",
@@ -76,45 +84,46 @@ export const buttonLg = style({
 
 // Button variants
 export const buttonContained = style({
-  color: "#fff",
-  backgroundColor: "#5CB85C",
-  borderColor: "#5CB85C",
+  color: themeVars.color.textColor,
+  backgroundColor: themeVars.color.backgroundColor,
+  borderColor: themeVars.color.backgroundColor,
+
   selectors: {
     [`&:focus`]: {
-      color: "#fff",
-      backgroundColor: "#449d44",
-      borderColor: "#449d44",
+      color: themeVars.color.textColor,
+      backgroundColor: themeVars.color.hoverColor,
+      borderColor: themeVars.color.hoverColor,
     },
     [`&:active`]: {
-      color: "#fff",
-      backgroundColor: "#449d44",
-      borderColor: "#449d44",
+      color: themeVars.color.textColor,
+      backgroundColor: themeVars.color.hoverColor,
+      borderColor: themeVars.color.hoverColor,
     },
   },
 });
 
 export const buttonOutlined = style({
-  color: "#5CB85C",
+  color: themeVars.color.textColor,
   backgroundColor: "transparent",
   backgroundImage: "none",
-  borderColor: "#5CB85C",
+  borderColor: themeVars.color.textColor,
   selectors: {
     [`&:focus`]: {
       color: "#fff",
-      backgroundColor: "#5CB85C",
-      borderColor: "#4195CB85C641",
+      backgroundColor: themeVars.color.textColor,
+      borderColor: themeVars.color.textColor,
     },
     [`&:active`]: {
       color: "#fff",
-      backgroundColor: "#5CB85C",
-      borderColor: "#5CB85C",
+      backgroundColor: themeVars.color.textColor,
+      borderColor: themeVars.color.textColor,
     },
   },
 });
 
 export const buttonLink = style({
-  color: "#B8B8B8",
-  backgroundColor: "white",
+  color: themeVars.color.textColor,
+  backgroundColor: "transparent",
   border: "none",
   selectors: {
     [`&:focus`]: {

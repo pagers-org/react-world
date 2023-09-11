@@ -1,3 +1,5 @@
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { darkenColor } from "utils/darkenColor";
 
 import * as S from "./button.css";
 
@@ -8,10 +10,10 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   size?: "xs" | "sm" | "md" | "lg";
   type?: "contained" | "outlined" | "link";
-  // color?: "primary" | "secondary";
   htmlType?: "button" | "submit" | "reset";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   backgroundColor?: string;
+  textColor?: string;
   label: string;
 }
 
@@ -21,9 +23,10 @@ export const Button = ({
   onClick,
   size = "sm",
   type = "contained",
-  // color = "primary",
   label,
   children,
+  textColor,
+  backgroundColor,
   ...props
 }: ButtonProps) => {
   const baseClasses = [S.button];
@@ -32,10 +35,6 @@ export const Button = ({
     outlined: S.buttonOutlined,
     link: S.buttonLink,
   };
-  // const colorClasses = {
-  //   primary: S.buttonPrimary,
-  //   secondary: S.buttonSecondary,
-  // };
 
   const sizeClasses = {
     xs: S.buttonXs,
@@ -48,11 +47,13 @@ export const Button = ({
     ...baseClasses,
     typeClasses[type],
     sizeClasses[size],
-    // colorClasses[color],
     block && S.buttonWFull,
   ].filter(Boolean);
 
-  console.log("classes", classes);
+  const hoverColor = backgroundColor ? darkenColor(backgroundColor) : undefined;
+
+  console.log("@@@darkenColor", hoverColor);
+
   return (
     <span className={[S.buttonContainer, block && S.buttonWFull].join(" ")}>
       <button
@@ -60,6 +61,13 @@ export const Button = ({
         onClick={onClick}
         disabled={disabled}
         {...props}
+        style={assignInlineVars(S.themeVars, {
+          color: {
+            textColor: textColor!,
+            backgroundColor: backgroundColor!,
+            hoverColor: hoverColor!,
+          },
+        })}
       >
         {label}
         {children}
