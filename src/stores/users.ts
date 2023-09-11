@@ -2,7 +2,10 @@ import { UserResponse } from '@/types/api/users';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { ACCESS_TOKEN_KEY } from '@/constants/key';
+import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
+import { COOKIE_ACCESS_TOKEN_MAX_AGE } from '@/constants/time';
+
+import { setCookie } from '@/utils/cookie';
 
 export type UserStoreState = {
   user: Omit<UserResponse['user'], 'token'>;
@@ -25,7 +28,11 @@ export const useUserStore = create(
       login: (user) =>
         set(() => {
           const { email, username, bio, image, token } = user;
-          localStorage.setItem(ACCESS_TOKEN_KEY, token);
+          setCookie(
+            COOKIE_ACCESS_TOKEN_KEY,
+            token,
+            COOKIE_ACCESS_TOKEN_MAX_AGE,
+          );
           window.location.href = '/';
           return {
             user: {
@@ -38,7 +45,7 @@ export const useUserStore = create(
         }),
       logout: () =>
         set(() => {
-          localStorage.removeItem(ACCESS_TOKEN_KEY);
+          setCookie(COOKIE_ACCESS_TOKEN_KEY, '', 0);
           window.location.href = '/';
           return {
             user: INITIAL_USER,
@@ -47,7 +54,11 @@ export const useUserStore = create(
       updateInfo: (user) =>
         set(() => {
           const { email, username, bio, image, token } = user;
-          localStorage.setItem(ACCESS_TOKEN_KEY, token);
+          setCookie(
+            COOKIE_ACCESS_TOKEN_KEY,
+            token,
+            COOKIE_ACCESS_TOKEN_MAX_AGE,
+          );
           return {
             user: {
               email,
