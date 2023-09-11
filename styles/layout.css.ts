@@ -25,7 +25,7 @@ export const footer = style({
   textAlign: 'center',
   padding: '15px',
   boxShadow: '0 5px 5px 5px rgba(0,0,0,0.4)',
-  zIndex: '999',
+  zIndex: '2',
   fontSize: '1.5rem',
 });
 

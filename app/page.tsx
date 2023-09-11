@@ -9,7 +9,7 @@ import { bannerDescription, bannerTitle } from '@/styles/home.css';
 export default function Page() {
   return (
     <section>
-      <Banner>
+      <Banner background="green">
         <h1 className={bannerTitle}>conduit</h1>
         <p className={bannerDescription}>A place to share your knowledge.</p>
       </Banner>

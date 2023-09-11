@@ -48,6 +48,13 @@ export const flexBox = style({
   gap: 10,
 });
 
+export const alignCenter = style([
+  flex,
+  {
+    alignItems: 'center',
+  },
+]);
+
 export const flexBetween = style({
   display: 'flex',
   justifyContent: 'space-between',
@@ -61,4 +68,12 @@ export const input = style({
   borderRadius: '0.3rem',
   border: '1px solid rgba(0, 0, 0, 0.15);',
   boxSizing: 'border-box',
+});
+
+export const backgroundGreen = style({
+  background: '#5CB85C',
+});
+
+export const backgroundBlack = style({
+  background: '#333',
 });

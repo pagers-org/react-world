@@ -47,6 +47,11 @@ export const articleTitle = style({
   marginBottom: '3px',
 });
 
+export const articleDetailTitle = style({
+  fontSize: '2.8rem',
+  fontWeight: '600',
+});
+
 export const articleDescription = style({
   fontWeight: '300',
   fontSize: '1rem',

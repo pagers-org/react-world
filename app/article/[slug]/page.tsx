@@ -2,7 +2,7 @@ import Banner from '@/components/layouts/Banner';
 import TagList from '@/components/tags/TagList';
 import UserBox from '@/components/user/UserBox';
 import { fetchArticle } from '@/services/articles';
-import { articleContent } from '@/styles/article.css';
+import { articleContent, articleDetailTitle } from '@/styles/article.css';
 import { container } from '@/styles/common.css';
 import Link from 'next/link';
 import React from 'react';
@@ -16,8 +16,8 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
 
   return (
     <section>
-      <Banner>
-        <div>{title}</div>
+      <Banner background="black">
+        <h1 className={articleDetailTitle}>{title}</h1>
         <div>
           <UserBox author={author} createdAt={createdAt} />
         </div>

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { flexCenter, flexRow } from './common.css';
+import { alignCenter, flexCenter, flexRow } from './common.css';
 
 const responsiveStyle = ({ tablet, desktop }) => ({
   '@media': {
@@ -30,9 +30,7 @@ export const form = style([
   }),
 ]);
 
-export const userBoxBlock = style({
-  display: 'flex',
-});
+export const userBoxBlock = style([alignCenter]);
 
 export const info = style({
   margin: ' 0 1.5rem 0 0.3rem',
