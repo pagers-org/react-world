@@ -10,10 +10,14 @@ const responsiveStyle = ({ tablet, desktop }) => ({
 export const container = style([
   { margin: '0 auto', padding: '0 15px' },
   responsiveStyle({
-    tablet: { maxWidth: '768px' },
-    desktop: { maxWidth: '1140px' },
+    tablet: { width: '768px' },
+    desktop: { width: '1140px' },
   }),
 ]);
+
+export const textCenter = style({
+  textAlign: 'center',
+});
 
 export const sidePadding = style({
   padding: '0 15px',
@@ -21,6 +25,32 @@ export const sidePadding = style({
 
 export const circle = style({
   borderRadius: '50%',
+});
+
+export const flexRow = style({
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+export const flexCenter = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+export const flex = style({
+  display: 'flex',
+});
+
+export const flexBox = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 10,
+});
+
+export const flexBetween = style({
+  display: 'flex',
+  justifyContent: 'space-between',
 });
 
 export const input = style({

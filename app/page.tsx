@@ -3,9 +3,8 @@ import ArticleTab from '@/components/article/ArticleTab';
 import Banner from '@/components/layouts/Banner';
 import SideBar from '@/components/layouts/SideBar';
 import { articleContainer } from '@/styles/article.css';
-import { container } from '@/styles/common.css';
+import { container, flex } from '@/styles/common.css';
 import { bannerDescription, bannerTitle } from '@/styles/home.css';
-import { flex } from '@/styles/layout.css';
 
 export default function Page() {
   return (

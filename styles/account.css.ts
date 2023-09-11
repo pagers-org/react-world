@@ -1,4 +1,12 @@
 import { style } from '@vanilla-extract/css';
+import { flexCenter, flexRow } from './common.css';
+
+const responsiveStyle = ({ tablet, desktop }) => ({
+  '@media': {
+    'screen and (min-width: 768px)': tablet,
+    'screen and (min-width: 1024px)': desktop,
+  },
+});
 
 export const title = style({
   fontSize: '2.5rem',
@@ -10,9 +18,17 @@ export const question = style({
   marginBottom: '1rem',
 });
 
-export const textCenter = style({
-  textAlign: 'center',
-});
+export const form = style([
+  flexCenter,
+  flexRow,
+  {
+    gap: 15,
+  },
+  responsiveStyle({
+    tablet: { width: '340px' },
+    desktop: { width: '540px' },
+  }),
+]);
 
 export const userBoxBlock = style({
   display: 'flex',

@@ -2,10 +2,11 @@
 import { articleDescription, articleMeta, articlePreview, articleReadMore, articleTitle } from '@/styles/article.css';
 import UserBox from '../user/UserBox';
 import TagList from '../tags/TagList';
-import { flex } from '@/styles/layout.css';
+
 import { heart } from '@/styles/account.css';
 import { useRouter } from 'next/navigation';
 import { FillHeartIcon } from '@/composables/icons';
+import { flexBetween } from '@/styles/common.css';
 type Props = {
   article: any;
 };
@@ -24,7 +25,7 @@ const ArticlePreview = ({
       <div onClick={() => router.push(`/article/${slug}`)}>
         <div className={articleTitle}>{title}</div>
         <div className={articleDescription}>{description}</div>
-        <div className={flex}>
+        <div className={flexBetween}>
           <span className={articleReadMore}>Read more...</span>
           <TagList tags={tagList} />
         </div>

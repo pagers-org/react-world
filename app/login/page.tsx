@@ -2,9 +2,9 @@
 
 // import { login } from '@/actions/actions';
 import useUserStore from '@/stores/useUserStore';
-import { question, title } from '@/styles/account.css';
-import { input, container } from '@/styles/common.css';
-import { button, buttonBox, flexBox } from '@/styles/layout.css';
+import { form, question, title } from '@/styles/account.css';
+import { input, container, textCenter, flexCenter, flexRow } from '@/styles/common.css';
+import { button, buttonBox } from '@/styles/layout.css';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
@@ -16,16 +16,14 @@ const LoginPage = () => {
     router.push('/');
   };
   return (
-    <section className={container}>
+    <section className={`${container} ${flexRow} ${flexCenter}`}>
       <div className={title}>Sign in</div>
       <div className={question}>Need an account?</div>
-      <form onSubmit={handleSubmit}>
-        <div className={flexBox}>
-          <input type="email" name="email" placeholder="Email" className={input} />
-          <input type="password" name="password" placeholder="Password" className={input} />
-          <div className={buttonBox}>
-            <input type="submit" value={'Sign in'} className={button} />
-          </div>
+      <form onSubmit={handleSubmit} className={form}>
+        <input type="email" name="email" placeholder="Email" className={input} />
+        <input type="password" name="password" placeholder="Password" className={input} />
+        <div className={buttonBox}>
+          <input type="submit" value={'Sign in'} className={button} />
         </div>
       </form>
     </section>

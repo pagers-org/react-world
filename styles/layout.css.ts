@@ -106,20 +106,8 @@ export const button = style({
   },
 });
 
-export const flexBox = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 10,
-});
-
 export const buttonBox = style({
   display: 'flex',
   width: '100%',
   justifyContent: 'flex-end',
-});
-
-export const flex = style({
-  display: 'flex',
-  justifyContent: 'space-between',
-  width: '100%',
 });
