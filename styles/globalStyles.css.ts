@@ -13,5 +13,5 @@ globalStyle('a', {
 });
 
 globalStyle('main', {
-  marginBottom: '62px',
+  marginBottom: '100px',
 });

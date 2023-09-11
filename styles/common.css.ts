@@ -116,6 +116,22 @@ export const grayButton = style([
   },
 ]);
 
+export const fillGreenButton = style([
+  button,
+  {
+    border: '1px solid #5CB85C',
+    background: '#5CB85C',
+    color: '#fff',
+    ':hover': {
+      background: '#5CB85C',
+    },
+  },
+]);
+
 export const fontSize = style({
   fontSize: '1.3rem',
+});
+
+export const paddingTB = style({
+  padding: '20px 0',
 });

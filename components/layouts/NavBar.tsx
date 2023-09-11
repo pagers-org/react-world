@@ -52,8 +52,8 @@ const NavBar = () => {
                 href={href}
                 className={`${styles.navItem} ${pathname === href ? styles.activate : styles.disabled}`}
               >
-                {icon}
-                &nbsp; {name}
+                {icon && `${icon} &nbsp`}
+                {name}
               </Link>
             </li>
           ) : null

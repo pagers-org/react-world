@@ -1,3 +1,4 @@
+import CommentForm from '@/components/comments/CommentForm';
 import Banner from '@/components/layouts/Banner';
 import TagList from '@/components/tags/TagList';
 import FavoriteButton from '@/components/user/FavoriteButton';
@@ -5,7 +6,7 @@ import FollowButton from '@/components/user/FollowButton';
 import UserBox from '@/components/user/UserBox';
 import { fetchArticle } from '@/services/articles';
 import { articleContent, articleDetailTitle } from '@/styles/article.css';
-import { container, flex, justifyCenter } from '@/styles/common.css';
+import { container, flex, justifyCenter, paddingTB, textCenter } from '@/styles/common.css';
 import { Article } from '@/types';
 import Link from 'next/link';
 import React from 'react';
@@ -14,7 +15,7 @@ type Props = {
 };
 const ArticlePage = async ({ params: { slug } }: Props) => {
   const { title, author, createdAt, body, tagList, favoritesCount } = await fetchArticle<Article>(slug);
-
+  const user = false;
   return (
     <section>
       <Banner background="black">
@@ -29,13 +30,20 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
         <p className={articleContent}>{body}</p>
         <TagList tags={tagList} />
         <hr />
-        <div className={justifyCenter}>
+        <div className={`${justifyCenter} ${paddingTB}`}>
           <UserBox author={author} createdAt={createdAt} />
-          <FollowButton author={author} />
+          <FollowButton author={author} /> &nbsp;
           <FavoriteButton favoritesCount={favoritesCount} />
         </div>
         <div>
-          <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this article.
+          {user ? (
+            <CommentForm />
+          ) : (
+            <div className={textCenter}>
+              <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this
+              article.
+            </div>
+          )}
         </div>
       </div>
     </section>
