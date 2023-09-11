@@ -1,5 +1,5 @@
 import { Article } from "@/types/articles";
-import LikeButton from "./atoms/LikeButton";
+import LikeOrFavoriteBtn from "./atoms/LikeOrFavoriteBtn";
 import Profile from "./common/Profile";
 import Link from "next/link";
 import Tag from "./atoms/Tag";
@@ -16,7 +16,7 @@ const ArticleCard = ({
       <div className="flex justify-between items-center">
         <Profile src={author.image} name={author.username} date={createdAt} />
         <div>
-          <LikeButton likes={favoritesCount} />
+          <LikeOrFavoriteBtn>♥ {favoritesCount}</LikeOrFavoriteBtn>
         </div>
       </div>
       <article className="mt-2">
