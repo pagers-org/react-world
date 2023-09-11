@@ -1,36 +1,34 @@
-import Chip from "./atoms/Chip";
+import { Article } from "@/types/articles";
 import LikeButton from "./atoms/LikeButton";
 import Profile from "./common/Profile";
+import Link from "next/link";
+import Tag from "./atoms/Tag";
 
-const tempImgUrl = "/excitedPenguin.jpeg";
-const tempName = "Anah Benesova";
-const tempDate = "December 9, 2022";
+interface ArticleCardProps {
+  article: Article;
+}
 
-const ArticleCard = () => {
+const ArticleCard = ({
+  article: { title, description, tagList, favoritesCount, author, createdAt, slug },
+}: ArticleCardProps) => {
   return (
-    <li className="border-t-2 border-t-gray-300 px-2 py-4">
+    <li className="border-t-[1px] border-t-gray-300 px-2 py-4 xl:max-w-4xl">
       <div className="flex justify-between items-center">
-        <Profile src={tempImgUrl} name={tempName} date={tempDate} />
+        <Profile src={author.image} name={author.username} date={createdAt} />
         <div>
-          <LikeButton likes={1740} />
+          <LikeButton likes={favoritesCount} />
         </div>
       </div>
       <article className="mt-2">
-        <h1 className="text-xl font-semibold">
-          Try to transmit the HTTP card, maybe it will override the multi-byte hard drive!
-        </h1>
-        <p className="text-sm text-gray-400">
-          Assumenda molestiae laboriosam enim ipsum quaerat enim officia vel quo. Earum odit rem natus totam atque
-          cumque. Sint dolorem facere non.
-        </p>
+        <h1 className="text-xl font-semibold">{title}</h1>
+        <p className="text-sm text-gray-400">{description}</p>
       </article>
       <div className="flex justify-between pt-4 text-gray-300 text-sm">
-        <p>Read more...</p>
+        <Link href={`/articles/${slug}`}>Read more...</Link>
         <ul className="flex gap-1">
-          <Chip text="voluptate" />
-          <Chip text="rerum" />
-          <Chip text="ducimus" />
-          <Chip text="hic" />
+          {tagList.map((tag) => (
+            <Tag text={tag} />
+          ))}
         </ul>
       </div>
     </li>

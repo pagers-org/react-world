@@ -7,11 +7,7 @@
     /* Modules */
     "module": "esnext",
     "moduleResolution": "node",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@/public/*": ["./public/*"],
-      "@/assets/*": ["./assets/*"]
-    },
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
