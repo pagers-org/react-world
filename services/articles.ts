@@ -11,6 +11,11 @@ const fetchArticlesWithTag = (tag: string, limit = 20) => {
   return http.get(`https://api.realworld.io/api/articles?limit=${limit}&tag=${tag}`);
 };
 
+// Follow한 user의 Article 조회
+const fetchFollowArticles = async () => {
+  return await http.get('https://api.realworld.io/api/articles/feed');
+};
+
 // Article 작성
 const registerArticle = (article: NewArticle) => {
   return http.post('https://api.realworld.io/api/articles', article);
@@ -31,4 +36,12 @@ const deleteArticle = (slug: string) => {
   return http.delete(`https://api.realworld.io/api/articles/${slug}`);
 };
 
-export { fetchArticles, fetchArticlesWithTag, fetchArticle, registerArticle, updateArticle, deleteArticle };
+export {
+  fetchArticles,
+  fetchArticlesWithTag,
+  fetchFollowArticles,
+  fetchArticle,
+  registerArticle,
+  updateArticle,
+  deleteArticle,
+};
