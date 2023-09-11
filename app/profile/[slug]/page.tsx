@@ -1,7 +1,7 @@
 import { container } from '@/styles/common.css';
 
 const ProfilePage = () => {
-  return <main className={container}>ProfilePage</main>;
+  return <section className={container}>ProfilePage</section>;
 };
 
 export default ProfilePage;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EditorUpdatePage = () => {
-  return <div>EditorUpdatePage</div>;
+  return <section>EditorUpdatePage</section>;
 };
 
 export default EditorUpdatePage;

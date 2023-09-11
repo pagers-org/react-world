@@ -28,7 +28,7 @@ const EditorPage = () => {
     }));
   };
   return (
-    <main className={container}>
+    <section className={container}>
       <form onSubmit={handleSubmit} className={editorForm}>
         <input
           type="text"
@@ -57,7 +57,7 @@ const EditorPage = () => {
         <TagInput setFormData={setFormData} />
         <input type="submit" value="Publish Article" className={editorButton} />
       </form>
-    </main>
+    </section>
   );
 };
 

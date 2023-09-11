@@ -28,7 +28,7 @@ const SettingsPage = () => {
     }));
   };
   return (
-    <main className={container}>
+    <section className={container}>
       <div className={settingBlock}>
         <div className={settingTitle}>Your Settings</div>
         <form onSubmit={handleSubmit} className={settingForm}>
@@ -77,7 +77,7 @@ const SettingsPage = () => {
         <hr />
         <button className={button}>Or click here to logout.</button>
       </div>
-    </main>
+    </section>
   );
 };
 

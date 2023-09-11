@@ -8,7 +8,7 @@ import Link from 'next/link';
 const ProfilePage = async () => {
   // const user = await fetchUser();
   return (
-    <main>
+    <section>
       <div className={userBlock}>
         <div className={userInfo}>
           <Image
@@ -28,7 +28,7 @@ const ProfilePage = async () => {
       <div className={container}>
         <ArticleTab />
       </div>
-    </main>
+    </section>
   );
 };
 

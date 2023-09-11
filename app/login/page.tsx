@@ -16,7 +16,7 @@ const LoginPage = () => {
     router.push('/');
   };
   return (
-    <main className={container}>
+    <section className={container}>
       <div className={title}>Sign in</div>
       <div className={question}>Need an account?</div>
       <form onSubmit={handleSubmit}>
@@ -28,7 +28,7 @@ const LoginPage = () => {
           </div>
         </div>
       </form>
-    </main>
+    </section>
   );
 };
 

@@ -15,7 +15,7 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
   } = await fetchArticle(slug);
 
   return (
-    <div>
+    <section>
       <Banner>
         <div>{title}</div>
         <div>
@@ -29,7 +29,7 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
           <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this article.
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -7,7 +7,7 @@ import { button, buttonBox, flexBox } from '@/styles/layout.css';
 
 const RegisterPage = () => {
   return (
-    <main className={container}>
+    <section className={container}>
       <div className={title}>Sign up</div>
       <div className={question}>Have an account?</div>
       <form action={createAccount}>
@@ -20,7 +20,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </form>
-    </main>
+    </section>
   );
 };
 

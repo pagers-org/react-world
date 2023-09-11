@@ -9,7 +9,7 @@ import { flex } from '@/styles/layout.css';
 
 export default function Page() {
   return (
-    <>
+    <section>
       <Banner>
         <h1 className={bannerTitle}>conduit</h1>
         <p className={bannerDescription}>A place to share your knowledge.</p>
@@ -23,6 +23,6 @@ export default function Page() {
           <SideBar />
         </div>
       </main>
-    </>
+    </section>
   );
 }

@@ -40,29 +40,34 @@ const NavBar = () => {
   return (
     <nav className={styles.nav}>
       <ul>
-        <Link href="/" className={`${styles.navItem} ${pathname === '/' ? styles.activate : styles.disabled}`}>
-          Home
-        </Link>
+        <li>
+          <Link href="/" className={`${styles.navItem} ${pathname === '/' ? styles.activate : styles.disabled}`}>
+            Home
+          </Link>
+        </li>
         {NAVS.map(({ href, name, icon, isLogin }, index) =>
           (isLogin && token) || (!isLogin && !token) ? (
-            <Link
-              key={index}
-              href={href}
-              className={`${styles.navItem} ${pathname === href ? styles.activate : styles.disabled}`}
-            >
-              {icon}
-              &nbsp; {name}
-            </Link>
+            <li key={index}>
+              <Link
+                href={href}
+                className={`${styles.navItem} ${pathname === href ? styles.activate : styles.disabled}`}
+              >
+                {icon}
+                &nbsp; {name}
+              </Link>
+            </li>
           ) : null
         )}
         {token && (
-          <Link
-            href={`/@${username}`}
-            className={`${styles.navItem} ${pathname === `/@${username}` ? styles.activate : styles.disabled}`}
-          >
-            <Image src={image} alt="Profile" width={26} height={26} className={userImageSm} />
-            &nbsp; {username}
-          </Link>
+          <li>
+            <Link
+              href={`/@${username}`}
+              className={`${styles.navItem} ${pathname === `/@${username}` ? styles.activate : styles.disabled}`}
+            >
+              <Image src={image} alt="Profile" width={26} height={26} className={userImageSm} />
+              &nbsp; {username}
+            </Link>
+          </li>
         )}
       </ul>
     </nav>
