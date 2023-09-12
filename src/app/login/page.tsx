@@ -2,9 +2,12 @@
 
 import React from 'react';
 
-import Form from '@/pageComponents/Form/Form';
-
 const page = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   return (
     <div>
       <div className="auth-page">
@@ -19,7 +22,25 @@ const page = () => {
               <ul className="error-messages">
                 <li>That email is already taken</li>
               </ul>
-              <Form />
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <input
+                    className="form-control form-control-lg"
+                    type="text"
+                    placeholder="Email"
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control form-control-lg"
+                    type="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <button className="btn btn-lg btn-primary pull-xs-right">
+                  Sign in
+                </button>
+              </form>
             </div>
           </div>
         </div>
