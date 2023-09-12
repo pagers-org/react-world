@@ -1,26 +1,22 @@
 import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
-type ContainerProps = {
+type HomePageContainerProps = {
   children?: ReactNode;
 };
 
-const HomePageContainer = ({ children }: ContainerProps) => {
-  return <Container>{children}</Container>;
-};
-
-const Container = styled.div`
-  &.home-page .feed-toggle {
+const HomePageContainer = styled.div<HomePageContainerProps>`
+  .feed-toggle {
     margin-bottom: -1px;
   }
 
-  &.home-page .sidebar {
+  .sidebar {
     padding: 5px 10px 10px 10px;
     background: #f3f3f3;
     border-radius: 4px;
   }
 
-  &.home-page .sidebar p {
+  .sidebar p {
     margin-bottom: 0.2rem;
   }
 `;
