@@ -1,10 +1,10 @@
 'use client';
 
-import { useGetArticles } from '@/shared/api/realworld/apis';
 import React from 'react';
 import { ArticleListItem } from '..';
 import { ArticleListPagination } from '@/features/article';
 import { getItemIndex } from '@/shared/utils/array';
+import { useGetArticles } from '@/shared/api/realworld/endpoints/articles/articles';
 
 interface ArticleListProps {}
 

@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { Comment } from "./comment";
+import type { Comment } from './comment';
 
 export interface SingleCommentResponse {
   comment: Comment;

@@ -1,5 +1,5 @@
 'use client';
-import { useCreateArticleFavorite } from '@/shared/api/realworld/apis';
+import { useCreateArticleFavorite } from '@/shared/api/realworld/endpoints/favorites/favorites';
 import { Button } from '@packages/ui';
 import React from 'react';
 import { IoIosHeart } from 'react-icons/io';
