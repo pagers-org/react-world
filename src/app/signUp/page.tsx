@@ -32,8 +32,6 @@ const page = () => {
   const signOutUser = async (userInfo: RegisterPostRequestType) => {
     await postUserRegister(userInfo).then((res) => {
       if (res.errors) {
-        console.log(Object.keys(res.errors));
-        console.log(Object.values(res.errors));
         const errorText = `${Object.keys(res.errors)} ${
           Object.values(res.errors)[0]
         }`;

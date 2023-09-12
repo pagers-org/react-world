@@ -20,7 +20,6 @@ const page = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e);
     const userInfo: LoginPostRequestType = {
       user: {
         email: e.target.email.value,
@@ -33,8 +32,6 @@ const page = () => {
   const login = async (userInfo: LoginPostRequestType) => {
     await postUserLogin(userInfo).then((res) => {
       if (res.errors) {
-        console.log(Object.keys(res.errors));
-        console.log(Object.values(res.errors));
         const errorText = `${Object.keys(res.errors)} ${
           Object.values(res.errors)[0]
         }`;
