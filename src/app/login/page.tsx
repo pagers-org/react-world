@@ -1,11 +1,48 @@
 'use client';
 
-import React from 'react';
+import { LoginPostRequestType } from '@/types/auth';
+import { produce } from 'immer';
+import { useRouter } from 'next/navigation';
+import React, { FormEvent, useState } from 'react';
+
+import { postUserLogin } from '@/api/auth';
 
 const page = () => {
-  const handleSubmit = (e: any) => {
+  const router = useRouter();
+
+  const [formInput, setFormInput] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const [error, setError] = useState<null | string>();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e);
+    const userInfo: LoginPostRequestType = {
+      user: {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      },
+    };
+    login(userInfo);
+  };
+
+  const login = async (userInfo: LoginPostRequestType) => {
+    await postUserLogin(userInfo).then((res) => {
+      if (res.errors) {
+        console.log(Object.keys(res.errors));
+        console.log(Object.values(res.errors));
+        const errorText = `${Object.keys(res.errors)} ${
+          Object.values(res.errors)[0]
+        }`;
+        setError(errorText);
+      } else {
+        router.push('/');
+      }
+    });
   };
 
   return (
@@ -19,12 +56,23 @@ const page = () => {
                 <a href="/register">Need an account?</a>
               </p>
 
-              <ul className="error-messages">
-                <li>That email is already taken</li>
-              </ul>
+              {error && (
+                <ul className="error-messages">
+                  <li>{error}</li>
+                </ul>
+              )}
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <input
+                    value={formInput.email}
+                    onChange={(e) =>
+                      setFormInput(
+                        produce((input) => {
+                          input.email = e.target.value;
+                        }),
+                      )
+                    }
+                    name="email"
                     className="form-control form-control-lg"
                     type="text"
                     placeholder="Email"
@@ -32,12 +80,27 @@ const page = () => {
                 </div>
                 <div className="form-group">
                   <input
+                    value={formInput.password}
+                    onChange={(e) =>
+                      setFormInput(
+                        produce((input) => {
+                          input.password = e.target.value;
+                        }),
+                      )
+                    }
+                    name="password"
                     className="form-control form-control-lg"
                     type="password"
                     placeholder="Password"
                   />
                 </div>
-                <button className="btn btn-lg btn-primary pull-xs-right">
+                <button
+                  disabled={
+                    formInput.email.length === 0 ||
+                    formInput.password.length === 0
+                  }
+                  className="btn btn-lg btn-primary pull-xs-right"
+                >
                   Sign in
                 </button>
               </form>
