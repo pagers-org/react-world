@@ -1,4 +1,4 @@
-import type { ArticlesQueryParamsType } from "../types/articles.types";
+import type { ArticlesQueryParamsType } from "../_types/articles.types";
 
 export const queryKeys = {
   articles: (params: ArticlesQueryParamsType) => ["articles", params] as const,
