@@ -141,6 +141,9 @@ export const fillGreenButton = style([
     border: '1px solid #5CB85C',
     background: '#5CB85C',
     color: '#fff',
+    padding: '0.75rem 1.5rem',
+    fontSize: '1.25rem',
+    borderRadius: '0.3rem',
     ':hover': {
       backgroundColor: '#449d44',
       borderColor: '#419641',

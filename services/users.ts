@@ -1,8 +1,18 @@
 import { http } from '@/libs/http';
-import { LoginUser } from '@/types';
+import { LoginUser, NewUser } from '@/types';
+import Error from 'next/error';
 
-const login = (user: LoginUser) => {
-  return http.post('https://api.realworld.io/api/users/login', user);
+const registerUser = async (user: NewUser) => {
+  try {
+    const response = await http.post('https://api.realworld.io/api/users', { user });
+    return response;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
+const login = async (user: LoginUser) => {
+  return await http.post('https://api.realworld.io/api/users/login', { user });
 };
 
 const logout = () => {
@@ -17,4 +27,4 @@ const updateUser = () => {
   return http.put('https://api.realworld.io/api/user');
 };
 
-export { login, logout, getUser, updateUser };
+export { registerUser, login, logout, getUser, updateUser };

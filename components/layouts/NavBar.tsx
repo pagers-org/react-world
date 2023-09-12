@@ -35,12 +35,12 @@ const NAVS = [
 ];
 
 const NavBar = () => {
-  // const { token, username, image } = useUserStore();
+  const { token, username, image } = useUserStore();
   const pathname = usePathname();
 
-  const token = 'ff';
-  const username = 'hyeon';
-  const image = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+  // const token = 'ff';
+  // const username = 'hyeon';
+  // const image = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
 
   return (
     <nav>

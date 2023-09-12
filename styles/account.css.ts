@@ -45,19 +45,3 @@ export const date = style({
   color: '#bbb',
   fontSize: '0.8rem',
 });
-
-export const heart = style({
-  padding: '0.25rem 0.5rem',
-  fontSize: '0.875rem',
-  borderRadius: '0.2rem',
-  cursor: 'pointer',
-  userSelect: 'none',
-  border: '1px solid #5CB85C',
-  background: 'white',
-  color: '#5CB85C',
-  ':hover': {
-    color: '#fff',
-    backgroundColor: '#5CB85C',
-    borderColor: '#5CB85C',
-  },
-});

@@ -2,11 +2,9 @@
 import { articleDescription, articleMeta, articlePreview, articleReadMore, articleTitle } from '@/styles/article.css';
 import UserBox from '../user/UserBox';
 import TagList from '../tags/TagList';
-
-import { heart } from '@/styles/account.css';
 import { useRouter } from 'next/navigation';
 import { FillHeartIcon } from '@/composables/icons';
-import { flexBetween } from '@/styles/common.css';
+import { fillGreenButton, flex, flexBetween } from '@/styles/common.css';
 type Props = {
   article: any;
 };
@@ -18,8 +16,11 @@ const ArticlePreview = ({
     <div className={articlePreview}>
       <div className={articleMeta}>
         <UserBox author={author} createdAt={createdAt} />
-        <button className={favorited ? `${heart}` : `${heart}`}>
-          <FillHeartIcon /> {favoritesCount}
+        <button className={favorited ? `${fillGreenButton}` : `${fillGreenButton}`}>
+          <div className={flex}>
+            <FillHeartIcon /> &nbsp;
+            {favoritesCount}
+          </div>
         </button>
       </div>
       <div onClick={() => router.push(`/article/${slug}`)}>
