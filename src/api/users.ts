@@ -52,7 +52,7 @@ export const putCurrentUser = (
   payload: CurrentUserPayload,
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<UserResponse> => {
+): Promise<UserResponse | string> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/user`, {
