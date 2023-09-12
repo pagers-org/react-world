@@ -1,4 +1,4 @@
-import '../styles/main.css';
+import '@/styles/main.css';
 import Nav from '@/component/Nav';
 import Footer from '@/component/Footer';
 export default function Home() {
