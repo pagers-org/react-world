@@ -2,6 +2,7 @@
 
 import { useUserStore } from '@/stores/users';
 import { CurrentUserPayload, UserResponse } from '@/types/api/users';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { putCurrentUser } from '@/api/users';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const SettingsPageMain = ({ mySettings }: Props) => {
+  const router = useRouter();
   const { logout, updateInfo } = useUserStore();
 
   const [form, setForm] = useState<CurrentUserPayload['user']>({
@@ -98,6 +100,11 @@ const SettingsPageMain = ({ mySettings }: Props) => {
     const { name, value } = event.target;
 
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
   };
 
   return (
@@ -197,7 +204,7 @@ const SettingsPageMain = ({ mySettings }: Props) => {
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={logout}
+              onClick={handleLogout}
             >
               Or click here to logout.
             </button>

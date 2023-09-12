@@ -2,11 +2,13 @@
 
 import { useUserStore } from '@/stores/users';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { postUserLogin } from '@/api/users';
 
 const LoginPageMain = () => {
+  const router = useRouter();
   const login = useUserStore((state) => state.login);
 
   const [form, setForm] = useState<{
@@ -33,6 +35,7 @@ const LoginPageMain = () => {
       } else {
         const user = res.user;
         login(user);
+        router.push('/');
       }
       setIsLoading(false);
     });

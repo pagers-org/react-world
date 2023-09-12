@@ -33,7 +33,6 @@ export const useUserStore = create(
             token,
             COOKIE_ACCESS_TOKEN_MAX_AGE,
           );
-          window.location.href = '/';
           return {
             user: {
               email,
@@ -46,7 +45,6 @@ export const useUserStore = create(
       logout: () =>
         set(() => {
           setCookie(COOKIE_ACCESS_TOKEN_KEY, '', 0);
-          window.location.href = '/';
           return {
             user: INITIAL_USER,
           };
