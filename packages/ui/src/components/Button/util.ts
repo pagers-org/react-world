@@ -16,7 +16,7 @@ export const getColorStyle = ({
       .with({ color: "error", variant: "outlined" },() => colorStyle["error-outlined"])
       .exhaustive();
 
-const getStartIcon = ({ icon }: Pick<ButtonProps, "icon">) => {
+export const getStartIcon = ({ icon }: Pick<ButtonProps, "icon">) => {
   if (!icon) {
     return undefined;
   }

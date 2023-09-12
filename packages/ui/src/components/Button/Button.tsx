@@ -1,5 +1,5 @@
 import { forwardRef, HTMLAttributes, ReactNode } from "react";
-import { getColorStyle } from "./util";
+import { getColorStyle, getStartIcon } from "./util";
 import { sizeStyle } from "./style";
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -23,10 +23,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const colorStyle = getColorStyle({ color, variant });
-
+    const startIcon = getStartIcon({ icon });
     return (
-      <button className={`${sizeStyle[size]} ${colorStyle}`} ref={ref}>
-        {children}
+      <button
+        className={`flex items-center gap-4 ${sizeStyle[size]} ${colorStyle}`}
+        ref={ref}
+      >
+        {startIcon} {children}
       </button>
     );
   }
