@@ -32,3 +32,5 @@ export const ArticlesResponseSchema = z.object({
   articles: z.array(ArticleSchema),
   articlesCount: z.number(),
 });
+
+export type ArticlesDTO = z.infer<typeof ArticlesResponseSchema>;
