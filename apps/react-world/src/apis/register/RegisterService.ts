@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios';
-import {
+import { api } from '../apiInstances';
+import type {
   RegisterUserParams,
   RegisterUserResponse,
 } from './RegisterService.types';
-import { api } from '../apiInstances';
 
 class RegisterService {
   static async registerUser(

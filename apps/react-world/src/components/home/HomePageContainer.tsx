@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
 type ContainerProps = {
   children?: ReactNode;
 };
 
-export const HomePageContainer = ({ children }: ContainerProps) => {
+const HomePageContainer = ({ children }: ContainerProps) => {
   return <Container>{children}</Container>;
 };
 

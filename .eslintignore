@@ -1,0 +1,26 @@
+# Build/Output
+dist/
+build/
+out/
+
+# Dependency
+node_modules/
+
+# Settings, Script
+.eslintrc.js
+.eslintrc.cjs
+webpack.config.js
+
+# Auto-generated
+*.autogen.js
+
+# Test codes - 프로덕션 코드와 다른 linting 규칙을 가질 수도 있음
+**/__tests__/
+**/*.test.js
+**/*.spec.js
+
+# minified files
+*.min.js
+
+# storybook files
+**/.storybook/*.js

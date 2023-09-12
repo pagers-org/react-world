@@ -110,8 +110,12 @@
     "node_modules"
   ],
   "include": [
+    "next-env.d.ts",
+    "jest.config.ts",
+    "vite.config.ts",
+    "src",
     "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+  ],
 }
