@@ -1,16 +1,18 @@
 'use client';
 
-import { login } from '@/services/users';
+import { loginAPI } from '@/services/users';
+import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexCenter, flexRow, fillGreenButton } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
 import { LoginUser } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
+  const { login } = useUserStore();
 
   const [formData, setFormData] = useState<LoginUser>({
     email: '',
@@ -18,16 +20,23 @@ const LoginPage = () => {
   });
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: login,
+    mutationFn: loginAPI,
     onError: error => {
-      console.log(error);
+      setFormData({
+        email: '',
+        password: '',
+      });
+      alert('아이디 또는 비밀번호가 잘못되었습니다.');
     },
-    onSuccess: () => {
+    onSuccess: res => {
+      login({
+        ...res.user,
+      });
       router.push('/');
     },
   });
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate({
       ...formData,

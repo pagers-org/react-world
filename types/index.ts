@@ -86,3 +86,7 @@ export type UserAction = {
   logout: () => void;
   reset: () => void;
 };
+
+export type UserResponse = {
+  user: User;
+};

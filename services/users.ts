@@ -1,30 +1,62 @@
-import { http } from '@/libs/http';
-import { LoginUser, NewUser } from '@/types';
+import { API_BASE_URL } from '@/constants/env';
+import { LoginUser, NewUser, UpdateUser } from '@/types';
+import { getCookie } from '@/utils/cookies';
 import Error from 'next/error';
 
+// Register a new user
 const registerUser = async (user: NewUser) => {
-  try {
-    const response = await http.post('https://api.realworld.io/api/users', { user });
-    return response;
-  } catch (err: any) {
-    throw new Error(err.response.data.message);
-  }
+  return fetch(`${API_BASE_URL}/users`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({ user }),
+  }).then(res => {
+    if (!(res.status === 200)) {
+      throw new Error('Error');
+    }
+    res.json();
+  });
 };
 
-const login = async (user: LoginUser) => {
-  return await http.post('https://api.realworld.io/api/users/login', { user });
+// Login for existing user
+const loginAPI = async (user: LoginUser) => {
+  return fetch(`${API_BASE_URL}/users/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({ user }),
+  }).then(res => {
+    if (!(res.status === 200)) {
+      throw new Error('Error');
+    }
+    res.json();
+  });
 };
 
-const logout = () => {
-  console.log('로그아웃');
+// Updated user information for current user
+const updateUser = (user: UpdateUser) => {
+  const accessToken = getCookie('token');
+  return fetch(`${API_BASE_URL}/user`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json; charset=utf-8', Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify({ user }),
+  }).then(res => {
+    if (!(res.status === 200)) {
+      throw new Error('Error');
+    }
+    res.json();
+  });
 };
 
+// Gets the currently logged-in user
 const getUser = () => {
-  return http.get('https://api.realworld.io/api/user');
+  return fetch(`${API_BASE_URL}/user`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  }).then(res => {
+    if (!(res.status === 200)) {
+      throw new Error('Error');
+    }
+    res.json();
+  });
 };
 
-const updateUser = () => {
-  return http.put('https://api.realworld.io/api/user');
-};
-
-export { registerUser, login, logout, getUser, updateUser };
+export { registerUser, loginAPI, getUser, updateUser };
