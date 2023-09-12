@@ -1,7 +1,6 @@
 import { PopularTags } from '@/widgets/tags';
 import { FeedToggle } from '@/widgets/tab';
 import { ArticleList } from '@/widgets/article';
-import { ArticleListPagination } from '@/features/article';
 
 export default function Home() {
   return (

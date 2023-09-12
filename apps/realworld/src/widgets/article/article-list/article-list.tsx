@@ -3,7 +3,6 @@
 import { useGetArticles } from '@/shared/api/realworld/apis';
 import React from 'react';
 import { ArticleListItem } from '..';
-import { match } from 'ts-pattern';
 import { ArticleListPagination } from '@/features/article';
 import { getItemIndex } from '@/shared/utils/array';
 
@@ -12,7 +11,7 @@ interface ArticleListProps {}
 const LIMIT = 10;
 
 const ArticleList = ({}: ArticleListProps) => {
-  const { data: articlesResoponse } = useGetArticles(
+  const { data: articlesResponse } = useGetArticles(
     {},
     {
       query: {
@@ -22,7 +21,7 @@ const ArticleList = ({}: ArticleListProps) => {
       },
     },
   );
-  const { articles, articlesCount } = articlesResoponse ?? {
+  const { articles, articlesCount } = articlesResponse ?? {
     articles: [],
     articlesCount: 0,
   };

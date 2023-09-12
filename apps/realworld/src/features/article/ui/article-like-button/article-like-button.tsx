@@ -2,6 +2,7 @@
 import { useCreateArticleFavorite } from '@/shared/api/realworld/apis';
 import { Button } from '@packages/ui';
 import React from 'react';
+import { IoIosHeart } from 'react-icons/io';
 
 interface ArticleLikeButtonProps {
   label: number;
@@ -19,7 +20,15 @@ const ArticleLikeButton = ({ label, favorited, slug }: ArticleLikeButtonProps) =
   };
 
   return (
-    <Button variant={variant} color={'primary'} size={'s'} onClick={handleLikeButtonClick}>
+    <Button
+      variant={variant}
+      color={'primary'}
+      size={'s'}
+      onClick={handleLikeButtonClick}
+      icon={{
+        start: <IoIosHeart />,
+      }}
+    >
       {label}
     </Button>
   );
