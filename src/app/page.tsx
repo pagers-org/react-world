@@ -1,32 +1,10 @@
 import '../styles/main.css';
+import Nav from '@/component/Nav';
+import Footer from '@/component/Footer';
 export default function Home() {
   return (
     <>
-      <nav className="navbar navbar-light">
-        <div className="container">
-          <a className="navbar-brand" href="/">
-            conduit
-          </a>
-          <ul className="nav navbar-nav pull-xs-right">
-            <li className="nav-item">
-              <a className="nav-link active" href="/">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/login">
-                Sign in
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/register">
-                Sign up
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
+      <Nav />
       <main className="home-page">
         <div className="banner">
           <div className="container">
@@ -95,7 +73,7 @@ export default function Home() {
                   </button>
                 </div>
                 <a href="/article/the-song-you" className="preview-link">
-                  <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
+                  <h1>The song you won&apos;t ever stop singing. No matter how hard you try.</h1>
                   <p>This is the description for the post.</p>
                   <span>Read more...</span>
                   <ul className="tag-list">
@@ -154,18 +132,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      <footer>
-        <div className="container">
-          <a href="/" className="logo-font">
-            conduit
-          </a>
-          <span className="attribution">
-            An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code
-            &amp; design licensed under MIT.
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
