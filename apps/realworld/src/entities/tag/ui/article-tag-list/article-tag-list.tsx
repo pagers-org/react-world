@@ -8,7 +8,7 @@ interface ArticleTagListProps {
 }
 const ArticleTagList = ({ tagList, slug }: ArticleTagListProps) => {
   return (
-    <Link className="flex gap-2 cursor-pointer" href={`/${slug}`}>
+    <Link className="flex gap-2 cursor-pointer" href={`/article/${slug}`}>
       {tagList.map(label => (
         <Tag key={label} label={label} variant="outlined" />
       ))}
