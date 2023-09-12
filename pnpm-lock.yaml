@@ -29,6 +29,7 @@ specifiers:
   eslint-plugin-prettier: ^5.0.0
   eslint-plugin-tailwindcss: ^3.13.0
   husky: ^8.0.3
+  immer: ^10.0.2
   jest: ^29.6.2
   jest-environment-jsdom: ^29.6.2
   lint-staged: ^14.0.0
@@ -54,6 +55,7 @@ dependencies:
   class-variance-authority: 0.7.0
   clsx: 2.0.0
   eslint-plugin-tailwindcss: 3.13.0_tailwindcss@3.3.3
+  immer: 10.0.2
   next: 13.4.19_h6kuhl5org62hkozzbezqqrdtu
   postcss: 8.4.29
   postcss-loader: 7.3.3_wuvfkmht2k33mxogkpaw4cfzyq
@@ -63,7 +65,7 @@ dependencies:
   tailwind-merge: 1.14.0
   tailwindcss: 3.3.3
   zod: 3.22.2
-  zustand: 4.4.1_gq4reeurwxuj4hvyerswzzqthy
+  zustand: 4.4.1_iqbto6s6tftaasxelmvw55hbhi
 
 devDependencies:
   '@babel/core': 7.22.11
@@ -3200,6 +3202,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/10.0.2:
+    resolution: {integrity: sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -5962,7 +5968,7 @@ packages:
     resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
     dev: false
 
-  /zustand/4.4.1_gq4reeurwxuj4hvyerswzzqthy:
+  /zustand/4.4.1_iqbto6s6tftaasxelmvw55hbhi:
     resolution: {integrity: sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -5978,6 +5984,7 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.21
+      immer: 10.0.2
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

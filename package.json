@@ -51,6 +51,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "eslint-plugin-tailwindcss": "^3.13.0",
+    "immer": "^10.0.2",
     "next": "^13.4.7",
     "postcss": "^8.4.29",
     "postcss-loader": "^7.3.3",
