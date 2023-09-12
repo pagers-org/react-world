@@ -81,6 +81,9 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
+      react-error-boundary:
+        specifier: ^4.0.11
+        version: 4.0.11(react@18.2.0)
       react-ionicons:
         specifier: ^4.2.1
         version: 4.2.1(browserify-css@0.12.0)(styled-components@6.0.7)
@@ -6365,6 +6368,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+
+  /react-error-boundary@4.0.11(react@18.2.0):
+    resolution: {integrity: sha512-U13ul67aP5DOSPNSCWQ/eO0AQEYzEFkVljULQIjMV0KlffTAhxuDoBKdO0pb/JZ8mDhMKFZ9NZi0BmLGUiNphw==}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.22.11
+      react: 18.2.0
+    dev: false
 
   /react-ionicons@4.2.1(browserify-css@0.12.0)(styled-components@6.0.7):
     resolution: {integrity: sha512-/i6Sp35YF5bxtoDoAN/K6WOrvwDXDmYOYdkYd7dKT42ExSo0T79CB2Z3ejsWoOLxmZdgcXOBk8EKE/lbx89rEA==}
