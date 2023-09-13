@@ -1,6 +1,5 @@
-export const darkenColor = (hex: string, amount = 24) => {
+export const darkenColor = (hex: string, amount = 24): string => {
   // HEX를 RGB로 변환
-  if (!hex) return undefined;
   const r = Number.parseInt(hex.slice(1, 3), 16);
   const g = Number.parseInt(hex.slice(3, 5), 16);
   const b = Number.parseInt(hex.slice(5, 7), 16);

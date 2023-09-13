@@ -5,13 +5,12 @@ import { darkenColor } from "utils/darkenColor";
 import * as S from "./button.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  backgroundColor?: string;
   block?: boolean;
+  colors?: string;
   icon?: React.ReactNode;
   size?: "xs" | "sm" | "md" | "lg";
   variant?: "contained" | "outlined" | "link";
-  backgroundColor?: string;
-  colors?: string;
-  label: string;
 }
 
 export const Button = ({
@@ -20,7 +19,6 @@ export const Button = ({
   onClick,
   size = "sm",
   variant = "contained",
-  label,
   icon,
   children,
   colors,
@@ -82,7 +80,6 @@ export const Button = ({
         className={classes.join(" ")}
         onClick={onClick}
         disabled={disabled}
-        {...props}
         style={assignInlineVars(S.themeVars, {
           colors: {
             color: colors || initialColor!,
@@ -90,9 +87,9 @@ export const Button = ({
             hoverColor: hoverColor || initialHoverColor!,
           },
         })}
+        {...props}
       >
         {icon}
-        {label}
         {children}
       </button>
     </span>

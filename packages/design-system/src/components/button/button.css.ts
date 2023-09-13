@@ -91,12 +91,7 @@ export const buttonContained = style({
   borderColor: themeVars.colors.backgroundColor,
 
   selectors: {
-    [`&:focus`]: {
-      color: themeVars.colors.color,
-      backgroundColor: themeVars.colors.hoverColor,
-      borderColor: themeVars.colors.hoverColor,
-    },
-    [`&:active`]: {
+    [`&:hover`]: {
       color: themeVars.colors.color,
       backgroundColor: themeVars.colors.hoverColor,
       borderColor: themeVars.colors.hoverColor,
@@ -110,12 +105,7 @@ export const buttonOutlined = style({
   backgroundImage: "none",
   borderColor: themeVars.colors.color,
   selectors: {
-    [`&:focus`]: {
-      color: "#fff",
-      backgroundColor: themeVars.colors.color,
-      borderColor: themeVars.colors.color,
-    },
-    [`&:active`]: {
+    [`&:hover`]: {
       color: "#fff",
       backgroundColor: themeVars.colors.color,
       borderColor: themeVars.colors.color,
@@ -128,7 +118,7 @@ export const buttonLink = style({
   backgroundColor: "transparent",
   border: "none",
   selectors: {
-    [`&:focus`]: {
+    [`&:hover`]: {
       textDecoration: "underline",
     },
   },

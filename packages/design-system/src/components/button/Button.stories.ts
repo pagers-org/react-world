@@ -21,47 +21,47 @@ type Story = StoryObj<typeof meta>;
 export const Contained: Story = {
   args: {
     variant: "contained",
-    label: "Button",
+    children: "Button",
   },
 };
 
 export const Outlined: Story = {
   args: {
     variant: "outlined",
-    label: "Button",
+    children: "Button",
   },
 };
 export const Link: Story = {
   args: {
     variant: "link",
-    label: "Button",
+    children: "Button",
   },
 };
 
 export const Xs: Story = {
   args: {
     size: "xs",
-    label: "Button",
+    children: "Button",
   },
 };
 
 export const Sm: Story = {
   args: {
     size: "sm",
-    label: "Button",
+    children: "Button",
   },
 };
 
 export const Md: Story = {
   args: {
     size: "md",
-    label: "Button",
+    children: "Button",
   },
 };
 
 export const Lg: Story = {
   args: {
     size: "lg",
-    label: "Button",
+    children: "Button",
   },
 };
