@@ -5,30 +5,13 @@ module.exports = {
 		es2021: true,
 		jest: true,
 	},
-	extends: [
-		'xo',
-		'next',
-		"prettier"
-	],
-	overrides: [
-		{
-			env: {
-				node: true,
-			},
-		},
-		{
-			extends: [
-				'xo-typescript',
-			],
-			files: [
-				'*.ts',
-				'*.tsx',
-			],
-		},
-	],
+	extends: ['xo', 'next/core-web-vitals', 'plugin:prettier/recommended'],
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		ecmaFeatures: {
+			"jsx": true
+		},
 	},
 	plugins: [
 		'react',
@@ -37,16 +20,16 @@ module.exports = {
 		'unused-imports',
 		'react-hooks',
 	],
+
 	rules: {
 		"no-console": "error",
-		"prettier/prettier": "error",
+		"prettier/prettier": "off",
 		"unused-imports/no-unused-imports": "error",
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-		"@typescript-eslint/prefer-optional-chain": "error",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
 		"react/destructuring-assignment": "warn",
 		"react/no-direct-mutation-state": "warn",
 		"react/no-unused-state": "warn",
 		"react/self-closing-comp": "warn",
-	  }
+	}
 };

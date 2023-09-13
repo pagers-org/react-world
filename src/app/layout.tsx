@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import ReactQueryProviders from '../lib/ReactQueryProviders';
 import { PropsWithChildren } from 'react';
+import '../../styles/reset.css';
+import Header from '../components/Header';
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -8,11 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
-    return (
-        <html lang="ko">
-            <body>
-                <ReactQueryProviders>{children}</ReactQueryProviders>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="ko">
+      <body>
+        <ReactQueryProviders>
+          <Header />
+          {children}
+        </ReactQueryProviders>
+      </body>
+    </html>
+  );
 }
