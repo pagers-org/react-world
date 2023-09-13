@@ -14,16 +14,15 @@ const HomeFeedTabItem = styled.a<HomeFeedTabItemProps>`
   border-bottom: 2px solid transparent;
   background: transparent;
   color: #aaa;
-  text-decoration: none; // 기본 링크 스타일 제거
+  text-decoration: none;
   cursor: pointer;
 
   &:hover {
     color: #555;
-    text-decoration: none; // hover 상태에서의 링크 스타일도 제거
   }
 
-  ${props =>
-    props.isActive &&
+  ${({ isActive }) =>
+    isActive &&
     `
     background: #fff;
     border-bottom: 2px solid #5cb85c;
