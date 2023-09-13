@@ -75,7 +75,7 @@ const getCurrentUser = async (
 ): Promise<UsersResponseType> => {
   return await fetch(`${BASE_URL}/user`, {
     ...options,
-    method: HTTP_METHOD.GET,
+    method: 'get',
     headers: {
       ...BASE_HEADER,
       ...headers,

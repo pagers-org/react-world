@@ -50,7 +50,7 @@ const page = () => {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign in</h1>
               <p className="text-xs-center">
-                <a href="/register">Need an account?</a>
+                <a href="/signUp">Need an account?</a>
               </p>
 
               {error && (
