@@ -14,6 +14,7 @@ export const likeButton = style({
     color: vars.colors.white,
     backgroundColor: vars.colors.mainColor,
   },
+  cursor: 'pointer',
 });
 
 export const count = style({

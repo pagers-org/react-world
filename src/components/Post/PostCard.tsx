@@ -5,6 +5,7 @@ import { Article } from '../../service/post';
 import { convertISOToEngFormat } from '../../utils/date';
 import LikeButton from '../LikeButton';
 import TagList from '../TagList/TagList';
+import { ROUTES } from '../../constants/routes';
 
 type PostCardProps = {
   post: Article;
@@ -23,7 +24,7 @@ export default function PostCard({ post }: PostCardProps) {
   return (
     <div className={styles.postCard}>
       <div className={styles.articleMeta}>
-        <Link href={`/user/${author.username}`}>
+        <Link href={`${ROUTES.userArticlePage}${author.username}`}>
           <div className={styles.postInfo}>
             <Image
               src={author.image}
@@ -41,7 +42,7 @@ export default function PostCard({ post }: PostCardProps) {
         <LikeButton favoritesCount={favoritesCount} />
       </div>
       <div className={styles.contentWrapper}>
-        <Link href={`detail/${slug}`}>
+        <Link href={`${ROUTES.articleDetail}${slug}`}>
           <div className={styles.title}>{title}</div>
           <div className={styles.content}>{description}</div>
           <span className={styles.readMore}>Read more...</span>

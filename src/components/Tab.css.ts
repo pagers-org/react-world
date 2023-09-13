@@ -8,4 +8,5 @@ export const tabItem = style({
   borderBottom: `2px solid ${vars.colors.mainColor}`,
   color: vars.colors.mainColor,
   paddingBottom: vars.space.smaller,
+  cursor: 'pointer',
 });
