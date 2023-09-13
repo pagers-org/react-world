@@ -1,21 +1,23 @@
-'use client';
-
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 
 import Header from '@/src/components/layout/Header';
 
-import ReactQueryProviders from '@/src/lib/react-query/ReactQueryProviders';
+import ReactQueryProvider from '@/src/lib/react-query/ReactQueryProvider';
 
 import '@/src/styles/reset.css';
 
-export default function RootLayout({ children }: PropsWithChildren) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko">
       <body>
-        <ReactQueryProviders>
+        <ReactQueryProvider>
           <Header />
           <main>{children}</main>
-        </ReactQueryProviders>
+        </ReactQueryProvider>
       </body>
     </html>
   );

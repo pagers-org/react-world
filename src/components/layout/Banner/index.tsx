@@ -1,20 +1,15 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import * as styles from '@/src/components/layout/Banner/index.css';
 
-interface Props extends PropsWithChildren {
+interface Props {
   title: string;
   description?: string;
   background: keyof typeof styles.background;
 }
 
-export default function Banner({
-  title,
-  description,
-  background,
-  children,
-}: Props) {
+export default function Banner({ title, description, background }: Props) {
   return (
     <div
       className={classNames(
@@ -25,7 +20,6 @@ export default function Banner({
       <div className={styles.bannerContent}>
         <div className={styles.bannerTitle}>{title}</div>
         <p className={styles.bannerDescription}>{description}</p>
-        {children}
       </div>
     </div>
   );

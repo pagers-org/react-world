@@ -1,31 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+
+import Pagination from '@/src/components/Pagination';
 
 import { ARTICLE_LIMIT_PER_PAGE } from '@/features/article/constants';
 import ArticleCard from '@/features/article/components/ArticleCard';
-import { articleApiService } from '@/features/article/services/ArticleApiService';
-
-import Pagination from '@/src/components/Pagination';
+import { useGetArticleListQuery } from '@/features/article/hooks/queries/useGetArticleListQuery';
 
 export default function Articles() {
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['article', page],
-    queryFn: () => articleApiService.getArticles(page),
-  });
+  const { data } = useGetArticleListQuery({ page });
 
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error...</div>;
-  }
-
-  const totalPage = Math.floor(data.articlesCount / ARTICLE_LIMIT_PER_PAGE);
+  const totalPage = Math.floor(data?.articlesCount! / ARTICLE_LIMIT_PER_PAGE);
 
   const handleClickPage = (page: number) => {
     setPage(page);
@@ -34,7 +22,7 @@ export default function Articles() {
   return (
     <>
       <ul>
-        {data.articles.map((article) => {
+        {data?.articles.map((article) => {
           return <ArticleCard key={article.slug} {...article} />;
         })}
       </ul>

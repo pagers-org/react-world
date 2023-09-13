@@ -1,5 +1,3 @@
-import ky from 'ky';
-
 import { ARTICLE_LIMIT_PER_PAGE } from '@/features/article/constants';
 import { Article } from '@/features/article/types';
 
