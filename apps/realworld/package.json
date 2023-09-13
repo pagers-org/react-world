@@ -14,7 +14,6 @@
     "@packages/ui": "*",
     "@tanstack/eslint-plugin-query": "^4.34.1",
     "@tanstack/react-query": "^4.33.0",
-    "@tanstack/react-query-next-experimental": "^5.0.0-alpha.80",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
