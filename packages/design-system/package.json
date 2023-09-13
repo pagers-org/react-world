@@ -13,7 +13,8 @@
   "dependencies": {
     "@vanilla-extract/css": "^1.13.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.0",
