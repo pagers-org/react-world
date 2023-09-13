@@ -29,9 +29,9 @@ const SettingsPageMain = ({ mySettings }: Props) => {
     const { email, username, image } = currentForm;
 
     return {
-      email: !!email || false,
-      username: !!username || false,
-      image: !!image || false,
+      email: !!email,
+      username: !!username,
+      image: !!image,
     };
   };
 
