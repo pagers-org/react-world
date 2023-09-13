@@ -1,11 +1,8 @@
-import Text from "../components/Text";
-import './page.css'
-import { wrapper } from "./page.css";
-
-export default function page() {
+import Banner from '../components/Banner';
+export default function HomePage() {
   return (
-    <div className={wrapper}>
-      <Text children="루트페이지" />
-    </div>
+    <main>
+      <Banner />
+    </main>
   );
 }

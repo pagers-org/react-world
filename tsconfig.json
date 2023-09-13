@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES6", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */ // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "jsx": "preserve", /* Specify what JSX code is generated. */ // "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
-    "module": "commonjs", /* Specify what module code is generated. */ // "rootDir": "./",                                  /* Specify the root folder within your source files. */
-    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */ /* Type Checking */
-    "strict": true, /* Enable all strict type-checking options. */ // "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "target": "ES6",
+    "jsx": "preserve",
+    "module": "commonjs",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
     "lib": [
       "dom",
       "dom.iterable",
