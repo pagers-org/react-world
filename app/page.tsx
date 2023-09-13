@@ -18,8 +18,10 @@ import * as styles from '@/app/page.css';
 export default async function MainPage() {
   const queryClient = getQueryClient();
 
-  await prefetchGetArticleListQuery(queryClient);
-  await prefetchGetTagListQuery(queryClient);
+  await Promise.all([
+    prefetchGetArticleListQuery(queryClient),
+    prefetchGetTagListQuery(queryClient),
+  ]);
 
   const dehydratedState = dehydrate(queryClient);
 
