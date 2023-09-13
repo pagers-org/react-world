@@ -21,6 +21,7 @@ export const Button = ({
   size = "sm",
   variant = "contained",
   label,
+  icon,
   children,
   colors,
   backgroundColor,
@@ -90,6 +91,7 @@ export const Button = ({
           },
         })}
       >
+        {icon}
         {label}
         {children}
       </button>

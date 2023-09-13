@@ -16,6 +16,7 @@ export const buttonContainer = style({
 export const button = style({
   display: "inline-flex",
   fontWeight: "normal",
+  alignItems: "center",
 
   lineHeight: "1.25rem",
   textAlign: "center",
@@ -31,6 +32,7 @@ export const button = style({
   position: "relative",
   WebkitAppearance: "button",
   overflow: "visible",
+  gap: "0.25rem",
 });
 
 globalStyle(`${button}.disabled, ${button}:disabled`, {
