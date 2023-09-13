@@ -1,6 +1,3 @@
-import type { GetServerSideProps } from 'next';
-import { ClientService } from '../core/grpc-service';
-
 interface Props {
   client: {
     id: number;
@@ -23,17 +20,3 @@ export default function Home({ client }: Props) {
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const authService = new ClientService();
-    const { client, error } = await authService.getClient(1);
-    return {
-      props: { client, error },
-    };
-  } catch (error) {
-    return {
-      props: { error },
-    };
-  }
-};

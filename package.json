@@ -28,7 +28,8 @@
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "scripts": {
     "server": "ts-node ./src/server/server.ts",
-    "generate:api": "openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.yaml -o ./gen -g typescript-fetch",
+    "get:api": "rm -rf ./openapi && curl -LOJ https://github.com/gothinkster/realworld/raw/main/api/openapi.yml && mkdir -p ./openapi/ && mv openapi.yml ./openApi/",
+    "generate:api": "pnpm get:api && rm -rf ./src/gen && openapi-generator-cli generate -i './openapi/openapi.yml' -o ./src/gen -g typescript-fetch",
     "prepare": "husky install"
   },
   "dependencies": {
