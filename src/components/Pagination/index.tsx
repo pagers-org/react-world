@@ -14,7 +14,7 @@ export default function Pagination({
   onClickPage,
 }: Props) {
   return (
-    <div>
+    <div data-testid="pagination-container">
       {Array.from({ length: totalPage }).map((_, index) => {
         return (
           <button
@@ -24,6 +24,7 @@ export default function Pagination({
             onClick={() => onClickPage(index + 1)}
             key={index}
             type="button"
+            data-testid="pagination-button"
           >
             {index + 1}
           </button>
