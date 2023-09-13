@@ -1,8 +1,8 @@
 import { createThemeContract, globalStyle, style } from "@vanilla-extract/css";
 
 export const themeVars = createThemeContract({
-  color: {
-    textColor: "",
+  colors: {
+    color: "",
     backgroundColor: "",
     hoverColor: "",
   },
@@ -84,46 +84,45 @@ export const buttonLg = style({
 
 // Button variants
 export const buttonContained = style({
-  color: themeVars.color.textColor,
-  backgroundColor: themeVars.color.backgroundColor,
-  borderColor: themeVars.color.backgroundColor,
+  color: themeVars.colors.color,
+  backgroundColor: themeVars.colors.backgroundColor,
+  borderColor: themeVars.colors.backgroundColor,
 
   selectors: {
     [`&:focus`]: {
-      color: themeVars.color.textColor,
-      backgroundColor: themeVars.color.hoverColor,
-      borderColor: themeVars.color.hoverColor,
+      color: themeVars.colors.color,
+      backgroundColor: themeVars.colors.hoverColor,
+      borderColor: themeVars.colors.hoverColor,
     },
     [`&:active`]: {
-      color: themeVars.color.textColor,
-      backgroundColor: themeVars.color.hoverColor,
-      borderColor: themeVars.color.hoverColor,
+      color: themeVars.colors.color,
+      backgroundColor: themeVars.colors.hoverColor,
+      borderColor: themeVars.colors.hoverColor,
     },
   },
 });
 
-
 export const buttonOutlined = style({
-  color: themeVars.color.textColor,
+  color: themeVars.colors.color,
   backgroundColor: "transparent",
   backgroundImage: "none",
-  borderColor: themeVars.color.textColor,
+  borderColor: themeVars.colors.color,
   selectors: {
     [`&:focus`]: {
       color: "#fff",
-      backgroundColor: themeVars.color.textColor,
-      borderColor: themeVars.color.textColor,
+      backgroundColor: themeVars.colors.color,
+      borderColor: themeVars.colors.color,
     },
     [`&:active`]: {
       color: "#fff",
-      backgroundColor: themeVars.color.textColor,
-      borderColor: themeVars.color.textColor,
+      backgroundColor: themeVars.colors.color,
+      borderColor: themeVars.colors.color,
     },
   },
 });
 
 export const buttonLink = style({
-  color: themeVars.color.textColor,
+  color: themeVars.colors.color,
   backgroundColor: "transparent",
   border: "none",
   selectors: {

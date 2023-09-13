@@ -10,7 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "xs" | "sm" | "md" | "lg";
   variant?: "contained" | "outlined" | "link";
   backgroundColor?: string;
-  textColor?: string;
+  colors?: string;
   label: string;
 }
 
@@ -22,8 +22,8 @@ export const Button = ({
   variant = "contained",
   label,
   children,
-  textColor = "white",
-  backgroundColor = "green",
+  colors,
+  backgroundColor,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   const baseClasses = [S.button];
@@ -49,7 +49,31 @@ export const Button = ({
 
   const hoverColor = backgroundColor ? darkenColor(backgroundColor) : undefined;
 
-  console.log("@@@darkenColor", hoverColor);
+  let initialColor;
+  let initialBackgroundColor;
+  let initialHoverColor;
+
+  switch (variant) {
+    case "contained": {
+      initialColor = "#fff";
+      initialBackgroundColor = "#5CB85B";
+      initialHoverColor = "#4CA34C";
+      break;
+    }
+    case "outlined": {
+      initialColor = "#5CB85B";
+      initialBackgroundColor = "transparent";
+      break;
+    }
+    case "link": {
+      initialColor = "#5CB85B";
+      initialBackgroundColor = "";
+      break;
+    }
+    default: {
+      break;
+    }
+  }
 
   return (
     <span className={[S.buttonContainer, block && S.buttonWFull].join(" ")}>
@@ -59,10 +83,10 @@ export const Button = ({
         disabled={disabled}
         {...props}
         style={assignInlineVars(S.themeVars, {
-          color: {
-            textColor: textColor!,
-            backgroundColor: backgroundColor!,
-            hoverColor: hoverColor!,
+          colors: {
+            color: colors || initialColor!,
+            backgroundColor: backgroundColor || initialBackgroundColor!,
+            hoverColor: hoverColor || initialHoverColor!,
           },
         })}
       >
