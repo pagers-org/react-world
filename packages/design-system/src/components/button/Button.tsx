@@ -1,17 +1,14 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import type { PropsWithChildren } from "react";
 import { darkenColor } from "utils/darkenColor";
 
 import * as S from "./button.css";
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   block?: boolean;
-  children?: React.ReactNode;
-  disabled?: boolean;
   icon?: React.ReactNode;
   size?: "xs" | "sm" | "md" | "lg";
-  type?: "contained" | "outlined" | "link";
-  htmlType?: "button" | "submit" | "reset";
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  variant?: "contained" | "outlined" | "link";
   backgroundColor?: string;
   textColor?: string;
   label: string;
@@ -22,13 +19,13 @@ export const Button = ({
   disabled = false,
   onClick,
   size = "sm",
-  type = "contained",
+  variant = "contained",
   label,
   children,
-  textColor,
-  backgroundColor,
+  textColor = "white",
+  backgroundColor = "green",
   ...props
-}: ButtonProps) => {
+}: PropsWithChildren<ButtonProps>) => {
   const baseClasses = [S.button];
   const typeClasses = {
     contained: S.buttonContained,
@@ -45,7 +42,7 @@ export const Button = ({
 
   const classes = [
     ...baseClasses,
-    typeClasses[type],
+    typeClasses[variant],
     sizeClasses[size],
     block && S.buttonWFull,
   ].filter(Boolean);

@@ -22,20 +22,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Contained: Story = {
   args: {
-    type: "contained",
+    variant: "contained",
     label: "Button",
   },
 };
 
 export const Outlined: Story = {
   args: {
-    type: "outlined",
+    variant: "outlined",
     label: "Button",
   },
 };
 export const Link: Story = {
   args: {
-    type: "link",
+    variant: "link",
     label: "Button",
   },
 };
