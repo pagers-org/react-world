@@ -12,8 +12,8 @@ const PopularTags = () => {
   const { setActiveTab } = useTabsStore();
 
   const handleClickPopularTag = (tag: string) => {
-    setSelectedTag("# " + tag);
-    setActiveTab("# " + tag);
+    setSelectedTag(tag);
+    setActiveTab(tag);
   };
 
   return (
