@@ -27,7 +27,6 @@ const RegisterPageMain = () => {
     event.preventDefault();
 
     setIsLoading(true);
-    setErrorTypes(null);
 
     postUserRegister({
       user: {
@@ -43,6 +42,8 @@ const RegisterPageMain = () => {
         const user = res.user;
         login(user);
         router.push('/');
+
+        setErrorTypes(null);
       }
       setIsLoading(false);
     });
