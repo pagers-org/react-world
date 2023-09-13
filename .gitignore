@@ -134,3 +134,6 @@ src/server/proto/*.ts
 
 # local TODO
 TODO.*
+
+# open api Generator
+gen/

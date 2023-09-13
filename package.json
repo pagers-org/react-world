@@ -28,20 +28,18 @@
   "homepage": "https://github.com/pagers-org/react-world#readme",
   "scripts": {
     "server": "ts-node ./src/server/server.ts",
-    "proto-gen-types": "protoc --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ ./src/server/proto/*.proto",
+    "generate:api": "openapi-generator-cli generate -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.yaml -o ./gen -g typescript-fetch",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.9.2",
-    "@grpc/proto-loader": "^0.7.9",
     "next": "^13.4.19",
-    "protobufjs": "^7.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "eslint": "^8.48.0",
@@ -53,7 +51,6 @@
     "husky": "^8.0.3",
     "prettier": "^3.0.2",
     "ts-node": "^10.9.1",
-    "ts-proto": "^1.157.0",
     "typescript": "^5.2.2"
   },
   "volta": {
