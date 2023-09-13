@@ -10,7 +10,8 @@ import Tab from '../Tab';
 
 export default function PostList() {
   const [selectedPage, setSelectedPage] = useState('1');
-  const { posts } = useGetAllPosts(selectedPage);
+  const { posts, isLoading, error } = useGetAllPosts(selectedPage);
+
   const handlePagination = (e: MouseEvent<HTMLButtonElement>) => {
     setSelectedPage(e.currentTarget.name);
   };
@@ -20,18 +21,22 @@ export default function PostList() {
   };
 
   return (
-    posts && (
-      <div className={styles.postsContainer}>
-        <Tab onClick={reFetchGlobalFeed}>{'Global Feed'}</Tab>
-        {posts.articles.map((post: Article) => (
-          <PostCard key={uuidv4()} post={post} />
-        ))}
-        <Pagination
-          handlePagination={handlePagination}
-          articlesCount={posts.articlesCount}
-          selectedPage={selectedPage}
-        />
-      </div>
-    )
+    <div className={styles.postsContainer}>
+      <Tab onClick={reFetchGlobalFeed}>{'Global Feed'}</Tab>
+      {isLoading && <div>Loading....</div>}
+      {error && <div>Error!!!</div>}
+      {posts && (
+        <>
+          {posts.articles.map((post: Article) => (
+            <PostCard key={uuidv4()} post={post} />
+          ))}
+          <Pagination
+            handlePagination={handlePagination}
+            articlesCount={posts.articlesCount}
+            selectedPage={selectedPage}
+          />
+        </>
+      )}
+    </div>
   );
 }
