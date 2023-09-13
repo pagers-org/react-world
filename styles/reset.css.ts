@@ -29,6 +29,14 @@ globalStyle('a', {
   color: 'inherit',
 });
 
+globalStyle('button', {
+  textDecoration: 'none',
+  backgroundColor: 'inherit',
+  backgroundImage: 'none',
+  color: 'inherit',
+  border: 0,
+});
+
 globalStyle('li', {
   listStyleType: 'none',
 });

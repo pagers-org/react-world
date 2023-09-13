@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import * as styles from './Header.css';
 import { useState } from 'react';
-import { ROUTES } from '../app/constants/routes';
+import { ROUTES } from '../constants/routes';
 
 const NAV_LIST = [
   { name: 'Home', href: '/' },

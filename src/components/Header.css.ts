@@ -8,8 +8,8 @@ export const wrapper = style({
 });
 
 export const title = style({
-  margin: `${vars.space.large} ${vars.space.medium}`,
-  fontSize: vars.font.size.highlight,
+  margin: `${vars.space.medium} ${vars.space.biggest}`,
+  fontSize: vars.font.size.h3,
   fontWeight: vars.font.weight.bold,
   color: vars.colors.subColor,
   ':hover': {
@@ -21,6 +21,7 @@ export const nav = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  marginRight: vars.space.biggest,
 });
 
 export const navItem = style({
