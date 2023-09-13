@@ -8,7 +8,7 @@ const sotryMeta: Meta = {
     variant: {
       control: {
         type: 'select',
-        options: ['default', 'outline'],
+        options: ['default', 'outline', 'ghost'],
       },
     },
     size: {
@@ -35,6 +35,13 @@ export const OutlineButton: Story = {
   args: {
     variant: 'outline',
     children: 'outline',
+  },
+};
+
+export const GhostButton: Story = {
+  args: {
+    variant: 'ghost',
+    children: 'ghost',
   },
 };
 
