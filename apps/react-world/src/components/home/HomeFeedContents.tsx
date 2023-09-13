@@ -1,10 +1,11 @@
+import { Container } from '../shared/Container';
 import ArticlePreview from './ArticlePreview';
-import ArticleTagList from './ArticleTagList';
+import PopularArticleTagList from './PopularArticleTagList';
 import HomeFeedTab from './HomeFeedTab';
 import Pagination from './Pagination';
 
 const HomeFeedContents = () => (
-  <div className="container page">
+  <Container>
     <div className="row">
       <div className="col-md-9">
         <HomeFeedTab activeFeed="global_feed" />
@@ -34,7 +35,7 @@ const HomeFeedContents = () => (
         <Pagination pages={[1, 2]} activePage={1} />
       </div>
 
-      <ArticleTagList
+      <PopularArticleTagList
         tags={[
           'programming',
           'javascript',
@@ -47,7 +48,7 @@ const HomeFeedContents = () => (
         ]}
       />
     </div>
-  </div>
+  </Container>
 );
 
 export default HomeFeedContents;
