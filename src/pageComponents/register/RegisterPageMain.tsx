@@ -2,11 +2,13 @@
 
 import { useUserStore } from '@/stores/users';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { postUserRegister } from '@/api/users';
 
 const RegisterPageMain = () => {
+  const router = useRouter();
   const login = useUserStore((state) => state.login);
 
   const [form, setForm] = useState<{
@@ -33,11 +35,14 @@ const RegisterPageMain = () => {
       },
     }).then((res) => {
       if (res?.errors) {
-        const errorTypes = Object.keys(res.errors);
+        const errorTypes = Object.entries(res.errors).map(
+          ([key, [value]]) => `${key} ${value}`,
+        );
         setErrorTypes(errorTypes);
       } else {
         const user = res.user;
         login(user);
+        router.push('/');
       }
       setIsLoading(false);
     });
@@ -62,9 +67,7 @@ const RegisterPageMain = () => {
             {errorTypes && (
               <ul className="error-messages">
                 {errorTypes.map((errorType) => (
-                  <li key={errorType}>
-                    {`That ${errorType} is already taken`}
-                  </li>
+                  <li key={errorType}>{errorType}</li>
                 ))}
               </ul>
             )}
