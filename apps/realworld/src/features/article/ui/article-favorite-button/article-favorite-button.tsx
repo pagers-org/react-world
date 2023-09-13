@@ -4,38 +4,32 @@ import { Button } from '@packages/ui';
 import React from 'react';
 import { IoIosHeart } from 'react-icons/io';
 
-interface ArticleLikeButtonProps {
-  label: number;
-  favorited: boolean;
+interface ArticleFavoriteButtonProps {
   slug: string;
+  favoritesCount: number;
 }
 
-const ArticleLikeButton = ({ label, favorited, slug }: ArticleLikeButtonProps) => {
-  const variant = getButtonVariant(favorited);
+const ArticleFavoriteButton = ({ slug, favoritesCount }: ArticleFavoriteButtonProps) => {
   const { mutateAsync: createArticleFavorite } = useCreateArticleFavorite();
 
-  const handleLikeButtonClick = () => {
+  const handleFavoriteButtonClick = () => {
     createArticleFavorite({ slug });
     // TODO: validate queries
   };
 
   return (
     <Button
-      variant={variant}
+      variant="fill"
       color={'primary'}
       size={'s'}
-      onClick={handleLikeButtonClick}
+      onClick={handleFavoriteButtonClick}
       icon={{
         start: <IoIosHeart />,
       }}
     >
-      {label}
+      Favorite Article ({favoritesCount})
     </Button>
   );
 };
 
-export default ArticleLikeButton;
-
-const getButtonVariant = (favorited: boolean) => {
-  return favorited ? 'fill' : 'outlined';
-};
+export default ArticleFavoriteButton;
