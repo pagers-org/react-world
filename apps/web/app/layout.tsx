@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
-import "./styles/main.css";
-import "./styles/ionicons.min.css";
+import "./_styles/main.css";
+import "./_styles/ionicons.min.css";
 import Providers from "../lib/providers";
-import { titillium } from "./styles/fonts";
-import Gnb from "./components/gnb";
-import Footer from "./components/footer";
+import { titillium } from "./_styles/fonts";
+import Gnb from "./_components/gnb";
+import Footer from "./_components/footer";
 
 export default function RootLayout({ children }: { children: ReactNode }): JSX.Element {
   return (
