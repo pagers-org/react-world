@@ -1,14 +1,14 @@
 'use client';
 
-import { useGetTags } from '@/shared/api/realworld/apis';
 import { ClickToMoveTag } from '@/entities/tag';
+import { useGetTags } from '@/shared/api/realworld/endpoints/default/default';
 import React from 'react';
 
 const PopularTags = () => {
   const { data: tags } = useGetTags({
     query: {
       select: data => {
-        return data.data.tags;
+        return data.tags;
       },
     },
   });

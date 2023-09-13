@@ -11,16 +11,7 @@ interface ArticleListProps {}
 const LIMIT = 10;
 
 const ArticleList = ({}: ArticleListProps) => {
-  const { data: articlesResponse } = useGetArticles(
-    {},
-    {
-      query: {
-        select: data => {
-          return data.data;
-        },
-      },
-    },
-  );
+  const { data: articlesResponse } = useGetArticles();
   const { articles, articlesCount } = articlesResponse ?? {
     articles: [],
     articlesCount: 0,
