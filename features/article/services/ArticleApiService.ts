@@ -1,7 +1,8 @@
-import { ARTICLE_LIMIT_PER_PAGE } from '@/features/article/constants';
-import { Article } from '@/features/article/types';
+import { Options } from 'ky';
 
 import { ApiService } from '@/src/services/ApiService';
+
+import { Article } from '@/features/article/types';
 
 interface GetArticlesResponse {
   articles: Article[];
@@ -9,13 +10,10 @@ interface GetArticlesResponse {
 }
 
 class ArticleApiService extends ApiService {
-  async getArticles(page = 1): Promise<GetArticlesResponse> {
-    const searchParams = new URLSearchParams();
-    searchParams.set('offset', String(page * ARTICLE_LIMIT_PER_PAGE));
-
+  async getArticles(options?: Options): Promise<GetArticlesResponse> {
     return await this.instance
       .get('articles', {
-        searchParams,
+        ...options,
       })
       .json();
   }
