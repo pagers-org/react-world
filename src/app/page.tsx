@@ -1,14 +1,15 @@
 "use client";
 import ArticleCard from "@/components/ArticleCard";
 import HomeBanner from "@/components/HomeBanner";
-import { contentContainer, tabContainer } from "./page.css";
+import { contentContainer } from "./page.css";
 import { useQuery } from "@tanstack/react-query";
 import { getArticles } from "@/services/articles";
 import PopularTags from "@/components/PopularTags";
-import { useState } from "react";
+import Tabs from "@/components/Tabs";
+import { useTagsStore } from "@/stores/useStore";
 
 export default function Home() {
-  const [selectedTag, setSelectedTag] = useState<string>();
+  const { selectedTag } = useTagsStore();
   const { isLoading, data: articleResponse } = useQuery(
     ["/api/articles", selectedTag],
     () => getArticles(selectedTag ? { tag: selectedTag } : undefined),
@@ -24,9 +25,7 @@ export default function Home() {
         {isLoading && <div>Loading...</div>}
         {articleResponse && (
           <div>
-            <ul className="flex">
-              <li className={tabContainer}>Global Feed</li>
-            </ul>
+            <Tabs tabs={[undefined, "Global Feed", selectedTag]} />
             <ul>
               {articleResponse.articles.map((article) => (
                 <ArticleCard article={article} />
@@ -34,7 +33,7 @@ export default function Home() {
             </ul>
           </div>
         )}
-        <PopularTags selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+        <PopularTags />
       </section>
     </main>
   );

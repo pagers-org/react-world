@@ -2,20 +2,18 @@
 import { getTags } from "@/services/tags";
 import { useQuery } from "@tanstack/react-query";
 import PopularTagBtn from "./buttons/PopularTagBtn";
-import { Dispatch, SetStateAction } from "react";
+import { useTabsStore, useTagsStore } from "@/stores/useStore";
 
-interface Props {
-  selectedTag?: string;
-  setSelectedTag: Dispatch<SetStateAction<string | undefined>>;
-}
-
-const PopularTags = ({ selectedTag, setSelectedTag }: Props) => {
+const PopularTags = () => {
   const { data: tags } = useQuery(["/api/tags"], () => getTags(), {
     refetchOnWindowFocus: false,
   });
+  const { selectedTag, setSelectedTag } = useTagsStore();
+  const { setActiveTab } = useTabsStore();
 
-  const handleSelectTag = (tag: string) => {
-    setSelectedTag(tag);
+  const handleClickPopularTag = (tag: string) => {
+    setSelectedTag("# " + tag);
+    setActiveTab("# " + tag);
   };
 
   return (
@@ -24,7 +22,7 @@ const PopularTags = ({ selectedTag, setSelectedTag }: Props) => {
       {tags ? (
         <ul className="flex flex-wrap w-60 gap-1 ">
           {tags.map((tag) => (
-            <PopularTagBtn selected={selectedTag === tag} key={tag} onClick={() => handleSelectTag(tag)}>
+            <PopularTagBtn selected={selectedTag === tag} key={tag} onClick={() => handleClickPopularTag(tag)}>
               {tag}
             </PopularTagBtn>
           ))}

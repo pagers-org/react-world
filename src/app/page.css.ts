@@ -13,9 +13,3 @@ export const contentContainer = style({
     },
   },
 });
-
-export const tabContainer = style({
-  borderBottom: "4px solid #5CB85C",
-  padding: 4,
-  color: "#5CB85C",
-});
