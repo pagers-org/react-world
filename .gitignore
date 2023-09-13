@@ -132,8 +132,8 @@ dist
 # generated TS files
 src/server/proto/*.ts
 
-# local TODO
-TODO.*
+# docs
+docs/
 
 # open api Generator
 gen/
