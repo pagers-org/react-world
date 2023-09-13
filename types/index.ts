@@ -34,7 +34,7 @@ export type User = {
 export type UpdateUser = {
   email: string;
   password: string;
-  usename: string;
+  username: string;
   bio: string;
   image: string;
 };

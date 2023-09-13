@@ -1,13 +1,18 @@
 'use client';
 import { registerUser } from '@/services/users';
+import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexRow, flexCenter, fillGreenButton } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
 import { NewUser } from '@/types';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 const RegisterPage = () => {
+  const router = useRouter();
+  const { login } = useUserStore();
   const [formData, setFormData] = useState<NewUser>({
     username: '',
     email: '',
@@ -17,7 +22,15 @@ const RegisterPage = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: registerUser,
     onError: error => {
+      alert('회원가입에 실패했습니다.');
       console.log(error);
+    },
+    onSuccess: res => {
+      alert('회원가입에 성공했습니다.');
+      login({
+        ...res.user,
+      });
+      router.push('/');
     },
   });
 

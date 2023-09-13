@@ -37,6 +37,7 @@ const NAVS = [
 const NavBar = () => {
   const { token, username, image } = useUserStore();
   const pathname = usePathname();
+  console.log(username);
 
   // const token = 'ff';
   // const username = 'hyeon';
@@ -51,7 +52,7 @@ const NavBar = () => {
           </Link>
         </li>
         {NAVS.map(({ href, name, icon, isLogin }, index) =>
-          (isLogin && token) || (!isLogin && !token) ? (
+          (isLogin && username) || (!isLogin && !username) ? (
             <li key={index}>
               <Link
                 href={href}
@@ -63,7 +64,7 @@ const NavBar = () => {
             </li>
           ) : null
         )}
-        {token && (
+        {username && (
           <li>
             <Link
               href={`/@${username}`}

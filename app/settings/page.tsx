@@ -1,24 +1,41 @@
 'use client';
-import { http } from '@/libs/http';
+import { updateUser } from '@/services/users';
 import useUserStore from '@/stores/useUserStore';
 import { articleTextarea } from '@/styles/article.css';
 import { container, flex, hr, input } from '@/styles/common.css';
 import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const SettingsPage = () => {
-  // const { email, username } = useUserStore();
+  const { email, username, image, bio, password, logout } = useUserStore();
+
+  // 초기화 함수로 전환
   const [formData, setFormData] = useState({
-    iamge: '',
-    username: '',
-    bio: '',
-    email: '',
-    password: '',
+    image,
+    username,
+    bio,
+    email,
+    password,
   });
+  const { mutate, isLoading } = useMutation({
+    mutationFn: updateUser,
+    onError: err => {
+      console.error(err);
+    },
+    onSuccess: () => {
+      alert('회원 정보를 변경했습니다!');
+
+      console.log('성공!');
+    },
+  });
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // route.ts로 이동
-    http.put('https://api.realworld.io/api/user', formData);
+
+    mutate({
+      ...formData,
+    });
   };
 
   const handleChange = (e: any) => {
@@ -37,7 +54,7 @@ const SettingsPage = () => {
             name="iamge"
             className={input}
             placeholder="URL of profile picture"
-            value={formData.iamge}
+            value={formData.image}
             onChange={handleChange}
           />
           <input
@@ -77,7 +94,9 @@ const SettingsPage = () => {
           </div>
           <div className={hr} />
           <div className={flex}>
-            <button className={logoutButton}>Or click here to logout.</button>
+            <button className={logoutButton} onClick={logout}>
+              Or click here to logout.
+            </button>
           </div>
         </form>
       </div>
