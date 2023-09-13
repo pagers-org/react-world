@@ -1,6 +1,17 @@
 import { useState } from "react";
 
-import { tabContainer, tabItemText, tabItem } from "./Tab.css";
+import {
+  tabContainer,
+  tabItemText,
+  tabItem,
+  expandedIconContainer,
+  expandedIconButton,
+  expandedIcon,
+  container,
+} from "./Tab.css";
+import SvgIcon from "../SvgIcon";
+import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
+import useHasScroll from "@/hooks/useHasScroll";
 
 interface Tab {
   text: string;
@@ -16,6 +27,9 @@ interface Props {
 
 const Tab = ({ tabArr, containerStyle = "", defaultTab, callbacks }: Props) => {
   const [clickedTab, setClickedTab] = useState(defaultTab);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const { elementRef, hasScroll } = useHasScroll<HTMLUListElement>();
 
   const onTabClick = (index: number) => {
     setClickedTab(index);
@@ -23,20 +37,34 @@ const Tab = ({ tabArr, containerStyle = "", defaultTab, callbacks }: Props) => {
   };
 
   return (
-    <ul className={`${tabContainer} ${containerStyle}`}>
-      {tabArr.map((tab, index) => (
-        <li
-          key={index}
-          id={tab.id}
-          className={`${tabItem} ${clickedTab === index ? "active" : ""}`}
+    <div className={container}>
+      <ul ref={elementRef} className={`${tabContainer} ${containerStyle} ${isExpanded ? "expanded" : ""}`}>
+        {tabArr.map((tab, index) => (
+          <li
+            key={index}
+            id={tab.id}
+            className={`${tabItem} ${clickedTab === index ? "active" : ""}`}
+            onClick={() => {
+              onTabClick(index);
+            }}
+          >
+            <span className={tabItemText}>{tab.text}</span>
+          </li>
+        ))}
+      </ul>
+      {hasScroll && (
+        <div
+          className={expandedIconContainer}
           onClick={() => {
-            onTabClick(index);
+            setIsExpanded(prev => !prev);
           }}
         >
-          <span className={tabItemText}>{tab.text}</span>
-        </li>
-      ))}
-    </ul>
+          <a className={`${expandedIconButton}  ${isExpanded ? "active" : ""}`}>
+            <SvgIcon className={`${expandedIcon}`} src={ChevronDownIcon.src} id="chevron-down-icon"></SvgIcon>
+          </a>
+        </div>
+      )}
+    </div>
   );
 };
 
