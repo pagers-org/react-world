@@ -5,6 +5,7 @@ import { ArticleListItem } from '..';
 import { ArticleListPagination } from '@/features/article';
 import { getItemIndex } from '@/shared/utils/array';
 import { useGetArticles } from '@/shared/api/realworld/endpoints/articles/articles';
+import { getLastPage } from '@/entities/article/api/page';
 
 interface ArticleListProps {}
 
@@ -38,8 +39,6 @@ const ArticleList = ({}: ArticleListProps) => {
 };
 
 export default ArticleList;
-
-const getLastPage = (limit: number, totalCount: number) => Math.ceil(totalCount / limit);
 
 const style = {
   firstItem: 'border-y-1',
