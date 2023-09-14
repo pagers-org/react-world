@@ -12,21 +12,21 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const PATH = [
-    { href: '/', title: 'Home', id: 'Home' },
-    { href: '/login', title: 'Sign in', id: 'Sign in' },
-    { href: '/signUp', title: 'Sign Up', id: 'Sign up' },
+    { href: '/', title: 'Home'},
+    { href: '/login', title: 'Sign in'},
+    { href: '/signUp', title: 'Sign Up'},
   ];
 
   return (
     <nav className="navbar navbar-light">
       <div className="container flex !justify-between">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" href="/">
           Moseung
-        </a>
+        </Link>
         <ul className="flex gap-2">
           {PATH.map((path) => (
             <Link
-              key={path.id}
+              key={path.title}
               className={cn(
                 NavbarStyle({ isCurrentPath: pathname === path.href }),
               )}

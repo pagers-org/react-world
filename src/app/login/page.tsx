@@ -3,7 +3,7 @@
 import { LoginPostRequestType } from '@/types/auth';
 import { produce } from 'immer';
 import { useRouter } from 'next/navigation';
-import React, { FormEvent, useState } from 'react';
+import  { FormEvent, useState } from 'react';
 
 import { postUserLogin } from '@/api/auth';
 
@@ -11,27 +11,31 @@ const page = () => {
   const router = useRouter();
 
   const [formInput, setFormInput] = useState({
-    username: '',
     email: '',
     password: '',
   });
+  const [isLoading,setIsLoading] = useState(false)
 
   const [error, setError] = useState<null | string>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    const EventTarget = e.target;
     const userInfo: LoginPostRequestType = {
       user: {
-        email: e.target.email.value,
-        password: e.target.password.value,
+        email: EventTarget.email.value,
+        password: EventTarget.password.value,
       },
     };
     login(userInfo);
   };
 
   const login = async (userInfo: LoginPostRequestType) => {
+
     await postUserLogin(userInfo).then((res) => {
       if (res.errors) {
+        setIsLoading(false);
         const errorText = `${Object.keys(res.errors)} ${
           Object.values(res.errors)[0]
         }`;
@@ -92,6 +96,7 @@ const page = () => {
                   />
                 </div>
                 <button
+                type='submit'
                   disabled={
                     formInput.email.length === 0 ||
                     formInput.password.length === 0

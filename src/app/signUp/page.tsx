@@ -4,7 +4,7 @@ import { RegisterPostRequestType } from '@/types/auth';
 import { produce } from 'immer';
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, useState } from 'react';
-
+import Link from 'next/link';
 import { postUserRegister } from '@/api/auth';
 
 const page = () => {
@@ -26,10 +26,10 @@ const page = () => {
         password: e.target.password.value,
       },
     };
-    signOutUser(userInfo);
+    signUpUser(userInfo);
   };
 
-  const signOutUser = async (userInfo: RegisterPostRequestType) => {
+  const signUpUser = async (userInfo: RegisterPostRequestType) => {
     await postUserRegister(userInfo).then((res) => {
       if (res.errors) {
         const errorText = `${Object.keys(res.errors)} ${
@@ -49,7 +49,7 @@ const page = () => {
           <div className="col-md-6 offset-md-3 col-xs-12">
             <h1 className="text-xs-center">Sign up</h1>
             <p className="text-xs-center">
-              <a href="/login">Have an account?</a>
+              <Link href="/login">Have an account?</Link>
             </p>
 
             {error && (
