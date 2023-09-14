@@ -50,20 +50,18 @@ const HomeFeedContents = () => {
           )}
         </div>
 
-        {isLoading ? null : (
-          <PopularArticleTagList
-            tags={[
-              'programming',
-              'javascript',
-              'emberjs',
-              'angularjs',
-              'react',
-              'mean',
-              'node',
-              'rails',
-            ]}
-          />
-        )}
+        <PopularArticleTagList
+          tags={[
+            'programming',
+            'javascript',
+            'emberjs',
+            'angularjs',
+            'react',
+            'mean',
+            'node',
+            'rails',
+          ]}
+        />
       </div>
     </Container>
   );
