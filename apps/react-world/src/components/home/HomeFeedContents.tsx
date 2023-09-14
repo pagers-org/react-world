@@ -8,7 +8,7 @@ import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewSe
 
 const HomeFeedContents = () => {
   // TODO: Zustand Store 에서 초기값을 지정하고, 이후 현재 페이지 정보를 가지도록 구현 필요
-  const { data, isLoading } = useArticlePreviewQuery(1);
+  const { data, isLoading } = useArticlePreviewQuery(0);
   const totalPageCount = data?.articlesCount
     ? data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT
     : 0;
