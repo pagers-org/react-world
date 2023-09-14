@@ -17,6 +17,7 @@ export const tabContainer = style({
   columnGap: 4,
   alignItems: "center",
   marginBottom: "10px",
+  rowGap: "10px",
 
   selectors: {
     "&.expanded": {

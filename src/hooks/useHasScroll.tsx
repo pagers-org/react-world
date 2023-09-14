@@ -16,11 +16,11 @@ const useHasScroll = <T extends HTMLElement>() => {
 
     checkHasScroll();
 
-    window.addEventListener("resize", checkHasScroll);
+    // window.addEventListener("resize", checkHasScroll);
 
-    return () => {
-      window.removeEventListener("resize", checkHasScroll);
-    };
+    // return () => {
+    //   window.removeEventListener("resize", checkHasScroll);
+    // };
   }, []);
 
   return {
