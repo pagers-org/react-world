@@ -32,8 +32,8 @@ export const PageButton = styled.a<{ isActive: boolean }>`
 
   &:focus,
   &:hover {
-    color: #3d8b3d;
-    background-color: #eceeef;
+    color: ${props => (props.isActive ? '#fff' : '#3d8b3d')};
+    background-color: ${props => (props.isActive ? '#5cb85c' : '#eceeef')};
     border-color: #ddd;
   }
 
