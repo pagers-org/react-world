@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { Profile } from "./profile";
+import type { Profile } from './profile';
 
 export interface Article {
   slug: string;

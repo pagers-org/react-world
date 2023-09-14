@@ -5,7 +5,7 @@
  * Conduit API
  * OpenAPI spec version: 1.0.0
  */
-import type { LoginUser } from "./loginUser";
+import type { LoginUser } from './loginUser';
 
 export interface LoginUserRequest {
   user: LoginUser;

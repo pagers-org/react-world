@@ -4,15 +4,24 @@ import React from 'react';
 
 interface ArticleTagListProps {
   tagList: string[];
-  slug: string;
+  slug?: string;
 }
 const ArticleTagList = ({ tagList, slug }: ArticleTagListProps) => {
+  if (slug) {
+    return (
+      <Link className="flex gap-2 cursor-pointer" href={`/article/${slug}`}>
+        {tagList.map(label => (
+          <Tag key={label} label={label} variant="outlined" />
+        ))}
+      </Link>
+    );
+  }
   return (
-    <Link className="flex gap-2 cursor-pointer" href={`/article/${slug}`}>
+    <div className="flex gap-2 ">
       {tagList.map(label => (
         <Tag key={label} label={label} variant="outlined" />
       ))}
-    </Link>
+    </div>
   );
 };
 

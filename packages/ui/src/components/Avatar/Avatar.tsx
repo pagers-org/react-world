@@ -12,7 +12,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
   ) => {
     return (
       <img
-        className={`object-cover w-full h-full rounded-full ${style.size[size]}`}
+        className={`object-cover rounded-full ${style.size[size]}`}
         ref={ref}
         src={src}
         alt={src}

@@ -5,3 +5,5 @@ export const generatePageList = (count: number) =>
 
 export const getItemActivation = (itemPage: number, currentPage: number) =>
   currentPage === itemPage ? 'active' : 'inactive';
+
+export const getLastPage = (limit: number, totalCount: number) => Math.ceil(totalCount / limit);

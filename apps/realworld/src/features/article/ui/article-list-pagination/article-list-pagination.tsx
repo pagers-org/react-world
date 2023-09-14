@@ -1,15 +1,20 @@
+'use client';
 import { generatePageList, getItemActivation } from '@/entities/article/api/page';
 import { getItemIndex } from '@/shared/utils/array';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 interface ArticleListPaginationProps {
   lastPage: number;
   currentPage: number;
-  onChange?: (pageNumber: number) => void;
 }
 
-const ArticleListPagination = ({ currentPage = 1, lastPage, onChange }: ArticleListPaginationProps) => {
+const ArticleListPagination = ({ currentPage = 1, lastPage }: ArticleListPaginationProps) => {
+  const { push } = useRouter();
+  const handleChangePage = (page: number) => {
+    push(`/?page=${page}`);
+  };
   const pageList = generatePageList(lastPage);
 
   return (
@@ -20,11 +25,11 @@ const ArticleListPagination = ({ currentPage = 1, lastPage, onChange }: ArticleL
 
         return (
           <li
-            onClick={() => onChange?.(page)}
+            onClick={() => handleChangePage(page)}
             key={index}
             className={`flex items-center justify-center border w-42 h-42 cursor-pointer ${style.index[itemIndex]} ${style.activation[itemActivation]}`}
           >
-            <Link href={`/${page}`}>{page}</Link>
+            {page}
           </li>
         );
       })}

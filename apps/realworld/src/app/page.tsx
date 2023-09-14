@@ -1,6 +1,7 @@
 import { PopularTags } from '@/widgets/tags';
 import { FeedToggle } from '@/widgets/tab';
 import { ArticleList } from '@/widgets/article';
+import { responsiveWidth } from '@/shared/css/responsive-width';
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-[calc(100%_-_30px)] mx-auto max-w-1140 max-desktop:max-w-940 max-tablet:max-w-720 ">
+      <div className={`w-[calc(100%_-_30px)] mx-auto ${responsiveWidth}`}>
         <div className="flex gap-30">
           <div className="flex-[0_0_75%]">
             <FeedToggle />

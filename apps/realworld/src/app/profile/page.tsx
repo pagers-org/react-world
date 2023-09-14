@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Profile = () => {
   return (
@@ -8,14 +8,11 @@ const Profile = () => {
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-10 offset-md-1">
-                <img
-                  src="http://i.imgur.com/Qr71crq.jpg"
-                  className="user-img"
-                />
+                <img src="http://i.imgur.com/Qr71crq.jpg" className="user-img" />
                 <h4>Eric Simons</h4>
                 <p>
-                  Cofounder @GoThinkster, lived in Aol&apos;s HQ for a few
-                  months, kinda looks like Peeta from the Hunger Games
+                  Cofounder @GoThinkster, lived in Aol&apos;s HQ for a few months, kinda looks like Peeta from the
+                  Hunger Games
                 </p>
                 <button className="btn btn-sm btn-outline-secondary action-btn">
                   <i className="ion-plus-round"></i>
@@ -36,12 +33,12 @@ const Profile = () => {
               <div className="articles-toggle">
                 <ul className="nav nav-pills outline-active">
                   <li className="nav-item">
-                    <a className="nav-link active" href="">
+                    <a className="nav-link active" href="#">
                       My Articles
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="">
+                    <a className="nav-link" href="#">
                       Favorited Articles
                     </a>
                   </li>
@@ -63,20 +60,13 @@ const Profile = () => {
                     <i className="ion-heart"></i> 29
                   </button>
                 </div>
-                <a
-                  href="/article/how-to-buil-webapps-that-scale"
-                  className="preview-link"
-                >
+                <a href="/article/how-to-buil-webapps-that-scale" className="preview-link">
                   <h1>How to build webapps that scale</h1>
                   <p>This is the description for the post.</p>
                   <span>Read more...</span>
                   <ul className="tag-list">
-                    <li className="tag-default tag-pill tag-outline">
-                      realworld
-                    </li>
-                    <li className="tag-default tag-pill tag-outline">
-                      implementations
-                    </li>
+                    <li className="tag-default tag-pill tag-outline">realworld</li>
+                    <li className="tag-default tag-pill tag-outline">implementations</li>
                   </ul>
                 </a>
               </div>
@@ -97,10 +87,7 @@ const Profile = () => {
                   </button>
                 </div>
                 <a href="/article/the-song-you" className="preview-link">
-                  <h1>
-                    The song you won&aops;t ever stop singing. No matter how
-                    hard you try.
-                  </h1>
+                  <h1>The song you won&aops;t ever stop singing. No matter how hard you try.</h1>
                   <p>This is the description for the post.</p>
                   <span>Read more...</span>
                   <ul className="tag-list">
@@ -112,12 +99,12 @@ const Profile = () => {
 
               <ul className="pagination">
                 <li className="page-item active">
-                  <a className="page-link" href="">
+                  <a className="page-link" href="#">
                     1
                   </a>
                 </li>
                 <li className="page-item">
-                  <a className="page-link" href="">
+                  <a className="page-link" href="#">
                     2
                   </a>
                 </li>

@@ -15,6 +15,9 @@ module.exports = {
     `src/**/*.{js,ts,jsx,tsx}`,
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: {
+    pattern: /text-/,
+  },
   theme: {
     extend: {
       colors,
