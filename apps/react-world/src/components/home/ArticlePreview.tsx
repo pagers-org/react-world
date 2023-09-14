@@ -1,54 +1,60 @@
+import type { ArticlePreviewResponse } from '../../apis/article/ArticlePreviewService.types';
+import {
+  ArticlePreviewContainer,
+  ArticlePreviewMeta,
+  AuthorProfileLink,
+  AuthorProfileImage,
+  AuthorInfo,
+  Author,
+  PublishedDate,
+  LikeButton,
+  ArticlePreviewLink,
+  ArticleTitle,
+  ArticleDescription,
+  ReadMore,
+  TagList,
+  TagItem,
+} from './ArticlePreview.styled';
+
 interface ArticlePreviewProps {
-  authorProfileLink: string;
-  authorProfileImageUrl: string;
-  authorName: string;
-  publishDate: string;
-  likeCount: number;
-  articleLink: string;
-  articleTitle: string;
-  articleDescription: string;
-  tags: string[];
+  articlePreview: ArticlePreviewResponse;
 }
 
 const ArticlePreview = ({
-  authorProfileLink,
-  authorProfileImageUrl,
-  authorName,
-  publishDate,
-  likeCount,
-  articleLink,
-  articleTitle,
-  articleDescription,
-  tags,
+  articlePreview: {
+    authorProfileLink,
+    authorProfileImageUrl,
+    authorName,
+    publishDate,
+    likeCount,
+    articleLink,
+    articleTitle,
+    articleDescription,
+    tags,
+  },
 }: ArticlePreviewProps) => (
-  <div className="article-preview">
-    <div className="article-meta">
-      <a href={authorProfileLink}>
-        <img src={authorProfileImageUrl} />
-      </a>
-      <div className="info">
-        <a href={authorProfileLink} className="author">
-          {authorName}
-        </a>
-        <span className="date">{publishDate}</span>
-      </div>
-      <button className="btn btn-outline-primary btn-sm pull-xs-right">
-        <i className="ion-heart"></i> {likeCount}
-      </button>
-    </div>
-    <a href={articleLink} className="preview-link">
-      <h1>{articleTitle}</h1>
-      <p>{articleDescription}</p>
-      <span>Read more...</span>
-      <ul className="tag-list">
+  <ArticlePreviewContainer>
+    <ArticlePreviewMeta>
+      <AuthorProfileLink href={authorProfileLink}>
+        <AuthorProfileImage src={authorProfileImageUrl} />
+      </AuthorProfileLink>
+      <AuthorInfo>
+        <Author href={authorProfileLink}>{authorName}</Author>
+        <PublishedDate>{publishDate}</PublishedDate>
+      </AuthorInfo>
+      <LikeButton>{likeCount}</LikeButton>
+    </ArticlePreviewMeta>
+    <ArticlePreviewLink href={articleLink}>
+      <ArticleTitle>{articleTitle}</ArticleTitle>
+      <ArticleDescription>{articleDescription}</ArticleDescription>
+      <ReadMore>Read more...</ReadMore>
+      <TagList>
         {tags.map(tag => (
-          <li className="tag-default tag-pill tag-outline" key={tag}>
-            {tag}
-          </li>
+          <TagItem key={tag}>{tag}</TagItem>
         ))}
-      </ul>
-    </a>
-  </div>
+      </TagList>
+    </ArticlePreviewLink>
+  </ArticlePreviewContainer>
 );
 
 export default ArticlePreview;
