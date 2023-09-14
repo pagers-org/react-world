@@ -1202,7 +1202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.35.3":
+"@tanstack/query-core@npm:4.35.3, @tanstack/query-core@npm:^4.35.3":
   version: 4.35.3
   resolution: "@tanstack/query-core@npm:4.35.3"
   checksum: 0184cd19a26c4f96d05bbebd7966866741d46e5be19ac99d8cd6e5bbeb6550f257e7b52b674fb2673190696e113dd601422d196bf4870b58b4d2e2edf4307e92
@@ -2286,6 +2286,7 @@ __metadata:
   resolution: "client@workspace:apps/client"
   dependencies:
     "@packages/lib": "workspace:^"
+    "@tanstack/query-core": ^4.35.3
     "@tanstack/react-query": ^4.35.3
     "@tanstack/react-query-devtools": ^4.35.3
     "@types/node": 20.5.9
