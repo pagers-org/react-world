@@ -23,6 +23,7 @@ const Main = ({ data, tagsData }: Props) => {
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
+    setPage(0);
   };
 
   const handlePageChange = (page: number) => {
