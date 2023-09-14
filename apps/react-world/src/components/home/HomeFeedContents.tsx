@@ -9,14 +9,15 @@ import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewSe
 
 const HomeFeedContents = () => {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
-  const { data, isLoading } = useArticlePreviewQuery(currentPageIndex);
+  const { articlePreviews, isArticlePreviewsLoading } =
+    useArticlePreviewQuery(currentPageIndex);
 
   const handlePageChange = (newPageIndex: number) => {
     setCurrentPageIndex(newPageIndex);
   };
 
-  const totalPageCount = data?.articlesCount
-    ? Math.ceil(data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT)
+  const totalPageCount = articlePreviews?.articlesCount
+    ? Math.ceil(articlePreviews.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT)
     : 0;
 
   return (
@@ -24,7 +25,7 @@ const HomeFeedContents = () => {
       <div className="row">
         <div className="col-md-9">
           <HomeFeedTab activeFeed="global_feed" />
-          {isLoading ? (
+          {isArticlePreviewsLoading ? (
             <span
               style={{
                 display: 'inline-block',
@@ -35,7 +36,7 @@ const HomeFeedContents = () => {
             </span>
           ) : (
             <>
-              {data?.articles?.map(articlePreview => (
+              {articlePreviews?.articles?.map(articlePreview => (
                 <ArticlePreview
                   key={articlePreview.slug}
                   articlePreview={articlePreview}
