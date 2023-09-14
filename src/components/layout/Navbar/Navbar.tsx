@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '../../ui/button';
+import { Button } from '@/components/ui/Button/Button';
+import { ModeToggle } from '@/components/theme/ThemeToggle';
 
 export const Navbar = () => {
   const router = useRouter();
@@ -17,13 +18,14 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center py-4">
+    <div className="flex justify-between items-center h-[100px] py-4">
       <p>Logo</p>
-      <p className="text-4xl">Henlog</p>
+      <p className="text-4xl font-bold">Henlog</p>
       <div className="flex">
         <Button variant="ghost" onClick={handleButtonClick}>
           {isLogin ? 'Logout' : 'Sign in'}
         </Button>
+        <ModeToggle />
       </div>
     </div>
   );
