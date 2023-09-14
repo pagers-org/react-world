@@ -1,0 +1,49 @@
+{
+  "root": true,
+  "extends": ["prettier"],
+  "plugins": ["unused-imports", "import"],
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["*.svg", "*.html", "**/dist/*"],
+
+  "rules": {
+    // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "allowSeparatedGroups": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "type",
+          "unknown"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}

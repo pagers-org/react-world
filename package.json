@@ -1,11 +1,13 @@
 {
   "name": "@miso/react-world",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "private": true,
   "scripts": {
-    "preinstall": "pnpm dlx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "lint:fix": "eslint --fix 'packages/**'",
+    "dev:common": "pnpm --filter @miso/common dev",
+    "dev:web": "pnpm --filter @miso/web dev",
+    "dev": "pnpm run --parallel -r dev"
   },
   "engines": {
     "node": ">16.14.2",
@@ -19,6 +21,11 @@
   "license": "ISC",
   "packageManager": "pnpm@7.9.0",
   "devDependencies": {
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "pnpm": "^7.9.0"
   }
 }
