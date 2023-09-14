@@ -1,5 +1,5 @@
 'use client';
-import { updateUser } from '@/services/users';
+import { updateUserAPI } from '@/services/users';
 import useUserStore from '@/stores/useUserStore';
 import { articleTextarea } from '@/styles/article.css';
 import { container, flex, hr, input } from '@/styles/common.css';
@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const SettingsPage = () => {
-  const { email, username, image, bio, password, logout } = useUserStore();
+  const { email, username, image, bio, password, logout, updateUser } = useUserStore();
 
   // 초기화 함수로 전환
   const [formData, setFormData] = useState({
@@ -19,14 +19,15 @@ const SettingsPage = () => {
     password,
   });
   const { mutate, isLoading } = useMutation({
-    mutationFn: updateUser,
+    mutationFn: updateUserAPI,
     onError: err => {
       console.error(err);
     },
-    onSuccess: () => {
+    onSuccess: res => {
       alert('회원 정보를 변경했습니다!');
-
-      console.log('성공!');
+      updateUser({
+        ...res.user,
+      });
     },
   });
 
@@ -56,6 +57,7 @@ const SettingsPage = () => {
             placeholder="URL of profile picture"
             value={formData.image}
             onChange={handleChange}
+            readOnly={isLoading}
           />
           <input
             type="text"
@@ -64,6 +66,7 @@ const SettingsPage = () => {
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
+            readOnly={isLoading}
           />
           <textarea
             rows={8}
@@ -72,6 +75,7 @@ const SettingsPage = () => {
             placeholder="Short bio about you"
             value={formData.bio}
             onChange={handleChange}
+            readOnly={isLoading}
           ></textarea>
           <input
             type="email"
@@ -80,6 +84,7 @@ const SettingsPage = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
+            readOnly={isLoading}
           />
           <input
             type="password"
@@ -88,6 +93,7 @@ const SettingsPage = () => {
             placeholder="New Password"
             value={formData.password}
             onChange={handleChange}
+            readOnly={isLoading}
           />
           <div>
             <input type="submit" className={updateButton} value="Update Settings" />

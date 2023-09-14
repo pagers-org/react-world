@@ -1,5 +1,53 @@
+import { API_BASE_URL } from '@/constants/env';
 import { http } from '@/libs/http';
 import { Article, NewArticle } from '@/types';
+
+const ArticleAPI = {
+  all: async (offset?: number, limit = 10) => {
+    return fetch(`${API_BASE_URL}/articles?limit=${limit}&offset=${offset ? offset * limit : 0}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }).then(res => {
+      if (!(res.status === 200)) {
+        throw new Error('Error');
+      }
+      return res.json();
+    });
+  },
+  byTag: async (tag: string, offset = 0, limit = 10) => {
+    return fetch(`${API_BASE_URL}/articles?tag=${tag}&limit=${limit}&offset=${offset ? offset * limit : 0}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }).then(res => {
+      if (!(res.status === 200)) {
+        throw new Error('Error');
+      }
+      return res.json();
+    });
+  },
+  favorite: (slug: string) => {
+    return fetch(`${API_BASE_URL}/articles/${slug}/favorite`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }).then(res => {
+      if (!(res.status === 201)) {
+        throw new Error('Error');
+      }
+      return res.json();
+    });
+  },
+  unFavorite: (slug: string) => {
+    return fetch(`${API_BASE_URL}/articles/${slug}/favorite`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    }).then(res => {
+      if (!(res.status === 201)) {
+        throw new Error('Error');
+      }
+      return res.json();
+    });
+  },
+};
 
 // 전제 Article 조회
 const fetchArticles = (limit = 20) => {
@@ -44,4 +92,5 @@ export {
   registerArticle,
   updateArticle,
   deleteArticle,
+  ArticleAPI,
 };

@@ -18,7 +18,7 @@ const useUserStore = create(
       login: user => {
         set(() => {
           const { email, username, bio, image, token } = user;
-          setCookie('token', token, 0);
+          setCookie('token', token, 60 * 60 * 24);
           return {
             email,
             username,
@@ -32,6 +32,13 @@ const useUserStore = create(
           setCookie('token', '', 0);
           return {
             ...initialState,
+          };
+        });
+      },
+      updateUser: user => {
+        set(() => {
+          return {
+            ...user,
           };
         });
       },

@@ -5,6 +5,7 @@ import SideBar from '@/components/layouts/SideBar';
 import { articleContainer } from '@/styles/article.css';
 import { container, flex } from '@/styles/common.css';
 import { bannerDescription, bannerTitle } from '@/styles/home.css';
+import { Suspense } from 'react';
 
 export default function Page() {
   return (
@@ -17,9 +18,13 @@ export default function Page() {
         <div className={flex}>
           <div className={articleContainer}>
             <ArticleTab />
-            <ArticleList />
+            <Suspense fallback={<div>Loading2...</div>}>
+              <ArticleList />
+            </Suspense>
           </div>
-          <SideBar />
+          <Suspense fallback={<div>Loading1...</div>}>
+            <SideBar />
+          </Suspense>
         </div>
       </main>
     </section>

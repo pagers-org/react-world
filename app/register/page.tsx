@@ -1,5 +1,5 @@
 'use client';
-import { registerUser } from '@/services/users';
+import { registerUserAPI } from '@/services/users';
 import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexRow, flexCenter, fillGreenButton } from '@/styles/common.css';
@@ -20,7 +20,7 @@ const RegisterPage = () => {
   });
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: registerUser,
+    mutationFn: registerUserAPI,
     onError: error => {
       alert('회원가입에 실패했습니다.');
       console.log(error);

@@ -1,8 +1,9 @@
 'use client';
 import * as styles from '@/styles/layout.css';
+import dynamic from 'next/dynamic';
 import useUserStore from '@/stores/useUserStore';
 import { usePathname } from 'next/navigation';
-import { EditIcon, SettingIcon } from '@/composables/icons';
+
 import Link from 'next/link';
 import { userImageSm } from '@/styles/profile.css';
 import Image from 'next/image';
@@ -23,25 +24,20 @@ const NAVS = [
   {
     href: '/editor',
     name: 'New Article',
-    icon: <EditIcon />,
+    icon: dynamic(() => import('@/composables/icons').then(lib => lib.EditIcon)),
     isLogin: true,
   },
   {
     href: '/settings',
     name: 'Settings',
-    icon: <SettingIcon />,
+    icon: dynamic(() => import('@/composables/icons').then(lib => lib.SettingIcon)),
     isLogin: true,
   },
 ];
 
 const NavBar = () => {
-  const { token, username, image } = useUserStore();
+  const { username, image } = useUserStore();
   const pathname = usePathname();
-  console.log(username);
-
-  // const token = 'ff';
-  // const username = 'hyeon';
-  // const image = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
 
   return (
     <nav>
@@ -55,6 +51,7 @@ const NavBar = () => {
           (isLogin && username) || (!isLogin && !username) ? (
             <li key={index}>
               <Link
+                hydrate={true}
                 href={href}
                 className={`${styles.navItem} ${pathname === href ? styles.activate : styles.disabled}`}
               >

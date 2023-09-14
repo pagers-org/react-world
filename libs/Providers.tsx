@@ -7,7 +7,16 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { PropsWithChildren } from 'react';
 
 export default function Providers({ children }: PropsWithChildren) {
-  const [client] = useState(() => new QueryClient());
+  const [client] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            suspense: true,
+          },
+        },
+      })
+  );
 
   return (
     <QueryClientProvider client={client}>
