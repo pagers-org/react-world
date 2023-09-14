@@ -1,12 +1,12 @@
 'use client';
 import * as styles from '@/styles/layout.css';
-import dynamic from 'next/dynamic';
 import useUserStore from '@/stores/useUserStore';
 import { usePathname } from 'next/navigation';
 
 import Link from 'next/link';
 import { userImageSm } from '@/styles/profile.css';
 import Image from 'next/image';
+import { EditIcon, SettingIcon } from '@/composables/icons';
 
 const NAVS = [
   {
@@ -24,13 +24,13 @@ const NAVS = [
   {
     href: '/editor',
     name: 'New Article',
-    icon: dynamic(() => import('@/composables/icons').then(lib => lib.EditIcon)),
+    icon: <EditIcon />,
     isLogin: true,
   },
   {
     href: '/settings',
     name: 'Settings',
-    icon: dynamic(() => import('@/composables/icons').then(lib => lib.SettingIcon)),
+    icon: <SettingIcon />,
     isLogin: true,
   },
 ];
@@ -51,7 +51,6 @@ const NavBar = () => {
           (isLogin && username) || (!isLogin && !username) ? (
             <li key={index}>
               <Link
-                hydrate={true}
                 href={href}
                 className={`${styles.navItem} ${pathname === href ? styles.activate : styles.disabled}`}
               >
