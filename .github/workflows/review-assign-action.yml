@@ -6,6 +6,20 @@ on:
 
 jobs:
   assign:
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      discussions: write
+      issues: write
+      id-token: read
+      packages: write
+      pages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
     runs-on: ubuntu-latest
     steps:
       - if: github.base_ref == 'main' # base branch name is 'master'
