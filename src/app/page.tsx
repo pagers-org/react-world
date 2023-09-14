@@ -1,10 +1,10 @@
 import React from 'react';
 import { PostCardList } from '@/components/home/PostCardList';
 import { TagList } from '@/components/home/TagList';
+import { TEMP_TAGS } from '@/constants';
 
 const RootPage = () => {
-  const TEMP_TAGS = ['programming', 'react', 'javascript', 'typescript'];
-  return (
+   return (
     <div>
       <div className="flex">
         <PostCardList />

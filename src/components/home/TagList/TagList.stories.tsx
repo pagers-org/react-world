@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { TagList } from '.';
+import { TEMP_TAGS } from '@/constants';
 
 const sotryMeta: Meta = {
   title: 'components/home/TagList',
@@ -11,6 +12,6 @@ type Story = StoryObj<typeof TagList>;
 
 export const Default: Story = {
   args: {
-    tags: ['tag1', 'tag2', 'tag3', 'tag4'],
+    tags: TEMP_TAGS,
   },
 };

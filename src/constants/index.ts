@@ -6,3 +6,6 @@ export const TEMP_POSTS = [
 
 export const TEMP_CONTENT =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit Exercitationem sint soluta laudantium porro inventore sit debitis voluptates, nam perferendis cupiditate dolor minus doloribus quia voluptatibus ab voluptas? Saepe, magnam numquam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem sint soluta laudantium porro inventore sit debitis voluptates, nam perferendis cupiditate dolor minus doloribus quia voluptatibus ab voluptas? Saepe, magnam numquam.';
+
+ export const TEMP_TAGS = ['programming', 'react', 'javascript', 'typescript'];
+ 
