@@ -41,15 +41,12 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-/.pnp
-.pnp.js
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
-# TypeScript
+# TypeScript cache
 *.tsbuildinfo
-next-env.d.ts
 
 # Optional npm cache directory
 .npm
@@ -77,7 +74,6 @@ next-env.d.ts
 
 # dotenv environment variable files
 .env
-.env*
 .env.development.local
 .env.test.local
 .env.production.local
@@ -123,6 +119,9 @@ dist
 # TernJS port file
 .tern-port
 
+# vscode prettier
+.vscode/settings.json
+
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
@@ -133,26 +132,14 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# next.js
-/.next/
-/out/
+# testing
+/coverage
 
-# production
-/build
+# typescript
+*.tsbuildinfo
+next-env.d.ts
 
-# vercel
-.vercel
-
-# misc
-.DS_Store
-*.pem
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+/storybook-static
+/test-results/
+/playwright-report/
+/playwright/.cache/
