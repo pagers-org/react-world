@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Container } from '../shared/Container';
 import ArticlePreview from './ArticlePreview';
 import PopularArticleTagList from './PopularArticleTagList';
@@ -7,10 +8,15 @@ import useArticlePreviewQuery from '../../quries/useArticlePreviewQuery';
 import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewService';
 
 const HomeFeedContents = () => {
-  // TODO: Zustand Store 에서 초기값을 지정하고, 이후 현재 페이지 정보를 가지도록 구현 필요
-  const { data, isLoading } = useArticlePreviewQuery(0);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const { data, isLoading } = useArticlePreviewQuery(currentPageIndex);
+
+  const handlePageChange = (newPageIndex: number) => {
+    setCurrentPageIndex(newPageIndex);
+  };
+
   const totalPageCount = data?.articlesCount
-    ? data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT
+    ? Math.ceil(data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT)
     : 0;
 
   return (
@@ -35,7 +41,11 @@ const HomeFeedContents = () => {
                   articlePreview={articlePreview}
                 />
               ))}
-              <Pagination totalPages={totalPageCount} activePageIndex={0} />
+              <Pagination
+                totalPages={totalPageCount}
+                activePageIndex={currentPageIndex}
+                onPageChange={handlePageChange}
+              />
             </>
           )}
         </div>
