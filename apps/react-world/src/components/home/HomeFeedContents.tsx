@@ -19,7 +19,14 @@ const HomeFeedContents = () => {
         <div className="col-md-9">
           <HomeFeedTab activeFeed="global_feed" />
           {isLoading ? (
-            <span>Loading Articles...</span>
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '15px',
+              }}
+            >
+              Loading Articles...
+            </span>
           ) : (
             <>
               {data?.articles?.map(articlePreview => (
