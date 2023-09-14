@@ -6,12 +6,14 @@ import HomeFeedTab from './HomeFeedTab';
 import Pagination from './Pagination';
 import useArticlePreviewQuery from '../../quries/useArticlePreviewQuery';
 import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewService';
+import usePopularArticleTagsQuery from '../../quries/usePopularArticleTagsQuery';
 
 const HomeFeedContents = () => {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const { articlePreviews, isArticlePreviewsLoading } =
     useArticlePreviewQuery(currentPageIndex);
-
+  const { popularArticleTags, isPopularArticleTagsLoading } =
+    usePopularArticleTagsQuery();
   const handlePageChange = (newPageIndex: number) => {
     setCurrentPageIndex(newPageIndex);
   };
@@ -50,19 +52,9 @@ const HomeFeedContents = () => {
             </>
           )}
         </div>
-
-        <PopularArticleTagList
-          tags={[
-            'programming',
-            'javascript',
-            'emberjs',
-            'angularjs',
-            'react',
-            'mean',
-            'node',
-            'rails',
-          ]}
-        />
+        {isPopularArticleTagsLoading ? null : (
+          <PopularArticleTagList tags={popularArticleTags?.tags ?? []} />
+        )}
       </div>
     </Container>
   );
