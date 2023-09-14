@@ -18,9 +18,17 @@ interface Author {
   following: boolean;
 }
 
+export interface ArticleQueryParams {
+  tag: string;
+  author: string;
+  favorited: string;
+  offset: number;
+  limit: number;
+}
+
 export interface ArticleResponseType {
   articles: Article[];
-  articleCount: number;
+  articlesCount: number;
 }
 
 export interface GetArticlesInputParams {

@@ -1,5 +1,5 @@
 import { activeTabStyle, inactiveTabStyle } from "./styles/tabs.css";
-import { useTabsStore, useTagsStore } from "@/stores/useStore";
+import { useTabsStore, useArticlesParamsStore } from "@/stores/useStore";
 
 interface TabsProps {
   tabs: (string | undefined)[];
@@ -15,7 +15,7 @@ interface TabProps {
 }
 
 const Tab = ({ text }: TabProps) => {
-  const { setSelectedTag } = useTagsStore();
+  const { setSelectedTag } = useArticlesParamsStore();
   const { activeTab, setActiveTab } = useTabsStore();
   const handleClick = () => {
     if (text !== activeTab) {

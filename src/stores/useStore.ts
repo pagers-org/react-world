@@ -1,3 +1,4 @@
+import { ArticleQueryParams } from "@/types/articles";
 import { create } from "zustand";
 
 interface TabState {
@@ -10,12 +11,29 @@ export const useTabsStore = create<TabState>((set) => ({
   setActiveTab: (newTab: string) => set({ activeTab: newTab }),
 }));
 
-interface TagState {
-  selectedTag: string;
+const defaultArticlesState = {
+  tag: "",
+  author: "",
+  favorited: "",
+  offset: 0,
+  limit: 10,
+};
+
+interface ArticlesState {
+  articlesParams: ArticleQueryParams;
   setSelectedTag: (tag: string) => void;
+  resetSelectedTag: () => void;
+  setCurrentPage: (selectedPage: number) => void;
+  resetCurrentPage: () => void;
 }
 
-export const useTagsStore = create<TagState>((set) => ({
-  selectedTag: "",
-  setSelectedTag: (newTag: string) => set({ selectedTag: newTag }),
+export const useArticlesParamsStore = create<ArticlesState>((set) => ({
+  articlesParams: defaultArticlesState,
+  setSelectedTag: (newTag: string) =>
+    set((prev) => ({ ...prev, articlesParams: { ...prev.articlesParams, tag: newTag } })),
+  resetSelectedTag: () => set((prev) => ({ ...prev, tag: "" })),
+  setCurrentPage: (selectedPage: number) =>
+    set((prev) => ({ ...prev, articlesParams: { ...prev.articlesParams, offset: (selectedPage - 1) * 10 } })),
+  resetCurrentPage: () => set((prev) => ({ ...prev, articlesParams: { ...prev.articlesParams, offset: 0 } })),
+  resetArticlesParams: () => set({ articlesParams: defaultArticlesState }),
 }));

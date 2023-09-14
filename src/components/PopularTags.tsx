@@ -2,18 +2,23 @@
 import { getTags } from "@/services/tags";
 import { useQuery } from "@tanstack/react-query";
 import PopularTagBtn from "./buttons/PopularTagBtn";
-import { useTabsStore, useTagsStore } from "@/stores/useStore";
+import { useTabsStore, useArticlesParamsStore } from "@/stores/useStore";
 
 const PopularTags = () => {
   const { data: tags } = useQuery(["/api/tags"], () => getTags(), {
     refetchOnWindowFocus: false,
   });
-  const { selectedTag, setSelectedTag } = useTagsStore();
+  const {
+    articlesParams: { tag: selectedTag },
+    setSelectedTag,
+    resetCurrentPage,
+  } = useArticlesParamsStore();
   const { setActiveTab } = useTabsStore();
 
   const handleClickPopularTag = (tag: string) => {
     setSelectedTag(tag);
     setActiveTab(tag);
+    resetCurrentPage();
   };
 
   return (

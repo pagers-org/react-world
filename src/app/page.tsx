@@ -6,13 +6,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getArticles } from "@/services/articles";
 import PopularTags from "@/components/PopularTags";
 import Tabs from "@/components/Tabs";
-import { useTagsStore } from "@/stores/useStore";
+import PaginationBar from "@/components/PaginationBar";
+import { useArticlesParamsStore } from "@/stores/useStore";
 
 export default function Home() {
-  const { selectedTag } = useTagsStore();
+  const { articlesParams } = useArticlesParamsStore();
+
   const { isLoading, data: articleResponse } = useQuery(
-    ["/api/articles", selectedTag],
-    () => getArticles(selectedTag ? { tag: selectedTag } : undefined),
+    ["/api/articles", articlesParams],
+    () => getArticles(articlesParams),
     {
       refetchOnWindowFocus: false,
     },
@@ -22,17 +24,20 @@ export default function Home() {
     <main>
       <HomeBanner />
       <section className={contentContainer}>
-        {isLoading && <div>Loading...</div>}
-        {articleResponse && (
-          <div>
-            <Tabs tabs={[undefined, "Global Feed", selectedTag]} />
-            <ul>
-              {articleResponse.articles.map((article) => (
-                <ArticleCard article={article} />
-              ))}
-            </ul>
-          </div>
-        )}
+        <div>
+          {isLoading && <div>Loading...</div>}
+          {articleResponse && (
+            <div>
+              <Tabs tabs={[undefined, "Global Feed", articlesParams.tag]} />
+              <ul>
+                {articleResponse.articles.map((article) => (
+                  <ArticleCard article={article} />
+                ))}
+              </ul>
+            </div>
+          )}
+          {articleResponse && <PaginationBar count={articleResponse.articlesCount} />}
+        </div>
         <PopularTags />
       </section>
     </main>
