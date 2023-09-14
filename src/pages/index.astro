@@ -22,6 +22,14 @@ const tags: Tags = await HttpClient.get(`${API.TAGS}`);
     max-width: 1280px;
     display: flex;
     flex-direction: column;
-    margin: 25px 5%;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      margin: 25px 5%;
+    }
   }
 </style>
