@@ -1,5 +1,4 @@
-import ArticleFavoriteButton from './article-favorite-button/article-favorite-button';
+import ArticleFavoriteToggleButton from './article-favorite-toggle-button/article-favorite-toggle-button';
 import ArticleListPagination from './article-list-pagination/article-list-pagination';
-import ArticleUnfavoriteButton from './article-unfavorite-button/article-unfavorite-button';
 
-export { ArticleFavoriteButton, ArticleListPagination, ArticleUnfavoriteButton };
+export { ArticleListPagination, ArticleFavoriteToggleButton };

@@ -1,4 +1,3 @@
-import UserFollowButton from './user-follow-button/user-follow-button';
-import UserUnfollowButton from './user-unfollow-button/user-unfollow-button';
+import UserFollowToggleButton from './user-follow-toggle-button/user-follow-toggle-button';
 
-export { UserFollowButton, UserUnfollowButton };
+export { UserFollowToggleButton };
