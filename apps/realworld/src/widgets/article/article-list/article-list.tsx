@@ -6,13 +6,24 @@ import { ArticleListPagination } from '@/features/article';
 import { getItemIndex } from '@/shared/utils/array';
 import { useGetArticles } from '@/shared/api/realworld/endpoints/articles/articles';
 import { getLastPage } from '@/entities/article/api/page';
+import { useSearchParams } from 'next/navigation';
 
 interface ArticleListProps {}
 
 const LIMIT = 10;
 
 const ArticleList = ({}: ArticleListProps) => {
-  const { data: articlesResponse } = useGetArticles();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get('page') ?? 1);
+  const { data: articlesResponse } = useGetArticles(
+    { limit: LIMIT, offset: (currentPage - 1) * LIMIT },
+    {
+      query: {
+        keepPreviousData: true,
+      },
+    },
+  );
+
   const { articles, articlesCount } = articlesResponse ?? {
     articles: [],
     articlesCount: 0,
@@ -33,7 +44,7 @@ const ArticleList = ({}: ArticleListProps) => {
           </>
         );
       })}
-      <ArticleListPagination lastPage={lastPage} currentPage={1} />
+      <ArticleListPagination lastPage={lastPage} currentPage={currentPage} />
     </>
   );
 };
