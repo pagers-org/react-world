@@ -5,8 +5,9 @@ import TagList from '../tags/TagList';
 import { useRouter } from 'next/navigation';
 import { FillHeartIcon } from '@/composables/icons';
 import { fillGreenButton, flex, flexBetween, greenButton } from '@/styles/common.css';
-import { useMutation } from '@tanstack/react-query';
-import { favoriteArticleAPI, unFavoriteArticleAPI } from '@/services/favorites';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { favoriteAPI, unFavoriteAPI } from '@/services/articles';
+
 type Props = {
   article: any;
 };
@@ -15,15 +16,15 @@ const ArticlePreview = ({
 }: Props) => {
   const router = useRouter();
 
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
-    mutationFn: favorited ? unFavoriteArticleAPI : favoriteArticleAPI,
+    mutationFn: favorited ? favoriteAPI : unFavoriteAPI,
     onError: err => {
       console.error(err);
     },
     onSuccess: res => {
-      console.log(res);
-
-      console.log('좋아요!');
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
     },
   });
   return (

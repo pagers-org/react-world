@@ -1,15 +1,15 @@
-import { http } from '@/libs/http';
+import { http } from '@/utils/http';
 
 const getProfile = (username: string) => {
-  return http.get(`https://api.realworld.io/api/profiles/${username}`);
+  return http.get(`/profiles/${username}`);
 };
 
 const followUser = (username: string) => {
-  return http.post(`https://api.realworld.io/api/profiles/${username}`);
+  return http.post(`/profiles/${username}`);
 };
 
 const unFollowUser = (username: string) => {
-  return http.delete(`https://api.realworld.io/api/profiles/${username}`);
+  return http.delete(`/profiles/${username}`);
 };
 
 export { getProfile, followUser, unFollowUser };

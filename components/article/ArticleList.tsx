@@ -1,13 +1,14 @@
 'use client';
-import { ArticleAPI } from '@/services/articles';
+import { getArticlesAPI } from '@/services/articles';
 import ArticlePreview from './ArticlePreview';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React from 'react';
+import { flexCenter, greenButton } from '@/styles/common.css';
 
 const ArticleList = () => {
   const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery({
     queryKey: ['articles'],
-    queryFn: ({ pageParam = 1 }) => ArticleAPI.all(pageParam),
+    queryFn: ({ pageParam = 1 }) => getArticlesAPI(pageParam),
     getNextPageParam: (lastPage, pages) => {
       return true;
     },
@@ -16,7 +17,6 @@ const ArticleList = () => {
 
   return (
     <div>
-      <button onClick={() => fetchNextPage()}>다음</button>
       {data?.pages.map((group, i) => (
         <div key={i}>
           {group.articles.map(article => (
@@ -24,6 +24,11 @@ const ArticleList = () => {
           ))}
         </div>
       ))}
+      <div className={flexCenter}>
+        <button onClick={() => fetchNextPage()} className={greenButton}>
+          다음
+        </button>
+      </div>
     </div>
   );
 
