@@ -5,24 +5,19 @@ import * as styles from './Header.css';
 import { useState } from 'react';
 import { ROUTES } from '../constants/routes';
 
-const NAV_LIST = [
-  { name: 'Home', href: '/' },
-  { name: 'Sign in', href: '/login' },
-  { name: 'Sign up', href: '/register' },
-];
-
 export default function Header() {
   const [selected, setSelected] = useState('Home');
+  const nav = Object.values(ROUTES).filter((route) => route.nav);
   return (
     <header className={styles.wrapper}>
-      <Link href={ROUTES.home}>
+      <Link href={ROUTES.HOME.href}>
         <h1 className={styles.title} onClick={() => setSelected('Home')}>
           Real World Blog
         </h1>
       </Link>
       <nav>
         <ul className={styles.nav}>
-          {NAV_LIST.map((link) => (
+          {nav.map((link) => (
             <Link key={link.name} href={link.href}>
               <li
                 className={

@@ -23,6 +23,7 @@ module.exports = {
 
 	rules: {
 		"no-console": "error",
+		'new-cap': 'off',
 		"prettier/prettier": "off",
 		"unused-imports/no-unused-imports": "error",
 		"react-hooks/rules-of-hooks": "error",

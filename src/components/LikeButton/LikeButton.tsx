@@ -1,9 +1,9 @@
 import { AiFillHeart } from 'react-icons/ai';
 import * as styles from './LikeButton.css';
 
-type Props = {
+interface Props {
   favoritesCount: number;
-};
+}
 
 export default function LikeButton({ favoritesCount }: Props) {
   return (

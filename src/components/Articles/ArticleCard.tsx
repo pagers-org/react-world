@@ -1,17 +1,17 @@
 import Image from 'next/image';
-import * as styles from './PostCard.css';
+import * as styles from './ArticleCard.css';
 import Link from 'next/link';
-import { Article } from '../../service/post';
 import { convertISOToEngFormat } from '../../utils/date';
-import LikeButton from '../LikeButton';
 import TagList from '../TagList/TagList';
 import { ROUTES } from '../../constants/routes';
+import LikeButton from '../LikeButton/LikeButton';
+import { Article } from '../../types/articles';
 
-type PostCardProps = {
-  post: Article;
-};
+interface Props {
+  article: Article;
+}
 
-export default function PostCard({ post }: PostCardProps) {
+export default function ArticleCard({ article }: Props) {
   const {
     author,
     description,
@@ -20,18 +20,18 @@ export default function PostCard({ post }: PostCardProps) {
     favoritesCount,
     tagList,
     slug,
-  } = post;
+  } = article;
   return (
-    <div className={styles.postCard}>
+    <div className={styles.articleCard}>
       <div className={styles.articleMeta}>
-        <Link href={`${ROUTES.userArticlePage}${author.username}`}>
-          <div className={styles.postInfo}>
+        <Link href={`${ROUTES.USERARTICLEPAGE(author.username).href}`}>
+          <div className={styles.articleInfo}>
             <Image
               src={author.image}
               alt="Picture of the author"
               width={32}
               height={32}
-              className={styles.profilePic}
+              className={styles.profilePicture}
             />
             <div className={styles.info}>
               <p className={styles.authorName}>{author.username}</p>
@@ -42,7 +42,7 @@ export default function PostCard({ post }: PostCardProps) {
         <LikeButton favoritesCount={favoritesCount} />
       </div>
       <div className={styles.contentWrapper}>
-        <Link href={`${ROUTES.articleDetail}${slug}`}>
+        <Link href={`${ROUTES.ARTICLEDETAIL(slug).href}`}>
           <div className={styles.title}>{title}</div>
           <div className={styles.content}>{description}</div>
           <span className={styles.readMore}>Read more...</span>
