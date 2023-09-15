@@ -20,5 +20,8 @@
     "react-dom": "18.2.0",
     "typescript": "^5.2.2",
     "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "@vanilla-extract/next-plugin": "^2.3.0"
   }
 }
