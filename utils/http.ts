@@ -1,5 +1,4 @@
 import { API_BASE_URL } from '@/constants/env';
-
 export const http = {
   request: async (url: string, method: string, body?: Request, options?: any) => {
     const defaultOptions = {
@@ -10,19 +9,28 @@ export const http = {
       body: body ? JSON.stringify(body) : undefined,
       ...options,
     };
+    // console.log('서버자나');
+    console.log(API_BASE_URL);
+
+    // console.log(defaultOptions);
 
     try {
       const response = await fetch(`${API_BASE_URL}${url}`, defaultOptions);
 
       if (!response.ok) {
         const errorData = await response.json();
+        // console.log('error');
+        // console.log(errorData);
+
         throw new Error(errorData.message || 'Request failed');
       }
+
+      // console.log(response);
 
       return response.json();
     } catch (error) {
       console.error(error);
-      throw new Error('Request failed');
+      // throw new Error('Request failed');
     }
   },
 

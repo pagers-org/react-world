@@ -81,10 +81,10 @@ export type Comment = {
 };
 
 export type UserAction = {
-  login: (e: any) => void;
-  updateUser: () => void;
-  logout: () => void;
-  reset: () => void;
+  login?: (e: any) => void;
+  updateUser?: () => void;
+  logout?: () => void;
+  reset?: () => void;
 };
 
 export type UserResponse = {

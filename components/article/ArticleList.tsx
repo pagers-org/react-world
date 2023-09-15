@@ -2,18 +2,47 @@
 import { getArticlesAPI } from '@/services/articles';
 import ArticlePreview from './ArticlePreview';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { flexCenter, greenButton } from '@/styles/common.css';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 const ArticleList = () => {
+  const targetRef = useRef(null);
+
   const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery({
     queryKey: ['articles'],
-    queryFn: ({ pageParam = 1 }) => getArticlesAPI(pageParam),
+    queryFn: ({ pageParam = 1 }) => {
+      console.log(pageParam);
+
+      return getArticlesAPI(pageParam);
+    },
     getNextPageParam: (lastPage, pages) => {
-      return true;
+      console.log('getNextPageParam 발동');
+
+      const totalPage = Math.ceil(lastPage.articlesCount / 10);
+      let currentPage = pages.length;
+      if (totalPage < pages.length) {
+        console.log('그만');
+
+        return undefined;
+      }
+      // console.log(totalPage);
+      // console.log(currentPage);
+
+      return currentPage++;
     },
     retry: false,
+    refetchOnWindowFocus: false,
   });
+
+  const nextPage = () => {
+    if (!hasNextPage || isFetchingNextPage) {
+      return;
+    }
+    fetchNextPage();
+  };
+
+  useIntersectionObserver(nextPage, targetRef);
 
   return (
     <div>
@@ -24,15 +53,9 @@ const ArticleList = () => {
           ))}
         </div>
       ))}
-      <div className={flexCenter}>
-        <button onClick={() => fetchNextPage()} className={greenButton}>
-          다음
-        </button>
-      </div>
+      <div className={flexCenter} ref={targetRef}></div>
     </div>
   );
-
-  // return <div>{articles?.map(article => <ArticlePreview key={article.slug} article={article} />)}</div>;
 };
 
 export default ArticleList;

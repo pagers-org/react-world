@@ -12,13 +12,29 @@ const loginAPI = async (user: LoginUser) => {
 };
 
 // 회원정보 수정
-const updateUserAPI = async (user: UpdateUser) => {
-  return http.put('/user', { user });
+const updateUserAPI = async (user: UpdateUser, auth: string) => {
+  return http.put(
+    '/user',
+    { user },
+    {
+      headers: {
+        Authorization: `Token ${auth}`,
+      },
+    }
+  );
 };
 
 // 현재 유저 조회
-const getUserAPI = async () => {
-  return http.get('/user');
+const getUserAPI = async (auth: string) => {
+  console.log('getUserAPI');
+  console.log(auth);
+
+  return http.get('/user', {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Token ${auth}`,
+    },
+  });
 };
 
 export { registerUserAPI, loginAPI, getUserAPI, updateUserAPI };
