@@ -9,21 +9,21 @@ import { array } from "utils/array";
 
 type BaseProps = {
   total: number;
-  currentPage: number;
+  current: number;
   onPageChange?: (page: number) => void;
 };
 
 type Props = Override<ComponentPropsWithoutRef<"ul">, BaseProps>;
 
 export const Pagination = forwardRef<HTMLUListElement, Props>(
-  ({ total, className, currentPage, onPageChange, ...rest }, ref) => {
+  ({ total, className, current, onPageChange, ...rest }, ref) => {
     const pages = useMemo(() => array(total, (index) => index + 1), [total]);
 
     const handlePageClick = (page: number) => () => {
       onPageChange?.(page);
     };
 
-    const isCurrent = (page: number) => page === currentPage;
+    const isCurrent = (page: number) => page === current;
 
     return (
       <ul ref={ref} {...rest} className={clsx("flex", className)}>
