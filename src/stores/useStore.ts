@@ -1,6 +1,6 @@
 import { ArticleQueryParams } from "@/types/articles";
 import { create } from "zustand";
-
+import { immer } from "zustand/middleware/immer";
 interface TabState {
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -19,21 +19,36 @@ const defaultArticlesState = {
   limit: 10,
 };
 
-interface ArticlesState {
+type ArticlesState = {
   articlesParams: ArticleQueryParams;
+};
+
+type ArticlesStoreActions = {
   setSelectedTag: (tag: string) => void;
   resetSelectedTag: () => void;
   setCurrentPage: (selectedPage: number) => void;
   resetCurrentPage: () => void;
-}
+};
 
-export const useArticlesParamsStore = create<ArticlesState>((set) => ({
-  articlesParams: defaultArticlesState,
-  setSelectedTag: (newTag: string) =>
-    set((prev) => ({ ...prev, articlesParams: { ...prev.articlesParams, tag: newTag } })),
-  resetSelectedTag: () => set((prev) => ({ ...prev, tag: "" })),
-  setCurrentPage: (selectedPage: number) =>
-    set((prev) => ({ ...prev, articlesParams: { ...prev.articlesParams, offset: (selectedPage - 1) * 10 } })),
-  resetCurrentPage: () => set((prev) => ({ ...prev, articlesParams: { ...prev.articlesParams, offset: 0 } })),
-  resetArticlesParams: () => set({ articlesParams: defaultArticlesState }),
-}));
+export const useArticlesParamsStore = create(
+  immer<ArticlesState & ArticlesStoreActions>((set) => ({
+    articlesParams: defaultArticlesState,
+    setSelectedTag: (newTag: string) =>
+      set((state) => {
+        state.articlesParams.tag = newTag;
+      }),
+    resetSelectedTag: () =>
+      set((state) => {
+        state.articlesParams.tag = "";
+      }),
+    setCurrentPage: (selectedPage: number) =>
+      set((state) => {
+        state.articlesParams.offset = (selectedPage - 1) * 10;
+      }),
+    resetCurrentPage: () =>
+      set((state) => {
+        state.articlesParams.offset = 0;
+      }),
+    resetArticlesParams: () => set({ articlesParams: defaultArticlesState }),
+  })),
+);
