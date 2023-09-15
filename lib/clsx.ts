@@ -2,22 +2,20 @@ import { isObject } from "utils/guards/object";
 
 type ClassName = string | Record<string, boolean> | null | undefined;
 
-export const clsx = (...args: ClassName[]): string => {
-  let str = "";
+export const clsx = (...classNames: ClassName[]): string => {
+  let appended = "";
 
-  for (const arg of args) {
-    if (isObject(arg)) {
-      for (const key in arg) {
-        if (arg[key]) {
-          str += " ";
-          str += key;
+  for (const className of classNames) {
+    if (isObject(className)) {
+      for (const key in className) {
+        if (className[key]) {
+          appended += `${" "}${key}`;
         }
       }
-    } else if (arg) {
-      str += " ";
-      str += arg;
+    } else if (className) {
+      appended += `${" "}${className}`;
     }
   }
 
-  return str.trim();
+  return appended.trim();
 };
