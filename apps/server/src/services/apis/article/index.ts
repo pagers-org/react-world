@@ -2,7 +2,7 @@ import {
     IGetArticleDetailParams,
     IGetArticleListParams,
     IGetArticleCommentsParams,
-} from '@/types/article';
+} from '@/types/article.type';
 import { instance } from '../../instance';
 
 export const articleApi = {
