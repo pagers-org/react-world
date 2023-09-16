@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <Link className={styles.logo} href="/">
+        <Link href={ROUTES.HOME} className={styles.logo}>
           TECH
         </Link>
       </div>

@@ -1,18 +1,19 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import * as styles from '@/src/components/layout/Banner/index.css';
 
-interface Props extends PropsWithChildren {
+interface Props {
   title: string;
   description?: string;
-  background: keyof typeof styles.background;
+  background?: keyof typeof styles.background;
+  children?: ReactNode;
 }
 
 export default function Banner({
   title,
   description,
-  background,
+  background = 'primary',
   children,
 }: Props) {
   return (

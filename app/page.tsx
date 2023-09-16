@@ -1,41 +1,64 @@
-import * as styles from '@/app/page.css';
-
-import Articles from '@/features/article/components/Articles';
+import { Suspense } from 'react';
+import { dehydrate } from '@tanstack/react-query';
 
 import Banner from '@/src/components/layout/Banner';
 
-import { DUMMY_ARTICLES } from '@/src/fixtures/article';
-import { DUMMY_TAGS } from '@/src/fixtures/tag';
+import { getQueryClient } from '@/src/lib/react-query/getQueryClient';
+import Hydrate from '@/src/lib/react-query/hydrate.client';
 
-export default function MainPage() {
+import Tab from '@/features/article/components/Tab';
+import ArticleSkeleton from '@/features/article/components/ArticleSkeleton';
+import Articles from '@/features/article/components/Articles';
+import { prefetchGetArticleListQuery } from '@/features/article/hooks/queries/prefetchGetArticleListQuery';
+
+import Tags from '@/features/tag/components/Tags';
+import { prefetchGetTagListQuery } from '@/features/tag/hooks/prefetchGetTagListQuery';
+
+import * as styles from '@/app/page.css';
+
+export default async function MainPage() {
+  const queryClient = getQueryClient();
+
+  await Promise.all([
+    prefetchGetArticleListQuery(queryClient),
+    prefetchGetTagListQuery(queryClient),
+  ]);
+
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <div>
+    <Hydrate state={dehydratedState}>
       <Banner
         title="React-World"
         description="다양한 기술적 시도를 합니다."
         background="primary"
       />
-
       <div className={styles.content}>
         <div className={styles.article}>
           <div className={styles.tab}>
-            <div>Global Feed</div>
+            <Tab />
           </div>
-          <Articles articles={DUMMY_ARTICLES.articles} />
+
+          <Suspense
+            fallback={
+              <>
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+              </>
+            }
+          >
+            <Articles />
+          </Suspense>
         </div>
         <div className={styles.tag}>
-          popular tags
-          <div className={styles.chipWrapper}>
-            {DUMMY_TAGS.map((tag) => {
-              return (
-                <button className={styles.chip} key={tag} type="button">
-                  {tag}
-                </button>
-              );
-            })}
-          </div>
+          <Tags />
         </div>
       </div>
-    </div>
+    </Hydrate>
   );
 }

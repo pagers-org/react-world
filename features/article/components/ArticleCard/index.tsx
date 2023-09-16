@@ -3,15 +3,23 @@ import Image from 'next/image';
 import React from 'react';
 import { format } from 'date-fns';
 
+import * as styles from '@/features/article/components/ArticleCard/index.css';
 import { Article } from '@/features/article/types';
 
-import * as styles from '@/features/article/components/ArticleCard/index.css';
+import { ROUTES } from '@/src/constants/route';
 
 interface Props extends Article {}
 
 export default function ArticleCard(props: Props) {
-  const { title, description, tagList, favoritesCount, createdAt, author } =
-    props;
+  const {
+    slug,
+    title,
+    description,
+    tagList,
+    favoritesCount,
+    createdAt,
+    author,
+  } = props;
 
   const createdDate = format(new Date(createdAt), 'yyyy-MM-dd');
 
@@ -40,7 +48,7 @@ export default function ArticleCard(props: Props) {
         </div>
       </div>
 
-      <Link href="/article/임시" className={styles.content}>
+      <Link href={ROUTES.ARTICLE_DETAIL(slug)} className={styles.content}>
         <div className={styles.articleTitle}>{title}</div>
         <div className={styles.articleDescription}>{description}</div>
       </Link>

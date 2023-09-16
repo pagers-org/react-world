@@ -2,5 +2,5 @@ export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   REGISTER: '/register',
-  ARTICLE_DETAIL: (id: number) => `/article/${id}`,
+  ARTICLE_DETAIL: (slug: string) => `/article/${slug}`,
 } as const;
