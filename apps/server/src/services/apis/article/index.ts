@@ -1,4 +1,8 @@
-import { IGetArticleListParams } from '@/types/article';
+import {
+    IGetArticleDetailParams,
+    IGetArticleListParams,
+    IGetArticleCommentsParams,
+} from '@/types/article.type';
 import { instance } from '../../instance';
 
 export const articleApi = {
@@ -20,4 +24,9 @@ export const articleApi = {
                 },
             })
             .then(res => res.data),
+
+    getArticleDetail: async ({ slug }: IGetArticleDetailParams) =>
+        await instance.get(`/articles/${slug}`).then(res => res.data),
+    getArticleComments: async ({ slug }: IGetArticleCommentsParams) =>
+        await instance.get(`/articles/${slug}/comments`).then(res => res.data),
 };
