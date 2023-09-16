@@ -5,19 +5,19 @@ import { useMemo } from "react";
 
 import { serializeQuery } from "lib/query";
 
-type Params = Record<string, string | number>;
+type Query = Record<string, string | number>;
 
-export const useQueryParams = <T extends Params = Params>() => {
+export const useQueryParams = <T extends Query = Query>() => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const query = useMemo(() => toQuery(searchParams), [searchParams]);
 
-  const set = (incoming: Params) => {
+  const set = (incoming: Query) => {
     router.push(serializeQuery(incoming));
   };
 
-  const append = (incoming: Params) => {
+  const append = (incoming: Query) => {
     router.replace(serializeQuery({ ...query, ...incoming }), { scroll: false });
   };
 
@@ -29,7 +29,7 @@ export const useQueryParams = <T extends Params = Params>() => {
 };
 
 const toQuery = (params: ReadonlyURLSearchParams) => {
-  const query: Params = {};
+  const query: Query = {};
 
   params.forEach((value, key) => (query[key] = value));
 
