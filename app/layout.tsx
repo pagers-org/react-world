@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import type { PropsWithChildren } from "react";
 
 import { CommonLayout } from "components/shared/common-layout";
-import { Providers } from "components/shared/providers";
 
 import "styles/tailwind.css";
 
@@ -21,9 +20,7 @@ const inter = Inter({
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html lang="en" className={inter.variable}>
-      <Providers>
-        <CommonLayout>{children}</CommonLayout>
-      </Providers>
+      <CommonLayout>{children}</CommonLayout>
     </html>
   );
 };

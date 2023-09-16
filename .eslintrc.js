@@ -37,7 +37,6 @@ module.exports = {
         pathGroups: [
           { pattern: "{next*,next*/**}", group: "builtin", position: "before" },
           { pattern: "{react*,react-*}", group: "builtin", position: "before" },
-          { pattern: "{swr*,swr*/**}", group: "builtin", position: "before" },
         ],
         pathGroupsExcludedImportTypes: ["builtin"],
         alphabetize: {

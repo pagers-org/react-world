@@ -37,7 +37,7 @@ export const Trigger = forwardRef<HTMLLIElement, Props>(({ children, className, 
 });
 
 const styles = {
-  base: "flex h-9 cursor-pointer items-center justify-center px-8 text-base font-normal text-zinc-400",
+  base: "flex h-9 cursor-pointer items-center justify-center px-8 text-base font-medium text-zinc-400",
   active:
-    "relative !font-medium !text-zinc-800 after:absolute after:inset-0 after:border-b-2 after:border-zinc-800 after:content-['']",
+    "relative !text-zinc-800 after:absolute after:inset-0 after:border-b-2 after:border-zinc-800 after:content-['']",
 } as const;
