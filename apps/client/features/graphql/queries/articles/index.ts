@@ -26,8 +26,20 @@ interface GArticlesQuery {
 }
 
 const articlesQuery = gql`
-    query getArticleList {
-        getArticleList {
+    query getArticleList(
+        $tag: String
+        $author: String
+        $favorited: String
+        $offset: Int
+        $limit: Int
+    ) {
+        getArticleList(
+            tag: $tag
+            author: $author
+            favorited: $favorited
+            offset: $offset
+            limit: $limit
+        ) {
             articles {
                 body
                 title

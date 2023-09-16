@@ -15,6 +15,14 @@ export default async function Page() {
         request<GArticlesQuery>(
             'http://localhost:4000/articles',
             articlesQuery,
+            {
+                // parameters
+                tag: null,
+                author: null,
+                favorited: null,
+                offset: null,
+                limit: null,
+            },
         ),
     );
     const dehydratedState = dehydrate(queryClient);
