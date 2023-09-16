@@ -1,4 +1,4 @@
-import { Description } from "./description";
+import { Bio } from "./bio";
 import { Image } from "./image";
 import { Info } from "./info";
 import { Name } from "./name";
@@ -9,5 +9,5 @@ export const Avatar = {
   Image,
   Info,
   Name,
-  Description,
+  Bio,
 };

@@ -32,7 +32,7 @@ export const ArticleItem = ({ article }: Props) => {
             <Avatar.Info>
               <Avatar.Name>{username}</Avatar.Name>
 
-              <Avatar.Description>{relativeTime}</Avatar.Description>
+              <Avatar.Bio>{relativeTime}</Avatar.Bio>
             </Avatar.Info>
           </Avatar.Root>
         </Link>
