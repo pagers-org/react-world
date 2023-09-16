@@ -1,10 +1,20 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { articleApi } from './services/apis/article';
-import { IGetArticleListParams } from '@/types/article';
+import {
+    IGetArticleListParams,
+    IGetArticleDetailParams,
+} from '@/types/article';
 
 const typeDefs = gql`
     type Query {
-        getArticleList: Articles!
+        getArticleList(
+            tag: String
+            author: String
+            favorited: String
+            offset: Int
+            limit: Int
+        ): Articles!
+        getArticleDetail(slug: String!): Article!
     }
 
     type Articles {
@@ -40,7 +50,6 @@ const resolvers = {
             { author, tag, favorited, limit, offset }: IGetArticleListParams,
         ) {
             try {
-                // const result = await fetch('/');
                 const articleList = await articleApi.getArticleList({
                     author,
                     tag,
@@ -51,10 +60,19 @@ const resolvers = {
 
                 return articleList;
             } catch (e) {
-                return {
-                    data: null,
-                    success: false,
-                };
+                return e;
+            }
+        },
+
+        async getArticleDetail(_: never, { slug }: IGetArticleDetailParams) {
+            try {
+                const articleDetail = await articleApi.getArticleDetail({
+                    slug,
+                });
+
+                return articleDetail;
+            } catch (e) {
+                return e;
             }
         },
     },
