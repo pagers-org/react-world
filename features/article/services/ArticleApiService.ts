@@ -2,7 +2,7 @@ import { Options } from 'ky';
 
 import { HttpClient } from '@/src/services/HttpClient';
 
-import { Article, articleSchema } from '@/features/article/types';
+import { Article, articlesSchema } from '@/features/article/types';
 
 interface GetArticlesResponse {
   articles: Article[];
@@ -17,7 +17,7 @@ class ArticleApiService extends HttpClient {
       })
       .json()) as GetArticlesResponse;
 
-    articleSchema.parse(res.articles);
+    articlesSchema.parse(res.articles);
 
     return res;
   }

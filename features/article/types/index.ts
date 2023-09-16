@@ -22,5 +22,7 @@ export const articleSchema = z.object({
   author: authorSchema,
 });
 
+export const articlesSchema = z.array(articleSchema);
+
 export type Article = z.infer<typeof articleSchema>;
 export type Author = z.infer<typeof authorSchema>;
