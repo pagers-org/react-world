@@ -1,11 +1,12 @@
+import { ROUTE } from '@/constants/route';
+import { Article } from '@/types/articles';
+import { convertISOToEngFormat } from '@/utils/date';
 import Image from 'next/image';
-import * as styles from './ArticleCard.css';
 import Link from 'next/link';
-import { convertISOToEngFormat } from '../../utils/date';
-import TagList from '../TagList/TagList';
-import { ROUTES } from '../../constants/routes';
+
 import LikeButton from '../LikeButton/LikeButton';
-import { Article } from '../../types/articles';
+import TagList from '../TagList/TagList';
+import * as styles from './ArticleCard.css';
 
 interface Props {
   article: Article;
@@ -24,7 +25,7 @@ export default function ArticleCard({ article }: Props) {
   return (
     <div className={styles.articleCard}>
       <div className={styles.articleMeta}>
-        <Link href={`${ROUTES.USERARTICLEPAGE(author.username).href}`}>
+        <Link href={`${ROUTE.USER_ARTICLE_PAGE(author.username)}`}>
           <div className={styles.articleInfo}>
             <Image
               src={author.image}
@@ -42,7 +43,7 @@ export default function ArticleCard({ article }: Props) {
         <LikeButton favoritesCount={favoritesCount} />
       </div>
       <div className={styles.contentWrapper}>
-        <Link href={`${ROUTES.ARTICLEDETAIL(slug).href}`}>
+        <Link href={`${ROUTE.ARTICLE_DETAIL(slug)}`}>
           <div className={styles.title}>{title}</div>
           <div className={styles.content}>{description}</div>
           <span className={styles.readMore}>Read more...</span>

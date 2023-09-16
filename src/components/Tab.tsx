@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react';
+
 import * as styles from './Tab.css';
+
 export default function Tab({
   children,
   handleRefetch,

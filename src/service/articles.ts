@@ -1,20 +1,25 @@
+import { ARTICLE_LIMIT_PER_PAGE } from '@/constants';
+import { QUERY_KEY } from '@/constants/query';
+import { Article } from '@/types/articles';
+import { API_BASE_URL } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
-import { PAGE_LIMIT } from '../constants';
-import { Article } from '../types/articles';
 
-const fetchArticles = async (
-  page: number,
-): Promise<{ articles: Article[]; articlesCount: number }> => {
+interface FetchArticlesResponse {
+  articles: Article[];
+  articlesCount: number;
+}
+
+const getArticles = async (page: number): Promise<FetchArticlesResponse> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}articles?offset=${page}&limit=${PAGE_LIMIT}`,
+    `${API_BASE_URL}articles?offset=${page}&limit=${ARTICLE_LIMIT_PER_PAGE}`,
   );
   const data = await res.json();
   return data;
 };
 
 export const useGetAllArticlesQuery = (page: number) => {
-  const { data, ...rest } = useQuery(['posts', page], () =>
-    fetchArticles(page),
+  const { data, ...rest } = useQuery([QUERY_KEY.ARTICLE.LIST], () =>
+    getArticles(page),
   );
 
   return { articles: data, ...rest };

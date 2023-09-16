@@ -1,29 +1,33 @@
 'use client';
 
+import { ROUTE } from '@/constants/route';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 import * as styles from './Header.css';
-import { useState } from 'react';
-import { ROUTES } from '../constants/routes';
+
+const LINKS = [
+  { name: 'Home', href: ROUTE.HOME },
+  { name: 'Sign in', href: ROUTE.SIGNIN },
+  { name: 'Sign up', href: ROUTE.SIGNUP },
+];
 
 export default function Header() {
-  const [selected, setSelected] = useState('Home');
-  const nav = Object.values(ROUTES).filter((route) => route.nav);
+  const router = usePathname();
+
   return (
     <header className={styles.wrapper}>
-      <Link href={ROUTES.HOME.href}>
-        <h1 className={styles.title} onClick={() => setSelected('Home')}>
-          Real World Blog
-        </h1>
+      <Link href={ROUTE.HOME}>
+        <h1 className={styles.title}>Real World Blog</h1>
       </Link>
       <nav>
         <ul className={styles.nav}>
-          {nav.map((link) => (
+          {LINKS.map((link) => (
             <Link key={link.name} href={link.href}>
               <li
                 className={
-                  selected === link.name ? styles.selectedNav : styles.navItem
+                  router === link.href ? styles.selectedNav : styles.navItem
                 }
-                onClick={() => setSelected(link.name)}
               >
                 {link.name}
               </li>

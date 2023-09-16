@@ -22,7 +22,7 @@ module.exports = {
 	],
 
 	rules: {
-		"no-console": "error",
+		"no-console": "warn",
 		'new-cap': 'off',
 		"prettier/prettier": "off",
 		"unused-imports/no-unused-imports": "error",

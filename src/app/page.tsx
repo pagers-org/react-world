@@ -1,5 +1,6 @@
-import Banner from '../components/Banner';
-import ArticleList from '../components/Articles/ArticleList';
+import ArticleList from '@/components/Articles/ArticleList';
+import Banner from '@/components/Banner';
+
 export default function HomePage() {
   return (
     <main>

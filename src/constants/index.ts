@@ -1,1 +1,1 @@
-export const PAGE_LIMIT = 20;
+export const ARTICLE_LIMIT_PER_PAGE = 20;

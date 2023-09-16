@@ -1,45 +1,39 @@
 'use client';
+
+import { ARTICLE_LIMIT_PER_PAGE } from '@/constants';
+import { useGetAllArticlesQuery } from '@/service/articles';
 import { useState } from 'react';
-import { useGetAllArticlesQuery } from '../../service/articles';
-import * as styles from './ArticleList.css';
-import Tab from '../Tab';
+
 import Pagination from '../Pagination/Pagination';
-import { PAGE_LIMIT } from '../../constants';
+import Tab from '../Tab';
 import ArticleCard from './ArticleCard';
-import { Article } from '../../types/articles';
+import * as styles from './ArticleList.css';
 
 export default function ArticleList() {
   const [selectedPage, setSelectedPage] = useState(1);
-  const { articles, isLoading, error, refetch } = useGetAllArticlesQuery(
-    selectedPage,
-  ) as {
-    articles: { articles: Article[]; articlesCount: number };
-    isLoading: boolean;
-    error: Error | null;
-    refetch: () => void;
-  };
+  const { articles, isLoading, error } = useGetAllArticlesQuery(selectedPage);
 
   const handlePagination = (page: number) => {
     setSelectedPage(page);
     scrollTo(0, 0);
   };
 
-  const handleRefetch = () => {
-    setSelectedPage(1);
-    refetch();
-  };
-
-  const totalPage = articles && Math.ceil(articles.articlesCount / PAGE_LIMIT);
+  const totalPage =
+    articles?.articlesCount! &&
+    Math.ceil(articles.articlesCount / ARTICLE_LIMIT_PER_PAGE);
 
   return (
     <div className={styles.articleContainer}>
-      <Tab handleRefetch={handleRefetch}>Global Feed</Tab>
+      <Tab handleRefetch={() => setSelectedPage(1)}>Global Feed</Tab>
       {isLoading && <div>Loading....</div>}
-      {error && <div>Error!!!</div>}
+      {error instanceof Error && <div>{error.message}</div>}
       {articles && (
         <>
           {articles.articles.map((article) => (
-            <ArticleCard key={article.title} article={article} />
+            <ArticleCard
+              key={`${article.title}${article.author.username}${article.createdAt}`}
+              article={article}
+            />
           ))}
           <Pagination
             totalPage={totalPage}
