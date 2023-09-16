@@ -1,15 +1,20 @@
-import { Tag } from '@/features/tag/types';
+import { Tag, tagsSchema } from '@/features/tag/types';
 
-import { ApiService } from '@/src/services/ApiService';
-import { ResponsePromise } from 'ky';
+import { HttpClient } from '@/src/services/HttpClient';
 
 interface GetTagsResponse {
   tags: Tag[];
 }
 
-class TagApiService extends ApiService {
+class TagApiService extends HttpClient {
   async getTags(): Promise<GetTagsResponse> {
-    return await this.instance.get('tags').json();
+    const response = (await this.instance
+      .get('tags')
+      .json()) as GetTagsResponse;
+
+    tagsSchema.parse(response.tags);
+
+    return response;
   }
 }
 

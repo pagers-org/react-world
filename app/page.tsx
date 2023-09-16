@@ -7,6 +7,7 @@ import { getQueryClient } from '@/src/lib/react-query/getQueryClient';
 import Hydrate from '@/src/lib/react-query/hydrate.client';
 
 import Tab from '@/features/article/components/Tab';
+import ArticleSkeleton from '@/features/article/components/ArticleSkeleton';
 import Articles from '@/features/article/components/Articles';
 import { prefetchGetArticleListQuery } from '@/features/article/hooks/queries/prefetchGetArticleListQuery';
 
@@ -37,7 +38,20 @@ export default async function MainPage() {
           <div className={styles.tab}>
             <Tab />
           </div>
-          <Suspense fallback={<div>loading...</div>}>
+
+          <Suspense
+            fallback={
+              <>
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+                <ArticleSkeleton />
+              </>
+            }
+          >
             <Articles />
           </Suspense>
         </div>

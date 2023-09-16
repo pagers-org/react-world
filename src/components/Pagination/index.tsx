@@ -16,17 +16,19 @@ export default function Pagination({
   return (
     <div data-testid="pagination-container">
       {Array.from({ length: totalPage }).map((_, index) => {
+        const page = index + 1;
+
         return (
           <button
             className={classNames(styles.paginationButton, {
-              [styles.activePaginationButton]: currentPage === index + 1,
+              [styles.activePaginationButton]: currentPage === page,
             })}
-            onClick={() => onClickPage(index + 1)}
+            onClick={() => onClickPage(page)}
             key={index}
             type="button"
             data-testid="pagination-button"
           >
-            {index + 1}
+            {page}
           </button>
         );
       })}

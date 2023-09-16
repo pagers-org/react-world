@@ -1,21 +1,25 @@
 import { Options } from 'ky';
 
-import { ApiService } from '@/src/services/ApiService';
+import { HttpClient } from '@/src/services/HttpClient';
 
-import { Article } from '@/features/article/types';
+import { Article, articleSchema } from '@/features/article/types';
 
 interface GetArticlesResponse {
   articles: Article[];
   articlesCount: number;
 }
 
-class ArticleApiService extends ApiService {
+class ArticleApiService extends HttpClient {
   async getArticles(options?: Options): Promise<GetArticlesResponse> {
-    return await this.instance
+    const res = (await this.instance
       .get('articles', {
         ...options,
       })
-      .json();
+      .json()) as GetArticlesResponse;
+
+    articleSchema.parse(res.articles);
+
+    return res;
   }
 }
 
