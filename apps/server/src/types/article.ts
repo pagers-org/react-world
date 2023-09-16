@@ -6,6 +6,10 @@ export interface IGetArticleListParams {
     offset?: number;
 }
 
-export interface IGetArticleDetailParams {
+export interface IDefaultSlugParams {
     slug: string;
 }
+
+export interface IGetArticleDetailParams extends IDefaultSlugParams {}
+
+export interface IGetArticleCommentsParams extends IDefaultSlugParams {}

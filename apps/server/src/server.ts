@@ -3,6 +3,7 @@ import { articleApi } from './services/apis/article';
 import {
     IGetArticleListParams,
     IGetArticleDetailParams,
+    IGetArticleCommentsParams,
 } from '@/types/article';
 
 const typeDefs = gql`
@@ -15,6 +16,7 @@ const typeDefs = gql`
             limit: Int
         ): Articles!
         getArticleDetail(slug: String!): Article!
+        getArticleComment(slug: String!): Comments!
     }
 
     type Articles {
@@ -40,6 +42,18 @@ const typeDefs = gql`
         bio: String!
         image: String!
         following: Boolean!
+    }
+
+    type Comments {
+        comments: [Commnet]!
+    }
+
+    type Comment {
+        id: ID!
+        createdAt: String!
+        updatedAt: String!
+        body: String!
+        author: Author!
     }
 `;
 
@@ -71,6 +85,21 @@ const resolvers = {
                 });
 
                 return articleDetail;
+            } catch (e) {
+                return e;
+            }
+        },
+
+        async getArticleComments(
+            _: never,
+            { slug }: IGetArticleCommentsParams,
+        ) {
+            try {
+                const articleComments = await articleApi.getArticleComments({
+                    slug,
+                });
+
+                return articleComments;
             } catch (e) {
                 return e;
             }
