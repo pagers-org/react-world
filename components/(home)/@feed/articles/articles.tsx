@@ -8,10 +8,10 @@ type Props = {
 
 export const Articles = ({ articles }: Props) => {
   return (
-    <div className="flex flex-col">
+    <ul className="flex flex-col">
       {articles.map((article) => (
         <ArticleItem key={article.slug} article={article} />
       ))}
-    </div>
+    </ul>
   );
 };
