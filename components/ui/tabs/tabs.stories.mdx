@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta
+  title="ui/tabs"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Tabs
+
+Tabs make it easy to switch between different views.
+
+## Anatomy
+
+Import all parts and piece them together.
+
+```jsx
+import { Tabs } from 'components/ui';
+
+<Tabs.Root defaultValue="1">
+  <Tabs.List>
+    <Tabs.Trigger value="1">item 1</Tabs.Trigger>
+    <Tabs.Trigger value="2">item 2</Tabs.Trigger>
+  </Tabs.List>
+
+  <Tabs.Content value="1">content 1</Tabs.Content>
+  <Tabs.Content value="2">content 2</Tabs.Content>
+</Tabs.Root>;
+```

@@ -1,3 +1,7 @@
-export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
-}
+import { Home } from 'components/home';
+
+const HomePage = () => {
+  return <Home />;
+};
+
+export default HomePage;
