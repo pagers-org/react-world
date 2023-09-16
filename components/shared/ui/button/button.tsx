@@ -51,7 +51,7 @@ const styles = {
       "bg-white text-zinc-950 after:rounded-[4px] after:border-[1px] after:border-zinc-950 after:absolute after:inset-0 after:content-['']",
   },
   size: {
-    [Size.SMALL]: "h-7 rounded-[4px] px-3 text-xs gap-[2px]",
+    [Size.SMALL]: "h-7 rounded-[4px] px-3 text-xs gap-1",
     [Size.LARGE]: "text-sm h-9 rounded-[4px] px-6 gap-1",
   },
 } as const;
