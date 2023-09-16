@@ -3,8 +3,8 @@ import { executeAPI } from "./app";
 
 export const getArticles = async (params: Partial<ArticleQueryParams>): Promise<ArticleResponseType> => {
   const formedParams = Object.entries(params)
-    .map(([key, value]) => value && `${key}=${value}`)
-    .join("&");
+    .map(([key, value]) => value && `${key}=${value}&`)
+    .join("");
 
   const result = await executeAPI({
     method: "GET",

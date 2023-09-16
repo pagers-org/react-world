@@ -1,4 +1,5 @@
 import { useArticlesParamsStore } from "@/stores/useStore";
+import PageBtn from "./buttons/PageBtn";
 
 interface PaginationBarProps {
   count: number;
@@ -17,29 +18,22 @@ const PaginationBar: React.FC<PaginationBarProps> = ({ count }) => {
   };
 
   const renderPaginationButtons = () => {
-    const buttons = [];
+    const pageBtns = [];
     for (let i = 1; i <= Math.ceil(count / 10); i++) {
-      buttons.push(
-        <button
-          key={i}
-          onClick={() => handlePageClick(i)}
-          style={{
-            padding: "5px 10px",
-            background: i === currentPage ? "#ddd" : "white",
-            border: "1px solid #ccc",
-          }}
-        >
+      pageBtns.push(
+        <PageBtn key={i} onClick={() => handlePageClick(i)} isActive={i === currentPage}>
           {i}
-        </button>,
+        </PageBtn>,
       );
     }
-    return buttons;
+    return pageBtns;
   };
 
   return (
     <div>
-      <div>Current Page: {currentPage}</div>
-      <div style={{ marginTop: "10px", borderRadius: "5px", overflow: "hidden" }}>{renderPaginationButtons()}</div>
+      <div className="[&>*:first-child]:rounded-l-md [&>*:last-child]:rounded-r-md mt-5">
+        {renderPaginationButtons()}
+      </div>
     </div>
   );
 };
