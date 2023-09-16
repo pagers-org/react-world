@@ -1,7 +1,7 @@
 import type { Article } from "models/article";
 
-import { Articles } from "./articles";
-import { ArticlesPagination } from "./articles-pagination";
+import { Articles } from "../articles";
+import { ArticlesPagination } from "../articles-pagination";
 
 type Props = {
   articles: Article[];
