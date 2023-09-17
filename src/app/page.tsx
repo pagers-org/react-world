@@ -35,6 +35,7 @@ export default function Page() {
       <Header />
       <Banner />
       <div style={{ width: '100%', display: 'flex', border: 'solid' }}>
+        {/* @ts-expect-error Async Server Component */}
         <ArticleList />
       </div>
       <Footer />
