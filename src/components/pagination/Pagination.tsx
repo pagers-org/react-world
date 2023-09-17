@@ -10,11 +10,11 @@ interface Props {
 }
 
 const Pagination = ({ totalPage, page, setPage, offset = 5 }: Props) => {
-  const pageList = new Array(totalPage).fill(0).map((v, i) => i + 1);
+  const pageList = new Array(totalPage).fill(0).map((_, idx) => idx + 1);
   const firstNum = page - (page % offset);
   const lastNum = page - (page % offset) + (offset - 1);
 
-  const handleClick = (page: number) => {
+  const handleClick = (page: number) => () => {
     setPage(page);
   };
 
@@ -26,30 +26,25 @@ const Pagination = ({ totalPage, page, setPage, offset = 5 }: Props) => {
       <button id="prev-button" className={pageButton} disabled={page - 1 < 0} onClick={() => handleClick(page - 1)}>
         <SvgIcon src={PaginationIcon.src} className={icon} id="chevron-left" />
       </button>
-      {pageList.slice(firstNum, lastNum + 1).map((v, i) => (
+      {pageList.slice(firstNum, lastNum + 1).map((num, idx) => (
         <button
-          disabled={page === i}
+          disabled={page === idx}
           id="pagination"
-          onClick={() => handleClick(i)}
-          className={`${pageButton} ${page + 1 === v ? "active" : ""}`}
-          key={v}
+          onClick={handleClick(idx)}
+          className={`${pageButton} ${page + 1 === num ? "active" : ""}`}
+          key={num}
         >
-          <span className={pageButtonText}>{v}</span>
+          <span className={pageButtonText}>{num}</span>
         </button>
       ))}
-      <button
-        id="next-button"
-        className={pageButton}
-        disabled={page === totalPage - 1}
-        onClick={() => handleClick(page + 1)}
-      >
+      <button id="next-button" className={pageButton} disabled={page === totalPage - 1} onClick={handleClick(page + 1)}>
         <SvgIcon src={PaginationIcon.src} className={icon} id="chevron-right" />
       </button>
       <button
         disabled={page === totalPage - 1}
         id="last-page-button"
         className={pageButton}
-        onClick={() => handleClick(totalPage - 1)}
+        onClick={handleClick(totalPage - 1)}
       >
         <SvgIcon src={PaginationIcon.src} className={icon} id="chevron-double-right" />
       </button>
