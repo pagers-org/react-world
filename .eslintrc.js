@@ -26,5 +26,6 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'react/react-in-jsx-scope': 'off',
+    'react/function-component-definition': [2, { namedComponents: ['arrow-function', 'function-declaration'] }],
   },
 };
