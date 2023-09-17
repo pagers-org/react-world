@@ -1,4 +1,5 @@
 import type { ArticleDetailData } from '../../apis/article/ArticleService.types';
+import { formatDate } from '../../utils/dateUtils';
 
 interface ArticleHeaderProps {
   article: ArticleDetailData;
@@ -20,9 +21,7 @@ const ArticleHeader = (props: ArticleHeaderProps) => {
             <a href={`/profile/${article.author.username}`} className="author">
               {article.author.username}
             </a>
-            <span className="date">
-              {new Date(article.createdAt).toLocaleDateString()}
-            </span>
+            <span className="date">{formatDate(article.createdAt)}</span>
           </div>
           <button className="btn btn-sm btn-outline-secondary">
             <i className="ion-plus-round"></i>
