@@ -1,3 +1,5 @@
+import { ProfileResponse } from './profile';
+
 export type FeedQueryStrings = Partial<{
   tag: string;
   author: string; // username
@@ -17,12 +19,7 @@ export type FeedResponse = {
     updatedAt: string;
     favorited: boolean;
     favoritesCount: number;
-    author: {
-      username: string;
-      bio: string;
-      image: string;
-      following: boolean;
-    };
+    author: ProfileResponse['profile'];
   };
 };
 
