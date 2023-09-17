@@ -21,6 +21,7 @@ export type FeedResponse = {
     favoritesCount: number;
     author: ProfileResponse['profile'];
   };
+  errors?: unknown;
 };
 
 export type FeedsResponse = {

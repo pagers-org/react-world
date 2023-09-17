@@ -9,6 +9,9 @@ import {
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
+import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
+
+import { getCookie } from '@/utils/cookie';
 
 /* Client Side APIs */
 
@@ -18,12 +21,15 @@ export const postArticle = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ): Promise<ArticleResponse> => {
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
+
   return fetch(`${API_BASE_URL}/articles`, {
     ...options,
     method: HTTP_METHOD.POST,
     headers: {
       ...COMMON_HEADERS,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   })
@@ -38,12 +44,15 @@ export const putArticle = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ): Promise<ArticleResponse> => {
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
+
   return fetch(`${API_BASE_URL}/articles/${slug}`, {
     ...options,
     method: HTTP_METHOD.PUT,
     headers: {
       ...COMMON_HEADERS,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   })
@@ -57,12 +66,15 @@ export const deleteArticle = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ) => {
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
+
   return fetch(`${API_BASE_URL}/articles/${slug}`, {
     ...options,
     method: HTTP_METHOD.DELETE,
     headers: {
       ...COMMON_HEADERS,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
     .then((res) => res.json())
