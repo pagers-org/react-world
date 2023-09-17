@@ -1,4 +1,4 @@
-import type { ArticleAuthor } from './ArticlePreviewService.types';
+import type { ArticleAuthor } from './Article.types';
 
 export interface ArticleDetailData {
   slug: string;
