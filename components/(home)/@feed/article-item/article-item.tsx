@@ -27,7 +27,7 @@ export const ArticleItem = ({ article }: Props) => {
       <div className="mb-2 flex items-center justify-between">
         <Link href={`/profile/${username}`}>
           <Avatar.Root>
-            <Avatar.Image src={image} alt="" />
+            <Avatar.Image src={image} alt={image} />
 
             <Avatar.Info>
               <Avatar.Name>{username}</Avatar.Name>
