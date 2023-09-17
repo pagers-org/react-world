@@ -1,22 +1,33 @@
-const ArticleHeader = () => {
+import type { ArticleDetailData } from '../../apis/article/ArticleService.types';
+
+interface ArticleHeaderProps {
+  article: ArticleDetailData;
+}
+
+const ArticleHeader = (props: ArticleHeaderProps) => {
+  const { article } = props;
+
   return (
     <div className="banner">
       <div className="container">
-        <h1>How to build webapps that scale</h1>
+        <h1>{article.title}</h1>
 
         <div className="article-meta">
-          <a href="/profile/eric-simons">
-            <img src="http://i.imgur.com/Qr71crq.jpg" />
+          <a href={`/profile/${article.author.username}`}>
+            <img src={article.author.image} alt={article.author.username} />
           </a>
           <div className="info">
-            <a href="/profile/eric-simons" className="author">
-              Eric Simons
+            <a href={`/profile/${article.author.username}`} className="author">
+              {article.author.username}
             </a>
-            <span className="date">January 20th</span>
+            <span className="date">
+              {new Date(article.createdAt).toLocaleDateString()}
+            </span>
           </div>
           <button className="btn btn-sm btn-outline-secondary">
             <i className="ion-plus-round"></i>
-            &nbsp; Follow Eric Simons <span className="counter">(10)</span>
+            &nbsp; Follow {article.author.username}{' '}
+            <span className="counter">({article.favoritesCount})</span>
           </button>
           &nbsp;&nbsp;
           <button className="btn btn-sm btn-outline-primary">
