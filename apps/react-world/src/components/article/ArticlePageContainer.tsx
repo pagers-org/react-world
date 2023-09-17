@@ -26,7 +26,12 @@ const ArticlePageContainer = (props: ArticlePageContainerProps) => {
           tagList={articleDetail.article.tagList}
         />
         <hr />
-        <ArticleActions />
+        <ArticleActions
+          author={articleDetail.article.author}
+          createdAt={articleDetail.article.createdAt}
+          favorited={articleDetail.article.favorited}
+          favoritesCount={articleDetail.article.favoritesCount}
+        />
         <ArticleComments />
       </Container>
     </div>
