@@ -1,0 +1,59 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  icon: ImageMetadata;
+  alt: string;
+  size: "sm" | "base" | "lg";
+  color?: string;
+  text: string;
+  href?: string;
+  active: boolean;
+}
+
+const { icon, alt, size, text, color, href, active } = Astro.props;
+
+const imageVariant = {
+  sm: 16,
+  base: 20,
+  lg: 24,
+};
+---
+
+<a href={href} class:list={["wrapper", { active }]}>
+  <Image src={icon} alt={alt} width={imageVariant[size]} height={imageVariant[size]} />
+  <span class="label">{text}</span>
+</a>
+
+<style define:vars={{ color }}>
+  .wrapper {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .wrapper.active {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.9);
+  }
+
+  .label {
+    color: var(--color);
+  }
+
+  @media (max-width: 768px) {
+    .wrapper {
+      flex-direction: row;
+      padding: 20px;
+      column-gap: 10px;
+    }
+
+    .wrapper.active {
+      border-bottom: none;
+      border-left: 2px solid rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+</style>

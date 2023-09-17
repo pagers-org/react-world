@@ -1,0 +1,38 @@
+---
+import HomeIcon from "@/assets/icons/home.svg";
+import UserPlusIcon from "@/assets/icons/user-plus.svg";
+import LoginIcon from "@/assets/icons/login.svg";
+import { ROUTES } from "@/constants/routes";
+
+import IconLabel from "@/components/IconLabel.astro";
+
+const currentUrl = Astro.url.pathname;
+---
+
+<IconLabel
+  href="/"
+  size="lg"
+  icon={HomeIcon}
+  color="#555657"
+  text="Home"
+  alt="home-icon"
+  active={currentUrl === ROUTES.INDEX}
+/>
+<IconLabel
+  href="/login"
+  size="lg"
+  icon={LoginIcon}
+  color="#555657"
+  text="Sign in"
+  alt="sign-in"
+  active={currentUrl === ROUTES.LOGIN}
+/>
+<IconLabel
+  href="/register"
+  size="lg"
+  icon={UserPlusIcon}
+  color="#555657"
+  text="Sign up"
+  alt="sign-up"
+  active={currentUrl === ROUTES.REGISTER}
+/>

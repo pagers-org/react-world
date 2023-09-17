@@ -1,0 +1,24 @@
+---
+import Header from "./header/Header.astro";
+import "../styles/reset.css";
+import "../styles/global.css";
+---
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body id="app">
+    <div>
+      <Header />
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    background-color: #e4edf3;
+  }
+</style>

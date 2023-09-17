@@ -1,0 +1,143 @@
+---
+import HamburgerIcon from "@/assets/icons/hamburger.svg";
+import XmarkIcon from "@/assets/icons/x-mark.svg";
+
+import HeaderLink from "./HeaderLink.astro";
+
+import { Image } from "astro:assets";
+---
+
+<header class="header">
+  <div id="desktop_menu" class="header-menu_desktop">
+    <HeaderLink />
+  </div>
+  <div id="mobile_menu" class="header-menu_mobile">
+    <a id="mobile_menu_link"><Image src={HamburgerIcon} width={24} height={24} alt="menu-icon" /></a>
+
+    <aside id="mobile_menu_side" class="mobile-menu-side">
+      <div class="mobile-menu-header">
+        <a id="mobile_menu_x_mark"><Image src={XmarkIcon} width={24} height={24} alt="x-icon" /></a>
+      </div>
+      <div class="mobile-menu-content">
+        <HeaderLink />
+      </div>
+    </aside>
+    <div id="mobile_menu_overlay" class="mobile-menu-overlay"></div>
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 5%;
+    background-color: white;
+  }
+
+  .header-menu_desktop {
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      justify-content: start;
+    }
+
+    .mobile-menu-side {
+      position: fixed;
+      z-index: 1004;
+      inline-size: 260px;
+      left: 0;
+      top: 0;
+      min-height: 100vh;
+      transition:
+        transform 0.25s ease-in-out,
+        inline-size 0.25s ease-in-out,
+        box-shadow 0.25s ease-in-out;
+      will-change: transform, inline-size;
+      background-color: #fff;
+      box-shadow:
+        0 2px 6px rgba(47, 43, 61, 0.14),
+        0 0 transparent,
+        0 0 transparent;
+    }
+
+    .mobile-menu-side:not(.active) {
+      transform: translateX(-260px);
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      z-index: 1003;
+      background-color: #0009;
+      cursor: pointer;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-in-out;
+      will-change: transform;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-header {
+      padding: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .mobile-menu-content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  import { isMobile } from "@/stores/ui";
+
+  function render() {
+    console.log(isMobile.get());
+    if (isMobile.get()) {
+      document.getElementById("desktop_menu")?.classList.add("hidden");
+      document.getElementById("mobile_menu")?.classList.remove("hidden");
+      mobileSideMenuAddEvent();
+    } else {
+      document.getElementById("mobile_menu")?.classList.add("hidden");
+      document.getElementById("desktop_menu")?.classList.remove("hidden");
+      mobileSideMenuRemoveEvent();
+    }
+  }
+
+  render();
+  window.addEventListener("resize", render);
+
+  function mobileSideMenuAddEvent() {
+    document.getElementById("mobile_menu_link")?.addEventListener("click", toggleMenu);
+
+    document.getElementById("mobile_menu_overlay")?.addEventListener("click", toggleMenu);
+
+    document.getElementById("mobile_menu_x_mark")?.addEventListener("click", toggleMenu);
+  }
+
+  function mobileSideMenuRemoveEvent() {
+    document.getElementById("mobile_menu_link")?.removeEventListener("click", toggleMenu);
+
+    document.getElementById("mobile_menu_overlay")?.removeEventListener("click", toggleMenu);
+
+    document.getElementById("mobile_menu_x_mark")?.removeEventListener("click", toggleMenu);
+  }
+
+  function toggleMenu() {
+    document.getElementById("mobile_menu_side")?.classList.toggle("active");
+    document.getElementById("mobile_menu_overlay")?.classList.toggle("active");
+  }
+</script>
