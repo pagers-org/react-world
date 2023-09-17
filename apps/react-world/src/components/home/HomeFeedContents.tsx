@@ -39,6 +39,7 @@ const HomeFeedContents = () => {
       () => ArticleService.fetchArticleDetail(articleSlug),
     );
     navigate(articleLink);
+    window.scrollTo(0, 0); // 전처리 후 페이지 이동시 스크롤 위치가 최상단으로 안 가있는 문제 수정
   };
 
   return (
