@@ -1,3 +1,4 @@
+import { PathBuilder } from '@/shared/utils/routes';
 import Link from 'next/link';
 import React from 'react';
 
@@ -7,7 +8,7 @@ interface ReadMoreButtonProps {
 
 const ReadMoreButton = ({ slug }: ReadMoreButtonProps) => {
   return (
-    <Link href={`/article/${slug}`} className="text-gray1200 text-[0.8rem] font-light">
+    <Link href={PathBuilder.buildArticle().addSlug(slug).getPath()} className="text-gray1200 text-[0.8rem] font-light">
       Read More..
     </Link>
   );

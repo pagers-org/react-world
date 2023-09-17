@@ -1,6 +1,7 @@
 'use client';
 import { generatePageList, getItemActivation } from '@/entities/article/api/page';
 import { getItemIndex } from '@/shared/utils/array';
+import { PathBuilder } from '@/shared/utils/routes';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -12,7 +13,7 @@ interface ArticleListPaginationProps {
 const ArticleListPagination = ({ currentPage = 1, lastPage }: ArticleListPaginationProps) => {
   const { push } = useRouter();
   const handleChangePage = (page: number) => {
-    push(`/?page=${page}`);
+    push(PathBuilder.buildHome().addPage(page).getPath());
   };
   const pageList = generatePageList(lastPage);
 

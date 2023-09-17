@@ -1,3 +1,4 @@
+import { PathBuilder } from '@/shared/utils/routes';
 import { Tag } from '@packages/ui';
 import Link from 'next/link';
 import React from 'react';
@@ -9,7 +10,7 @@ interface ArticleTagListProps {
 const ArticleTagList = ({ tagList, slug }: ArticleTagListProps) => {
   if (slug) {
     return (
-      <Link className="flex gap-2 cursor-pointer" href={`/article/${slug}`}>
+      <Link className="flex gap-2 cursor-pointer" href={PathBuilder.buildArticle().addSlug(slug).getPath()}>
         {tagList.map(label => (
           <Tag key={label} label={label} variant="outlined" />
         ))}
