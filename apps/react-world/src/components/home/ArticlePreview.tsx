@@ -18,9 +18,13 @@ import {
 
 interface ArticlePreviewProps {
   articlePreview: ArticlePreviewData;
+  onArticleClick: (articleSlug: string, articleLink: string) => void;
 }
 
-const ArticlePreview = ({ articlePreview }: ArticlePreviewProps) => {
+const ArticlePreview = ({
+  articlePreview,
+  onArticleClick,
+}: ArticlePreviewProps) => {
   const authorProfileLink = `/profile/${articlePreview.author.username}`;
   const authorProfileImageUrl = articlePreview.author.image;
   const authorName = articlePreview.author.username;
@@ -46,7 +50,13 @@ const ArticlePreview = ({ articlePreview }: ArticlePreviewProps) => {
         </AuthorInfo>
         <LikeButton>{likeCount}</LikeButton>
       </ArticlePreviewMeta>
-      <ArticlePreviewLink href={articleLink}>
+      <ArticlePreviewLink
+        href={articleLink}
+        onClick={e => {
+          e.preventDefault(); // a 태그의 기본 이벤트 블락
+          onArticleClick(articlePreview.slug, articleLink);
+        }}
+      >
         <ArticleTitle>{articleTitle}</ArticleTitle>
         <ArticleDescription>{articleDescription}</ArticleDescription>
         <ReadMore>Read more...</ReadMore>
