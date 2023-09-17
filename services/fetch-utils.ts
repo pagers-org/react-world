@@ -22,7 +22,6 @@ export const get = async <T extends z.ZodTypeAny>(
   }
 
   return schema.parse(await response.json());
-  // return response.json();
 };
 
 export const post = async <T extends z.ZodTypeAny>(
