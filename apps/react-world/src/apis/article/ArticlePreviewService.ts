@@ -6,10 +6,10 @@ export const ARTICLE_PREVIEW_FETCH_LIMIT = 10;
 
 class ArticleService {
   static async fetchArticlePreviews(
-    pageNumber: number,
+    pageIndex: number,
   ): Promise<ArticlePreviewResponse> {
     try {
-      const calculatedOffset = (pageNumber - 1) * ARTICLE_PREVIEW_FETCH_LIMIT;
+      const calculatedOffset = pageIndex * ARTICLE_PREVIEW_FETCH_LIMIT;
       const offset = calculatedOffset >= 0 ? calculatedOffset : 0; // offset이 0보다 작으면 0으로 설정
 
       const response = await api.get('/articles', {

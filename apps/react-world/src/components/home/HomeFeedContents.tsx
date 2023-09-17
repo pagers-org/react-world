@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Container } from '../shared/Container';
 import ArticlePreview from './ArticlePreview';
 import PopularArticleTagList from './PopularArticleTagList';
@@ -7,10 +8,15 @@ import useArticlePreviewQuery from '../../quries/useArticlePreviewQuery';
 import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewService';
 
 const HomeFeedContents = () => {
-  // TODO: Zustand Store 에서 초기값을 지정하고, 이후 현재 페이지 정보를 가지도록 구현 필요
-  const { data, isLoading } = useArticlePreviewQuery(1);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const { data, isLoading } = useArticlePreviewQuery(currentPageIndex);
+
+  const handlePageChange = (newPageIndex: number) => {
+    setCurrentPageIndex(newPageIndex);
+  };
+
   const totalPageCount = data?.articlesCount
-    ? data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT
+    ? Math.ceil(data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT)
     : 0;
 
   return (
@@ -19,7 +25,14 @@ const HomeFeedContents = () => {
         <div className="col-md-9">
           <HomeFeedTab activeFeed="global_feed" />
           {isLoading ? (
-            <span>Loading Articles...</span>
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '15px',
+              }}
+            >
+              Loading Articles...
+            </span>
           ) : (
             <>
               {data?.articles?.map(articlePreview => (
@@ -28,25 +41,27 @@ const HomeFeedContents = () => {
                   articlePreview={articlePreview}
                 />
               ))}
-              <Pagination totalPages={totalPageCount} activePageIndex={0} />
+              <Pagination
+                totalPages={totalPageCount}
+                activePageIndex={currentPageIndex}
+                onPageChange={handlePageChange}
+              />
             </>
           )}
         </div>
 
-        {isLoading ? null : (
-          <PopularArticleTagList
-            tags={[
-              'programming',
-              'javascript',
-              'emberjs',
-              'angularjs',
-              'react',
-              'mean',
-              'node',
-              'rails',
-            ]}
-          />
-        )}
+        <PopularArticleTagList
+          tags={[
+            'programming',
+            'javascript',
+            'emberjs',
+            'angularjs',
+            'react',
+            'mean',
+            'node',
+            'rails',
+          ]}
+        />
       </div>
     </Container>
   );
