@@ -22,3 +22,9 @@ export const getStartIcon = ({ icon }: Pick<ButtonProps, "icon">) => {
   }
   return icon.start;
 };
+
+export const getWidthStyle = (fullWidth: boolean) =>
+  fullWidth ? "w-full" : "w-fit";
+
+export const getDisabledStyle = (disabled: boolean) =>
+  disabled ? "hover:bg-[] hover:border-[] opacity-50 cursor-default" : "";

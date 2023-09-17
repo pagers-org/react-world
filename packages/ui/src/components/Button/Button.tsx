@@ -1,7 +1,14 @@
-import { forwardRef, HTMLAttributes, ReactNode } from "react";
-import { getColorStyle, getStartIcon } from "./util";
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
+import {
+  getColorStyle,
+  getDisabledStyle,
+  getStartIcon,
+  getWidthStyle,
+} from "./util";
 import { sizeStyle } from "./style";
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+import { twMerge } from "tailwind-merge";
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   icon?: {
     start: ReactNode;
@@ -9,6 +16,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   variant: "outlined" | "fill";
   color: "primary" | "gray" | "error";
   size: "s" | "m" | "lg";
+  fullWidth?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -19,15 +27,27 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "outlined",
       size = "m",
       icon,
+      fullWidth = false,
+      className,
+      disabled = false,
+      ...rest
     }: ButtonProps,
     ref
   ) => {
     const colorStyle = getColorStyle({ color, variant });
     const startIcon = getStartIcon({ icon });
+    const widthStyle = getWidthStyle(fullWidth);
+    const disabledStyle = getDisabledStyle(disabled);
     return (
       <button
-        className={`flex items-center gap-4 ${sizeStyle[size]} ${colorStyle}`}
+        className={twMerge(
+          `flex items-center gap-4 w-fit cursor-pointer ${sizeStyle[size]} ${colorStyle} ${widthStyle}`,
+          disabledStyle,
+          className
+        )}
         ref={ref}
+        disabled={disabled}
+        {...rest}
       >
         {startIcon} {children}
       </button>
