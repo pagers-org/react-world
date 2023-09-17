@@ -20,7 +20,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {...rest}
         onChange={handleChange}
         ref={ref}
-        className={`placeholder:text-gray-500 text-gray-600 border outline-none border-black/15 focus-within:border-blue-400 ${style.size[size]}`}
+        className={`w-full placeholder:text-gray-500 text-gray-600 border outline-none border-black/15 focus-within:border-blue-400 ${style.size[size]}`}
       />
     );
   }
