@@ -1,4 +1,5 @@
 import type { ArticlePreviewData } from '../../apis/article/ArticlePreviewService.types';
+import { formatDate } from '../../utils/dateUtils';
 import {
   ArticlePreviewContainer,
   ArticlePreviewMeta,
@@ -29,7 +30,7 @@ const ArticlePreview = ({
   const authorProfileImageUrl = articlePreview.author.image;
   const authorName = articlePreview.author.username;
 
-  const publishDate = new Date(articlePreview.createdAt).toDateString();
+  const publishDate = formatDate(articlePreview.createdAt);
 
   const articleLink = `/article/${articlePreview.slug}`;
   const articleTitle = articlePreview.title;
