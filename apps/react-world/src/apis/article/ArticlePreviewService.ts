@@ -2,19 +2,20 @@ import { isAxiosError } from 'axios';
 import { api } from '../apiInstances';
 import type { ArticlePreviewResponse } from './ArticlePreviewService.types';
 
+export const ARTICLE_PREVIEW_FETCH_LIMIT = 10;
+
 class ArticleService {
   static async fetchArticlePreviews(
     pageNumber: number,
   ): Promise<ArticlePreviewResponse> {
     try {
-      const limit = 10;
-      const calculatedOffset = (pageNumber - 1) * limit;
+      const calculatedOffset = (pageNumber - 1) * ARTICLE_PREVIEW_FETCH_LIMIT;
       const offset = calculatedOffset >= 0 ? calculatedOffset : 0; // offset이 0보다 작으면 0으로 설정
 
       const response = await api.get('/articles', {
         params: {
           offset,
-          limit,
+          ARTICLE_PREVIEW_FETCH_LIMIT,
         },
       });
       return response.data;

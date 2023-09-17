@@ -1,15 +1,17 @@
 import { PaginationContainer, PageButton } from './Pagination.styled';
 
 interface PaginationProps {
-  pages: number[];
-  activePage: number;
+  totalPages: number;
+  activePageIndex: number;
 }
 
-const Pagination = ({ pages, activePage }: PaginationProps) => {
+const Pagination = ({ totalPages, activePageIndex }: PaginationProps) => {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
     <PaginationContainer>
-      {pages.map(page => (
-        <PageButton key={page} href="#" isActive={page === activePage}>
+      {pages.map((page, index) => (
+        <PageButton key={page} href="#" isActive={index === activePageIndex}>
           {page}
         </PageButton>
       ))}

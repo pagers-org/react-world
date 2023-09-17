@@ -4,10 +4,14 @@ import PopularArticleTagList from './PopularArticleTagList';
 import HomeFeedTab from './HomeFeedTab';
 import Pagination from './Pagination';
 import useArticlePreviewQuery from '../../quries/useArticlePreviewQuery';
+import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewService';
 
 const HomeFeedContents = () => {
   // TODO: Zustand Store 에서 초기값을 지정하고, 이후 현재 페이지 정보를 가지도록 구현 필요
   const { data, isLoading } = useArticlePreviewQuery(1);
+  const totalPageCount = data?.articlesCount
+    ? data.articlesCount / ARTICLE_PREVIEW_FETCH_LIMIT
+    : 0;
 
   return (
     <Container>
@@ -24,7 +28,7 @@ const HomeFeedContents = () => {
                   articlePreview={articlePreview}
                 />
               ))}
-              <Pagination pages={[1, 2]} activePage={1} />
+              <Pagination totalPages={totalPageCount} activePageIndex={0} />
             </>
           )}
         </div>
