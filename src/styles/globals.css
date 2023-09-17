@@ -1,5 +1,6 @@
 /* Template provided styles */
 @import './main.css';
+@import './ionicons.min.css';
 
 /* Tailwind basic styles */
 /* @tailwind base;
