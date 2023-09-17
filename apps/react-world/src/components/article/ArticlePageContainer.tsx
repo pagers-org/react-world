@@ -3,6 +3,7 @@ import ArticleActions from './ArticleActions';
 import ArticleComments from './ArticleComments';
 import ArticleContents from './ArticleContents';
 import ArticleHeader from './ArticleHeader';
+import useArticleDetailQuery from '../../quries/useArticleDetailQuery';
 
 interface ArticlePageContainerProps {
   articleSlug: string;
@@ -10,10 +11,15 @@ interface ArticlePageContainerProps {
 
 const ArticlePageContainer = (props: ArticlePageContainerProps) => {
   const { articleSlug } = props;
+  const { articleDetail } = useArticleDetailQuery(articleSlug);
+
+  if (!articleDetail) {
+    return null;
+  }
 
   return (
     <div className="article-page">
-      <ArticleHeader />
+      <ArticleHeader article={articleDetail.article} />
       <Container>
         <ArticleContents />
         <hr />
