@@ -3,7 +3,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.stack.imgur.com',
+        hostname: 'api.realworld.io',
       },
     ],
   },
