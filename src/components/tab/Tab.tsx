@@ -36,9 +36,20 @@ const Tab = ({ tabArr, containerStyle = "", defaultTab, callbacks }: Props) => {
     callbacks && callbacks(index);
   };
 
+  // 조건부 바인딩을 제외한 2개 이상의 클래스를 바인딩해야할 경우 함수로 분리
+  const tabClasses = () => {
+    const cn = [tabContainer, containerStyle];
+
+    if (isExpanded) {
+      cn.push("expanded");
+    }
+
+    return cn.join(" ");
+  };
+
   return (
     <div className={container}>
-      <ul ref={elementRef} className={`${tabContainer} ${containerStyle} ${isExpanded ? "expanded" : ""}`}>
+      <ul ref={elementRef} className={tabClasses()}>
         {tabArr.map((tab, index) => (
           <li
             key={index}
