@@ -20,7 +20,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en" className={inter.variable}>
       <body>
@@ -30,4 +30,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

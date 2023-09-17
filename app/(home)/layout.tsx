@@ -1,17 +1,20 @@
-import { ArticleSection } from './article-section';
-import { Banner } from './banner';
-import { TagList } from './tag-list';
+import { ReactNode } from 'react';
 
-export const Home = () => {
+import { Banner } from 'components/home/banner';
+import { TagList } from 'components/home/tag-list';
+
+type Props = {
+  feeds: ReactNode;
+};
+
+const HomeLayout = ({ feeds }: Props) => {
   return (
     <div className="home-page">
       <Banner />
 
       <div className="page container">
         <div className="row">
-          <div className="col-md-9">
-            <ArticleSection />
-          </div>
+          <div className="col-md-9">{feeds}</div>
 
           <div className="col-md-3">
             <div className="sidebar">
@@ -24,3 +27,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default HomeLayout;

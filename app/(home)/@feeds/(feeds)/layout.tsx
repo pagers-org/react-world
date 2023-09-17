@@ -1,8 +1,13 @@
+import { ReactNode } from 'react';
+
 import { Tabs } from 'components/ui';
-import { FeedList } from '../feed-list';
 import { clsx } from 'lib/utils';
 
-export const ArticleSection = () => {
+type Props = {
+  global: ReactNode;
+};
+
+const FeedsLayout = ({ global }: Props) => {
   const tabs = [
     {
       key: 'feed',
@@ -29,10 +34,10 @@ export const ArticleSection = () => {
           <div className={clsx('pt-[24px]', 'pb-[24px]')}>No articles are here... yet</div>
         </Tabs.Content>
 
-        <Tabs.Content value="all">
-          <FeedList />
-        </Tabs.Content>
+        <Tabs.Content value="all">{global}</Tabs.Content>
       </Tabs.Root>
     </div>
   );
 };
+
+export default FeedsLayout;
