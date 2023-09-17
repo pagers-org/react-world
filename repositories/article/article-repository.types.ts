@@ -1,7 +1,7 @@
-import type { ArticleAttrs } from "models/article";
+import type { Article, RichArticle } from "models/article";
 
 export type ArticlesResponse = {
-  articles: ArticleAttrs[];
+  articles: Article[];
   articlesCount: number;
 };
 
@@ -11,4 +11,8 @@ export type ArticlesParams = {
   favorited?: string;
   offset?: number;
   limit?: number;
+};
+
+export type ArticleResponse = {
+  article: RichArticle;
 };

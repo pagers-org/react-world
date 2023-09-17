@@ -1,3 +1,9 @@
+import type { Author } from "./author";
+
+export type RichArticle = Article & {
+  body: string;
+};
+
 export type Article = {
   slug: string;
   title: string;
@@ -8,11 +14,4 @@ export type Article = {
   author: Author;
   createdAt: Date;
   updatedAt: Date;
-};
-
-export type Author = {
-  username: string;
-  bio: string;
-  image: string;
-  following: boolean;
 };
