@@ -4,7 +4,7 @@ import type { ArticlePreviewResponse } from './ArticlePreviewService.types';
 
 export const ARTICLE_PREVIEW_FETCH_LIMIT = 10;
 
-class ArticleService {
+class ArticlePreviewService {
   static async fetchArticlePreviews(
     pageIndex: number,
   ): Promise<ArticlePreviewResponse> {
@@ -28,4 +28,4 @@ class ArticleService {
   }
 }
 
-export default ArticleService;
+export default ArticlePreviewService;
