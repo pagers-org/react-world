@@ -15,4 +15,5 @@ const BannerStyle = style({
   },
 });
 
+// eslint-disable-next-line import/prefer-default-export
 export { BannerStyle };

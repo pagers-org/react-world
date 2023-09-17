@@ -1,7 +1,12 @@
 import { BannerStyle } from './index.css';
 
 const Banner = () => {
-  return <div className={BannerStyle}>블로그 이름 / 블로그 제목 </div>;
+  const a = '블로그 이름 / 블로그 제목';
+  return (
+    <div className={BannerStyle}>
+      <div>{a}</div>
+    </div>
+  );
 };
 
 export default Banner;
