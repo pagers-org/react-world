@@ -1,13 +1,22 @@
 import type { PropsWithChildren } from "react";
 
+import { Sidebar } from "components/shared/ui/sidebar";
+import { HEADER_HEIGHT } from "constants/header";
+
+const TAGS_TOP = 52;
+const TAGS_STICKY_OFFSET = TAGS_TOP + HEADER_HEIGHT;
+
 const TagsLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="absolute left-[100%] top-[52px] pl-10">
-      <div className="w-56 rounded-md bg-zinc-100 px-3 py-2">
-        <p className="mb-3 text-base font-medium text-zinc-800">Popular Tags</p>
-        {children}
-      </div>
-    </div>
+    <Sidebar.Root align="right" top={TAGS_TOP}>
+      <Sidebar.Sticky offset={TAGS_STICKY_OFFSET}>
+        <Sidebar.Content>
+          <Sidebar.Title>Popular Tags</Sidebar.Title>
+
+          {children}
+        </Sidebar.Content>
+      </Sidebar.Sticky>
+    </Sidebar.Root>
   );
 };
 
