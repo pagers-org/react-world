@@ -4,7 +4,13 @@ import ArticleComments from './ArticleComments';
 import ArticleContents from './ArticleContents';
 import ArticleHeader from './ArticleHeader';
 
-const ArticlePageContainer = () => {
+interface ArticlePageContainerProps {
+  articleSlug: string;
+}
+
+const ArticlePageContainer = (props: ArticlePageContainerProps) => {
+  const { articleSlug } = props;
+
   return (
     <div className="article-page">
       <ArticleHeader />
