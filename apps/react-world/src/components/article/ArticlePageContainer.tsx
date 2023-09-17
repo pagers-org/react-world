@@ -21,7 +21,10 @@ const ArticlePageContainer = (props: ArticlePageContainerProps) => {
     <div className="article-page">
       <ArticleHeader article={articleDetail.article} />
       <Container>
-        <ArticleContents />
+        <ArticleContents
+          body={articleDetail.article.body}
+          tagList={articleDetail.article.tagList}
+        />
         <hr />
         <ArticleActions />
         <ArticleComments />
