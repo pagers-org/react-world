@@ -15,6 +15,10 @@ export const Pagination = forwardRef<HTMLUListElement, Props>(function paginatio
 ) {
   const pages = Array.from({ length: total }, (_, i) => i + 1);
 
+  if (total < 2) {
+    return null;
+  }
+
   return (
     <ul ref={ref} {...otherProps} className="pagination">
       {pages.map((page) => (
