@@ -6,10 +6,13 @@ import { container, flex, hr, input } from '@/styles/common.css';
 import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
 import { User, UserAction } from '@/types';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
 
 const SettingsPage = () => {
-  const { email, username, image, bio, password, logout, updateUser } = useUserStore();
+  const router = useRouter();
+  const { email, username, image, bio, password, updateUser } = useUserStore();
 
   // 초기화 함수로 전환
   const [formData, setFormData] = useState({
@@ -47,6 +50,15 @@ const SettingsPage = () => {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const logout = async () => {
+    try {
+      await fetch('/api/auth/logout');
+      router.push('/login');
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
   return (
     <section className={container}>

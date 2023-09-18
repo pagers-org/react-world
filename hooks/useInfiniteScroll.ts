@@ -3,7 +3,7 @@ import useIntersectionObserver from './useIntersectionObserver';
 import { RefObject } from 'react';
 
 const useInfiniteScroll = (fetcher: (page: any) => any, ref: RefObject<HTMLElement>) => {
-  const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['articles'],
     queryFn: ({ pageParam = 1 }) => {
       console.log(pageParam);
@@ -20,8 +20,6 @@ const useInfiniteScroll = (fetcher: (page: any) => any, ref: RefObject<HTMLEleme
 
         return undefined;
       }
-      // console.log(totalPage);
-      // console.log(currentPage);
 
       return currentPage++;
     },

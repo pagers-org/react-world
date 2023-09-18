@@ -20,7 +20,7 @@ const LoginPage = () => {
   });
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: loginAPI,
+    mutationFn: (formData: any) => fetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ ...formData }) }),
     onError: error => {
       setFormData({
         email: '',
@@ -29,9 +29,8 @@ const LoginPage = () => {
       alert('아이디 또는 비밀번호가 잘못되었습니다.');
     },
     onSuccess: res => {
-      login({
-        ...res.user,
-      });
+      console.log(res);
+
       router.push('/');
     },
   });

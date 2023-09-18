@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(req: NextRequest) {
-  const token = true;
+export async function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const isPublic = path === '/login' || path === '/register';
 
-  if (!token) {
-    // // 아직 보류
-    // if (req.nextUrl.pathname.startsWith('/api')) {
-    //   return new NextResponse('Authentiction Error', { status: 401 });
-    // }
-    // 권한 문제
-    return NextResponse.redirect('http://localhost:3000/login');
+  const token = request.cookies.get('token')?.value || '';
+
+  if (isPublic && token) {
+    return NextResponse.redirect(new URL('/', request.nextUrl));
   }
 
-  return NextResponse.next();
+  if (!isPublic && !token) {
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
+  }
 }
 
 export const config = {
-  matcher: ['/settings', '/editor'],
+  matcher: ['/settings', '/editor', '/login', '/register'],
 };
