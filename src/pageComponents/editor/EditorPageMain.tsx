@@ -3,22 +3,20 @@
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
-import { postArticle } from '@/api/articles';
+import { EditorFormType } from '@/app/editor/page';
 
-const EditorPageMain = () => {
+import { postArticle, putArticle } from '@/api/articles';
+
+interface Props {
+  currentForm: EditorFormType;
+  isEditMode: boolean;
+  slug: string | null;
+}
+
+const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
   const router = useRouter();
 
-  const [form, setForm] = useState<{
-    title: string;
-    description: string;
-    body: string;
-    tagList: string[];
-  }>({
-    title: '',
-    description: '',
-    body: '',
-    tagList: [],
-  });
+  const [form, setForm] = useState<Props['currentForm']>(currentForm);
   const [currentTag, setCurrentTag] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,21 +24,39 @@ const EditorPageMain = () => {
   const handleSubmit = () => {
     setIsLoading(true);
 
-    postArticle({
-      article: { ...form },
-    }).then((res) => {
-      if (res?.errors) {
-        const [[error, [type]]] = Object.entries(res.errors);
-        setError(`${error} ${type}`);
-      } else {
-        const { slug } = res.article;
-        router.push(`/article/${slug}`);
+    if (!isEditMode) {
+      postArticle({
+        article: { ...form },
+      }).then((res) => {
+        if (res?.errors) {
+          const [[error, [type]]] = Object.entries(res.errors);
+          setError(`${error} ${type}`);
+        } else {
+          const { slug } = res.article;
+          router.push(`/article/${slug}`);
 
-        setError(null);
-      }
+          setError(null);
+        }
 
-      setIsLoading(false);
-    });
+        setIsLoading(false);
+      });
+    } else if (isEditMode && slug) {
+      putArticle(slug, {
+        article: { ...form },
+      }).then((res) => {
+        if (res?.errors) {
+          const [[error, [type]]] = Object.entries(res.errors);
+          setError(`${error} ${type}`);
+        } else {
+          const { slug } = res.article;
+          router.push(`/article/${slug}`);
+
+          setError(null);
+        }
+
+        setIsLoading(false);
+      });
+    }
   };
 
   const handleChangeForm = (
