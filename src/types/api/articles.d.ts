@@ -38,8 +38,6 @@ export type PostArticlePayload = {
   };
 };
 
-export type PutArticlePayload = {
-  article: Omit<PostArticlePayload['article'], 'tagList'>;
-};
+export type PutArticlePayload = PostArticlePayload;
 
 export type ArticleResponse = FeedResponse;
