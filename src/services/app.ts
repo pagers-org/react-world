@@ -7,20 +7,15 @@ interface ExecuteAPIProps {
 
 const API_ENDPINT = "https://api.realworld.io/api";
 
-export const executeAPI = async ({
-  method,
-  // token,
-  body,
-  url,
-}: ExecuteAPIProps) => {
-  // const authorization = `Bearer ${token}`;
+export const executeAPI = async ({ method, body, url }: ExecuteAPIProps) => {
+  const token = localStorage.getItem("token");
+  const authorization = `Bearer ${token}`;
 
   const promise_api = await fetch(`${API_ENDPINT}${url}`, {
     method,
-    // mode: "cors",
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
-      Authorization: "xxxxxx.yyyyyyy.zzzzzz",
+      Authorization: authorization,
     },
     body: JSON.stringify(body),
   });
