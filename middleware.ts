@@ -6,6 +6,10 @@ export async function middleware(request: NextRequest) {
 
   const token = request.cookies.get('token')?.value || '';
 
+  // if (path === '/api/user'){
+
+  // }
+
   if (isPublic && token) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
   }
@@ -16,5 +20,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/settings', '/editor', '/login', '/register'],
+  matcher: ['/settings', '/editor', '/login', '/register', '/api/user'],
 };

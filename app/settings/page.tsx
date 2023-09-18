@@ -1,10 +1,9 @@
 'use client';
-import { updateUserAPI } from '@/services/users';
+
 import useUserStore from '@/stores/useUserStore';
 import { articleTextarea } from '@/styles/article.css';
 import { container, flex, hr, input } from '@/styles/common.css';
 import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
-import { User, UserAction } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -23,17 +22,10 @@ const SettingsPage = () => {
     password,
   });
   const { mutate, isLoading } = useMutation({
-    mutationFn: updateUserAPI,
-    onError: err => {
-      console.error(err);
-    },
+    mutationFn: (formData: any) =>
+      fetch('/api/auth/user', { method: 'PUT', body: JSON.stringify(formData) }).then(res => res.json()),
     onSuccess: res => {
-      alert('회원 정보를 변경했습니다!');
       console.log(res);
-
-      updateUser({
-        ...res.user,
-      });
     },
   });
 
@@ -115,7 +107,6 @@ const SettingsPage = () => {
           </div>
           <div className={hr} />
           <div className={flex}>
-            <button onClick={() => fetch('/api/user', { method: 'GET' })}>정보 조회</button>
             <button className={logoutButton} onClick={logout}>
               Or click here to logout.
             </button>

@@ -26,9 +26,6 @@ const updateUserAPI = async (user: UpdateUser, auth: string) => {
 
 // 현재 유저 조회
 const getUserAPI = async (auth: string) => {
-  console.log('getUserAPI');
-  console.log(auth);
-
   return http.get('/user', {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

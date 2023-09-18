@@ -1,11 +1,11 @@
-import { http } from '@/utils/http';
+import { loginAPI } from '@/services/users';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const req = await http.post('/users/login', { user: body });
+    const req = await loginAPI(body);
 
     const response = NextResponse.json({
       message: 'Login successfull',

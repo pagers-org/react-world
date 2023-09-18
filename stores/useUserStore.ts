@@ -1,5 +1,4 @@
 import { User, UserAction } from '@/types';
-import { setCookie } from '@/utils/cookies';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -18,7 +17,7 @@ const useUserStore = create(
       login: user => {
         set(() => {
           const { email, username, bio, image, token } = user;
-          setCookie('token', token, 60 * 60 * 24);
+
           return {
             email,
             username,
@@ -29,13 +28,12 @@ const useUserStore = create(
       },
       logout: () => {
         set(() => {
-          setCookie('token', '', 0);
           return {
             ...initialState,
           };
         });
       },
-      updateUser: user => {
+      updateUser: (user: User) => {
         set(() => {
           return {
             ...user,

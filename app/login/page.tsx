@@ -1,6 +1,5 @@
 'use client';
 
-import { loginAPI } from '@/services/users';
 import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexCenter, flexRow, fillGreenButton } from '@/styles/common.css';
@@ -20,7 +19,8 @@ const LoginPage = () => {
   });
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (formData: any) => fetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ ...formData }) }),
+    mutationFn: (formData: any) =>
+      fetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ ...formData }) }).then(res => res.json()),
     onError: error => {
       setFormData({
         email: '',

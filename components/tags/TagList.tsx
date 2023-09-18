@@ -22,17 +22,18 @@ const TagList = ({ tags }: Props) => {
   // const handleTagClick = (tag: string) => {
   //   mutate(tag);
   // };
+
   return (
     <ul className={tagList}>
-      {/* {tags?.map((tag, index) => (
+      {tags?.map((tag, index) => (
         <li
           key={index}
           className={`${tagItem} ${tagFill}`}
-          onClick={() => (handleTagClick ? handleTagClick(tag) : console.log('없음'))}
+          // onClick={() => (handleTagClick ? handleTagClick(tag) : console.log('없음'))}
         >
           {tag}
         </li>
-      ))} */}
+      ))}
     </ul>
   );
 };
