@@ -128,3 +128,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# generated TS files
+src/server/proto/*.ts
+
+# docs
+docs/
+
+# open api Generator
+gen/
