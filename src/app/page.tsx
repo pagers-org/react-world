@@ -1,5 +1,7 @@
 import HomePageMain from '@/pageComponents/HomePageMain';
 
-export default function HomePage() {
+const HomePage = async () => {
   return <HomePageMain />;
-}
+};
+
+export default HomePage;
