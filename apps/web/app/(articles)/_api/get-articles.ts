@@ -6,9 +6,7 @@ export const getArticles = (params: ArticlesQueryParamsType): Promise<ArticlesDT
   const newSearchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
-    if (value) {
-      newSearchParams.append(key, `${value}`);
-    }
+    newSearchParams.append(key, `${value}`);
   });
 
   return http.get({

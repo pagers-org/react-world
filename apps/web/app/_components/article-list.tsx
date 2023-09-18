@@ -1,13 +1,21 @@
 "use client";
 
-import { Suspense } from "react";
+import { usePathname } from "next/navigation";
 import { useGetArticles } from "../(articles)/_hooks/use-get-articles";
+import { DEFAULT_ARTICLES_LIMIT } from "../(articles)/_constants";
+import Pagination from "./pagination";
 
 export default function ArticleList(): JSX.Element {
-  const { data } = useGetArticles();
+  const pathname = usePathname();
+  const currentPage = Number(pathname.split("/").filter(value => value !== "")[0]);
+
+  const { data } = useGetArticles({
+    offset: currentPage - 1,
+    limit: DEFAULT_ARTICLES_LIMIT,
+  });
 
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <>
       {data?.articles.map(({ slug, author, title, description, favoritesCount, updatedAt, tagList }) => {
         const { image, username } = author;
 
@@ -45,6 +53,8 @@ export default function ArticleList(): JSX.Element {
           </div>
         );
       })}
-    </Suspense>
+
+      {data ? <Pagination articlesCount={data.articlesCount} currentPage={currentPage} /> : null}
+    </>
   );
 }
