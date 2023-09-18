@@ -1,7 +1,6 @@
 'use client';
 import { generatePageList, getItemActivation } from '@/entities/article/api/page';
 import { getItemIndex } from '@/shared/utils/array';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 

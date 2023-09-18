@@ -3,12 +3,12 @@
 import { InduceSignIn } from '@/entities/comment';
 import { ArticleTagList } from '@/entities/tag';
 import { UserProfileAvatar } from '@/entities/user';
+import { ArticleFavoriteToggleButton } from '@/features/article';
+import { UserFollowToggleButton } from '@/features/user';
 import { useGetArticle } from '@/shared/api/realworld/endpoints/articles/articles';
 import { useGetArticleComments } from '@/shared/api/realworld/endpoints/comments/comments';
 import { responsiveWidth } from '@/shared/css/responsive-width';
-import { ArticleFavoriteToggleButton } from '@/widgets/article';
 import { UserCommentList } from '@/widgets/comment';
-import { UserFollowToggleButton } from '@/widgets/user';
 
 const Article = ({ slug }: { slug: string }) => {
   const { data: articleResponse } = useGetArticle(slug, { query: { staleTime: 1000 } });
@@ -16,6 +16,10 @@ const Article = ({ slug }: { slug: string }) => {
   const { author, body, createdAt, favorited, favoritesCount, tagList, title } = articleResponse?.article!;
   const commentList = commentsResponse?.comments!;
   const formattedBody = body.replaceAll('\\n', '\n');
+  const articleFavoriteToggleButtonLabel = favorited
+    ? `Unfavorite Article (${favoritesCount})`
+    : `Favorite Article (${favoritesCount})`;
+  const userFollowToggleButtonLabel = author.following ? 'Follow' : 'UnFollow' + author.username;
 
   return (
     <div className="flex flex-col justify-center w-full">
@@ -25,8 +29,12 @@ const Article = ({ slug }: { slug: string }) => {
           <div className="flex items-center gap-24">
             <UserProfileAvatar author={author} createdAt={createdAt} usernameColor="text-white" />
             <div className="flex gap-8 button-group">
-              <UserFollowToggleButton following={author.following} username={author.username} />
-              <ArticleFavoriteToggleButton favorited={favorited} slug={slug} favoritesCount={favoritesCount} />
+              <UserFollowToggleButton following={author.following} username={author.username}>
+                {userFollowToggleButtonLabel}
+              </UserFollowToggleButton>
+              <ArticleFavoriteToggleButton favorited={favorited} slug={slug}>
+                {articleFavoriteToggleButtonLabel}
+              </ArticleFavoriteToggleButton>
             </div>
           </div>
         </div>
@@ -45,8 +53,12 @@ const Article = ({ slug }: { slug: string }) => {
           <div className="flex items-center justify-center gap-24">
             <UserProfileAvatar author={author} createdAt={createdAt} />
             <div className="flex gap-8 button-group">
-              <UserFollowToggleButton following={author.following} username={author.username} />
-              <ArticleFavoriteToggleButton favorited={favorited} slug={slug} favoritesCount={favoritesCount} />
+              <UserFollowToggleButton following={author.following} username={author.username}>
+                {userFollowToggleButtonLabel}
+              </UserFollowToggleButton>
+              <ArticleFavoriteToggleButton favorited={favorited} slug={slug}>
+                {articleFavoriteToggleButtonLabel}
+              </ArticleFavoriteToggleButton>
             </div>
           </div>
           <InduceSignIn />
