@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { vars } from '../../../styles/global.css';
+import { vars } from '../../../public/styles/global.css';
 
 export const articleCard = style({
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',

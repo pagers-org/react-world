@@ -18,7 +18,7 @@ const getArticles = async (page: number): Promise<FetchArticlesResponse> => {
 };
 
 export const useGetAllArticlesQuery = (page: number) => {
-  const { data, ...rest } = useQuery([QUERY_KEY.ARTICLE.LIST], () =>
+  const { data, ...rest } = useQuery(QUERY_KEY.ARTICLE.LIST(page), () =>
     getArticles(page),
   );
 

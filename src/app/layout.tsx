@@ -3,7 +3,7 @@ import ReactQueryProviders from '@/lib/ReactQueryProviders';
 import { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
-import '../../styles/reset.css';
+import '../../public/styles/reset.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
