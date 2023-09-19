@@ -57,7 +57,9 @@ const NavLink = ({ link, name, iconImage }: NavLinkProps) => {
     <li className="nav-item">
       <Link
         className={`nav-link ${classNames({
-          active: pathname === link,
+          active:
+            pathname === link ||
+            (link === '/profile' && pathname.startsWith('/profile')),
         })}`}
         href={link === '/profile' ? `/profile/${user.username}` : link}
       >
