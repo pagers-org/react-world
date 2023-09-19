@@ -1,12 +1,39 @@
 'use client';
 
+import Pagination from '@/composables/Pagination';
+import { FeedsResponse } from '@/types/api/articles';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-const HomePageMain = () => {
-  const [feedType, setFeedType] = useState<'Your' | 'Global'>('Your');
+interface Props {
+  feeds: FeedsResponse;
+}
+
+const HomePageMain = ({ feeds }: Props) => {
+  const searchParams = useSearchParams();
+  const [feedType, setFeedType] = useState<'your' | 'global'>();
+  const [page, setPage] = useState<number>(1);
+
+  const { articlesCount, articles } = feeds;
+
+  useEffect(() => {
+    let type = searchParams?.get('type') ?? 'your';
+
+    if (type !== 'your' && type !== 'global') {
+      type = 'your';
+    }
+
+    setFeedType(type as 'your' | 'global');
+  }, [searchParams]);
+
+  useEffect(() => {
+    const page = searchParams?.get('page') ?? '1';
+
+    setPage(parseInt(page));
+  }, [searchParams]);
 
   return (
     <div className="home-page">
@@ -25,10 +52,15 @@ const HomePageMain = () => {
                 <li className="nav-item">
                   <Link
                     className={`nav-link ${classNames({
-                      active: feedType === 'Your',
+                      active: feedType === 'your',
                     })}`}
-                    href=""
-                    onClick={() => setFeedType('Your')}
+                    href={{
+                      query: {
+                        type: 'your',
+                        page: '1',
+                      },
+                    }}
+                    onClick={() => setFeedType('your')}
                   >
                     Your Feed
                   </Link>
@@ -36,10 +68,15 @@ const HomePageMain = () => {
                 <li className="nav-item">
                   <Link
                     className={`nav-link ${classNames({
-                      active: feedType === 'Global',
+                      active: feedType === 'global',
                     })}`}
-                    href=""
-                    onClick={() => setFeedType('Global')}
+                    href={{
+                      query: {
+                        type: 'global',
+                        page: '1',
+                      },
+                    }}
+                    onClick={() => setFeedType('global')}
                   >
                     Global Feed
                   </Link>
@@ -47,94 +84,62 @@ const HomePageMain = () => {
               </ul>
             </div>
 
-            <div className="article-preview">
-              <div className="article-meta">
-                <Link href="/profile/eric-simons">
-                  <Image
-                    src="http://i.imgur.com/Qr71crq.jpg"
-                    alt="글 작성자 프로필"
-                    width={32}
-                    height={32}
-                  />
-                </Link>
-                <div className="info">
-                  <Link href="/profile/eric-simons" className="author">
-                    Eric Simons
+            {articles.map(
+              ({
+                slug,
+                title,
+                description,
+                tagList,
+                createdAt,
+                favoritesCount,
+                author: { username: authorUsername, image: authorImage },
+              }) => (
+                <div key={slug} className="article-preview">
+                  <div className="article-meta">
+                    <Link href={`/profile/${authorUsername}`}>
+                      <Image
+                        src={authorImage}
+                        alt={authorUsername}
+                        width={32}
+                        height={32}
+                      />
+                    </Link>
+                    <div className="info">
+                      <Link
+                        href={`/profile/${authorUsername}`}
+                        className="author"
+                      >
+                        {authorUsername}
+                      </Link>
+                      <span className="date">{createdAt}</span>
+                    </div>
+                    <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                      <i className="ion-heart"></i> {favoritesCount}
+                    </button>
+                  </div>
+                  <Link
+                    href="/article/how-to-build-webapps-that-scale"
+                    className="preview-link"
+                  >
+                    <h1>{title}</h1>
+                    <p>{description}</p>
+                    <span>Read more...</span>
+                    <ul className="tag-list">
+                      {tagList.map((tag) => (
+                        <li
+                          key={tag}
+                          className="tag-default tag-pill tag-outline"
+                        >
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
                   </Link>
-                  <span className="date">January 20th</span>
                 </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 29
-                </button>
-              </div>
-              <Link
-                href="/article/how-to-build-webapps-that-scale"
-                className="preview-link"
-              >
-                <h1>How to build webapps that scale</h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">
-                    realworld
-                  </li>
-                  <li className="tag-default tag-pill tag-outline">
-                    implementations
-                  </li>
-                </ul>
-              </Link>
-            </div>
+              ),
+            )}
 
-            <div className="article-preview">
-              <div className="article-meta">
-                <Link href="/profile/albert-pai">
-                  <Image
-                    src="http://i.imgur.com/N4VcUeJ.jpg"
-                    alt="글 작성자 프로필"
-                    width={32}
-                    height={32}
-                  />
-                </Link>
-                <div className="info">
-                  <Link href="/profile/albert-pai" className="author">
-                    Albert Pai
-                  </Link>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 32
-                </button>
-              </div>
-              <Link href="/article/the-song-you" className="preview-link">
-                <h1>
-                  {`The song you won't ever stop singing. No matter how hard you
-                  try.`}
-                </h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">
-                    realworld
-                  </li>
-                  <li className="tag-default tag-pill tag-outline">
-                    implementations
-                  </li>
-                </ul>
-              </Link>
-            </div>
-
-            <ul className="pagination">
-              <li className="page-item active">
-                <Link className="page-link" href="">
-                  1
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link className="page-link" href="">
-                  2
-                </Link>
-              </li>
-            </ul>
+            <Pagination totalCounts={articlesCount} page={page} perPage={10} />
           </div>
 
           <div className="col-md-3">
