@@ -6,9 +6,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { isActiveLink } from '../../api/isActiveLink';
+import useGetUser from '@/entities/user/api/useGetUser';
+import { Avatar } from '@packages/ui';
 
 const GNB = () => {
   const pathname = usePathname();
+  const { isLogin, user } = useGetUser();
+
   const activeLinkStyle = (path: RoutePath) => {
     return isActiveLink(pathname, path) ? 'text-black' : 'text-black/30';
   };
@@ -25,16 +29,41 @@ const GNB = () => {
               <p className={`hover:text-black ${activeLinkStyle('/')}`}>Home</p>
             </Link>
           </li>
-          <li>
-            <Link data-testid="gnbSignIn" href={PathBuilder.buildLogin().getPath()} className="no-underline">
-              <p className={`hover:text-black ${activeLinkStyle('/login')}`}>Sign in</p>
-            </Link>
-          </li>
-          <li>
-            <Link data-testid="gnbSignUp" href={PathBuilder.buildRegister().getPath()} className="no-underline">
-              <p className={`hover:text-black ${activeLinkStyle('/register')}`}>Sign up</p>
-            </Link>
-          </li>
+          {isLogin ? (
+            <>
+              <li>
+                <Link data-testid="gnbEditor" href={PathBuilder.buildNewArticle().getPath()} className="no-underline">
+                  <p className={`hover:text-black ${activeLinkStyle('/editor')}`}>New Article</p>
+                </Link>
+              </li>
+              <li>
+                <Link data-testid="gnbSettings" href={PathBuilder.buildSettings().getPath()} className="no-underline">
+                  <p className={`hover:text-black ${activeLinkStyle('/settings')}`}>Settings</p>
+                </Link>
+              </li>
+              <li>
+                <Link data-testid="gnbUser" href={PathBuilder.buildUser().getPath()} className="no-underline">
+                  <p className={`flex items-center gap-4 hover:text-black ${activeLinkStyle('/user')}`}>
+                    <Avatar size="xxs" src={user.image} />
+                    {user.username}
+                  </p>
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link data-testid="gnbSignIn" href={PathBuilder.buildLogin().getPath()} className="no-underline">
+                  <p className={`hover:text-black ${activeLinkStyle('/login')}`}>Sign in</p>
+                </Link>
+              </li>
+              <li>
+                <Link data-testid="gnbSignUp" href={PathBuilder.buildRegister().getPath()} className="no-underline">
+                  <p className={`hover:text-black ${activeLinkStyle('/register')}`}>Sign up</p>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

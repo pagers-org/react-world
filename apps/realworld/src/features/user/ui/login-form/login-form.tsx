@@ -1,13 +1,33 @@
 'use client';
 
+import { getGetUserQueryKey } from '@/entities/user/api/useGetUser';
 import { useLogin } from '@/shared/api/realworld/endpoints/user-and-authentication/user-and-authentication';
+import { PathBuilder } from '@/shared/utils/routes';
+import webStorage, { StorageKey } from '@/shared/utils/webStorage';
 import { Button, Input } from '@packages/ui';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { mutateAsync: login, error: loginError, isLoading: loginLoading } = useLogin();
+  const { push } = useRouter();
+  const queryClient = useQueryClient();
+
+  const {
+    mutateAsync: login,
+    error: loginError,
+    isLoading: loginLoading,
+  } = useLogin({
+    mutation: {
+      onSuccess: async data => {
+        webStorage.setItem(StorageKey.userToken, data.user.token);
+        await queryClient.invalidateQueries(getGetUserQueryKey());
+        push(PathBuilder.buildHome().getPath());
+      },
+    },
+  });
 
   const handleChangeEmail = (_: React.ChangeEvent<HTMLInputElement>, email: string) => {
     setEmail(email);
