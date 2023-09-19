@@ -6,10 +6,14 @@ import { ProfileResponse } from '@/types/api/profile';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { useCurationQuery } from '@/hooks/query/articles/useArticlesQuery';
+import { useArticlesQuery } from '@/hooks/query/articles/useArticlesQuery';
+import {
+  useDeleteUnFollowUserMutation,
+  usePostFollowUserMutation,
+} from '@/hooks/query/profile/useProfileMutation';
 
 interface Props {
   profile: ProfileResponse['profile'];
@@ -19,13 +23,19 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   // client-side fetch - react query 이용
 
   const searchParams = useSearchParams();
+  const { push: navigate } = useRouter();
 
   const user = useUserStore((state) => state.user);
+
+  const [currentProfile, setCurrentProfile] =
+    useState<Props['profile']>(profile);
+
+  const [isFollowLoading, setIsFollowLoading] = useState<boolean>(false);
 
   const [articleType, setArticleType] = useState<'my' | 'favorited'>();
   const [page, setPage] = useState<number>(1);
 
-  const { username, image, following } = profile;
+  const { username, image, following } = currentProfile;
 
   const perPage = '10';
 
@@ -35,11 +45,45 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   const feedQueryObj =
     articleType === 'my' ? { author: username } : { favorited: username };
 
-  const { data, isLoading } = useCurationQuery({
+  const { data, isLoading } = useArticlesQuery({
     ...feedQueryObj,
     offset,
     limit,
   });
+
+  const postFollowUserMutation = usePostFollowUserMutation();
+  const deleteUnfollowUserMutation = useDeleteUnFollowUserMutation();
+
+  const handleFollow = (following: boolean) => {
+    if (!user.email) {
+      navigate('/login');
+      return;
+    }
+
+    setIsFollowLoading(true);
+
+    if (following) {
+      deleteUnfollowUserMutation.mutate(username, {
+        onSuccess: (res) => {
+          const { profile } = res;
+          setCurrentProfile(profile);
+        },
+        onSettled: () => {
+          setIsFollowLoading(false);
+        },
+      });
+    } else {
+      postFollowUserMutation.mutate(username, {
+        onSuccess: (res) => {
+          const { profile } = res;
+          setCurrentProfile(profile);
+        },
+        onSettled: () => {
+          setIsFollowLoading(false);
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     const type = searchParams?.get('type') ?? 'my';
@@ -70,12 +114,15 @@ const ProfileUserPageMain = ({ profile }: Props) => {
               <p>{profile?.bio}</p>
               <button
                 className={`btn btn-sm action-btn ${classNames({
-                  'btn-secondary': !following,
-                  'btn-outline-secondary': following,
+                  'btn-secondary': following,
+                  'btn-outline-secondary': !following,
                 })}`}
+                type="button"
+                onClick={() => handleFollow(following)}
+                disabled={isFollowLoading}
               >
                 <i className="ion-plus-round"></i>
-                &nbsp; {following ? 'Follow' : 'Unfollow'} {username}
+                &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
               </button>
               {user.email === username && (
                 <button className="btn btn-sm btn-outline-secondary action-btn">

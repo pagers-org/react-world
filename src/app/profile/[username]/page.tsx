@@ -1,11 +1,20 @@
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import ProfileUserPageMain from '@/pageComponents/profile/[username]/ProfileUserPageMain';
 
+import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
+
 import { getProfile } from '@/api/profile';
 
 const getCurrentProfile = async (username: string) => {
-  const res = await getProfile(username);
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
+
+  const res = await getProfile(
+    username,
+    accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+  );
 
   if (!res?.profile) {
     redirect('/');
