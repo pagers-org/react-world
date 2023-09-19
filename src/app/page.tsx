@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 import HomePageMain from '@/pageComponents/HomePageMain';
 
@@ -12,15 +11,13 @@ const getFeeds = async (
   page: string = '1',
   perPage: string = '10',
 ) => {
-  if (type !== 'your' && type !== 'global') {
-    type = 'your';
-  }
-
   const cookieStore = cookies();
   const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
   if (!accessToken) {
     type = 'global';
+  } else if (type !== 'your' && type !== 'global') {
+    type = 'your';
   }
 
   const getFn = type === 'your' ? getMyFeeds : getGlobalFeeds;
