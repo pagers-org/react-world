@@ -112,22 +112,24 @@ const ProfileUserPageMain = ({ profile }: Props) => {
               />
               <h4>{username}</h4>
               <p>{profile?.bio}</p>
-              <button
-                className={`btn btn-sm action-btn ${classNames({
-                  'btn-secondary': following,
-                  'btn-outline-secondary': !following,
-                })}`}
-                type="button"
-                onClick={() => handleFollow(following)}
-                disabled={isFollowLoading}
-              >
-                <i className="ion-plus-round"></i>
-                &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
-              </button>
-              {user.email === username && (
+
+              {user.username === username ? (
                 <button className="btn btn-sm btn-outline-secondary action-btn">
                   <i className="ion-gear-a"></i>
                   &nbsp; Edit Profile Settings
+                </button>
+              ) : (
+                <button
+                  className={`btn btn-sm action-btn ${classNames({
+                    'btn-secondary': following,
+                    'btn-outline-secondary': !following,
+                  })}`}
+                  type="button"
+                  onClick={() => handleFollow(following)}
+                  disabled={isFollowLoading}
+                >
+                  <i className="ion-plus-round"></i>
+                  &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
                 </button>
               )}
             </div>
