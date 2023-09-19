@@ -24,3 +24,4 @@ export const useGetAllArticlesQuery = (page: number) => {
 
   return { articles: data, ...rest };
 };
+
