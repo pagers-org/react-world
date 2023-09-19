@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { useArticlesQuery } from '@/hooks/query/articles/useArticlesQuery';
 import {
@@ -29,6 +29,8 @@ const ProfileUserPageMain = ({ profile }: Props) => {
 
   const [currentProfile, setCurrentProfile] =
     useState<Props['profile']>(profile);
+
+  const [profileMenusElement, setProfileMenusElement] = useState<ReactNode>();
 
   const [isFollowLoading, setIsFollowLoading] = useState<boolean>(false);
 
@@ -97,6 +99,37 @@ const ProfileUserPageMain = ({ profile }: Props) => {
     setPage(parseInt(page));
   }, [searchParams]);
 
+  useEffect(() => {
+    const profileMenusElement =
+      user.username === username ? (
+        <button
+          className="btn btn-sm btn-outline-secondary action-btn"
+          type="button"
+          onClick={() => {
+            navigate('/settings');
+          }}
+        >
+          <i className="ion-gear-a"></i>
+          &nbsp; Edit Profile Settings
+        </button>
+      ) : (
+        <button
+          className={`btn btn-sm action-btn ${classNames({
+            'btn-secondary': following,
+            'btn-outline-secondary': !following,
+          })}`}
+          type="button"
+          onClick={() => handleFollow(following)}
+          disabled={isFollowLoading}
+        >
+          <i className="ion-plus-round"></i>
+          &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
+        </button>
+      );
+
+    setProfileMenusElement(profileMenusElement);
+  }, [following, isFollowLoading, user.username, username]);
+
   return (
     <div className="profile-page">
       <div className="user-info">
@@ -113,25 +146,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
               <h4>{username}</h4>
               <p>{profile?.bio}</p>
 
-              {user.username === username ? (
-                <button className="btn btn-sm btn-outline-secondary action-btn">
-                  <i className="ion-gear-a"></i>
-                  &nbsp; Edit Profile Settings
-                </button>
-              ) : (
-                <button
-                  className={`btn btn-sm action-btn ${classNames({
-                    'btn-secondary': following,
-                    'btn-outline-secondary': !following,
-                  })}`}
-                  type="button"
-                  onClick={() => handleFollow(following)}
-                  disabled={isFollowLoading}
-                >
-                  <i className="ion-plus-round"></i>
-                  &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
-                </button>
-              )}
+              {profileMenusElement}
             </div>
           </div>
         </div>
