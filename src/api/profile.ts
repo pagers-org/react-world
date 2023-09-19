@@ -2,6 +2,9 @@ import { ProfileResponse } from '@/types/api/profile';
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
+import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
+
+import { getCookie } from '@/utils/cookie';
 
 /* Client Side APIs */
 
@@ -11,12 +14,15 @@ export const postFollowUser = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ): Promise<ProfileResponse> => {
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
+
   return fetch(`${API_BASE_URL}/profiles/${username}/follow`, {
     ...options,
     method: HTTP_METHOD.POST,
     headers: {
       ...COMMON_HEADERS,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
     .then((res) => res.json())
@@ -29,12 +35,15 @@ export const deleteUnfollowUser = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ): Promise<ProfileResponse> => {
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
+
   return fetch(`${API_BASE_URL}/profiles/${username}/follow`, {
     ...options,
     method: HTTP_METHOD.DELETE,
     headers: {
       ...COMMON_HEADERS,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
   })
     .then((res) => res.json())
