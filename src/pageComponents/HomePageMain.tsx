@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface Props {
   feeds: FeedsResponse;
@@ -20,6 +20,8 @@ const HomePageMain = ({ feeds }: Props) => {
 
   const [feedType, setFeedType] = useState<'your' | 'global'>();
   const [page, setPage] = useState<number>(1);
+
+  const [tabsElement, setTabsElement] = useState<ReactNode>(<></>);
 
   const { articlesCount, articles } = feeds;
 
@@ -41,6 +43,49 @@ const HomePageMain = ({ feeds }: Props) => {
     setPage(parseInt(page));
   }, [searchParams]);
 
+  useEffect(() => {
+    const tabsElement = (
+      <ul className="nav nav-pills outline-active">
+        {user.email && (
+          <li className="nav-item">
+            <Link
+              className={`nav-link ${classNames({
+                active: feedType === 'your',
+              })}`}
+              href={{
+                query: {
+                  type: 'your',
+                  page: '1',
+                },
+              }}
+              onClick={() => setFeedType('your')}
+            >
+              Your Feed
+            </Link>
+          </li>
+        )}
+        <li className="nav-item">
+          <Link
+            className={`nav-link ${classNames({
+              active: feedType === 'global',
+            })}`}
+            href={{
+              query: {
+                type: 'global',
+                page: '1',
+              },
+            }}
+            onClick={() => setFeedType('global')}
+          >
+            Global Feed
+          </Link>
+        </li>
+      </ul>
+    );
+
+    setTabsElement(tabsElement);
+  }, [user.email, feedType]);
+
   return (
     <div className="home-page">
       <div className="banner">
@@ -53,44 +98,7 @@ const HomePageMain = ({ feeds }: Props) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
-            <div className="feed-toggle">
-              <ul className="nav nav-pills outline-active">
-                {user.email && (
-                  <li className="nav-item">
-                    <Link
-                      className={`nav-link ${classNames({
-                        active: feedType === 'your',
-                      })}`}
-                      href={{
-                        query: {
-                          type: 'your',
-                          page: '1',
-                        },
-                      }}
-                      onClick={() => setFeedType('your')}
-                    >
-                      Your Feed
-                    </Link>
-                  </li>
-                )}
-                <li className="nav-item">
-                  <Link
-                    className={`nav-link ${classNames({
-                      active: feedType === 'global',
-                    })}`}
-                    href={{
-                      query: {
-                        type: 'global',
-                        page: '1',
-                      },
-                    }}
-                    onClick={() => setFeedType('global')}
-                  >
-                    Global Feed
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <div className="feed-toggle">{tabsElement}</div>
 
             {articles.map(
               ({
