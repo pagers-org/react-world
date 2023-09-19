@@ -1,6 +1,7 @@
 'use client';
 
 import Pagination from '@/composables/Pagination';
+import { useUserStore } from '@/stores/users';
 import { FeedsResponse } from '@/types/api/articles';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -14,6 +15,9 @@ interface Props {
 
 const HomePageMain = ({ feeds }: Props) => {
   const searchParams = useSearchParams();
+
+  const user = useUserStore((state) => state.user);
+
   const [feedType, setFeedType] = useState<'your' | 'global'>();
   const [page, setPage] = useState<number>(1);
 
@@ -22,12 +26,14 @@ const HomePageMain = ({ feeds }: Props) => {
   useEffect(() => {
     let type = searchParams?.get('type') ?? 'your';
 
-    if (type !== 'your' && type !== 'global') {
+    if (!user.email) {
+      type = 'global';
+    } else if (type !== 'your' && type !== 'global') {
       type = 'your';
     }
 
     setFeedType(type as 'your' | 'global');
-  }, [searchParams]);
+  }, [searchParams, user.email]);
 
   useEffect(() => {
     const page = searchParams?.get('page') ?? '1';
@@ -49,22 +55,24 @@ const HomePageMain = ({ feeds }: Props) => {
           <div className="col-md-9">
             <div className="feed-toggle">
               <ul className="nav nav-pills outline-active">
-                <li className="nav-item">
-                  <Link
-                    className={`nav-link ${classNames({
-                      active: feedType === 'your',
-                    })}`}
-                    href={{
-                      query: {
-                        type: 'your',
-                        page: '1',
-                      },
-                    }}
-                    onClick={() => setFeedType('your')}
-                  >
-                    Your Feed
-                  </Link>
-                </li>
+                {user.email && (
+                  <li className="nav-item">
+                    <Link
+                      className={`nav-link ${classNames({
+                        active: feedType === 'your',
+                      })}`}
+                      href={{
+                        query: {
+                          type: 'your',
+                          page: '1',
+                        },
+                      }}
+                      onClick={() => setFeedType('your')}
+                    >
+                      Your Feed
+                    </Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <Link
                     className={`nav-link ${classNames({

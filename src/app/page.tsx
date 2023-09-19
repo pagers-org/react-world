@@ -19,9 +19,8 @@ const getFeeds = async (
   const cookieStore = cookies();
   const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-  // TODO: 임시 - 분기 처리 필요
   if (!accessToken) {
-    redirect('/login');
+    type = 'global';
   }
 
   const getFn = type === 'your' ? getMyFeeds : getGlobalFeeds;
@@ -34,7 +33,7 @@ const getFeeds = async (
       offset,
       limit,
     },
-    { Authorization: `Bearer ${accessToken}` },
+    accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
   );
 
   return res;
