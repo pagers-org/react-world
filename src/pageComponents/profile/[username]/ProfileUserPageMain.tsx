@@ -20,7 +20,8 @@ interface Props {
 }
 
 const ProfileUserPageMain = ({ profile }: Props) => {
-  // client-side fetch - react query 이용
+  // server-side fetch (profile 정보)
+  // client-side fetch (article 정보) - react query 이용
 
   const searchParams = useSearchParams();
   const { push: navigate } = useRouter();

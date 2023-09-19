@@ -14,7 +14,7 @@ interface Props {
 }
 
 const HomePageMain = ({ feeds }: Props) => {
-  // server-side fetch - server component 이용
+  // server-side fetch - server component만 이용
 
   const searchParams = useSearchParams();
 
