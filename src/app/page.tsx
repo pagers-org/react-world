@@ -19,6 +19,7 @@ const getFeeds = async (
   const cookieStore = cookies();
   const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
+  // TODO: 임시 - 분기 처리 필요
   if (!accessToken) {
     redirect('/login');
   }
