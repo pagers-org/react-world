@@ -1,7 +1,7 @@
-import { HTMLAttributes, forwardRef } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 
 interface InputProps
-  extends Omit<HTMLAttributes<HTMLInputElement>, "onChange"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "size"> {
   size?: "m" | "lg";
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>, value: string) => void;

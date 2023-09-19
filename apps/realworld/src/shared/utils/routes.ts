@@ -1,7 +1,19 @@
-export class PathBuilder {
-  private path: string;
+const RouteList = {
+  home: '/',
+  login: '/login',
+  register: '/register',
+  article: '/article',
+  editor: '/editor',
+  settings: '/settings',
+  user: '/user',
+} as const;
 
-  private constructor(path: string) {
+export type RoutePath = (typeof RouteList)[keyof typeof RouteList];
+
+export class PathBuilder {
+  private path: RoutePath;
+
+  private constructor(path: RoutePath) {
     this.path = path;
   }
 
@@ -15,6 +27,18 @@ export class PathBuilder {
 
   static buildLogin(): PathBuilder {
     return new PathBuilder('/login');
+  }
+
+  static buildNewArticle(): PathBuilder {
+    return new PathBuilder('/editor');
+  }
+
+  static buildSettings(): PathBuilder {
+    return new PathBuilder('/settings');
+  }
+
+  static buildUser(): PathBuilder {
+    return new PathBuilder('/user');
   }
 
   static buildArticle(): ArticlePathBuilder {

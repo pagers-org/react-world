@@ -1,4 +1,6 @@
-import React from "react";
+import { LogoutButton } from '@/features/user';
+import { Button } from '@packages/ui';
+import React from 'react';
 
 const Setting = () => {
   return (
@@ -16,18 +18,10 @@ const Setting = () => {
               <form>
                 <fieldset>
                   <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="URL of profile picture"
-                    />
+                    <input className="form-control" type="text" placeholder="URL of profile picture" />
                   </fieldset>
                   <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Your Name"
-                    />
+                    <input className="form-control form-control-lg" type="text" placeholder="Your Name" />
                   </fieldset>
                   <fieldset className="form-group">
                     <textarea
@@ -37,28 +31,17 @@ const Setting = () => {
                     ></textarea>
                   </fieldset>
                   <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Email"
-                    />
+                    <input className="form-control form-control-lg" type="text" placeholder="Email" />
                   </fieldset>
                   <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="New Password"
-                    />
+                    <input className="form-control form-control-lg" type="password" placeholder="New Password" />
                   </fieldset>
-                  <button className="btn btn-lg btn-primary pull-xs-right">
-                    Update Settings
-                  </button>
+                  <button className="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
                 </fieldset>
               </form>
               <hr />
-              <button className="btn btn-outline-danger">
-                Or click here to logout.
-              </button>
+
+              <LogoutButton>Or click here to logout.</LogoutButton>
             </div>
           </div>
         </div>
