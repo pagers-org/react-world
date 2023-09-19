@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getGlobalFeeds } from '@/api/articles';
 
-export const useCurationQuery = (
+export const useArticlesQuery = (
   queryStrings: FeedQueryStrings = {
     limit: '20',
   },
