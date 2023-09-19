@@ -1,12 +1,14 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useGetArticles } from "../(articles)/_hooks/use-get-articles";
 import { DEFAULT_ARTICLES_LIMIT } from "../(articles)/_constants";
 import Pagination from "./pagination";
 
 export default function ArticleList(): JSX.Element {
   const pathname = usePathname();
+
   const currentPage = Number(pathname.split("/").filter(value => value !== "")[0]);
 
   const { data } = useGetArticles({
@@ -35,7 +37,12 @@ export default function ArticleList(): JSX.Element {
                 <i className="ion-heart" /> {favoritesCount}
               </button>
             </div>
-            <a className="preview-link" href="/article">
+            <Link
+              className="preview-link"
+              href={{
+                pathname: `/article/${slug}`,
+              }}
+            >
               <h1>{title}</h1>
               <p>{description}</p>
               <span>Read more...</span>
@@ -49,7 +56,7 @@ export default function ArticleList(): JSX.Element {
                   );
                 })}
               </ul>
-            </a>
+            </Link>
           </div>
         );
       })}
