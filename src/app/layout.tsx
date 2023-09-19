@@ -9,6 +9,7 @@ import {
   sourceSerif4,
   titilliumWeb,
 } from './fonts';
+import Providers from './providers';
 
 export default function RootLayout({
   children,
@@ -21,7 +22,7 @@ export default function RootLayout({
         className={`${titilliumWeb.variable} ${sourceSerif4.variable} ${merriweatherSans.variable} ${sourceSansPro.variable}`}
       >
         <Nav />
-        {children}
+        <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>
