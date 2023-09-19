@@ -1,14 +1,14 @@
 import { dehydrate } from "@tanstack/query-core";
-import getQueryClient from "../lib/get-query-clinet";
-import Hydrate from "../lib/query-hydrate";
-import { DEFAULT_ARTICLES_LIMIT, DEFAULT_ARTICLES_OFFSET } from "./(articles)/_constants";
-import { queryKeys } from "./(articles)/_constants/querykeys";
-import ArticleList from "./_components/article-list";
-import FeedToggle from "./_components/feed-toggle";
-import HomeBanner from "./_components/home-banner";
-import { getArticles } from "./(articles)/_api/get-articles";
-import Pagination from "./_components/pagination";
-import type { ArticlesQueryParamsType } from "./(articles)/_types/articles.types";
+import { Suspense } from "react";
+import getQueryClient from "../../lib/get-query-clinet";
+import Hydrate from "../../lib/query-hydrate";
+import { DEFAULT_ARTICLES_LIMIT, DEFAULT_ARTICLES_OFFSET } from "../(articles)/_constants";
+import { queryKeys } from "../(articles)/_constants/querykeys";
+import ArticleList from "../_components/article-list";
+import FeedToggle from "../_components/feed-toggle";
+import HomeBanner from "../_components/home-banner";
+import { getArticles } from "../(articles)/_api/get-articles";
+import type { ArticlesQueryParamsType } from "../(articles)/_types/articles.types";
 
 export default async function Page(): Promise<JSX.Element> {
   const queryClient = getQueryClient();
@@ -30,8 +30,9 @@ export default async function Page(): Promise<JSX.Element> {
           <div className="row">
             <div className="col-md-9">
               <FeedToggle />
-              <ArticleList />
-              <Pagination />
+              <Suspense fallback={<div className="article-preview">loading...</div>}>
+                <ArticleList />
+              </Suspense>
             </div>
 
             <div className="col-md-3">
