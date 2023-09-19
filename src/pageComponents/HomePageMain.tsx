@@ -14,6 +14,8 @@ interface Props {
 }
 
 const HomePageMain = ({ feeds }: Props) => {
+  // server-side fetch - server component 이용
+
   const searchParams = useSearchParams();
 
   const user = useUserStore((state) => state.user);
