@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,4 +10,16 @@ export default defineConfig({
     cors: true,
   },
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@apis': '/src/apis',
+      '@components': '/src/components',
+      '@hooks': '/src/hooks',
+      '@pages': '/src/pages',
+      '@quries': '/src/quries',
+      '@routes': '/src/routes',
+      '@stores': '/src/stores',
+      '@utils': '/src/utils',
+    },
+  },
 });
