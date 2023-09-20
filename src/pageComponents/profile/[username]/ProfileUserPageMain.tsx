@@ -38,7 +38,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   const [articleType, setArticleType] = useState<'my' | 'favorited'>();
   const [page, setPage] = useState<number>(1);
 
-  const { username, image, following } = currentProfile;
+  const { username, image, following } = currentProfile ?? profile;
 
   const perPage = '10';
 
