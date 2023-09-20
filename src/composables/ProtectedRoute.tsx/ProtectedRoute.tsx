@@ -1,15 +1,19 @@
+'use client';
+
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ProtecTedRoute(Component) {
   return function ProtectedRoute({ ...props }) {
     const router = useRouter();
     const path = usePathname();
-    console.log(path);
-    const user =
-      localStorage.getItem('user') &&
-      JSON.parse(localStorage.getItem('user') as string);
+    const [user, setUser] = useState<string | null>();
+
     const userIsAuthenticated = !!user !== false;
+
+    useEffect(() => {
+      setUser(window.localStorage.getItem('user'));
+    }, []);
 
     useEffect(() => {
       if (userIsAuthenticated && path === '/login') {
