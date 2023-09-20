@@ -1,24 +1,24 @@
-type GlobalFeedResponseType = {
+type FeedResponseType = {
   articles: [
     {
-      slug: 'string';
-      title: 'string';
-      description: 'string';
-      body: 'string';
-      tagList: ['string'];
-      createdAt: '2023-09-20T11:51:46.724Z';
-      updatedAt: '2023-09-20T11:51:46.724Z';
-      favorited: true;
-      favoritesCount: 0;
+      slug: string;
+      title: string;
+      description: string;
+      body: string;
+      tagList: string[];
+      createdAt: string;
+      updatedAt: string;
+      favorited: boolean;
+      favoritesCount: number;
       author: {
-        username: 'string';
-        bio: 'string';
-        image: 'string';
-        following: true;
+        username: string;
+        bio: string;
+        image: string;
+        following: boolean;
       };
     },
   ];
-  articlesCount: 0;
+  articlesCount: number;
 };
 
-export type { GlobalFeedResponseType };
+export type { FeedResponseType };
