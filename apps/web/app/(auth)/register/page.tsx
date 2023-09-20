@@ -1,3 +1,5 @@
+import { RegisterForm } from "../_component/register-form";
+
 export default function RegisterPage(): JSX.Element {
   return (
     <div className="auth-page">
@@ -9,24 +11,7 @@ export default function RegisterPage(): JSX.Element {
               <a href="/login">Have an account?</a>
             </p>
 
-            <ul className="error-messages">
-              <li>That email is already taken</li>
-            </ul>
-
-            <form>
-              <fieldset className="form-group">
-                <input className="form-control form-control-lg" placeholder="Username" type="text" />
-              </fieldset>
-              <fieldset className="form-group">
-                <input className="form-control form-control-lg" placeholder="Email" type="text" />
-              </fieldset>
-              <fieldset className="form-group">
-                <input className="form-control form-control-lg" placeholder="Password" type="password" />
-              </fieldset>
-              <button className="btn btn-lg btn-primary pull-xs-right" type="button">
-                Sign up
-              </button>
-            </form>
+            <RegisterForm />
           </div>
         </div>
       </div>
