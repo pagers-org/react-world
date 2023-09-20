@@ -14,8 +14,10 @@ class ArticleService {
       return response.data;
     } catch (error) {
       if (isAxiosError(error) && error.response) {
+        console.error('Axios error occurred:', error.response.data);
         throw error.response.data as ArticleDetailErrorResponse;
       }
+      console.error('An unexpected error occurred:', error);
       throw error;
     }
   }
