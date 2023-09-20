@@ -42,7 +42,9 @@ globalStyle('li', {
 });
 
 globalStyle('input', {
-  backgroundColor: 'transparent',
-  backgroundImage: 'none !important',
+  textDecoration: 'none',
+  backgroundColor: 'inherit',
+  backgroundImage: 'none',
+  color: 'inherit',
   border: 0,
 });

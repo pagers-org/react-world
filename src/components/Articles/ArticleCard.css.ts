@@ -1,7 +1,8 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '../../../styles/global.css';
 
-export const postCard = style({
+import { vars } from '../../../public/styles/global.css';
+
+export const articleCard = style({
   borderTop: '1px solid rgba(0, 0, 0, 0.1)',
   padding: `${vars.space.largest} 0`,
 });
@@ -12,11 +13,11 @@ export const articleMeta = style({
   alignItems: 'center',
 });
 
-export const postInfo = style({
+export const articleInfo = style({
   display: 'flex',
 });
 
-export const profilePic = style({
+export const profilePicture = style({
   borderRadius: '30px',
   marginRight: vars.space.tinny,
 });
