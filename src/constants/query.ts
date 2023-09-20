@@ -1,10 +1,10 @@
-import { LoginInfo } from "@/service/login";
+import { LoginInfo } from '@/service/login';
 
 export const QUERY_KEY = {
   ARTICLE: {
-    LIST: (page: number) => ['articles', page],
+    LIST: (page: number, tab: number) => ['articles', page, tab],
   },
-  LOGIN : {
-    INFO: (loginInfo: LoginInfo) => ['loginInfo', loginInfo]
-  }
+  LOGIN: {
+    INFO: (loginInfo: LoginInfo) => ['loginInfo', loginInfo],
+  },
 } as const;

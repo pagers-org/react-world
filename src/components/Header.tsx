@@ -42,8 +42,8 @@ export default function Header() {
       </Link>
       <nav>
         <ul className={styles.nav}>
-          {links.map((link) => (
-            <Link key={link.name} href={link.href}>
+          {links.map((link, index) => (
+            <Link key={index} href={link.href}>
               <li
                 className={
                   router === link.href ? styles.selectedNav : styles.navItem
