@@ -24,61 +24,50 @@ export default function ArticleList() {
     selectedTab,
   );
   const articles = data?.articles;
+  const totalPage = (data?.articlesCount &&
+    Math.ceil(data.articlesCount / ARTICLE_LIMIT_PER_PAGE)) as number;
 
-  const totalPage =
-    data?.articlesCount! &&
-    Math.ceil(data.articlesCount / ARTICLE_LIMIT_PER_PAGE);
-
-  const handlePagination = (page: number) => {
-    setSelectedPage(page);
-    scrollTo(0, 0);
-  };
-
-  const handleRefetchTab = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    tab: typeof TAB.MY_FEED | typeof TAB.GLOBAL,
-  ) => {
+  const handleRefetch = (tab: typeof TAB.MY_FEED | typeof TAB.GLOBAL) => {
     setSelectedTab(tab);
+    setSelectedPage(1);
   };
+
+  if (isLoading) return <div>Loading....</div>;
+  if (error) return error instanceof Error && <div>{error.message}</div>;
+  if (!articles?.length) return <div>아티클이 없어용..</div>;
 
   return (
     <div className={styles.articleContainer}>
       <div className={styles.tabContainer}>
         {userToken && (
           <Tab
-            handleRefetch={handleRefetchTab}
-            isSelected={selectedTab === 1}
+            handleRefetch={handleRefetch}
+            isSelected={selectedTab === TAB.MY_FEED}
             tabValue={TAB.MY_FEED}
-          >
-            MY FEED
-          </Tab>
+            label="MY FEED"
+          />
         )}
         <Tab
-          handleRefetch={handleRefetchTab}
-          isSelected={selectedTab === 2}
+          handleRefetch={handleRefetch}
+          isSelected={selectedTab === TAB.GLOBAL}
           tabValue={TAB.GLOBAL}
-        >
-          Global Feed
-        </Tab>
+          label="Global Feed"
+        />
       </div>
-      {isLoading && <div>Loading....</div>}
-      {error instanceof Error && <div>{error.message}</div>}
-      {!isLoading && articles! && (
-        <>
-          {articles?.map((article) => (
-            <ArticleCard
-              key={`${article.title}${article.author.username}${article.createdAt}`}
-              article={article}
-            />
-          ))}
-          <Pagination
-            totalPage={totalPage}
-            selectedPage={selectedPage}
-            handlePagination={handlePagination}
-          />
-        </>
-      )}
-      {!isLoading && articles?.length === 0 && <div>아티클이 없어용..</div>}
+      {articles.map((article) => (
+        <ArticleCard
+          key={`${article.title}${article.author.username}${article.createdAt}`}
+          article={article}
+        />
+      ))}
+      <Pagination
+        totalPage={totalPage}
+        selectedPage={selectedPage}
+        handlePagination={(page) => {
+          setSelectedPage(page);
+          scrollTo(0, 0);
+        }}
+      />
     </div>
   );
 }
