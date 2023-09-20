@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 
 import * as styles from './Header.css';
 
-interface NavLinkProps {
+interface Props {
   name: string;
   href: string;
 }
@@ -29,7 +29,7 @@ export default function Header() {
   const router = usePathname();
   const [cookies] = useCookies(['token']);
   const userToken = cookies.token;
-  const [links, setLinks] = useState<NavLinkProps[]>([]);
+  const [links, setLinks] = useState<Props[]>([]);
 
   useEffect(() => {
     setLinks(userToken ? WITH_LOGIN_LINKS : WITHOUT_LOGIN_LINKS);
