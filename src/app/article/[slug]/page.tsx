@@ -16,9 +16,14 @@ const getArticleDetail = async (slug: string) => {
     redirect('/');
   }
 
-  const res = await getArticle(slug, {
-    Authorization: `Bearer ${accessToken}`,
-  });
+  const res = await getArticle(
+    slug,
+    accessToken
+      ? {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      : {},
+  );
 
   if (res?.errors) {
     redirect('/');
