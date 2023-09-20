@@ -1,5 +1,6 @@
 import type { ArticleAuthor } from './Article.types';
 
+// Article Detail
 export interface ArticleDetailData {
   slug: string;
   title: string;
@@ -18,6 +19,25 @@ export interface ArticleDetailResponse {
 }
 
 export interface ArticleDetailErrorResponse {
+  errors: {
+    body: string[];
+  };
+}
+
+// Article Comment
+export interface ArticleCommentData {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: ArticleAuthor;
+}
+
+export interface ArticleCommentsResponse {
+  comments: ArticleCommentData[];
+}
+
+export interface ArticleCommentsErrorResponse {
   errors: {
     body: string[];
   };
