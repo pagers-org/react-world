@@ -32,12 +32,19 @@ const ArticlePreview = ({
 
   const publishDate = formatDate(articlePreview.createdAt);
 
+  const articleSlug = articlePreview.slug;
   const articleLink = `/article/${articlePreview.slug}`;
   const articleTitle = articlePreview.title;
   const articleDescription = articlePreview.description;
 
   const likeCount = articlePreview.favoritesCount;
   const tagsList = articlePreview.tagList;
+
+  const handleArticlePreviewLinkClick = onArticleClick.bind(
+    null,
+    articleSlug,
+    articleLink,
+  );
 
   return (
     <ArticlePreviewContainer>
@@ -51,13 +58,7 @@ const ArticlePreview = ({
         </AuthorInfo>
         <LikeButton>{likeCount}</LikeButton>
       </ArticlePreviewMeta>
-      <ArticlePreviewLink
-        href={articleLink}
-        onClick={e => {
-          e.preventDefault(); // a 태그의 기본 이벤트 블락
-          onArticleClick(articlePreview.slug, articleLink);
-        }}
-      >
+      <ArticlePreviewLink onClick={handleArticlePreviewLinkClick}>
         <ArticleTitle>{articleTitle}</ArticleTitle>
         <ArticleDescription>{articleDescription}</ArticleDescription>
         <ReadMore>Read more...</ReadMore>
