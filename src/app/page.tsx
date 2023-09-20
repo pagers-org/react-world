@@ -1,4 +1,39 @@
-export default function Home() {
+'use client';
+
+import ProtecTedRoute from '@/composables/ProtectedRoute.tsx/ProtectedRoute';
+import { GlobalFeedResponseType } from '@/types/article';
+import { useEffect, useState } from 'react';
+
+import { getGlobalFeed } from '@/api/article';
+
+const Home = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [globalFeeds, setGlobalFeeds] =
+    useState<GlobalFeedResponseType | null>();
+  const [currentTab, setCurrentTab] = useState<'myFeed' | 'globalFeed'>(
+    'globalFeed',
+  );
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    setUser(JSON.parse(window.localStorage.getItem('user'))?.username);
+  }, []);
+  const globalFeed = async () => {
+    await getGlobalFeed().then((res) => {
+      if (res.errors) {
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+        console.log(res);
+        setGlobalFeeds(res);
+      }
+    });
+  };
+
+  useEffect(() => {
+    globalFeed();
+  }, []);
+
   return (
     <main className="mb-3 mt-2 flex bg-red-400  text-blue-500">
       <div className="home-page">
@@ -14,11 +49,13 @@ export default function Home() {
             <div className="col-md-9">
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
-                  <li className="nav-item">
-                    <a className="nav-link" href="">
-                      Your Feed
-                    </a>
-                  </li>
+                  {user && (
+                    <li className="nav-item">
+                      <a className="nav-link" href="">
+                        Your Feed
+                      </a>
+                    </li>
+                  )}
                   <li className="nav-item">
                     <a className="nav-link active" href="">
                       Global Feed
@@ -27,71 +64,41 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="article-preview">
-                <div className="article-meta">
-                  <a href="/profile/eric-simons">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" />
-                  </a>
-                  <div className="info">
-                    <a href="/profile/eric-simons" className="author">
-                      Eric Simons
+              {globalFeeds?.articles.map((feed) => {
+                return (
+                  <div key={feed.author.username} className="article-preview">
+                    <div className="article-meta">
+                      <a href="/profile/eric-simons">
+                        <img src={feed.author.image} />
+                      </a>
+                      <div className="info">
+                        <a href="/profile/eric-simons" className="author">
+                          Eric Simons
+                        </a>
+                        <span className="date">January 20th</span>
+                      </div>
+                      <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                        <i className="ion-heart"></i> {feed.favoritesCount}
+                      </button>
+                    </div>
+                    <a href={`/article/${feed.slug}`} className="preview-link">
+                      <h1>{feed.slug}</h1>
+                      <p>{feed.description}</p>
+                      <span>Read more...</span>
+                      <ul className="tag-list">
+                        {feed.tagList.map((tag) => (
+                          <li
+                            key={tag}
+                            className="tag-default tag-pill tag-outline"
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
                     </a>
-                    <span className="date">January 20th</span>
                   </div>
-                  <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                    <i className="ion-heart"></i> 29
-                  </button>
-                </div>
-                <a
-                  href="/article/how-to-build-webapps-that-scale"
-                  className="preview-link"
-                >
-                  <h1>How to build webapps that scale</h1>
-                  <p>This is the description for the post.</p>
-                  <span>Read more...</span>
-                  <ul className="tag-list">
-                    <li className="tag-default tag-pill tag-outline">
-                      realworld
-                    </li>
-                    <li className="tag-default tag-pill tag-outline">
-                      implementations
-                    </li>
-                  </ul>
-                </a>
-              </div>
-
-              <div className="article-preview">
-                <div className="article-meta">
-                  <a href="/profile/albert-pai">
-                    <img src="http://i.imgur.com/N4VcUeJ.jpg" />
-                  </a>
-                  <div className="info">
-                    <a href="/profile/albert-pai" className="author">
-                      Albert Pai
-                    </a>
-                    <span className="date">January 20th</span>
-                  </div>
-                  <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                    <i className="ion-heart"></i> 32
-                  </button>
-                </div>
-                <a href="/article/the-song-you" className="preview-link">
-                  <h1>
-                    The song you won't ever stop singing. No matter how hard you
-                    try.
-                  </h1>
-                  <p>This is the description for the post.</p>
-                  <span>Read more...</span>
-                  <ul className="tag-list">
-                    <li className="tag-default tag-pill tag-outline">
-                      realworld
-                    </li>
-                    <li className="tag-default tag-pill tag-outline">
-                      implementations
-                    </li>
-                  </ul>
-                </a>
-              </div>
+                );
+              })}
 
               <ul className="pagination">
                 <li className="page-item active">
@@ -144,4 +151,5 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+export default ProtecTedRoute(Home);
