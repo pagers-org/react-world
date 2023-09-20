@@ -37,8 +37,6 @@ const useRegister = () => {
       setIsLoading(false);
       return response;
     } catch (error) {
-      setIsLoading(false);
-
       // TODO: 로그 제거
       console.log('error: ' + JSON.stringify(error, null, 2));
       if (error && typeof error === 'object' && 'errors' in error) {
@@ -47,6 +45,8 @@ const useRegister = () => {
         console.error('An unexpected error occurred:', error);
       }
       return null;
+    } finally {
+      setIsLoading(false);
     }
   };
 
