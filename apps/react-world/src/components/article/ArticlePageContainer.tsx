@@ -19,7 +19,13 @@ const ArticlePageContainer = (props: ArticlePageContainerProps) => {
 
   return (
     <div className="article-page">
-      <ArticleHeader article={articleDetail.article} />
+      <ArticleHeader
+        title={articleDetail.article.title}
+        authorName={articleDetail.article.author.username}
+        authorImage={articleDetail.article.author.image}
+        createdAt={articleDetail.article.createdAt}
+        favoritesCount={articleDetail.article.favoritesCount}
+      />
       <Container>
         <ArticleContents
           body={articleDetail.article.body}

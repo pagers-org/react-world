@@ -1,32 +1,35 @@
-import type { ArticleDetailData } from '../../apis/article/ArticleService.types';
 import { formatDate } from '../../utils/dateUtils';
 
 interface ArticleHeaderProps {
-  article: ArticleDetailData;
+  title: string;
+  authorName: string;
+  authorImage: string;
+  createdAt: string;
+  favoritesCount: number;
 }
 
 const ArticleHeader = (props: ArticleHeaderProps) => {
-  const { article } = props;
+  const { title, authorName, authorImage, createdAt, favoritesCount } = props;
 
   return (
     <div className="banner">
       <div className="container">
-        <h1>{article.title}</h1>
+        <h1>{title}</h1>
 
         <div className="article-meta">
-          <a href={`/profile/${article.author.username}`}>
-            <img src={article.author.image} alt={article.author.username} />
+          <a href={`/profile/${authorName}`}>
+            <img src={authorImage} alt={authorName} />
           </a>
           <div className="info">
-            <a href={`/profile/${article.author.username}`} className="author">
-              {article.author.username}
+            <a href={`/profile/${authorName}`} className="author">
+              {authorName}
             </a>
-            <span className="date">{formatDate(article.createdAt)}</span>
+            <span className="date">{formatDate(createdAt)}</span>
           </div>
           <button className="btn btn-sm btn-outline-secondary">
             <i className="ion-plus-round"></i>
-            &nbsp; Follow {article.author.username}{' '}
-            <span className="counter">({article.favoritesCount})</span>
+            &nbsp; Follow {authorName}{' '}
+            <span className="counter">({favoritesCount})</span>
           </button>
           &nbsp;&nbsp;
           <button className="btn btn-sm btn-outline-primary">
