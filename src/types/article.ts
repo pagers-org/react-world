@@ -1,3 +1,12 @@
+type ArticlePostRequestType = {
+  article: {
+    title: string;
+    description: string;
+    body: string;
+    tagList: string[];
+  };
+};
+
 type FeedResponseType = {
   articles: [
     {
@@ -21,4 +30,4 @@ type FeedResponseType = {
   articlesCount: number;
 };
 
-export type { FeedResponseType };
+export type { FeedResponseType, ArticlePostRequestType };

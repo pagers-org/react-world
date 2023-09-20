@@ -1,4 +1,4 @@
-import { FeedResponseType } from '@/types/article';
+import { ArticlePostRequestType, FeedResponseType } from '@/types/article';
 
 import { BASE_HEADER, BASE_URL } from '@/constants/auth';
 
@@ -34,4 +34,22 @@ const getMyFeed = async (
     .catch((err) => console.error(err));
 };
 
-export { getGlobalFeed, getMyFeed };
+const postArticleRegister = async (
+  request: ArticlePostRequestType,
+  options: RequestInit = {},
+): Promise<FeedResponseType> => {
+  const accessToken = JSON.parse(window.localStorage.getItem('user'))?.token;
+  return await fetch(`${BASE_URL}/articles`, {
+    ...options,
+    method: 'post',
+    headers: {
+      ...BASE_HEADER,
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(request),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+};
+
+export { getGlobalFeed, getMyFeed, postArticleRegister };
