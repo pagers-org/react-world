@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { Suspense } from 'react';
 import { dehydrate } from '@tanstack/react-query';
 
@@ -15,9 +16,14 @@ import Tags from '@/features/tag/components/Tags';
 import { prefetchGetTagListQuery } from '@/features/tag/hooks/prefetchGetTagListQuery';
 
 import * as styles from '@/app/page.css';
+import { useAtom } from 'jotai';
+import { authAtom } from '@/src/providers/AuthProvider';
 
 export default async function MainPage() {
   const queryClient = getQueryClient();
+  const cookieStore = cookies();
+
+  const accessToken = cookieStore.get('access_token')?.value;
 
   await Promise.all([
     prefetchGetArticleListQuery(queryClient),

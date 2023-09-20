@@ -7,9 +7,13 @@ import Pagination from '@/src/components/Pagination';
 import { ARTICLE_LIMIT_PER_PAGE } from '@/features/article/constants';
 import ArticleCard from '@/features/article/components/ArticleCard';
 import { useGetArticleListQuery } from '@/features/article/hooks/queries/useGetArticleListQuery';
+import { authAtom, useAuth } from '@/src/providers/AuthProvider';
+import { useAtom } from 'jotai';
 
 export default function Articles() {
   const [page, setPage] = useState(1);
+
+  const [auth] = useAtom(authAtom);
 
   const { data } = useGetArticleListQuery({ page });
 

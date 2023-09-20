@@ -7,5 +7,6 @@ export const vars = createGlobalTheme(':root', {
     gray: '#DDD',
     gray400: '#687077',
     black: '#333',
+    danger: 'red',
   },
 });

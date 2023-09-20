@@ -8,13 +8,11 @@ interface GetTagsResponse {
 
 class TagApiService extends HttpClient {
   async getTags(): Promise<GetTagsResponse> {
-    const response = (await this.instance
-      .get('tags')
-      .json()) as GetTagsResponse;
+    const { data } = await this.instance.get<GetTagsResponse>('tags');
 
-    tagsSchema.parse(response.tags);
+    tagsSchema.parse(data.tags);
 
-    return response;
+    return data;
   }
 }
 
