@@ -1,10 +1,12 @@
 'use client';
 
+import ProtecTedRoute from '@/composables/ProtectedRoute.tsx/ProtectedRoute';
 import { RegisterPostRequestType } from '@/types/auth';
 import { produce } from 'immer';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, useState } from 'react';
-import Link from 'next/link';
+
 import { postUserRegister } from '@/api/auth';
 
 const page = () => {
@@ -125,4 +127,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProtecTedRoute(page);
