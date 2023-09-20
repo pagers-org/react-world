@@ -136,10 +136,7 @@ const HomePageMain = ({ feeds }: Props) => {
                         <i className="ion-heart"></i> {favoritesCount}
                       </button>
                     </div>
-                    <Link
-                      href="/article/how-to-build-webapps-that-scale"
-                      className="preview-link"
-                    >
+                    <Link href={`/article/${slug}`} className="preview-link">
                       <h1>{title}</h1>
                       <p>{description}</p>
                       <span>Read more...</span>
