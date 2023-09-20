@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import ArticleDetailPageMain from '@/pageComponents/article/[article_title]/ArticleDetailPageMain';
+import ArticleDetailPageMain from '@/pageComponents/article/[slug]/ArticleDetailPageMain';
 
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
