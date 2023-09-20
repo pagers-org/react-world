@@ -10,6 +10,15 @@ export const loginContainer = style({
   marginTop: vars.space.biggest,
 });
 
+export const title = style({
+  fontSize: vars.font.size.h2,
+  marginBottom: vars.space.tinny,
+});
+export const subTitle = style({
+  color: vars.colors.mainColor,
+  marginBottom: vars.space.small,
+});
+
 export const formType = style({
   display: 'flex',
   flexDirection: 'column',

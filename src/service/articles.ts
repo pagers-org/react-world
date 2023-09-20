@@ -11,7 +11,7 @@ interface FetchArticlesResponse {
 
 const getArticles = async (page: number): Promise<FetchArticlesResponse> => {
   const res = await fetch(
-    `${API_BASE_URL}articles?offset=${page}&limit=${ARTICLE_LIMIT_PER_PAGE}`,
+    `${API_BASE_URL}/articles?offset=${page}&limit=${ARTICLE_LIMIT_PER_PAGE}`,
   );
   const data = await res.json();
   return data;

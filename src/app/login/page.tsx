@@ -1,29 +1,38 @@
 'use client';
 
+import Button from '@/components/Button';
+import { FormTitle } from '@/components/FormTitle';
+import Input from '@/components/Input';
+import { ROUTE } from '@/constants/route';
 import { postLogin } from '@/service/login';
+import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useState } from 'react';
-
-import * as styles from './page.css';
 import { useCookies } from 'react-cookie';
 
+import * as styles from './page.css';
 
+interface Props {
+  email: string;
+  password: string;
+}
 export default function LoginPage() {
-  const [,setCookie] = useCookies(['token']);
-
-  const [form, setForm] = useState<{ email: string; password: string }>({
+  const router = useRouter();
+  const [, setCookie] = useCookies(['token']);
+  const [form, setForm] = useState<Props>({
     email: '',
     password: '',
   });
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const loginInfo = { user: { email: form.email, password: form.password } };
     const data = await postLogin(loginInfo);
+
     setCookie('token', data.user.token, {
       path: '/',
       secure: true,
-      httpOnly: true
-    })
+    });
+    router?.push(ROUTE.HOME);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,26 +42,21 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginContainer}>
-      <p className={styles.title}>Sign in</p>
-      <p className={styles.subTitle}>Need an account?</p>
+      <FormTitle title="Sign In" subTitle="Need an account?" href={ROUTE.SIGNUP}/>
       <form className={styles.formType} onSubmit={handleSubmit}>
-        <input
-          className={styles.inputType}
+        <Input
           type="email"
           name="email"
           value={form.email}
-          onChange={handleChange}
+          handleEvent={handleChange}
         />
-        <input
-          className={styles.inputType}
+        <Input
           type="password"
           name="password"
           value={form.password}
-          onChange={handleChange}
+          handleEvent={handleChange}
         />
-        <button className={styles.submitButton} type="submit">
-          Sign in
-        </button>
+        <Button className={styles.submitButton} content="Sign in " />
       </form>
     </div>
   );

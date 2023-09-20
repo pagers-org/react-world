@@ -8,7 +8,7 @@ interface User {
   image: string;
 }
 
-interface UserResponse {
+export interface UserResponse {
   user: User;
 }
 
@@ -20,7 +20,7 @@ export interface LoginInfo {
 }
 
 export const postLogin = async (loginInfo: LoginInfo): Promise<UserResponse> => 
-  fetch(`${API_BASE_URL}users/login`, {
+  fetch(`${API_BASE_URL}/users/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(loginInfo),
