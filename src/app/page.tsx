@@ -1,23 +1,20 @@
 'use client';
 
 import ProtecTedRoute from '@/composables/ProtectedRoute.tsx/ProtectedRoute';
-import { GlobalFeedResponseType } from '@/types/article';
+import { FeedResponseType } from '@/types/article';
 import { useEffect, useState } from 'react';
 
-import { getGlobalFeed } from '@/api/article';
+import { getGlobalFeed, getMyFeed } from '@/api/article';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [globalFeeds, setGlobalFeeds] =
-    useState<GlobalFeedResponseType | null>();
+  const [globalFeeds, setGlobalFeeds] = useState<FeedResponseType | null>();
+  const [myFeeds, setMyFeeds] = useState<FeedResponseType | null>();
   const [currentTab, setCurrentTab] = useState<'myFeed' | 'globalFeed'>(
     'globalFeed',
   );
   const [user, setUser] = useState();
 
-  useEffect(() => {
-    setUser(JSON.parse(window.localStorage.getItem('user'))?.username);
-  }, []);
   const globalFeed = async () => {
     await getGlobalFeed().then((res) => {
       if (res.errors) {
@@ -29,6 +26,29 @@ const Home = () => {
       }
     });
   };
+
+  const myFeed = async () => {
+    await getMyFeed().then((res) => {
+      if (res.errors) {
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+        console.log(res);
+        setGlobalFeeds(res);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (user) {
+      setCurrentTab('myFeed');
+      myFeed();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setUser(JSON.parse(window.localStorage.getItem('user'))?.username);
+  }, []);
 
   useEffect(() => {
     globalFeed();
@@ -50,55 +70,115 @@ const Home = () => {
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
                   {user && (
-                    <li className="nav-item">
-                      <a className="nav-link" href="">
+                    <li
+                      onClick={() => setCurrentTab('myFeed')}
+                      className="nav-item"
+                    >
+                      <p
+                        className={`nav-link ${
+                          currentTab === 'myFeed' ? 'active' : ''
+                        }`}
+                      >
                         Your Feed
-                      </a>
+                      </p>
                     </li>
                   )}
-                  <li className="nav-item">
-                    <a className="nav-link active" href="">
+                  <li
+                    onClick={() => setCurrentTab('globalFeed')}
+                    className="nav-item"
+                  >
+                    <p
+                      className={`nav-link ${
+                        currentTab === 'globalFeed' ? 'active' : ''
+                      }`}
+                    >
                       Global Feed
-                    </a>
+                    </p>
                   </li>
                 </ul>
               </div>
 
-              {globalFeeds?.articles.map((feed) => {
-                return (
-                  <div key={feed.author.username} className="article-preview">
-                    <div className="article-meta">
-                      <a href="/profile/eric-simons">
-                        <img src={feed.author.image} />
-                      </a>
-                      <div className="info">
-                        <a href="/profile/eric-simons" className="author">
-                          Eric Simons
+              {currentTab === 'globalFeed' &&
+                globalFeeds?.articles.map((feed) => {
+                  return (
+                    <div key={feed.author.username} className="article-preview">
+                      <div className="article-meta">
+                        <a href="/profile/eric-simons">
+                          <img src={feed.author.image} />
                         </a>
-                        <span className="date">January 20th</span>
+                        <div className="info">
+                          <a href="/profile/eric-simons" className="author">
+                            Eric Simons
+                          </a>
+                          <span className="date">January 20th</span>
+                        </div>
+                        <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                          <i className="ion-heart"></i> {feed.favoritesCount}
+                        </button>
                       </div>
-                      <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                        <i className="ion-heart"></i> {feed.favoritesCount}
-                      </button>
+                      <a
+                        href={`/article/${feed.slug}`}
+                        className="preview-link"
+                      >
+                        <h1>{feed.slug}</h1>
+                        <p>{feed.description}</p>
+                        <span>Read more...</span>
+                        <ul className="tag-list">
+                          {feed.tagList.map((tag) => (
+                            <li
+                              key={tag}
+                              className="tag-default tag-pill tag-outline"
+                            >
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      </a>
                     </div>
-                    <a href={`/article/${feed.slug}`} className="preview-link">
-                      <h1>{feed.slug}</h1>
-                      <p>{feed.description}</p>
-                      <span>Read more...</span>
-                      <ul className="tag-list">
-                        {feed.tagList.map((tag) => (
-                          <li
-                            key={tag}
-                            className="tag-default tag-pill tag-outline"
-                          >
-                            {tag}
-                          </li>
-                        ))}
-                      </ul>
-                    </a>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              {currentTab === 'myFeed' && myFeeds?.articles.length > 0 ? (
+                myFeeds?.articles.map((feed) => {
+                  return (
+                    <div key={feed.author.username} className="article-preview">
+                      <div className="article-meta">
+                        <a href="/profile/eric-simons">
+                          <img src={feed.author.image} />
+                        </a>
+                        <div className="info">
+                          <a href="/profile/eric-simons" className="author">
+                            Eric Simons
+                          </a>
+                          <span className="date">January 20th</span>
+                        </div>
+                        <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                          <i className="ion-heart"></i> {feed.favoritesCount}
+                        </button>
+                      </div>
+                      <a
+                        href={`/article/${feed.slug}`}
+                        className="preview-link"
+                      >
+                        <h1>{feed.slug}</h1>
+                        <p>{feed.description}</p>
+                        <span>Read more...</span>
+                        <ul className="tag-list">
+                          {feed.tagList.map((tag) => (
+                            <li
+                              key={tag}
+                              className="tag-default tag-pill tag-outline"
+                            >
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      </a>
+                    </div>
+                  );
+                })
+              ) : (
+                <div>피드 없음</div>
+              )}
 
               <ul className="pagination">
                 <li className="page-item active">
