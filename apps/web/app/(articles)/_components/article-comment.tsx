@@ -31,25 +31,6 @@ export function ArticleComment(): JSX.Element {
             <span className="date-posted">Dec 29th</span>
           </div>
         </div>
-
-        <div className="card">
-          <div className="card-block">
-            <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          </div>
-          <div className="card-footer">
-            <a className="comment-author" href="/profile/author">
-              <img alt="" className="comment-author-img" src="http://i.imgur.com/Qr71crq.jpg" />
-            </a>
-            &nbsp;
-            <a className="comment-author" href="/profile/jacob-schmidt">
-              Jacob Schmidt
-            </a>
-            <span className="date-posted">Dec 29th</span>
-            <span className="mod-options">
-              <i className="ion-trash-a" />
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );
