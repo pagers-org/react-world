@@ -1,9 +1,9 @@
-import { Container } from '../shared/Container';
+import { Container } from '@components/shared/Container';
 import ArticleActions from './ArticleActions';
 import ArticleComments from './ArticleComments';
 import ArticleContents from './ArticleContents';
 import ArticleHeader from './ArticleHeader';
-import useArticleDetailQuery from '../../quries/useArticleDetailQuery';
+import useArticleDetailQuery from '@quries/useArticleDetailQuery';
 
 interface ArticlePageContainerProps {
   articleSlug: string;
