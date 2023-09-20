@@ -1,4 +1,5 @@
 import type { ArticlePreviewData } from '../../apis/article/ArticlePreviewService.types';
+import { formatDate } from '../../utils/dateUtils';
 import {
   ArticlePreviewContainer,
   ArticlePreviewMeta,
@@ -18,21 +19,32 @@ import {
 
 interface ArticlePreviewProps {
   articlePreview: ArticlePreviewData;
+  onArticleClick: (articleSlug: string, articleLink: string) => void;
 }
 
-const ArticlePreview = ({ articlePreview }: ArticlePreviewProps) => {
+const ArticlePreview = ({
+  articlePreview,
+  onArticleClick,
+}: ArticlePreviewProps) => {
   const authorProfileLink = `/profile/${articlePreview.author.username}`;
   const authorProfileImageUrl = articlePreview.author.image;
   const authorName = articlePreview.author.username;
 
-  const publishDate = new Date(articlePreview.createdAt).toDateString();
+  const publishDate = formatDate(articlePreview.createdAt);
 
+  const articleSlug = articlePreview.slug;
   const articleLink = `/article/${articlePreview.slug}`;
   const articleTitle = articlePreview.title;
   const articleDescription = articlePreview.description;
 
   const likeCount = articlePreview.favoritesCount;
   const tagsList = articlePreview.tagList;
+
+  const handleArticlePreviewLinkClick = onArticleClick.bind(
+    null,
+    articleSlug,
+    articleLink,
+  );
 
   return (
     <ArticlePreviewContainer>
@@ -46,7 +58,7 @@ const ArticlePreview = ({ articlePreview }: ArticlePreviewProps) => {
         </AuthorInfo>
         <LikeButton>{likeCount}</LikeButton>
       </ArticlePreviewMeta>
-      <ArticlePreviewLink href={articleLink}>
+      <ArticlePreviewLink onClick={handleArticlePreviewLinkClick}>
         <ArticleTitle>{articleTitle}</ArticleTitle>
         <ArticleDescription>{articleDescription}</ArticleDescription>
         <ReadMore>Read more...</ReadMore>

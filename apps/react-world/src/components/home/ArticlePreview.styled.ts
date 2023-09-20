@@ -65,8 +65,8 @@ export const LikeButton = styled.button`
   }
 `;
 
-export const ArticlePreviewLink = styled.a`
-  color: inherit;
+export const ArticlePreviewLink = styled.div`
+  cursor: pointer;
 
   &:hover {
     color: inherit; // Keep default color on hover

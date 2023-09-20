@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 // TODO: 향후 .env 파일로 분리
 const BASE_URL = 'https://api.realworld.io/api';
