@@ -33,4 +33,9 @@ export const ArticlesResponseSchema = z.object({
   articlesCount: z.number(),
 });
 
+export const ArticleResponseSchema = z.object({
+  article: ArticleSchema,
+});
+
 export type ArticlesDTO = z.infer<typeof ArticlesResponseSchema>;
+export type ArticleDTO = z.infer<typeof ArticleResponseSchema>;
