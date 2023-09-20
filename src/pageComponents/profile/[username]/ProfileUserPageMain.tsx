@@ -229,7 +229,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                           </button>
                         </div>
                         <Link
-                          href="/article/how-to-build-webapps-that-scale"
+                          href={`/article/${slug}`}
                           className="preview-link"
                         >
                           <h1>{title}</h1>
