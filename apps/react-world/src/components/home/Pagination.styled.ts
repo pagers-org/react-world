@@ -9,7 +9,7 @@ export const PaginationContainer = styled.ul`
   border-radius: 0.25rem;
 `;
 
-export const PageButton = styled.a<{ isActive: boolean }>`
+export const PageButton = styled.button<{ isActive: boolean }>`
   position: relative;
   float: left;
   padding: 0.5rem 0.75rem;
@@ -30,11 +30,17 @@ export const PageButton = styled.a<{ isActive: boolean }>`
     border-top-right-radius: 0.25rem;
   }
 
+  &:focus {
+    outline: none;
+    text-decoration: none;
+  }
+
   &:focus,
   &:hover {
     color: ${props => (props.isActive ? '#fff' : '#3d8b3d')};
     background-color: ${props => (props.isActive ? '#5cb85c' : '#eceeef')};
     border-color: #ddd;
+    text-decoration: underline;
   }
 
   ${props =>

@@ -24,7 +24,6 @@ const Pagination = ({
       {pages.map((page, index) => (
         <PageButton
           key={page}
-          href="#"
           isActive={index === activePageIndex}
           onClick={() => handlePageClick(index)}
         >
