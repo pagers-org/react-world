@@ -1,8 +1,6 @@
-import { Options } from 'ky';
-
 import { HttpClient } from '@/src/services/HttpClient';
 
-import { Article, articleSchema } from '@/features/article/types';
+import { Article, articlesSchema } from '@/features/article/types';
 
 interface GetArticlesResponse {
   articles: Article[];
@@ -10,16 +8,18 @@ interface GetArticlesResponse {
 }
 
 class ArticleApiService extends HttpClient {
-  async getArticles(options?: Options): Promise<GetArticlesResponse> {
-    const res = (await this.instance
-      .get('articles', {
-        ...options,
-      })
-      .json()) as GetArticlesResponse;
+  async getArticles({
+    searchParams,
+  }: {
+    searchParams: URLSearchParams;
+  }): Promise<GetArticlesResponse> {
+    const { data } = await this.instance.get<GetArticlesResponse>('articles', {
+      params: searchParams,
+    });
 
-    articleSchema.parse(res.articles);
+    articlesSchema.parse(data.articles);
 
-    return res;
+    return data;
   }
 }
 

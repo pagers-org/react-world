@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 import { vars } from '@/src/styles/theme.css';
 
-export const loginContainer = style({
+export const registerContainer = style({
   marginTop: 40,
   display: 'flex',
   flexDirection: 'column',
@@ -10,7 +10,7 @@ export const loginContainer = style({
   gap: 12,
 });
 
-export const loginText = style({
+export const registerText = style({
   fontSize: 40,
   fontWeight: 500,
 });
@@ -19,7 +19,7 @@ export const descriptionText = style({
   color: vars.colors.primary,
 });
 
-export const loginInput = style({
+export const registerInput = style({
   width: 330,
   height: 50,
   padding: '12px 8px',
@@ -30,7 +30,7 @@ export const loginInput = style({
   },
 });
 
-export const loginButton = style({
+export const registerButton = style({
   width: 330,
   height: 50,
   backgroundColor: vars.colors.primary,
@@ -40,5 +40,10 @@ export const loginButton = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: 4,
+  gap: 8,
+});
+
+export const errorMessage = style({
+  marginTop: 4,
+  color: vars.colors.danger,
 });
