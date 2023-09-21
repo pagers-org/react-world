@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
 import HomeFeedTabItem from './HomeFeedTabItem';
+import type { HomeFeedType } from './HomeFeedContents';
 
 interface HomeFeedTabProps {
-  activeFeed: 'my_feed' | 'global_feed';
+  activeFeed: HomeFeedType; // 'my_feed' | 'global_feed';
 }
 
 const HomeFeedTab = ({ activeFeed }: HomeFeedTabProps) => (
   <HomeFeedTabContainer>
-    <HomeFeedTabItem isActive={activeFeed === 'my_feed'} href="#">
+    <HomeFeedTabItem isActive={activeFeed === 'my'} href="#">
       Your Feed
     </HomeFeedTabItem>
-    <HomeFeedTabItem isActive={activeFeed === 'global_feed'} href="#">
+    <HomeFeedTabItem isActive={activeFeed === 'global'} href="#">
       Global Feed
     </HomeFeedTabItem>
   </HomeFeedTabContainer>
