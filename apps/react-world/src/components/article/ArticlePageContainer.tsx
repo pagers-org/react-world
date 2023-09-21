@@ -4,6 +4,7 @@ import ArticleComments from './ArticleComments';
 import ArticleContents from './ArticleContents';
 import ArticleHeader from './ArticleHeader';
 import useArticleDetailQuery from '@quries/useArticleDetailQuery';
+import useArticleCommentsQuery from '@quries/useArticleCommentsQuery';
 
 interface ArticlePageContainerProps {
   articleSlug: string;
@@ -12,6 +13,7 @@ interface ArticlePageContainerProps {
 const ArticlePageContainer = (props: ArticlePageContainerProps) => {
   const { articleSlug } = props;
   const { articleDetail } = useArticleDetailQuery(articleSlug);
+  const { articleComments } = useArticleCommentsQuery(articleSlug);
 
   if (!articleDetail) {
     return null;
@@ -38,7 +40,7 @@ const ArticlePageContainer = (props: ArticlePageContainerProps) => {
           favorited={articleDetail.article.favorited}
           favoritesCount={articleDetail.article.favoritesCount}
         />
-        <ArticleComments />
+        <ArticleComments comments={articleComments?.comments || []} />
       </Container>
     </div>
   );
