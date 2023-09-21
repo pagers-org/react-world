@@ -16,8 +16,10 @@ class RegisterService {
       return response.data;
     } catch (error) {
       if (isAxiosError(error) && error.response) {
+        console.error('Axios error occurred:', error.response.data);
         throw error.response.data;
       }
+      console.error('An unexpected error occurred:', error);
       throw error;
     }
   }

@@ -5,6 +5,7 @@ import type {
   RegisterUserResponse,
 } from '../apis/register/RegisterService.types';
 import RegisterService from '../apis/register/RegisterService';
+import { saveTokenToCookie } from '@utils/jwtUtils';
 
 const useRegister = () => {
   const [userData, setUserData] = useState<RegisterUserParams>({
@@ -31,14 +32,14 @@ const useRegister = () => {
       const response = await RegisterService.registerUser(userData);
       console.log('response: ' + JSON.stringify(response, null, 2));
 
-      // TODO: 임시로 로컬 스토리지에 토큰 저장
-      localStorage.setItem('jwtToken', response.user.token);
+      // JWT 토큰을 쿠키에 저장
+      if (response && response.user && response.user.token) {
+        saveTokenToCookie(response.user.token);
+      }
 
       setIsLoading(false);
       return response;
     } catch (error) {
-      setIsLoading(false);
-
       // TODO: 로그 제거
       console.log('error: ' + JSON.stringify(error, null, 2));
       if (error && typeof error === 'object' && 'errors' in error) {
@@ -47,6 +48,8 @@ const useRegister = () => {
         console.error('An unexpected error occurred:', error);
       }
       return null;
+    } finally {
+      setIsLoading(false);
     }
   };
 
