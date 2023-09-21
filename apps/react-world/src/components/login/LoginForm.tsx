@@ -15,7 +15,13 @@ const LoginForm = (props: LoginFormProps) => {
     <form onSubmit={handleSubmit(onLogin)}>
       <fieldset className="form-group">
         <input
-          {...register('email')}
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: '유효한 이메일 주소가 아닙니다.',
+            },
+          })}
           className="form-control form-control-lg"
           type="text"
           placeholder="Email"
