@@ -32,6 +32,7 @@
       "@routes/*": ["routes/*"],
       "@stores/*": ["stores/*"],
       "@utils/*": ["utils/*"],
+      "@styles/*": ["../styles/*"],
     }
 
   },
