@@ -8,10 +8,8 @@ interface HomeFeedTabProps {
 
 const HomeFeedTab = ({ activeFeed }: HomeFeedTabProps) => (
   <HomeFeedTabContainer>
-    <HomeFeedTabItem isActive={activeFeed === 'my'} href="#">
-      Your Feed
-    </HomeFeedTabItem>
-    <HomeFeedTabItem isActive={activeFeed === 'global'} href="#">
+    <HomeFeedTabItem isActive={activeFeed === 'my'}>Your Feed</HomeFeedTabItem>
+    <HomeFeedTabItem isActive={activeFeed === 'global'}>
       Global Feed
     </HomeFeedTabItem>
   </HomeFeedTabContainer>
