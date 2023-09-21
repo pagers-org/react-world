@@ -30,8 +30,16 @@ const HomeFeedContents = (props: HomeFeedContentsProps) => {
     useArticlePreviewQuery(currentPageIndex);
   const { popularArticleTags, isPopularArticleTagsLoading } =
     usePopularArticleTagsQuery();
+
   const handlePageChange = (newPageIndex: number) => {
     setCurrentPageIndex(newPageIndex);
+
+    const currentURL = new URL(window.location.href);
+    const searchParams = currentURL.searchParams;
+    searchParams.set('page', (newPageIndex + 1).toString());
+    currentURL.search = searchParams.toString();
+
+    navigate(currentURL.pathname + currentURL.search);
   };
 
   const totalPageCount = articlePreviews?.articlesCount
