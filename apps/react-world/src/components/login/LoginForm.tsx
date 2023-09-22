@@ -1,15 +1,29 @@
+import { useEffect } from 'react';
+import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 interface LoginFormProps {
   onLogin: (data: { email: string; password: string }) => void;
+  onError: (errors: FieldErrors) => void;
 }
 
 const LoginForm = (props: LoginFormProps) => {
-  const { onLogin } = props;
-  const { register, handleSubmit } = useForm<{
+  const { onLogin, onError } = props;
+  const { register, handleSubmit, formState } = useForm<{
     email: string;
     password: string;
   }>();
+  const { errors } = formState;
+
+  useEffect(
+    () => {
+      if (Object.keys(errors).length > 0) {
+        onError(errors);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [errors], // onError 를 제외하기 위함
+  );
 
   return (
     <form onSubmit={handleSubmit(onLogin)}>
