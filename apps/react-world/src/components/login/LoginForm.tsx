@@ -39,6 +39,7 @@ const LoginForm = (props: LoginFormProps) => {
           className="form-control form-control-lg"
           type="text"
           placeholder="Email"
+          autoComplete="username"
         />
       </fieldset>
       <fieldset className="form-group">
@@ -47,6 +48,7 @@ const LoginForm = (props: LoginFormProps) => {
           className="form-control form-control-lg"
           type="password"
           placeholder="Password"
+          autoComplete="current-password"
         />
       </fieldset>
       <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
