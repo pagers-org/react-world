@@ -1,4 +1,4 @@
-import TestComponent from '@/components/test-component';
+import HomeComponent from '@/components/home';
 import {
     GArticlesQuery,
     articlesQuery,
@@ -9,19 +9,24 @@ import getQueryClient from 'config/react-query/get-query-client';
 import { articleKeys } from 'config/react-query/query-key-factory';
 import { request } from 'graphql-request';
 
-export default async function Page() {
+export default async function Page({
+    searchParams,
+}: {
+    params: { slug: string };
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) {
     const queryClient = getQueryClient();
     await queryClient.prefetchQuery(articleKeys.lists(), () =>
         request<GArticlesQuery>(
-            'http://localhost:4000/articles',
+            'http://localhost:4000/graphql',
             articlesQuery,
             {
                 // parameters
-                tag: null,
-                author: null,
-                favorited: null,
-                offset: null,
-                limit: null,
+                tag: searchParams?.tag,
+                author: searchParams?.author,
+                favorited: searchParams?.favorited,
+                offset: Number(searchParams?.offset),
+                limit: Number(searchParams?.limit),
             },
         ),
     );
@@ -29,7 +34,7 @@ export default async function Page() {
 
     return (
         <Hydrate state={dehydratedState}>
-            <TestComponent />
+            <HomeComponent />
         </Hydrate>
     );
 }

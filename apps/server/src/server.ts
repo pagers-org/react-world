@@ -1,4 +1,3 @@
-import { ApolloServer, gql } from 'apollo-server';
 import { articleApi } from './services/apis/article';
 import {
     IGetArticleListParams,
@@ -8,6 +7,14 @@ import {
 import { IGetUserProfileParams } from '@/types/profile.type';
 import { tagsApi } from './services/apis/tags';
 import { profileApi } from './services/apis/profile';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import pkg from 'body-parser';
+import { gql } from 'graphql-tag';
 
 const typeDefs = gql`
     # Queries
@@ -112,8 +119,6 @@ const resolvers = {
                 };
             }
         },
-
-        //
         async getArticleDetail(_: never, { slug }: IGetArticleDetailParams) {
             try {
                 const articleDetail = await articleApi.getArticleDetail({
@@ -127,7 +132,6 @@ const resolvers = {
                 };
             }
         },
-
         async getArticleComments(
             _: never,
             { slug }: IGetArticleCommentsParams,
@@ -144,7 +148,6 @@ const resolvers = {
                 };
             }
         },
-
         async getTags() {
             try {
                 const tags = await tagsApi.getTags();
@@ -156,7 +159,6 @@ const resolvers = {
                 };
             }
         },
-
         async getUserProfile(_: never, { username }: IGetUserProfileParams) {
             try {
                 const userProfile = await profileApi.getUserProfile({
@@ -173,6 +175,36 @@ const resolvers = {
     },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const { json } = pkg;
 
-server.listen().then(({ url }) => console.log(`Running on ${url}`));
+interface MyContext {
+    token?: String;
+}
+
+async function App() {
+    const app = express();
+    const httpServer = http.createServer(app);
+
+    const server = new ApolloServer<MyContext>({
+        typeDefs,
+        resolvers,
+        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    });
+
+    await server.start();
+    app.use(
+        '/graphql',
+        cors<cors.CorsRequest>(),
+        json(),
+        expressMiddleware(server, {
+            context: async ({ req }) => ({ token: req.headers.token }),
+        }),
+    );
+
+    await new Promise<void>(resolve =>
+        httpServer.listen({ port: 4000 }, resolve),
+    );
+    console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+}
+
+App();
