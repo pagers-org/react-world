@@ -1,5 +1,8 @@
-import styled from '@emotion/styled';
+import type { LoginUserErrors } from '@apis/login/LoginService.types';
+import type { LoginStatus } from '@hooks/useLogin';
 import { useForm } from 'react-hook-form';
+import { LoginErrorMessage, StyledLoginButton } from './LoginForm.styled';
+import { type ReactNode } from 'react';
 
 /*
 - ^로 시작합니다.
@@ -12,24 +15,24 @@ import { useForm } from 'react-hook-form';
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 interface LoginFormProps {
+  loginError: LoginUserErrors | null;
+  loginStatus: LoginStatus;
   onLoginSubmit: (data: { email: string; password: string }) => void;
 }
 
 const LoginForm = (props: LoginFormProps) => {
-  const { onLoginSubmit } = props;
+  const { loginError, loginStatus, onLoginSubmit } = props;
   const { register, handleSubmit, formState } = useForm<{
     email: string;
     password: string;
   }>();
   const { errors } = formState;
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    console.log('onSubmit: ' + JSON.stringify(data, null, 2));
-    onLoginSubmit(data);
-  };
+  const shouldLoginButtonDisabled = loginStatus === 'loggingIn';
+  const buttonText = loginStatus === 'loggingIn' ? 'Signing in...' : 'Sign in';
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onLoginSubmit)}>
       <fieldset className="form-group">
         <input
           {...register('email', {
@@ -73,10 +76,28 @@ const LoginForm = (props: LoginFormProps) => {
           <LoginErrorMessage>{errors.password.message}</LoginErrorMessage>
         )}
       </fieldset>
-      <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
-        Sign in
-      </button>
+      <LoginButton disabled={shouldLoginButtonDisabled}>
+        {buttonText}
+      </LoginButton>
     </form>
+  );
+};
+
+interface LoginButtonProps {
+  disabled: boolean;
+  children?: ReactNode;
+}
+const LoginButton = (props: LoginButtonProps) => {
+  const { disabled, children } = props;
+
+  return (
+    <StyledLoginButton
+      type="submit"
+      className={`btn btn-lg pull-xs-right`}
+      disabled={disabled}
+    >
+      {children}
+    </StyledLoginButton>
   );
 };
 
