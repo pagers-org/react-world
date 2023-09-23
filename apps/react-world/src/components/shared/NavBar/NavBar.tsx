@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Container } from '../../Container';
+import { Container } from '../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
