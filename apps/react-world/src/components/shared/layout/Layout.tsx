@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Footer } from './Footer';
-import { Navbar } from './NavBar/NavBar';
 
 type LayoutProps = {
   children?: ReactNode;
@@ -9,7 +8,6 @@ type LayoutProps = {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <Navbar />
       {children}
       <Footer />
     </>
