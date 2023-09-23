@@ -3,16 +3,35 @@ import { Container } from '../../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
+import type { NavItemType } from '@appTypes/NavItemModel';
 
-export const Navbar = () => {
+interface NavbarProps {
+  selectedNavItem: NavItemType;
+}
+
+export const Navbar = (props: NavbarProps) => {
+  const { selectedNavItem } = props;
+
   return (
     <NavbarContainer>
       <Container>
         <NavbarBrand />
         <NavList>
-          <NavItem href="/" isActive title="Home" />
-          <NavItem href="/login" title="Sign in" />
-          <NavItem href="/register" title="Sign up" />
+          <NavItem
+            href="/"
+            isActive={selectedNavItem === 'home'}
+            title="Home"
+          />
+          <NavItem
+            href="/login"
+            isActive={selectedNavItem === 'login'}
+            title="Sign in"
+          />
+          <NavItem
+            href="/register"
+            isActive={selectedNavItem === 'register'}
+            title="Sign up"
+          />
         </NavList>
       </Container>
     </NavbarContainer>
