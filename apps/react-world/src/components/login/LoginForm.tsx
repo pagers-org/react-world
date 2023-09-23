@@ -76,6 +76,13 @@ const LoginForm = (props: LoginFormProps) => {
           <LoginErrorMessage>{errors.password.message}</LoginErrorMessage>
         )}
       </fieldset>
+      {loginError && (
+        <LoginErrorMessage>
+          {Object.entries(loginError)
+            .map(([key, value]) => `${key} ${value[0]}`)
+            .join('. ')}
+        </LoginErrorMessage>
+      )}
       <LoginButton disabled={shouldLoginButtonDisabled}>
         {buttonText}
       </LoginButton>
