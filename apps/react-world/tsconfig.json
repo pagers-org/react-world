@@ -33,8 +33,8 @@
       "@stores/*": ["stores/*"],
       "@utils/*": ["utils/*"],
       "@styles/*": ["../styles/*"],
+      "@appTypes/*": ["types/*"],
     }
-
   },
   "references": [{ "path": "./tsconfig.node.json" }]
 }

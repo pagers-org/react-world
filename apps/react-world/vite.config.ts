@@ -19,6 +19,7 @@ export default defineConfig({
       '@stores': '/src/stores',
       '@utils': '/src/utils',
       '@styles': '/styles',
+      '@appTypes': '/src/types',
     },
   },
 });
