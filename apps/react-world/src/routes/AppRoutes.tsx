@@ -1,5 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import { Layout } from '@components/shared/Layout/Layout';
+import { Navbar } from '@components/shared/NavBar/NavBar';
 import { HomePage } from '@pages/home';
 import { LoginPage } from '@pages/login';
 import { RegisterPage } from '@pages/register';
@@ -9,12 +15,15 @@ import { EditorPage } from '@pages/editor';
 import { SettingsPage } from '@pages/settings';
 import { Global } from '@emotion/react';
 import globalStyles from '@styles/globalStyles';
+import type { NavItemType } from '@appTypes/NavItemModel';
+import { NAV_ITEMS } from '@appTypes/NavItemModel';
 
 export const AppRoutes = () => {
   return (
     <Layout>
       <Global styles={globalStyles} />
       <Router>
+        <NavBarWithLocation />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -27,4 +36,18 @@ export const AppRoutes = () => {
       </Router>
     </Layout>
   );
+};
+
+// Path 변경에 따른 NavBar 상태 변경을 처리하기 위한 처리
+const NavBarWithLocation = () => {
+  const location = useLocation();
+
+  let selectedNavItem: NavItemType = 'home'; // default
+  for (const navItem of NAV_ITEMS) {
+    if (location.pathname === navItem.path) {
+      selectedNavItem = navItem.name;
+      break;
+    }
+  }
+  return <Navbar selectedNavItem={selectedNavItem} />;
 };
