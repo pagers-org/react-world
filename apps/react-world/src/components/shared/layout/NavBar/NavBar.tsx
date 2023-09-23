@@ -12,26 +12,25 @@ interface NavbarProps {
 export const Navbar = (props: NavbarProps) => {
   const { selectedNavItem } = props;
 
+  const navItems = [
+    { href: '/', name: 'home', title: 'Home' },
+    { href: '/login', name: 'login', title: 'Sign in' },
+    { href: '/register', name: 'register', title: 'Sign up' },
+  ];
+
   return (
     <NavbarContainer>
       <Container>
         <NavbarBrand />
         <NavList>
-          <NavItem
-            href="/"
-            isActive={selectedNavItem === 'home'}
-            title="Home"
-          />
-          <NavItem
-            href="/login"
-            isActive={selectedNavItem === 'login'}
-            title="Sign in"
-          />
-          <NavItem
-            href="/register"
-            isActive={selectedNavItem === 'register'}
-            title="Sign up"
-          />
+          {navItems.map(item => (
+            <NavItem
+              key={item.name}
+              href={item.href}
+              isActive={selectedNavItem === item.name}
+              title={item.title}
+            />
+          ))}
         </NavList>
       </Container>
     </NavbarContainer>
