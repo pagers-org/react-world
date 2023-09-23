@@ -12,14 +12,34 @@ import usePopularArticleTagsQuery from '../../quries/usePopularArticleTagsQuery'
 import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewService';
 import { ARTICLE_DETAIL_CACHE_KEY } from '../../quries/useArticleDetailQuery';
 
-const HomeFeedContents = () => {
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+type StandardFeedType = 'my' | 'global';
+type ArticleTagFeedType = string; // 아티클 태그는 어떤 문자열이든 가능
+
+export type HomeFeedType = StandardFeedType | ArticleTagFeedType;
+
+interface HomeFeedContentsProps {
+  feedType: HomeFeedType;
+  page: number;
+}
+
+const HomeFeedContents = (props: HomeFeedContentsProps) => {
+  const { feedType, page } = props;
+
+  const [currentPageIndex, setCurrentPageIndex] = useState(page - 1);
   const { articlePreviews, isArticlePreviewsLoading } =
     useArticlePreviewQuery(currentPageIndex);
   const { popularArticleTags, isPopularArticleTagsLoading } =
     usePopularArticleTagsQuery();
+
   const handlePageChange = (newPageIndex: number) => {
     setCurrentPageIndex(newPageIndex);
+
+    const currentURL = new URL(window.location.href);
+    const searchParams = currentURL.searchParams;
+    searchParams.set('page', (newPageIndex + 1).toString());
+    currentURL.search = searchParams.toString();
+
+    navigate(currentURL.pathname + currentURL.search);
   };
 
   const totalPageCount = articlePreviews?.articlesCount
@@ -46,7 +66,7 @@ const HomeFeedContents = () => {
     <Container>
       <div className="row">
         <div className="col-md-9">
-          <HomeFeedTab activeFeed="global_feed" />
+          <HomeFeedTab activeFeed={feedType} />
           {isArticlePreviewsLoading ? (
             <span
               style={{

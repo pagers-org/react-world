@@ -6,7 +6,7 @@ interface HomeFeedTabItemProps {
   children: React.ReactNode;
 }
 
-const HomeFeedTabItem = styled.a<HomeFeedTabItemProps>`
+const HomeFeedTabItem = styled.button<HomeFeedTabItemProps>`
   display: block;
   padding: 0.5em 1em;
   border-radius: 0;
@@ -16,6 +16,10 @@ const HomeFeedTabItem = styled.a<HomeFeedTabItemProps>`
   color: #aaa;
   text-decoration: none;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 
   &:hover {
     color: #555;
