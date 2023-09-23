@@ -13,9 +13,9 @@ export const Navbar = (props: NavbarProps) => {
   const { selectedNavItem } = props;
 
   const navItems = [
-    { href: '/', name: 'home', title: 'Home' },
-    { href: '/login', name: 'login', title: 'Sign in' },
-    { href: '/register', name: 'register', title: 'Sign up' },
+    { path: '/', name: 'home', title: 'Home' },
+    { path: '/login', name: 'login', title: 'Sign in' },
+    { path: '/register', name: 'register', title: 'Sign up' },
   ];
 
   return (
@@ -26,7 +26,7 @@ export const Navbar = (props: NavbarProps) => {
           {navItems.map(item => (
             <NavItem
               key={item.name}
-              href={item.href}
+              to={item.path}
               isActive={selectedNavItem === item.name}
               title={item.title}
             />
