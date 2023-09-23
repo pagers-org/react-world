@@ -1,4 +1,5 @@
 import defaultAxios, { AxiosRequestConfig } from 'axios';
+import { authInterceptor } from './requestInterceptors/authInterceptor';
 
 const axios = defaultAxios.create({
   baseURL: 'https://api.realworld.io/api/',
@@ -7,6 +8,8 @@ const axios = defaultAxios.create({
     accept: 'application/json',
   },
 });
+
+axios.interceptors.request.use(authInterceptor);
 
 export const axiosInstance = async <T>(config: AxiosRequestConfig): Promise<T> => {
   config.data;
