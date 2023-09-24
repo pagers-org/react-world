@@ -5,10 +5,6 @@ import ArticleDetailPageMain from '@/pageComponents/article/[slug]/ArticleDetail
 import { getArticle } from '@/api/articles';
 
 const getArticleDetail = async (slug: string) => {
-  if (!slug) {
-    redirect('/');
-  }
-
   const res = await getArticle(slug);
 
   if (res?.errors) {
