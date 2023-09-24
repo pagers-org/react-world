@@ -2,8 +2,8 @@
 import {
   LoginPostRequestType,
   RegisterPostRequestType,
-  UpdatePutRequestType,
-  UsersResponseType,
+  UpdateUserType,
+  UserType,
 } from '@/types/auth';
 
 import { BASE_HEADER, BASE_URL } from '@/constants/auth';
@@ -12,7 +12,7 @@ import { BASE_HEADER, BASE_URL } from '@/constants/auth';
 const postUserLogin = async (
   request: LoginPostRequestType,
   options: RequestInit = {},
-): Promise<UsersResponseType> => {
+): Promise<UserType> => {
   return await fetch(`${BASE_URL}/users/login`, {
     ...options,
     method: 'post',
@@ -29,7 +29,7 @@ const postUserLogin = async (
 const postUserRegister = async (
   request: RegisterPostRequestType,
   options: RequestInit = {},
-): Promise<UsersResponseType> => {
+): Promise<UserType> => {
   return await fetch(`${BASE_URL}/users`, {
     ...options,
     method: 'post',
@@ -43,20 +43,17 @@ const postUserRegister = async (
 };
 
 // Updated user information for current user
-const putCurrentUser = async (
-  payload: UpdatePutRequestType,
+const updateUser = async (
+  payload: UpdateUserType,
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<UsersResponseType | string> => {
-  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
-
+): Promise<UserType> => {
   return await fetch(`${BASE_URL}/user`, {
     ...options,
     method: 'put',
     headers: {
       ...BASE_HEADER,
       ...headers,
-      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   })
@@ -72,7 +69,7 @@ const putCurrentUser = async (
 const getCurrentUser = async (
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<UsersResponseType> => {
+): Promise<UserType> => {
   return await fetch(`${BASE_URL}/user`, {
     ...options,
     method: 'get',
@@ -85,4 +82,4 @@ const getCurrentUser = async (
     .catch((err) => console.error(err));
 };
 
-export { postUserRegister, postUserLogin, putCurrentUser, getCurrentUser };
+export { postUserRegister, postUserLogin, updateUser, getCurrentUser };
