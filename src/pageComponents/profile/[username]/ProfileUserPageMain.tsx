@@ -59,7 +59,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   const { mutate: deleteUnfollowMutate, isLoading: isDeleteUnfollowLoading } =
     useDeleteUnFollowUserMutation();
 
-  const handleFollow = (following: boolean) => {
+  const followUser = (following: boolean) => {
     if (!user.email) {
       navigate('/login');
       return;
@@ -114,7 +114,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
             'btn-outline-secondary': !following,
           })}`}
           type="button"
-          onClick={() => handleFollow(following)}
+          onClick={() => followUser(following)}
           disabled={isPostFollowLoading || isDeleteUnfollowLoading}
         >
           <i className="ion-plus-round"></i>

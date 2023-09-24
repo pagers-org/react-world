@@ -36,11 +36,11 @@ const ArticleDetailPageMain = ({ article }: Props) => {
 
   const isAuthor = currentUser.username === authorUsername;
 
-  const handleEditArticle = () => {
+  const editCurrentArticle = () => {
     router.push(`/editor?title=${encodeURIComponent(slug)}`);
   };
 
-  const handleDeleteArticle = () => {
+  const deleteCurrentArticle = () => {
     setIsLoading(true);
 
     deleteArticle(slug).then(() => {
@@ -55,13 +55,13 @@ const ArticleDetailPageMain = ({ article }: Props) => {
       <>
         <button
           className="btn btn-sm btn-outline-secondary"
-          onClick={handleEditArticle}
+          onClick={editCurrentArticle}
         >
           <i className="ion-edit"></i> Edit Article
         </button>{' '}
         <button
           className="btn btn-sm btn-outline-danger"
-          onClick={handleDeleteArticle}
+          onClick={deleteCurrentArticle}
           disabled={isLoading}
         >
           <i className="ion-trash-a"></i> Delete Article

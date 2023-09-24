@@ -23,7 +23,7 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = () => {
+  const submitForm = () => {
     setIsLoading(true);
 
     if (!user.email) {
@@ -91,7 +91,7 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
     }
   };
 
-  const handleDeleteTag = (deletedTag: string) => {
+  const deleteTag = (deletedTag: string) => {
     const filteredTags = form.tagList.filter((tag) => tag !== deletedTag);
 
     setForm((prev) => ({ ...prev, tagList: filteredTags }));
@@ -153,7 +153,7 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
                       <span key={tag} className="tag-default tag-pill">
                         <i
                           className="ion-close-round"
-                          onClick={() => handleDeleteTag(tag)}
+                          onClick={() => deleteTag(tag)}
                         ></i>{' '}
                         {tag}
                       </span>
@@ -163,7 +163,7 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
                 <button
                   className="btn btn-lg pull-xs-right btn-primary"
                   type="button"
-                  onClick={handleSubmit}
+                  onClick={submitForm}
                   disabled={isLoading}
                 >
                   Publish Article
