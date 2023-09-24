@@ -1,5 +1,6 @@
 import Footer from '@/composables/Footer';
 import Nav from '@/composables/Nav';
+import { ReactNode } from 'react';
 
 import '@/styles/globals.css';
 
@@ -11,11 +12,7 @@ import {
 } from './fonts';
 import Providers from './providers';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body
