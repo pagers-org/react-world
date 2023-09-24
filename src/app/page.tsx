@@ -54,8 +54,6 @@ const Home = () => {
     fetchGlobalFeed();
   }, []);
 
-  console.log(globalFeeds);
-
   return (
     <main className="mb-3 mt-2 flex bg-red-400  text-blue-500">
       <div className="home-page">
