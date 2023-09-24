@@ -7,22 +7,17 @@ export default function ProtecTedRoute(Component) {
   return function ProtectedRoute({ ...props }) {
     const router = useRouter();
     const path = usePathname();
-    const [user, setUser] = useState<string | null>();
 
-    const userIsAuthenticated = !!user !== false;
-
-    useEffect(() => {
-      setUser(window.localStorage.getItem('user'));
-    }, []);
+    const IsAuthenticated = !!window.localStorage.getItem('user');
 
     useEffect(() => {
-      if (userIsAuthenticated && path === '/login') {
+      if (IsAuthenticated && path === '/login') {
         router.push('/');
       }
-      if (!userIsAuthenticated && path === '/settings') {
+      if (!IsAuthenticated && path === '/settings') {
         router.push('/login');
       }
-    }, [userIsAuthenticated, router, path]);
+    }, [IsAuthenticated, router, path]);
 
     return <Component {...props} />;
   };

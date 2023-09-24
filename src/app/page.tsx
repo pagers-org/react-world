@@ -15,7 +15,7 @@ const Home = () => {
   );
   const [user, setUser] = useState();
 
-  const globalFeed = async () => {
+  const fetchGlobalFeed = async () => {
     await getGlobalFeed().then((res) => {
       if (res.errors) {
         setIsLoading(false);
@@ -27,7 +27,7 @@ const Home = () => {
     });
   };
 
-  const myFeed = async () => {
+  const fetchMyFeed = async () => {
     await getMyFeed().then((res) => {
       if (res.errors) {
         setIsLoading(false);
@@ -42,7 +42,7 @@ const Home = () => {
   useEffect(() => {
     if (user) {
       setCurrentTab('myFeed');
-      myFeed();
+      fetchMyFeed();
     }
   }, [user]);
 
@@ -51,8 +51,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    globalFeed();
+    fetchGlobalFeed();
   }, []);
+
+  console.log(globalFeeds);
 
   return (
     <main className="mb-3 mt-2 flex bg-red-400  text-blue-500">
@@ -99,7 +101,8 @@ const Home = () => {
               </div>
 
               {currentTab === 'globalFeed' &&
-                globalFeeds?.articles.map((feed) => {
+                globalFeeds &&
+                globalFeeds?.articles?.map((feed) => {
                   return (
                     <div key={feed.author.username} className="article-preview">
                       <div className="article-meta">

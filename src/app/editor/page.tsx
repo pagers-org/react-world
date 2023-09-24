@@ -23,12 +23,13 @@ const page = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    const { title, description, body, tagList } = formInput;
     const articleInfo: ArticlePostRequestType = {
       article: {
-        title: formInput.title,
-        description: formInput.description,
-        body: formInput.body,
-        tagList: formInput.tagList,
+        title: title,
+        description: description,
+        body: body,
+        tagList: tagList,
       },
     };
     console.log(articleInfo);
@@ -53,7 +54,7 @@ const page = () => {
       const currentValue = event.currentTarget.value;
       setFormInput(
         produce((input) => {
-          input.tagList = [...input.tagList, currentValue];
+          input.tagList.push(currentValue);
         }),
       );
       event.currentTarget.value = '';

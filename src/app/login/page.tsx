@@ -22,11 +22,11 @@ const page = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const EventTarget = e.target;
+    const eventTarget = e.target;
     const userInfo: LoginPostRequestType = {
       user: {
-        email: (EventTarget as e.target).email.value,
-        password: (EventTarget as e.target).password.value,
+        email: eventTarget.email.value,
+        password: eventTarget.password.value,
       },
     };
     login(userInfo);

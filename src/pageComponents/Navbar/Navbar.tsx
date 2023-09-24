@@ -10,7 +10,6 @@ import { NavbarStyle } from './style';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [userName, setUserName] = useState('');
 
   const NOT_LOGIN_PATH = [
     { href: '/', title: 'Home' },
@@ -31,14 +30,11 @@ const Navbar = () => {
     },
     { href: '/settings', title: 'settings' },
     {
-      href: `/@${userName}`,
-      title: userName,
+      href: `/@${JSON.parse(window.localStorage.getItem('user'))?.username}`,
+      title: JSON.parse(window.localStorage.getItem('user'))?.username,
     },
   ];
 
-  useEffect(() => {
-    setUserName(JSON.parse(window.localStorage.getItem('user'))?.username);
-  }, []);
   return (
     <nav className="navbar navbar-light">
       <div className="container flex !justify-between">
@@ -46,7 +42,10 @@ const Navbar = () => {
           Moseung
         </Link>
         <ul className="flex gap-2">
-          {(userName ? LOGIN_PATH : NOT_LOGIN_PATH).map((path, index) => (
+          {(JSON.parse(window.localStorage.getItem('user'))?.username
+            ? LOGIN_PATH
+            : NOT_LOGIN_PATH
+          ).map((path, index) => (
             <Link
               key={index}
               className={cn(
