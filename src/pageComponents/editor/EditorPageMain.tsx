@@ -1,5 +1,6 @@
 'use client';
 
+import { useUserStore } from '@/stores/users';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
@@ -16,6 +17,8 @@ interface Props {
 const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
   const router = useRouter();
 
+  const user = useUserStore((state) => state.user);
+
   const [form, setForm] = useState<Props['currentForm']>(currentForm);
   const [currentTag, setCurrentTag] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,6 +26,11 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
 
   const handleSubmit = () => {
     setIsLoading(true);
+
+    if (!user.email) {
+      router.push('/login');
+      return;
+    }
 
     if (!isEditMode) {
       postArticle({
