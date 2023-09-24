@@ -1,3 +1,4 @@
+import { FeedResponse } from '@/types/api/articles';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -15,18 +16,18 @@ export type EditorFormType = {
 };
 
 const getArticleDetail = async (slug: string) => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-  const res = await getArticle(slug, {
-    Authorization: `Bearer ${accessToken}`,
-  });
+    const res = (await getArticle(slug, {
+      Authorization: `Bearer ${accessToken}`,
+    })) as FeedResponse;
 
-  if (res?.errors || res?.status === 'error') {
+    return res.article;
+  } catch (e) {
     redirect('/');
   }
-
-  return res.article;
 };
 
 const EditorPage = async ({

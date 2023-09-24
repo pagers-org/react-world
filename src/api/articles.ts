@@ -146,7 +146,7 @@ export const getArticle = (
   })
     .then((res) => res.json())
     .then((res: FeedResponse) => {
-      if (res?.errors) {
+      if (res?.errors || res?.status === 'error') {
         throw new Error(ERROR.ARTICLE_DETAIL);
       }
       return res;
