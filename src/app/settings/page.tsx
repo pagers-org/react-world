@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 import SettingsPageMain from '@/pageComponents/settings/SettingsPageMain';
 
@@ -11,6 +12,10 @@ const getMySettings = async () => {
   const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
   const res = await getCurrentUser({ Authorization: `Bearer ${accessToken}` });
+
+  if (res.status === 'error') {
+    redirect('/login');
+  }
 
   return res.user;
 };
