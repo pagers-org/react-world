@@ -1,4 +1,4 @@
-import { ArticleQueryParams, ArticleResponseType } from "@/types/articles";
+import { Article, ArticleQueryParams, ArticleResponseType } from "@/types/articles";
 import { executeAPI } from "./app";
 
 export const getArticles = async (params: Partial<ArticleQueryParams>): Promise<ArticleResponseType> => {
@@ -12,4 +12,12 @@ export const getArticles = async (params: Partial<ArticleQueryParams>): Promise<
     url: "/articles?" + formedParams,
   });
   return result;
+};
+
+export const getArticle = async (slug: string): Promise<Article> => {
+  const result = await executeAPI({
+    method: "GET",
+    url: `/articles/${slug}`,
+  });
+  return result.article;
 };

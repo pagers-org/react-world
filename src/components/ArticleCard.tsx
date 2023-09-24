@@ -19,10 +19,12 @@ const ArticleCard = ({
           <LikeOrFavoriteBtn>♥ {favoritesCount}</LikeOrFavoriteBtn>
         </div>
       </div>
-      <article className="mt-2">
-        <h1 className="text-xl font-semibold">{title}</h1>
-        <p className="text-sm text-gray-400">{description}</p>
-      </article>
+      <Link href={`/article/${slug}`}>
+        <article className="mt-2">
+          <h1 className="text-xl font-semibold">{title}</h1>
+          <p className="text-sm text-gray-400">{description}</p>
+        </article>
+      </Link>
       <div className="flex justify-between pt-4 text-gray-300 text-sm">
         <Link href={`/articles/${slug}`}>Read more...</Link>
         <ul className="flex gap-1">
