@@ -12,7 +12,7 @@ import {
 } from './fonts';
 import ReactQueryProviders from './providers';
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="ko">
       <body
@@ -24,4 +24,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
