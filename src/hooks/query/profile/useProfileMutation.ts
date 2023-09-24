@@ -4,19 +4,16 @@ import { useMutation } from '@tanstack/react-query';
 import { deleteUnfollowUser, postFollowUser } from '@/api/profile';
 
 export const usePostFollowUserMutation = () => {
-  const { mutate, isLoading, isSuccess, isError } = useMutation(
-    [queryKeys.PostFollowUser],
-    postFollowUser,
-  );
+  const mutation = useMutation([queryKeys.PostFollowUser], postFollowUser);
 
-  return { mutate, isLoading, isSuccess, isError };
+  return mutation;
 };
 
 export const useDeleteUnFollowUserMutation = () => {
-  const { mutate, isLoading, isSuccess, isError } = useMutation(
+  const mutation = useMutation(
     [queryKeys.DeleteUnfollowUser],
     deleteUnfollowUser,
   );
 
-  return { mutate, isLoading, isSuccess, isError };
+  return mutation;
 };

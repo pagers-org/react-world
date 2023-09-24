@@ -11,10 +11,9 @@ export const useArticlesQuery = (
   headers: HeadersInit = {},
   options: RequestInit = {},
 ) => {
-  const { data, isLoading, isSuccess, isError, isFetching, isFetched, error } =
-    useQuery([queryKeys.GetArticles, queryStrings], () =>
-      getGlobalFeeds(queryStrings, headers, options),
-    );
+  const query = useQuery([queryKeys.GetArticles, queryStrings], () =>
+    getGlobalFeeds(queryStrings, headers, options),
+  );
 
-  return { data, isLoading, isSuccess, isError, isFetching, isFetched, error };
+  return query;
 };
