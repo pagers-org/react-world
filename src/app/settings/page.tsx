@@ -1,3 +1,4 @@
+import { UserResponse } from '@/types/api/users';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -8,16 +9,18 @@ import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 import { getCurrentUser } from '@/api/users';
 
 const getMySettings = async () => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-  const res = await getCurrentUser({ Authorization: `Bearer ${accessToken}` });
+    const res = (await getCurrentUser({
+      Authorization: `Bearer ${accessToken}`,
+    })) as UserResponse;
 
-  if (res.status === 'error') {
+    return res.user;
+  } catch (e) {
     redirect('/login');
   }
-
-  return res.user;
 };
 
 const SettingsPage = async () => {

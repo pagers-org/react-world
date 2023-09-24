@@ -7,6 +7,7 @@ import {
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
+import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
@@ -77,7 +78,7 @@ export const putCurrentUser = (
 export const getCurrentUser = (
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<UserResponse> => {
+): Promise<UserResponse | void> => {
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
     method: HTTP_METHOD.GET,
@@ -87,5 +88,11 @@ export const getCurrentUser = (
     },
   })
     .then((res) => res.json())
+    .then((res: UserResponse) => {
+      if (res?.status === 'error') {
+        throw new Error(ERROR.CURRENT_USER);
+      }
+      return res;
+    })
     .catch((err) => console.error(err));
 };
