@@ -4,12 +4,20 @@ export interface RegisterUserInput {
   password: string;
 }
 
-export interface RegisterUserResponse {
+export type RegisterUserResponse = RegisterUserSuccessResponse | RegisterUserFailResponse;
+
+interface RegisterUserSuccessResponse {
   user: {
     email: string;
     token: string;
     username: string;
     bio: string;
     image: string;
+  };
+}
+
+export interface RegisterUserFailResponse {
+  errors: {
+    "email or password": string[];
   };
 }

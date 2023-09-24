@@ -8,23 +8,22 @@ interface ExecuteAPIProps {
 const API_ENDPINT = "https://api.realworld.io/api";
 
 export const executeAPI = async ({ method, body, url }: ExecuteAPIProps) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.get("Authorization");
   const authorization = `Bearer ${token}`;
 
   const promise_api = await fetch(`${API_ENDPINT}${url}`, {
     method,
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
-      Authorization: token ? authorization : "",
+      // Authorization: "XXXXX.YYYYY.ZZZZZ",
     },
     body: JSON.stringify(body),
   });
 
   const response = await promise_api.json();
-
-  if (!response.success) {
-    console.error(response.message);
-  }
+  // if (!response.ok) {
+  //   console.error(response.message);
+  // }
 
   return response;
 };

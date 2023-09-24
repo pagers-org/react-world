@@ -16,5 +16,6 @@ export const fetchLogin = async (loginUserInfo: Omit<RegisterUserInput, "usernam
     url: "/users/login",
     body: { user: loginUserInfo },
   });
+
   return result;
 };

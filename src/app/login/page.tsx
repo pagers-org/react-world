@@ -1,5 +1,4 @@
 "use client";
-import { fetchLogin } from "@/services/users";
 import { RegisterUserInput } from "@/types/users";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,11 +11,17 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (loginInput: Omit<RegisterUserInput, "username">) => {
-    const {
-      user: { token },
-    } = await fetchLogin(loginInput);
-    localStorage.setItem("token", token);
-    router.push("/");
+    await fetch("/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify(loginInput),
+    }).then((res) => {
+      if (res.status === 200) {
+        router.push("/");
+      }
+    });
   };
 
   return (
