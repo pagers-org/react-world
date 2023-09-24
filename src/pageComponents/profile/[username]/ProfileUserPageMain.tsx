@@ -35,8 +35,6 @@ const ProfileUserPageMain = ({ profile }: Props) => {
 
   const [profileMenusElement, setProfileMenusElement] = useState<ReactNode>();
 
-  const [isFollowLoading, setIsFollowLoading] = useState<boolean>(false);
-
   const [articleType, setArticleType] = useState<'my' | 'favorited'>();
   const [page, setPage] = useState<string>(INITIAL_PAGE);
 
@@ -56,8 +54,10 @@ const ProfileUserPageMain = ({ profile }: Props) => {
     limit,
   });
 
-  const postFollowUserMutation = usePostFollowUserMutation();
-  const deleteUnfollowUserMutation = useDeleteUnFollowUserMutation();
+  const { mutate: postFollowMutate, isLoading: isPostFollowLoading } =
+    usePostFollowUserMutation();
+  const { mutate: deleteUnfollowMutate, isLoading: isDeleteUnfollowLoading } =
+    useDeleteUnFollowUserMutation();
 
   const handleFollow = (following: boolean) => {
     if (!user.email) {
@@ -65,26 +65,18 @@ const ProfileUserPageMain = ({ profile }: Props) => {
       return;
     }
 
-    setIsFollowLoading(true);
-
     if (following) {
-      deleteUnfollowUserMutation.mutate(username, {
+      deleteUnfollowMutate(username, {
         onSuccess: (res) => {
           const { profile } = res;
           setCurrentProfile(profile);
-        },
-        onSettled: () => {
-          setIsFollowLoading(false);
         },
       });
     } else {
-      postFollowUserMutation.mutate(username, {
+      postFollowMutate(username, {
         onSuccess: (res) => {
           const { profile } = res;
           setCurrentProfile(profile);
-        },
-        onSettled: () => {
-          setIsFollowLoading(false);
         },
       });
     }
@@ -123,7 +115,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
           })}`}
           type="button"
           onClick={() => handleFollow(following)}
-          disabled={isFollowLoading}
+          disabled={isPostFollowLoading || isDeleteUnfollowLoading}
         >
           <i className="ion-plus-round"></i>
           &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
@@ -131,7 +123,13 @@ const ProfileUserPageMain = ({ profile }: Props) => {
       );
 
     setProfileMenusElement(profileMenusElement);
-  }, [following, isFollowLoading, user.username, username]);
+  }, [
+    following,
+    user.username,
+    username,
+    isPostFollowLoading,
+    isDeleteUnfollowLoading,
+  ]);
 
   return (
     <div className="profile-page">
