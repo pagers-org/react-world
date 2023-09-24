@@ -12,9 +12,10 @@ interface Props {
 
 const Pagination = ({ totalCounts, page, perPage }: Props) => {
   const searchParams = useSearchParams();
-  const totalPage = Math.ceil(totalCounts / perPage);
 
   const currentSearchQueries = getSearchParams(searchParams);
+
+  const totalPage = Math.ceil(totalCounts / perPage);
 
   return (
     <ul className="pagination">
