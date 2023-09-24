@@ -7,7 +7,7 @@ import {
   PutArticlePayload,
 } from '@/types/api/articles';
 
-import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
+import { COMMON_HEADERS, FEED_PER_PAGE, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
 import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
@@ -89,7 +89,7 @@ export const deleteArticle = (
 // Get recent articles from users you follow (Auth Required)
 export const getMyFeeds = (
   queryStrings: FeedQueryStrings = {
-    limit: '20',
+    limit: FEED_PER_PAGE,
   },
   headers: HeadersInit = {},
   options: RequestInit = {},
@@ -111,7 +111,7 @@ export const getMyFeeds = (
 // Get recent articles globally (Auth Optional)
 export const getGlobalFeeds = (
   queryStrings: FeedQueryStrings = {
-    limit: '20',
+    limit: FEED_PER_PAGE,
   },
   headers: HeadersInit = {},
   options: RequestInit = {},

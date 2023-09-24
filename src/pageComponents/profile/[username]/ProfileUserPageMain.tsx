@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
+import { INITIAL_PAGE } from '@/constants/api';
+
 import { useArticlesQuery } from '@/hooks/query/articles/useArticlesQuery';
 import {
   useDeleteUnFollowUserMutation,
@@ -95,7 +97,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   }, [searchParams]);
 
   useEffect(() => {
-    const page = searchParams?.get('page') ?? '1';
+    const page = searchParams?.get('page') ?? INITIAL_PAGE;
 
     setPage(parseInt(page));
   }, [searchParams]);
@@ -166,7 +168,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                     href={{
                       query: {
                         type: 'my',
-                        page: '1',
+                        page: INITIAL_PAGE,
                       },
                     }}
                     onClick={() => setArticleType('my')}
@@ -182,7 +184,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                     href={{
                       query: {
                         type: 'favorited',
-                        page: '1',
+                        page: INITIAL_PAGE,
                       },
                     }}
                     onClick={() => setArticleType('favorited')}

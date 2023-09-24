@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
+import { INITIAL_PAGE } from '@/constants/api';
+
 interface Props {
   feeds: FeedsResponse;
 }
@@ -40,7 +42,7 @@ const HomePageMain = ({ feeds }: Props) => {
   }, [searchParams, user.email]);
 
   useEffect(() => {
-    const page = searchParams?.get('page') ?? '1';
+    const page = searchParams?.get('page') ?? INITIAL_PAGE;
 
     setPage(parseInt(page));
   }, [searchParams]);
@@ -57,7 +59,7 @@ const HomePageMain = ({ feeds }: Props) => {
               href={{
                 query: {
                   type: 'your',
-                  page: '1',
+                  page: INITIAL_PAGE,
                 },
               }}
               onClick={() => setFeedType('your')}
@@ -74,7 +76,7 @@ const HomePageMain = ({ feeds }: Props) => {
             href={{
               query: {
                 type: 'global',
-                page: '1',
+                page: INITIAL_PAGE,
               },
             }}
             onClick={() => setFeedType('global')}

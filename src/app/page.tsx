@@ -2,25 +2,16 @@ import { cookies } from 'next/headers';
 
 import HomePageMain from '@/pageComponents/HomePageMain';
 
+import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getGlobalFeeds, getMyFeeds } from '@/api/articles';
 
-const getFeeds = async (
-  type: string,
-  page: string = '1',
-  perPage: string = '10',
-) => {
+const getFeeds = async (page: string, perPage: string) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-  if (!accessToken) {
-    type = 'global';
-  } else if (type !== 'your' && type !== 'global') {
-    type = 'your';
-  }
-
-  const getFn = type === 'your' ? getMyFeeds : getGlobalFeeds;
+  const getFn = accessToken ? getMyFeeds : getGlobalFeeds;
 
   const offset = ((Number(page) - 1) * Number(perPage)).toString();
   const limit = perPage;
@@ -44,9 +35,8 @@ const HomePage = async ({
   searchParams: Record<string, string | string[] | undefined>;
 }) => {
   const feeds = await getFeeds(
-    (searchParams?.type as string) ?? 'your',
-    (searchParams?.page as string) ?? '1',
-    (searchParams?.perPage as string) ?? '10',
+    (searchParams?.page as string) ?? INITIAL_PAGE,
+    (searchParams?.perPage as string) ?? FEED_PER_PAGE,
   );
 
   return <HomePageMain feeds={feeds} />;
