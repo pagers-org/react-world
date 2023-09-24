@@ -1,3 +1,4 @@
+import { ProfileResponse } from '@/types/api/profile';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -8,18 +9,18 @@ import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 import { getProfile } from '@/api/profile';
 
 const getCurrentProfile = async (username: string) => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-  const res = await getProfile(username, {
-    ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
-  });
+    const res = (await getProfile(username, {
+      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    })) as ProfileResponse;
 
-  if (!res?.profile) {
+    return res.profile;
+  } catch (e) {
     redirect('/');
   }
-
-  return res.profile;
 };
 
 const ProfileUserPage = async ({

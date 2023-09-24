@@ -2,6 +2,7 @@ import { ProfileResponse } from '@/types/api/profile';
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
+import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
@@ -59,7 +60,7 @@ export const getProfile = (
   username: string,
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<ProfileResponse> => {
+): Promise<ProfileResponse | void> => {
   return fetch(`${API_BASE_URL}/profiles/${username}`, {
     ...options,
     method: HTTP_METHOD.GET,
@@ -69,5 +70,11 @@ export const getProfile = (
     },
   })
     .then((res) => res.json())
+    .then((res: ProfileResponse) => {
+      if (!res?.profile) {
+        throw new Error(ERROR.PROFILE);
+      }
+      return res;
+    })
     .catch((err) => console.error(err));
 };
