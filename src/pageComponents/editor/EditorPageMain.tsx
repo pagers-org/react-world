@@ -20,7 +20,6 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
   const user = useUserStore((state) => state.user);
 
   const [form, setForm] = useState<Props['currentForm']>(currentForm);
-  const [currentTag, setCurrentTag] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,20 +74,20 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleChangeTag = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    setCurrentTag(value);
-  };
-
   const handleKeyUpTag = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      if (currentTag.length < 1 || form.tagList.includes(currentTag)) {
+    const {
+      key,
+      currentTarget: { value },
+    } = event;
+
+    if (key === 'Enter') {
+      if (value.length < 1 || form.tagList.includes(value)) {
         return;
       }
 
-      setForm((prev) => ({ ...prev, tagList: [...prev.tagList, currentTag] }));
-      setCurrentTag('');
+      setForm((prev) => ({ ...prev, tagList: [...prev.tagList, value] }));
+
+      event.currentTarget.value = '';
     }
   };
 
@@ -147,8 +146,6 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
                     type="text"
                     className="form-control"
                     placeholder="Enter tags"
-                    value={currentTag}
-                    onChange={handleChangeTag}
                     onKeyUp={handleKeyUpTag}
                   />
                   <div className="tag-list">
