@@ -42,7 +42,7 @@ const Navbar = () => {
           Moseung
         </Link>
         <ul className="flex gap-2">
-          {(JSON.parse(window.localStorage.getItem('user'))?.username
+          {(JSON.parse(window.localStorage.getItem('user'))
             ? LOGIN_PATH
             : NOT_LOGIN_PATH
           ).map((path, index) => (

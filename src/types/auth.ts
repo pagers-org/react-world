@@ -13,7 +13,7 @@ type RegisterPostRequestType = {
   };
 };
 
-type UpdatePutRequestType = {
+type UpdateUserType = {
   user: {
     email: string;
     password: string;
@@ -23,7 +23,7 @@ type UpdatePutRequestType = {
   };
 };
 
-type UsersResponseType = {
+type UserType = {
   user: {
     email: string;
     token: string;
@@ -36,6 +36,6 @@ type UsersResponseType = {
 export type {
   LoginPostRequestType,
   RegisterPostRequestType,
-  UpdatePutRequestType,
-  UsersResponseType,
+  UpdateUserType,
+  UserType,
 };
