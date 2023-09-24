@@ -9,6 +9,7 @@ import {
 
 import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
 import { API_BASE_URL } from '@/constants/env';
+import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
@@ -134,7 +135,7 @@ export const getArticle = (
   slug: string,
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<FeedResponse> => {
+): Promise<FeedResponse | void> => {
   return fetch(`${API_BASE_URL}/articles/${slug}`, {
     ...options,
     method: HTTP_METHOD.GET,
@@ -144,5 +145,11 @@ export const getArticle = (
     },
   })
     .then((res) => res.json())
+    .then((res: FeedResponse) => {
+      if (res?.errors) {
+        throw new Error(ERROR.ARTICLE_DETAIL);
+      }
+      return res;
+    })
     .catch((err) => console.error(err));
 };

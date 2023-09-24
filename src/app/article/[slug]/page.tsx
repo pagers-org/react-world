@@ -1,3 +1,4 @@
+import { FeedResponse } from '@/types/api/articles';
 import { redirect } from 'next/navigation';
 
 import ArticleDetailPageMain from '@/pageComponents/article/[slug]/ArticleDetailPageMain';
@@ -5,13 +6,12 @@ import ArticleDetailPageMain from '@/pageComponents/article/[slug]/ArticleDetail
 import { getArticle } from '@/api/articles';
 
 const getArticleDetail = async (slug: string) => {
-  const res = await getArticle(slug);
-
-  if (res?.errors) {
+  try {
+    const res = (await getArticle(slug)) as FeedResponse;
+    return res.article;
+  } catch (e) {
     redirect('/');
   }
-
-  return res.article;
 };
 
 const ArticleDetailPage = async ({ params }: { params: { slug: string } }) => {
