@@ -22,6 +22,8 @@ export type FeedResponse = {
     author: ProfileResponse['profile'];
   };
   errors?: unknown;
+  status?: string;
+  message?: string;
 };
 
 export type FeedsResponse = {

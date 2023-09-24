@@ -16,15 +16,14 @@ export type EditorFormType = {
 
 const getArticleDetail = async (slug: string) => {
   const cookieStore = cookies();
-
   const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
   const res = await getArticle(slug, {
     Authorization: `Bearer ${accessToken}`,
   });
 
-  if (res?.errors) {
-    redirect(`/article/${slug}`);
+  if (res?.errors || res?.status === 'error') {
+    redirect('/');
   }
 
   return res.article;
