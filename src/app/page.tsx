@@ -13,7 +13,7 @@ const getFeeds = async (page: string, perPage: string) => {
 
   const getFn = accessToken ? getMyFeeds : getGlobalFeeds;
 
-  const offset = ((Number(page) - 1) * Number(perPage)).toString();
+  const offset = ((parseInt(page) - 1) * parseInt(perPage)).toString();
   const limit = perPage;
 
   const res = await getFn(

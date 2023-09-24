@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
-import { INITIAL_PAGE } from '@/constants/api';
+import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
 
 import { useArticlesQuery } from '@/hooks/query/articles/useArticlesQuery';
 import {
@@ -38,13 +38,13 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   const [isFollowLoading, setIsFollowLoading] = useState<boolean>(false);
 
   const [articleType, setArticleType] = useState<'my' | 'favorited'>();
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<string>(INITIAL_PAGE);
 
   const { username, image, following } = currentProfile ?? profile;
 
-  const perPage = '10';
+  const perPage = FEED_PER_PAGE;
 
-  const offset = ((Number(page) - 1) * Number(perPage)).toString();
+  const offset = ((parseInt(page) - 1) * parseInt(perPage)).toString();
   const limit = perPage;
 
   const feedQueryObj =
@@ -99,7 +99,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
   useEffect(() => {
     const page = searchParams?.get('page') ?? INITIAL_PAGE;
 
-    setPage(parseInt(page));
+    setPage(page);
   }, [searchParams]);
 
   useEffect(() => {
@@ -258,8 +258,8 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                 )}
                 <Pagination
                   totalCounts={data.articlesCount}
-                  page={page}
-                  perPage={10}
+                  page={parseInt(page)}
+                  perPage={parseInt(perPage)}
                 />
               </>
             ) : (
