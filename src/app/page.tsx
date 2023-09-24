@@ -30,7 +30,9 @@ const getFeeds = async (
       offset,
       limit,
     },
-    accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+    {
+      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    },
   );
 
   return res;
