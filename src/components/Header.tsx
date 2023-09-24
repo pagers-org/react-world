@@ -1,34 +1,33 @@
 'use client';
 
+import { ROUTE } from '@/constants/route';
 import Link from 'next/link';
-import * as styles from './Header.css';
-import { useState } from 'react';
-import { ROUTES } from '../constants/routes';
+import { usePathname } from 'next/navigation';
 
-const NAV_LIST = [
-  { name: 'Home', href: '/' },
-  { name: 'Sign in', href: '/login' },
-  { name: 'Sign up', href: '/register' },
+import * as styles from './Header.css';
+
+const LINKS = [
+  { name: 'Home', href: ROUTE.HOME },
+  { name: 'Sign in', href: ROUTE.SIGNIN },
+  { name: 'Sign up', href: ROUTE.SIGNUP },
 ];
 
 export default function Header() {
-  const [selected, setSelected] = useState('Home');
+  const router = usePathname();
+
   return (
     <header className={styles.wrapper}>
-      <Link href={ROUTES.home}>
-        <h1 className={styles.title} onClick={() => setSelected('Home')}>
-          Real World Blog
-        </h1>
+      <Link href={ROUTE.HOME}>
+        <h1 className={styles.title}>Real World Blog</h1>
       </Link>
       <nav>
         <ul className={styles.nav}>
-          {NAV_LIST.map((link) => (
+          {LINKS.map((link) => (
             <Link key={link.name} href={link.href}>
               <li
                 className={
-                  selected === link.name ? styles.selectedNav : styles.navItem
+                  router === link.href ? styles.selectedNav : styles.navItem
                 }
-                onClick={() => setSelected(link.name)}
               >
                 {link.name}
               </li>
