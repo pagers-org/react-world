@@ -10,7 +10,7 @@ import {
   sourceSerif4,
   titilliumWeb,
 } from './fonts';
-import Providers from './providers';
+import ReactQueryProviders from './providers';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`${titilliumWeb.variable} ${sourceSerif4.variable} ${merriweatherSans.variable} ${sourceSansPro.variable}`}
       >
         <Nav />
-        <Providers>{children}</Providers>
+        <ReactQueryProviders>{children}</ReactQueryProviders>
         <Footer />
       </body>
     </html>
