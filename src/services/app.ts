@@ -12,6 +12,7 @@ export const executeAPI = async ({ method, body, url }: ExecuteAPIProps) => {
     method,
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
+      credentials: "include",
     },
     body: JSON.stringify(body),
   });
