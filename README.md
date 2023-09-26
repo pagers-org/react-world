@@ -20,3 +20,17 @@ For more information on how to this works with other frontends/backends, head ov
 # Getting started
 
 > npm install, npm start, etc.
+
+# 목표
+
+항상 생각하면서 너 나은 방법과 측정하는 방법을 익히기.
+
+- Vim 익히기
+
+Next.js + Server component
+  -> 코드 스트럭쳐와 특이사항들을 파악한다.
+Vanilla Extract
+  -> 코드 스트럭쳐 파악
+  -> Zero runtime이 어떤 원리인지 파악하기
+  -> Emotion과의 렌더링 성능 차이 파악
+
