@@ -16,6 +16,7 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
     const token = request.cookies.get('token')?.value || '';
     const res = await updateUserAPI(body, token);
+    console.log(res);
 
     return NextResponse.json({ message: 'Success', success: true, data: res });
   } catch (error: any) {

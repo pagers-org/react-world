@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { userImageSm } from '@/styles/profile.css';
 import Image from 'next/image';
 import { EditIcon, SettingIcon } from '@/composables/icons';
-import { useQuery } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const NAVS = [
   {
@@ -35,14 +35,12 @@ const NAVS = [
 ];
 
 const NavBar = () => {
-  const { data: userData } = useQuery({
-    queryKey: ['user-data'],
-    queryFn: () => fetch('/api/user').then(res => res.json()),
-  });
+  const queryClient = useQueryClient();
 
-  const {
-    user: { username, image },
-  } = userData;
+  const userQuery = queryClient.getQueryData(['user-data']);
+
+  const username = userQuery?.user?.username;
+  const image = userQuery?.user?.image;
 
   const pathname = usePathname();
 

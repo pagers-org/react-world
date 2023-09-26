@@ -13,6 +13,8 @@ export default function Providers({ children }: PropsWithChildren) {
         defaultOptions: {
           queries: {
             suspense: true,
+            refetchOnWindowFocus: false,
+            retry: false,
           },
         },
       })

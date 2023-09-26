@@ -10,7 +10,7 @@ export const http = {
       ...options,
     };
     // console.log('서버자나');
-    console.log(API_BASE_URL);
+    // console.log(API_BASE_URL);
 
     // console.log(defaultOptions);
 
@@ -21,11 +21,14 @@ export const http = {
         const errorData = await response.json();
         // console.log('error');
         // console.log(errorData);
+        console.log('실패');
 
         throw new Error(errorData.message || 'Request failed');
       }
 
       // console.log(response);
+
+      console.log('성공');
 
       return response.json();
     } catch (error) {
@@ -39,58 +42,3 @@ export const http = {
   put: (url: string, body?: any, options?: any) => http.request(url, 'PUT', body, options),
   delete: (url: string, options?: any) => http.request(url, 'DELETE', undefined, options),
 };
-
-// export const http = {
-//   get: (url: string, options?: any) => {
-//     return fetch(`${API_BASE_URL}${url}`, { ...options, method: 'GET' })
-//       .then(res => {
-//         if (!(res.status === 200 || res.status === 201)) {
-//           throw new Error('Error!');
-//         }
-//         return res.json();
-//       })
-//       .catch(err => {
-//         console.error(err);
-//         throw new Error('Error!');
-//       });
-//   },
-//   post: (url: string, body?: Request, options?: any) => {
-//     return fetch(`${API_BASE_URL}${url}`, { ...options, method: 'POST', body: JSON.stringify(body) })
-//       .then(res => {
-//         if (!(res.status === 200 || res.status === 201)) {
-//           throw new Error('Error!');
-//         }
-//         return res.json();
-//       })
-//       .catch(err => {
-//         console.error(err);
-//         throw new Error('Error!');
-//       });
-//   },
-//   put: (url: string, body?: Request, options?: any) => {
-//     return fetch(`${API_BASE_URL}${url}`, { ...options, method: 'PUT', body: JSON.stringify(body) })
-//       .then(res => {
-//         if (!(res.status === 200 || res.status === 201)) {
-//           throw new Error('Error!');
-//         }
-//         return res.json();
-//       })
-//       .catch(err => {
-//         console.error(err);
-//         throw new Error('Error!');
-//       });
-//   },
-//   delete: (url: string, options?: any) => {
-//     return fetch(`${API_BASE_URL}${url}`, { ...options, method: 'DELETE' })
-//       .then(res => {
-//         if (!(res.status === 200 || res.status === 201)) {
-//           throw new Error('Error!');
-//         }
-//         return res.json();
-//       })
-//       .catch(err => {
-//         console.error(err);
-//         throw new Error('Error!');
-//       });
-//   },
-// };

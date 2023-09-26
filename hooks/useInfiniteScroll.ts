@@ -6,25 +6,17 @@ const useInfiniteScroll = (fetcher: (page: any) => any, ref: RefObject<HTMLEleme
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['articles'],
     queryFn: ({ pageParam = 1 }) => {
-      console.log(pageParam);
-
       return fetcher(pageParam);
     },
     getNextPageParam: (lastPage, pages) => {
-      console.log('getNextPageParam 발동');
-
       const totalPage = Math.ceil(lastPage.articlesCount / 10);
       let currentPage = pages.length;
       if (totalPage < pages.length) {
-        console.log('그만');
-
         return undefined;
       }
 
       return currentPage++;
     },
-    retry: false,
-    refetchOnWindowFocus: false,
   });
 
   const nextPage = () => {
