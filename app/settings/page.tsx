@@ -1,17 +1,26 @@
 'use client';
-
-import useUserStore from '@/stores/useUserStore';
+import getQueryClient from '@/libs/getQueryClient';
 import { articleTextarea } from '@/styles/article.css';
 import { container, flex, hr, input } from '@/styles/common.css';
 import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 
 const SettingsPage = () => {
   const router = useRouter();
-  const { email, username, image, bio, password, updateUser } = useUserStore();
+
+  const { data: userData, refetch } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: () => fetch('/api/user').then(res => res.json()),
+  });
+
+  const queryClient = getQueryClient();
+
+  const {
+    user: { email, username, image, bio },
+  } = userData;
 
   // 초기화 함수로 전환
   const [formData, setFormData] = useState({
@@ -19,7 +28,7 @@ const SettingsPage = () => {
     username,
     bio: bio ? bio : '',
     email,
-    password,
+    password: '',
   });
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData: any) =>
@@ -47,6 +56,7 @@ const SettingsPage = () => {
   const logout = async () => {
     try {
       await fetch('/api/auth/logout');
+
       router.push('/login');
     } catch (error: any) {
       console.error(error.message);

@@ -1,12 +1,11 @@
 'use client';
 import * as styles from '@/styles/layout.css';
-import useUserStore from '@/stores/useUserStore';
 import { usePathname } from 'next/navigation';
-
 import Link from 'next/link';
 import { userImageSm } from '@/styles/profile.css';
 import Image from 'next/image';
 import { EditIcon, SettingIcon } from '@/composables/icons';
+import { useQuery } from '@tanstack/react-query';
 
 const NAVS = [
   {
@@ -36,7 +35,15 @@ const NAVS = [
 ];
 
 const NavBar = () => {
-  const { username, image } = useUserStore();
+  const { data: userData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: () => fetch('/api/user').then(res => res.json()),
+  });
+
+  const {
+    user: { username, image },
+  } = userData;
+
   const pathname = usePathname();
 
   return (

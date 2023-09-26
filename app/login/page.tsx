@@ -1,21 +1,25 @@
 'use client';
 
-import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexCenter, flexRow, fillGreenButton } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
 import { LoginUser } from '@/types';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
-  const { login } = useUserStore();
 
   const [formData, setFormData] = useState<LoginUser>({
     email: '',
     password: '',
+  });
+
+  const { data: userData, refetch } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: () => fetch('/api/user').then(res => res.json()),
+    enabled: false,
   });
 
   const { mutate, isLoading } = useMutation({
@@ -30,7 +34,7 @@ const LoginPage = () => {
     },
     onSuccess: res => {
       console.log(res);
-
+      refetch();
       router.push('/');
     },
   });

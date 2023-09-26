@@ -1,12 +1,18 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getUserAPI, updateUserAPI } from '@/services/users';
 
 export async function GET(req: NextRequest) {
   const { value } = req.cookies.get('token');
   console.log(value);
   console.log('route user get');
+  const { user } = await getUserAPI(value);
+  console.log(user);
 
-  return getUserAPI(value);
+  return NextResponse.json({
+    message: 'Login successfull',
+    success: true,
+    user,
+  });
 }
 
 export async function PUT(req: NextRequest) {
