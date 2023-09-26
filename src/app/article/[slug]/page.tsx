@@ -1,13 +1,19 @@
 "use client";
 import Tag from "@/components/atoms/Tag";
 import Profile from "@/components/common/Profile";
-import { useArticleStore } from "@/stores/ArticleStore";
+import { getArticle } from "@/services/articles";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import React from "react";
 
-const ArticleDetail = () => {
-  const { article } = useArticleStore();
-  if (!article) return;
+type Props = { params: { slug: string } };
+
+const ArticleDetail = ({ params: { slug } }: Props) => {
+  const { data: article } = useQuery([`/api/article/${slug}`], () => getArticle(slug));
+
+  if (!article) return <div>Loading...</div>;
+
+  console.log(article);
   const { title, author, createdAt, body, tagList } = article;
 
   return (
