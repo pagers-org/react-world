@@ -5,12 +5,12 @@ import {
   UserResponse,
 } from '@/types/api/users';
 
-import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
-import { API_BASE_URL } from '@/constants/env';
 import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
+
+import { httpClient } from './http/httpClient';
 
 /* Client Side APIs */
 
@@ -22,14 +22,11 @@ export const postUserLogin = ({
   payload: UserLoginPayload;
   options?: RequestInit;
 }): Promise<UserResponse> => {
-  return fetch(`${API_BASE_URL}/users/login`, {
-    ...options,
-    method: HTTP_METHOD.POST,
-    headers: {
-      ...COMMON_HEADERS,
-    },
-    body: JSON.stringify(payload),
-  })
+  return httpClient
+    .post('/users/login', {
+      ...options,
+      body: JSON.stringify(payload),
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -42,14 +39,11 @@ export const postUserRegister = ({
   payload: UserRegisterPayload;
   options?: RequestInit;
 }): Promise<UserResponse> => {
-  return fetch(`${API_BASE_URL}/users`, {
-    ...options,
-    method: HTTP_METHOD.POST,
-    headers: {
-      ...COMMON_HEADERS,
-    },
-    body: JSON.stringify(payload),
-  })
+  return httpClient
+    .post('/users', {
+      ...options,
+      body: JSON.stringify(payload),
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -66,16 +60,15 @@ export const putCurrentUser = ({
 }): Promise<UserResponse | string> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
-  return fetch(`${API_BASE_URL}/user`, {
-    ...options,
-    method: HTTP_METHOD.PUT,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(payload),
-  })
+  return httpClient
+    .put('/user', {
+      ...options,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(payload),
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -92,14 +85,11 @@ export const getCurrentUser = ({
   headers?: HeadersInit;
   options?: RequestInit;
 }): Promise<UserResponse | void> => {
-  return fetch(`${API_BASE_URL}/user`, {
-    ...options,
-    method: HTTP_METHOD.GET,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-    },
-  })
+  return httpClient
+    .get('/user', {
+      ...options,
+      headers,
+    })
     .then((res) => res.json())
     .then((res: UserResponse) => {
       if (res?.status === 'error') {

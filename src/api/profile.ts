@@ -1,11 +1,11 @@
 import { ProfileResponse } from '@/types/api/profile';
 
-import { COMMON_HEADERS, HTTP_METHOD } from '@/constants/api';
-import { API_BASE_URL } from '@/constants/env';
 import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
+
+import { httpClient } from './http/httpClient';
 
 /* Client Side APIs */
 
@@ -21,15 +21,14 @@ export const postFollowUser = ({
 }): Promise<ProfileResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
-  return fetch(`${API_BASE_URL}/profiles/${username}/follow`, {
-    ...options,
-    method: HTTP_METHOD.POST,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
+  return httpClient
+    .post(`/profiles/${username}/follow`, {
+      ...options,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -46,15 +45,14 @@ export const deleteUnfollowUser = ({
 }): Promise<ProfileResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
-  return fetch(`${API_BASE_URL}/profiles/${username}/follow`, {
-    ...options,
-    method: HTTP_METHOD.DELETE,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
+  return httpClient
+    .delete(`/profiles/${username}/follow`, {
+      ...options,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -73,14 +71,11 @@ export const getProfile = ({
   headers?: HeadersInit;
   options?: RequestInit;
 }): Promise<ProfileResponse | void> => {
-  return fetch(`${API_BASE_URL}/profiles/${username}`, {
-    ...options,
-    method: HTTP_METHOD.GET,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-    },
-  })
+  return httpClient
+    .get(`/profiles/${username}`, {
+      ...options,
+      headers,
+    })
     .then((res) => res.json())
     .then((res: ProfileResponse) => {
       if (!res?.profile) {

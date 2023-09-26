@@ -7,12 +7,13 @@ import {
   PutArticlePayload,
 } from '@/types/api/articles';
 
-import { COMMON_HEADERS, FEED_PER_PAGE, HTTP_METHOD } from '@/constants/api';
-import { API_BASE_URL } from '@/constants/env';
+import { FEED_PER_PAGE } from '@/constants/api';
 import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getCookie } from '@/utils/cookie';
+
+import { httpClient } from './http/httpClient';
 
 /* Client Side APIs */
 
@@ -28,16 +29,15 @@ export const postArticle = ({
 }): Promise<ArticleResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
-  return fetch(`${API_BASE_URL}/articles`, {
-    ...options,
-    method: HTTP_METHOD.POST,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(payload),
-  })
+  return httpClient
+    .post('/articles', {
+      ...options,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(payload),
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -56,16 +56,15 @@ export const putArticle = ({
 }): Promise<ArticleResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
-  return fetch(`${API_BASE_URL}/articles/${slug}`, {
-    ...options,
-    method: HTTP_METHOD.PUT,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(payload),
-  })
+  return httpClient
+    .put(`/articles/${slug}`, {
+      ...options,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(payload),
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -82,15 +81,14 @@ export const deleteArticle = ({
 }) => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
-  return fetch(`${API_BASE_URL}/articles/${slug}`, {
-    ...options,
-    method: HTTP_METHOD.DELETE,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
+  return httpClient
+    .delete(`/articles/${slug}`, {
+      ...options,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -113,14 +111,11 @@ export const getMyFeeds = ({
 }): Promise<FeedsResponse> => {
   const qs = new URLSearchParams(queryStrings).toString();
 
-  return fetch(`${API_BASE_URL}/articles/feed?${qs}`, {
-    ...options,
-    method: HTTP_METHOD.GET,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-    },
-  })
+  return httpClient
+    .get(`/articles/feed?${qs}`, {
+      ...options,
+      headers,
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -139,14 +134,11 @@ export const getGlobalFeeds = ({
 }): Promise<FeedsResponse> => {
   const qs = new URLSearchParams(queryStrings).toString();
 
-  return fetch(`${API_BASE_URL}/articles?${qs}`, {
-    ...options,
-    method: HTTP_METHOD.GET,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-    },
-  })
+  return httpClient
+    .get(`/articles?${qs}`, {
+      ...options,
+      headers,
+    })
     .then((res) => res.json())
     .catch((err) => console.error(err));
 };
@@ -161,14 +153,11 @@ export const getArticle = ({
   headers?: HeadersInit;
   options?: RequestInit;
 }): Promise<FeedResponse | void> => {
-  return fetch(`${API_BASE_URL}/articles/${slug}`, {
-    ...options,
-    method: HTTP_METHOD.GET,
-    headers: {
-      ...COMMON_HEADERS,
-      ...headers,
-    },
-  })
+  return httpClient
+    .get(`/articles/${slug}`, {
+      ...options,
+      headers,
+    })
     .then((res) => res.json())
     .then((res: FeedResponse) => {
       if (res?.errors || res?.status === 'error') {
