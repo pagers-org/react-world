@@ -23,6 +23,45 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const postNewArticle = () => {
+    postArticle({
+      payload: { article: { ...form } },
+    }).then((res) => {
+      if (res?.errors) {
+        const [[error, [type]]] = Object.entries(res.errors);
+        setError(`${error} ${type}`);
+      } else {
+        const { slug } = res.article;
+        router.push(`/article/${slug}`);
+
+        setError(null);
+      }
+
+      setIsLoading(false);
+    });
+  };
+
+  const putCurrentArticle = (slug: string) => {
+    putArticle({
+      slug,
+      payload: {
+        article: { ...form },
+      },
+    }).then((res) => {
+      if (res?.errors) {
+        const [[error, [type]]] = Object.entries(res.errors);
+        setError(`${error} ${type}`);
+      } else {
+        const { slug } = res.article;
+        router.push(`/article/${slug}`);
+
+        setError(null);
+      }
+
+      setIsLoading(false);
+    });
+  };
+
   const submitForm = () => {
     setIsLoading(true);
 
@@ -32,40 +71,9 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
     }
 
     if (!isEditMode) {
-      postArticle({
-        payload: { article: { ...form } },
-      }).then((res) => {
-        if (res?.errors) {
-          const [[error, [type]]] = Object.entries(res.errors);
-          setError(`${error} ${type}`);
-        } else {
-          const { slug } = res.article;
-          router.push(`/article/${slug}`);
-
-          setError(null);
-        }
-
-        setIsLoading(false);
-      });
+      postNewArticle();
     } else if (isEditMode && slug) {
-      putArticle({
-        slug,
-        payload: {
-          article: { ...form },
-        },
-      }).then((res) => {
-        if (res?.errors) {
-          const [[error, [type]]] = Object.entries(res.errors);
-          setError(`${error} ${type}`);
-        } else {
-          const { slug } = res.article;
-          router.push(`/article/${slug}`);
-
-          setError(null);
-        }
-
-        setIsLoading(false);
-      });
+      putCurrentArticle(slug);
     }
   };
 
