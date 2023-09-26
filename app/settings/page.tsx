@@ -1,19 +1,17 @@
 'use client';
+import useUserStore from '@/stores/useUserStore';
 import { articleTextarea } from '@/styles/article.css';
 import { container, flex, hr, input } from '@/styles/common.css';
 import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 
 const SettingsPage = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
 
-  const {
-    user: { email, username, image, bio },
-  } = queryClient.getQueryData(['user-data']);
+  const { logout, email, username, image, bio } = useUserStore();
 
   // 초기화 함수로 전환
   const [formData, setFormData] = useState({
@@ -29,13 +27,6 @@ const SettingsPage = () => {
     onSuccess: data => {
       console.log(data);
       console.log('성공');
-
-      queryClient.setQueryData(['user-data'], (oldQueryData: any) => {
-        return {
-          ...oldQueryData,
-          data: [...oldQueryData.user, data.user],
-        };
-      });
     },
   });
 
@@ -54,10 +45,11 @@ const SettingsPage = () => {
     }));
   };
 
-  const logout = async () => {
+  const signOut = async () => {
     try {
       await fetch('/api/auth/logout');
-      queryClient.removeQueries(['user-data']);
+
+      logout();
       router.push('/login');
     } catch (error: any) {
       console.error(error.message);
@@ -118,7 +110,7 @@ const SettingsPage = () => {
           </div>
           <div className={hr} />
           <div className={flex}>
-            <button className={logoutButton} onClick={logout}>
+            <button className={logoutButton} onClick={signOut}>
               Or click here to logout.
             </button>
           </div>

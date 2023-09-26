@@ -5,7 +5,6 @@ import { persist } from 'zustand/middleware';
 const initialState: User = {
   username: '',
   email: '',
-  token: '',
   bio: '',
   image: '',
 };
@@ -16,7 +15,7 @@ const useUserStore = create(
       ...initialState,
       login: user => {
         set(() => {
-          const { email, username, bio, image, token } = user;
+          const { email, username, bio, image } = user;
 
           return {
             email,

@@ -1,5 +1,6 @@
 'use client';
 
+import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexCenter, flexRow, fillGreenButton } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
@@ -10,6 +11,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
+  const { login } = useUserStore();
 
   const [formData, setFormData] = useState<LoginUser>({
     email: '',
@@ -34,7 +36,7 @@ const LoginPage = () => {
     },
     onSuccess: res => {
       console.log(res);
-      refetch();
+      login({ ...res.user });
       router.push('/');
     },
   });
