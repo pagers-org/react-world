@@ -16,15 +16,15 @@ const getFeeds = async (page: string, perPage: string) => {
   const offset = ((parseInt(page) - 1) * parseInt(perPage)).toString();
   const limit = perPage;
 
-  const res = await getFn(
-    {
+  const res = await getFn({
+    queryStrings: {
       offset,
       limit,
     },
-    {
+    headers: {
       ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     },
-  );
+  });
 
   return res;
 };

@@ -10,11 +10,15 @@ import { getCookie } from '@/utils/cookie';
 /* Client Side APIs */
 
 // Follow a user
-export const postFollowUser = (
-  username: string,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<ProfileResponse> => {
+export const postFollowUser = ({
+  username,
+  headers = {},
+  options = {},
+}: {
+  username: string;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<ProfileResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/profiles/${username}/follow`, {
@@ -31,11 +35,15 @@ export const postFollowUser = (
 };
 
 // Unfollow a user
-export const deleteUnfollowUser = (
-  username: string,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<ProfileResponse> => {
+export const deleteUnfollowUser = ({
+  username,
+  headers = {},
+  options = {},
+}: {
+  username: string;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<ProfileResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/profiles/${username}/follow`, {
@@ -56,11 +64,15 @@ export const deleteUnfollowUser = (
 /* Server Side APIs for Next 13 APP Router extended fetch api */
 
 // Get a Profile (Auth Optional)
-export const getProfile = (
-  username: string,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<ProfileResponse | void> => {
+export const getProfile = ({
+  username,
+  headers,
+  options,
+}: {
+  username: string;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<ProfileResponse | void> => {
   return fetch(`${API_BASE_URL}/profiles/${username}`, {
     ...options,
     method: HTTP_METHOD.GET,

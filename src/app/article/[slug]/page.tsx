@@ -7,7 +7,7 @@ import { getArticle } from '@/api/articles';
 
 const getArticleDetail = async (slug: string) => {
   try {
-    const res = (await getArticle(slug)) as FeedResponse;
+    const res = (await getArticle({ slug })) as FeedResponse;
     return res.article;
   } catch (e) {
     redirect('/');

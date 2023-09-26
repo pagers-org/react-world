@@ -13,8 +13,11 @@ const getCurrentProfile = async (username: string) => {
     const cookieStore = cookies();
     const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-    const res = (await getProfile(username, {
-      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    const res = (await getProfile({
+      username,
+      headers: {
+        ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+      },
     })) as ProfileResponse;
 
     return res.profile;

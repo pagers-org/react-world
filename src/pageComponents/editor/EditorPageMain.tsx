@@ -33,7 +33,7 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
 
     if (!isEditMode) {
       postArticle({
-        article: { ...form },
+        payload: { article: { ...form } },
       }).then((res) => {
         if (res?.errors) {
           const [[error, [type]]] = Object.entries(res.errors);
@@ -48,8 +48,11 @@ const EditorPageMain = ({ currentForm, isEditMode, slug }: Props) => {
         setIsLoading(false);
       });
     } else if (isEditMode && slug) {
-      putArticle(slug, {
-        article: { ...form },
+      putArticle({
+        slug,
+        payload: {
+          article: { ...form },
+        },
       }).then((res) => {
         if (res?.errors) {
           const [[error, [type]]] = Object.entries(res.errors);

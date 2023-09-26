@@ -14,7 +14,9 @@ const getMySettings = async () => {
     const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
     const res = (await getCurrentUser({
-      Authorization: `Bearer ${accessToken}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     })) as UserResponse;
 
     return res.user;

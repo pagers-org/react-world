@@ -75,7 +75,9 @@ const SettingsPageMain = ({ mySettings }: Props) => {
         };
 
     putCurrentUser({
-      user: payload,
+      payload: {
+        user: payload,
+      },
     }).then((res) => {
       if (typeof res === 'string') {
         if (res.match(/email/)) {

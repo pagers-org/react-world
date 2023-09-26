@@ -20,8 +20,11 @@ const getArticleDetail = async (slug: string) => {
     const cookieStore = cookies();
     const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-    const res = (await getArticle(slug, {
-      Authorization: `Bearer ${accessToken}`,
+    const res = (await getArticle({
+      slug,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     })) as FeedResponse;
 
     return res.article;

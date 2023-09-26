@@ -43,7 +43,7 @@ const ArticleDetailPageMain = ({ article }: Props) => {
   const deleteCurrentArticle = () => {
     setIsLoading(true);
 
-    deleteArticle(slug).then(() => {
+    deleteArticle({ slug }).then(() => {
       router.push('/');
 
       setIsLoading(false);

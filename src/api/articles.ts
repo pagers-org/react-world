@@ -17,11 +17,15 @@ import { getCookie } from '@/utils/cookie';
 /* Client Side APIs */
 
 // Create an article (Auth Required)
-export const postArticle = (
-  payload: PostArticlePayload,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<ArticleResponse> => {
+export const postArticle = ({
+  payload,
+  headers = {},
+  options = {},
+}: {
+  payload: PostArticlePayload;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<ArticleResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/articles`, {
@@ -39,12 +43,17 @@ export const postArticle = (
 };
 
 // Update an article (Auth Required)
-export const putArticle = (
-  slug: string,
-  payload: PutArticlePayload,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<ArticleResponse> => {
+export const putArticle = ({
+  slug,
+  payload,
+  headers = {},
+  options = {},
+}: {
+  slug: string;
+  payload: PutArticlePayload;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<ArticleResponse> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/articles/${slug}`, {
@@ -62,11 +71,15 @@ export const putArticle = (
 };
 
 // Delete an article (Auth Required)
-export const deleteArticle = (
-  slug: string,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-) => {
+export const deleteArticle = ({
+  slug,
+  headers = {},
+  options = {},
+}: {
+  slug: string;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}) => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/articles/${slug}`, {
@@ -87,13 +100,17 @@ export const deleteArticle = (
 /* Server Side APIs for Next 13 APP Router extended fetch api */
 
 // Get recent articles from users you follow (Auth Required)
-export const getMyFeeds = (
-  queryStrings: FeedQueryStrings = {
+export const getMyFeeds = ({
+  queryStrings = {
     limit: FEED_PER_PAGE,
   },
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<FeedsResponse> => {
+  headers = {},
+  options = {},
+}: {
+  queryStrings?: FeedQueryStrings;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<FeedsResponse> => {
   const qs = new URLSearchParams(queryStrings).toString();
 
   return fetch(`${API_BASE_URL}/articles/feed?${qs}`, {
@@ -109,13 +126,17 @@ export const getMyFeeds = (
 };
 
 // Get recent articles globally (Auth Optional)
-export const getGlobalFeeds = (
-  queryStrings: FeedQueryStrings = {
+export const getGlobalFeeds = ({
+  queryStrings = {
     limit: FEED_PER_PAGE,
   },
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<FeedsResponse> => {
+  headers = {},
+  options = {},
+}: {
+  queryStrings?: FeedQueryStrings;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<FeedsResponse> => {
   const qs = new URLSearchParams(queryStrings).toString();
 
   return fetch(`${API_BASE_URL}/articles?${qs}`, {
@@ -131,11 +152,15 @@ export const getGlobalFeeds = (
 };
 
 // Get an article (Auth Optional)
-export const getArticle = (
-  slug: string,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<FeedResponse | void> => {
+export const getArticle = ({
+  slug,
+  headers = {},
+  options = {},
+}: {
+  slug: string;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<FeedResponse | void> => {
   return fetch(`${API_BASE_URL}/articles/${slug}`, {
     ...options,
     method: HTTP_METHOD.GET,

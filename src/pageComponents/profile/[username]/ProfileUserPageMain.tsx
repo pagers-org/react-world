@@ -49,9 +49,11 @@ const ProfileUserPageMain = ({ profile }: Props) => {
     articleType === 'my' ? { author: username } : { favorited: username };
 
   const { data, isLoading } = useArticlesQuery({
-    ...feedQueryObj,
-    offset,
-    limit,
+    queryStrings: {
+      ...feedQueryObj,
+      offset,
+      limit,
+    },
   });
 
   const { mutate: postFollowMutate, isLoading: isPostFollowLoading } =
@@ -66,19 +68,27 @@ const ProfileUserPageMain = ({ profile }: Props) => {
     }
 
     if (following) {
-      deleteUnfollowMutate(username, {
-        onSuccess: (res) => {
-          const { profile } = res;
-          setCurrentProfile(profile);
+      deleteUnfollowMutate(
+        { username },
+        {
+          onSuccess: (res) => {
+            const { profile } = res;
+            setCurrentProfile(profile);
+          },
         },
-      });
+      );
     } else {
-      postFollowMutate(username, {
-        onSuccess: (res) => {
-          const { profile } = res;
-          setCurrentProfile(profile);
+      postFollowMutate(
+        {
+          username,
         },
-      });
+        {
+          onSuccess: (res) => {
+            const { profile } = res;
+            setCurrentProfile(profile);
+          },
+        },
+      );
     }
   };
 

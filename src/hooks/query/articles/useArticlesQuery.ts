@@ -6,15 +6,19 @@ import { FEED_PER_PAGE } from '@/constants/api';
 
 import { getGlobalFeeds } from '@/api/articles';
 
-export const useArticlesQuery = (
-  queryStrings: FeedQueryStrings = {
+export const useArticlesQuery = ({
+  queryStrings = {
     limit: FEED_PER_PAGE,
   },
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-) => {
+  headers = {},
+  options = {},
+}: {
+  queryStrings?: FeedQueryStrings;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}) => {
   const query = useQuery([queryKeys.GetArticles, queryStrings], () =>
-    getGlobalFeeds(queryStrings, headers, options),
+    getGlobalFeeds({ queryStrings, headers, options }),
   );
 
   return query;

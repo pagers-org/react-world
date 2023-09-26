@@ -15,10 +15,13 @@ import { getCookie } from '@/utils/cookie';
 /* Client Side APIs */
 
 // Login for existing user
-export const postUserLogin = (
-  payload: UserLoginPayload,
-  options: RequestInit = {},
-): Promise<UserResponse> => {
+export const postUserLogin = ({
+  payload,
+  options = {},
+}: {
+  payload: UserLoginPayload;
+  options?: RequestInit;
+}): Promise<UserResponse> => {
   return fetch(`${API_BASE_URL}/users/login`, {
     ...options,
     method: HTTP_METHOD.POST,
@@ -32,10 +35,13 @@ export const postUserLogin = (
 };
 
 // Register a new user
-export const postUserRegister = (
-  payload: UserRegisterPayload,
-  options: RequestInit = {},
-): Promise<UserResponse> => {
+export const postUserRegister = ({
+  payload,
+  options = {},
+}: {
+  payload: UserRegisterPayload;
+  options?: RequestInit;
+}): Promise<UserResponse> => {
   return fetch(`${API_BASE_URL}/users`, {
     ...options,
     method: HTTP_METHOD.POST,
@@ -49,11 +55,15 @@ export const postUserRegister = (
 };
 
 // Updated user information for current user
-export const putCurrentUser = (
-  payload: CurrentUserPayload,
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<UserResponse | string> => {
+export const putCurrentUser = ({
+  payload,
+  headers = {},
+  options = {},
+}: {
+  payload: CurrentUserPayload;
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<UserResponse | string> => {
   const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
 
   return fetch(`${API_BASE_URL}/user`, {
@@ -75,10 +85,13 @@ export const putCurrentUser = (
 /* Server Side APIs for Next 13 APP Router extended fetch api */
 
 // Gets the currently logged-in user
-export const getCurrentUser = (
-  headers: HeadersInit = {},
-  options: RequestInit = {},
-): Promise<UserResponse | void> => {
+export const getCurrentUser = ({
+  headers = {},
+  options = {},
+}: {
+  headers?: HeadersInit;
+  options?: RequestInit;
+}): Promise<UserResponse | void> => {
   return fetch(`${API_BASE_URL}/user`, {
     ...options,
     method: HTTP_METHOD.GET,

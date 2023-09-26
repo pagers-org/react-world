@@ -26,8 +26,10 @@ const LoginPageMain = () => {
     setIsLoading(true);
 
     postUserLogin({
-      user: {
-        ...form,
+      payload: {
+        user: {
+          ...form,
+        },
       },
     }).then((res) => {
       if (res?.errors) {
