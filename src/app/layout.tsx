@@ -1,6 +1,6 @@
 import Footer from '@/composables/Footer';
 import Nav from '@/composables/Nav';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 import '@/styles/globals.css';
 
@@ -12,7 +12,7 @@ import {
 } from './fonts';
 import ReactQueryProviders from './providers';
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html lang="ko">
       <body
