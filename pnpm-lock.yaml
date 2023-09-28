@@ -22,6 +22,7 @@ specifiers:
   babel-jest: ^29.6.2
   class-variance-authority: ^0.7.0
   clsx: ^2.0.0
+  dayjs: ^1.11.10
   eslint: ^8.47.0
   eslint-config-next: ^13.4.16
   eslint-config-prettier: ^9.0.0
@@ -55,6 +56,7 @@ dependencies:
   autoprefixer: 10.4.15_postcss@8.4.29
   class-variance-authority: 0.7.0
   clsx: 2.0.0
+  dayjs: 1.11.10
   eslint-plugin-tailwindcss: 3.13.0_tailwindcss@3.3.3
   immer: 10.0.2
   next: 13.4.19_h6kuhl5org62hkozzbezqqrdtu
@@ -2133,6 +2135,10 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /dayjs/1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
+    dev: false
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
