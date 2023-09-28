@@ -2,14 +2,12 @@
 
 import { FeedResponseType } from '@/types/article';
 import { ProfileResponseType } from '@/types/profile';
-import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import Articles from '@/pageComponents/Articles/Articles';
 
 import { getAuthorArticle, getFavorited } from '@/api/article';
-import { getProfile } from '@/api/profiles';
 
 import { cn } from '@/utils/style';
 
@@ -17,11 +15,9 @@ import UserProfile from './components/UserProfile';
 import { CurrentTabStyle } from './style';
 
 const ProfilePage = () => {
-  const router = useRouter();
   const [currentTab, setCurrentTab] = useState<
     'My Articles' | 'Favorited Articles'
   >('My Articles');
-  const [userData, setUserData] = useState<undefined | ProfileResponseType>();
   const [favoritedData, setFavoritedData] = useState<
     undefined | FeedResponseType
   >();
@@ -35,33 +31,6 @@ const ProfilePage = () => {
       label: 'Favorited Articles',
     },
   ] as const;
-
-  const fetchUserProfile = async (username: string) => {
-    try {
-      const response = await getProfile(username);
-      if (!response.ok) {
-        throw new Error('Failed to fetch profile');
-      }
-      return response.json();
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data: ProfileResponseType =
-          await fetchUserProfile(pathOnlyUserName);
-        setUserData(data);
-        // 여기서 data 변수에 접근 가능
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const fetchFavoritedData = async (slug: string) => {
     try {
@@ -127,7 +96,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-      {userData && <UserProfile userData={userData} />}
+      {<UserProfile />}
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
