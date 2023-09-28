@@ -1,19 +1,19 @@
-type LoginPostRequestType = {
+interface LoginPostRequestType {
   user: {
     email: string;
     password: string;
   };
-};
+}
 
-type RegisterPostRequestType = {
+interface RegisterPostRequestType {
   user: {
     username: string;
     email: string;
     password: string;
   };
-};
+}
 
-type UpdateUserType = {
+interface UpdateUserType {
   user: {
     email: string;
     password: string;
@@ -21,9 +21,9 @@ type UpdateUserType = {
     bio: string;
     image: string;
   };
-};
+}
 
-type UserType = {
+interface UserType {
   user: {
     email: string;
     token: string;
@@ -31,7 +31,7 @@ type UserType = {
     bio: string;
     image: string;
   };
-};
+}
 
 export type {
   LoginPostRequestType,

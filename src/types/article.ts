@@ -1,13 +1,13 @@
-type ArticlePostRequestType = {
+interface ArticlePostRequestType {
   article: {
     title: string;
     description: string;
     body: string;
     tagList: string[];
   };
-};
+}
 
-type FeedResponseType = {
+interface FeedResponseType {
   articles: [
     {
       slug: string;
@@ -28,6 +28,6 @@ type FeedResponseType = {
     },
   ];
   articlesCount: number;
-};
+}
 
 export type { FeedResponseType, ArticlePostRequestType };
