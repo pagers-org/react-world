@@ -34,4 +34,20 @@ const followUser = async (
   });
 };
 
-export { getProfile, followUser };
+const unFollowUser = async (
+  username: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(`${BASE_URL}/profiles/${username}/follow`, {
+    ...options,
+    method: 'delete',
+    headers: {
+      ...BASE_HEADER,
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+export { getProfile, followUser, unFollowUser };
