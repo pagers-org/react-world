@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { FillHeartIcon } from '@/composables/icons';
 import { fillGreenButton, flex, flexBetween, greenButton } from '@/styles/common.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { favoriteAPI, unFavoriteAPI } from '@/services/articles';
 
 type Props = {
   article: any;
@@ -19,11 +18,19 @@ const ArticlePreview = ({
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: favorited ? favoriteAPI : unFavoriteAPI,
+    mutationFn: async (slug: string) => {
+      const method = favorited ? 'DELETE' : 'POST';
+      console.log(slug);
+
+      return fetch(`/api/articles/favorite/${slug}`, { method }).then(res => res.json());
+    },
     onError: err => {
-      console.error(err);
+      // 권한이 없을 경우 login 페이지로 이동
+      router.push('/login');
     },
     onSuccess: res => {
+      console.log('성공 후 리패치');
+
       queryClient.invalidateQueries({ queryKey: ['articles'] });
     },
   });

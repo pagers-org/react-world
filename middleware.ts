@@ -6,9 +6,9 @@ export async function middleware(request: NextRequest) {
 
   const token = request.cookies.get('token')?.value || '';
 
-  // if (path === '/api/user'){
-
-  // }
+  if (path.includes('/api/articles/favorite') && !token) {
+    return new NextResponse('Authentication Error', { status: 401 });
+  }
 
   if (isPublic && token) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
@@ -20,5 +20,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/settings', '/editor', '/login', '/register', '/api/user'],
+  matcher: ['/settings', '/editor', '/login', '/register', '/api/user', '/api/articles/favorite/:path*'],
 };

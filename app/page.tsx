@@ -1,11 +1,13 @@
 import ArticleList from '@/components/article/ArticleList';
-import ArticleTab from '@/components/article/ArticleTab';
 import Banner from '@/components/layouts/Banner';
 import SideBar from '@/components/layouts/SideBar';
 import { articleContainer } from '@/styles/article.css';
 import { container, flex } from '@/styles/common.css';
 import { bannerDescription, bannerTitle } from '@/styles/home.css';
+import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+
+const ArticleTab = dynamic(() => import('@/components/article/ArticleTab'), { ssr: false });
 
 export default function Page() {
   return (

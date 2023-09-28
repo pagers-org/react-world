@@ -1,31 +1,29 @@
 'use client';
-import { getArticlesAPI } from '@/services/articles';
+
 import ArticlePreview from './ArticlePreview';
 import React, { useRef } from 'react';
 import { flexCenter } from '@/styles/common.css';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { useQueryClient } from '@tanstack/react-query';
-import useCurrentTag from '@/stores/useCurrentTag';
+import useCurrentTab from '@/stores/useCurrentTab';
+import useArticles from '@/hooks/useArticles';
 
 const ArticleList = () => {
   const targetRef = useRef(null);
-  const { tag } = useCurrentTag();
-
-  const { data } = useInfiniteScroll(getArticlesAPI, targetRef);
-
-  const queryClient = useQueryClient();
-  const query = queryClient.getQueryData(['articles-tag', tag]);
-  console.log(query);
+  const { tab } = useCurrentTab();
+  const { data } = useArticles(targetRef, tab);
 
   return (
     <div>
-      {data?.pages.map((group, i) => (
-        <div key={i}>
-          {group.articles.map(article => (
-            <ArticlePreview key={article.slug} article={article} />
+      {data?.pages?.at(-1)?.articles?.length === 0 ? (
+        '데이터가 없습니다.'
+      ) : (
+        <div>
+          {data?.pages.map((group, i) => (
+            <div key={i}>
+              {group?.articles?.map(article => <ArticlePreview key={article.slug} article={article} />)}
+            </div>
           ))}
         </div>
-      ))}
+      )}
       <div className={flexCenter} ref={targetRef}></div>
     </div>
   );

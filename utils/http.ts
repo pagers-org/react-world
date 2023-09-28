@@ -9,6 +9,8 @@ export const http = {
       body: body ? JSON.stringify(body) : undefined,
       ...options,
     };
+    console.log(defaultOptions);
+
     // console.log('서버자나');
     // console.log(API_BASE_URL);
 

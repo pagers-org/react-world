@@ -1,16 +1,33 @@
 'use client';
-import useCurrentTag from '@/stores/useCurrentTag';
+import useCurrentTab from '@/stores/useCurrentTab';
+import useUserStore from '@/stores/useUserStore';
 import { articleTab, articleTabItem, articleTabItemActivate, articleTabItemDisable } from '@/styles/article.css';
 
 const ArticleTab = () => {
-  const user = false;
-  const { tag } = useCurrentTag();
+  const { email } = useUserStore();
+  const { tab, setTab } = useCurrentTab();
+
+  const handleTabClick = (tab: string) => {
+    setTab(tab);
+  };
 
   return (
     <ul className={articleTab}>
-      {user && <li className={`${articleTabItem} ${articleTabItemDisable}`}>Your Feed</li>}
-      <li className={`${articleTabItem} ${articleTabItemActivate}`}>Global Feed</li>
-      {tag && <li className={`${articleTabItem} ${articleTabItemDisable}`}># {tag}</li>}
+      {email && (
+        <li
+          className={`${articleTabItem} ${tab === 'your' ? articleTabItemActivate : articleTabItemDisable}`}
+          onClick={() => handleTabClick('your')}
+        >
+          Your Feed
+        </li>
+      )}
+      <li
+        className={`${articleTabItem} ${tab === 'global' ? articleTabItemActivate : articleTabItemDisable}`}
+        onClick={() => handleTabClick('global')}
+      >
+        Global Feed
+      </li>
+      {tab !== 'global' && tab !== 'your' && <li className={`${articleTabItem} ${articleTabItemActivate}`}># {tab}</li>}
     </ul>
   );
 };

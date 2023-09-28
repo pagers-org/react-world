@@ -1,22 +1,21 @@
-import CommentCard from '@/components/comments/CommentCard';
-import CommentForm from '@/components/comments/CommentForm';
+import CommentBox from '@/components/comments/CommentBox';
 import Banner from '@/components/layouts/Banner';
 import TagList from '@/components/tags/TagList';
 import FavoriteButton from '@/components/user/FavoriteButton';
 import FollowButton from '@/components/user/FollowButton';
 import UserBox from '@/components/user/UserBox';
-import { fetchArticle } from '@/services/articles';
+import { getArticleAPI } from '@/services/articles';
 import { articleContent, articleDetailTitle } from '@/styles/article.css';
-import { container, flex, flexCenter, flexRow, justifyCenter, paddingTB, textCenter } from '@/styles/common.css';
-import { Article } from '@/types';
-import Link from 'next/link';
+import { container, flex, justifyCenter, paddingTB } from '@/styles/common.css';
 import React from 'react';
 type Props = {
   params: { slug: string };
 };
 const ArticlePage = async ({ params: { slug } }: Props) => {
-  const { title, author, createdAt, body, tagList, favoritesCount } = await fetchArticle<Article>(slug);
-  const user = true;
+  const {
+    article: { title, author, createdAt, body, tagList, favoritesCount },
+  } = await getArticleAPI(slug);
+
   return (
     <section>
       <Banner background="black">
@@ -36,20 +35,8 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
           <FollowButton author={author} /> &nbsp;
           <FavoriteButton favoritesCount={favoritesCount} />
         </div>
-        <div>
-          {user ? (
-            <div className={`${flexRow} ${flexCenter}`}>
-              <CommentForm />
-              <CommentCard />
-            </div>
-          ) : (
-            <div className={textCenter}>
-              <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this
-              article.
-            </div>
-          )}
-        </div>
       </div>
+      <CommentBox />
     </section>
   );
 };
