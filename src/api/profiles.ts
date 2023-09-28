@@ -1,5 +1,7 @@
 import { BASE_HEADER, BASE_URL } from '@/constants/auth';
 
+const accessToken = JSON.parse(window.localStorage.getItem('user'))?.token;
+
 const getProfile = async (
   username: string,
   headers: HeadersInit = {},
@@ -11,8 +13,25 @@ const getProfile = async (
     headers: {
       ...BASE_HEADER,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
 };
 
-export { getProfile };
+const followUser = async (
+  username: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(`${BASE_URL}/profiles/${username}/follow`, {
+    ...options,
+    method: 'post',
+    headers: {
+      ...BASE_HEADER,
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+export { getProfile, followUser };
