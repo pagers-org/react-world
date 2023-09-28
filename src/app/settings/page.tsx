@@ -58,7 +58,7 @@ const page = () => {
         }`;
         setError(errorText);
       } else {
-        router.push(`/${username}`);
+        router.push(`/@${username}`);
       }
     });
   };
@@ -176,7 +176,9 @@ const page = () => {
                   />
                 </fieldset>
                 <button
-                  disabled={!(profilePictureUrl && username && email)}
+                  disabled={
+                    !(profilePictureUrl && username && password && email)
+                  }
                   className="btn btn-lg btn-primary pull-xs-right"
                   onClick={handleSubmit}
                 >
