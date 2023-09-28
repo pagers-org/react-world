@@ -2,6 +2,8 @@ import { ArticlePostRequestType, FeedResponseType } from '@/types/article';
 
 import { BASE_HEADER, BASE_URL } from '@/constants/auth';
 
+const accessToken = JSON.parse(window.localStorage.getItem('user'))?.token;
+
 const getGlobalFeed = async (
   headers: HeadersInit = {},
   options: RequestInit = {},
@@ -21,24 +23,22 @@ const getGlobalFeed = async (
 const getMyFeed = async (
   headers: HeadersInit = {},
   options: RequestInit = {},
-): Promise<FeedResponseType> => {
+): Promise<Response> => {
   return await fetch(`${BASE_URL}/articles/feed`, {
     ...options,
     method: 'get',
     headers: {
       ...BASE_HEADER,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
-  })
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
+  });
 };
 
 const postArticleRegister = async (
   request: ArticlePostRequestType,
   options: RequestInit = {},
 ): Promise<FeedResponseType> => {
-  const accessToken = JSON.parse(window.localStorage.getItem('user'))?.token;
   return await fetch(`${BASE_URL}/articles`, {
     ...options,
     method: 'post',

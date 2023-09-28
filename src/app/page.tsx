@@ -27,19 +27,32 @@ const Home = () => {
     });
   };
 
-  const fetchMyFeed = async () => {
-    await getMyFeed().then((res) => {
-      if (res.errors) {
-        setIsLoading(false);
-      } else {
-        setIsLoading(true);
-        console.log(res);
-        setGlobalFeeds(res);
+  const fetchGetMyFeed = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getMyFeed();
+      if (!response.ok) {
+        throw new Error('Failed to fetch profile');
       }
-    });
+      setIsLoading(false);
+      return response.json();
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+      throw error;
+    }
   };
 
   useEffect(() => {
+    const fetchMyFeed = async () => {
+      try {
+        const data: FeedResponseType = await fetchGetMyFeed();
+        setGlobalFeeds(data);
+        // 여기서 data 변수에 접근 가능
+      } catch (error) {
+        console.error(error);
+      }
+    };
     if (user) {
       setCurrentTab('myFeed');
       fetchMyFeed();
