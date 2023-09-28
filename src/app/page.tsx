@@ -38,7 +38,6 @@ const Home = () => {
       return response.json();
     } catch (error) {
       setIsLoading(false);
-      console.error(error);
       throw error;
     }
   };
@@ -47,7 +46,7 @@ const Home = () => {
     const fetchMyFeed = async () => {
       try {
         const data: FeedResponseType = await fetchGetMyFeed();
-        setGlobalFeeds(data);
+        setMyFeeds(data);
         // 여기서 data 변수에 접근 가능
       } catch (error) {
         console.error(error);
