@@ -7,27 +7,26 @@ interface ArticlePostRequestType {
   };
 }
 
+type ArticleType = {
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  tagList: string[];
+  createdAt: string;
+  updatedAt: string;
+  favorited: boolean;
+  favoritesCount: number;
+  author: {
+    username: string;
+    bio: string;
+    image: string;
+    following: boolean;
+  };
+};
 interface FeedResponseType {
-  articles: [
-    {
-      slug: string;
-      title: string;
-      description: string;
-      body: string;
-      tagList: string[];
-      createdAt: string;
-      updatedAt: string;
-      favorited: boolean;
-      favoritesCount: number;
-      author: {
-        username: string;
-        bio: string;
-        image: string;
-        following: boolean;
-      };
-    },
-  ];
+  articles: ArticleType[];
   articlesCount: number;
 }
 
-export type { FeedResponseType, ArticlePostRequestType };
+export type { FeedResponseType, ArticlePostRequestType, ArticleType };

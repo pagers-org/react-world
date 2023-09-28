@@ -1,118 +1,163 @@
 'use client';
 
+import { FeedResponseType } from '@/types/article';
+import { ProfileResponseType } from '@/types/profile';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
-const page = () => {
+import Articles from '@/pageComponents/Articles/Articles';
+
+import { getAuthorArticle, getFavorited } from '@/api/article';
+import { getProfile } from '@/api/profiles';
+
+import { cn } from '@/utils/style';
+
+import UserProfile from './components/UserProfile';
+import { CurrentTabStyle } from './style';
+
+const ProfilePage = () => {
   const router = useRouter();
+  const [currentTab, setCurrentTab] = useState<
+    'My Articles' | 'Favorited Articles'
+  >('My Articles');
+  const [userData, setUserData] = useState<undefined | ProfileResponseType>();
+  const [favoritedData, setFavoritedData] = useState<
+    undefined | FeedResponseType
+  >();
+
+  const pathname = usePathname();
+  const pathOnlyUserName = pathname?.substring(2);
+
+  const PROFILE_PAGE_TAB = [
+    { label: 'My Articles' },
+    {
+      label: 'Favorited Articles',
+    },
+  ] as const;
+
+  const fetchUserProfile = async (username: string) => {
+    try {
+      const response = await getProfile(username);
+      if (!response.ok) {
+        throw new Error('Failed to fetch profile');
+      }
+      return response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data: ProfileResponseType =
+          await fetchUserProfile(pathOnlyUserName);
+        setUserData(data);
+        // 여기서 data 변수에 접근 가능
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const fetchFavoritedData = async (slug: string) => {
+    try {
+      const response = await getFavorited(slug);
+      if (!response.ok) {
+        throw new Error('Failed to fetch profile');
+      }
+      return response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    const fetchFavorited = async () => {
+      try {
+        const data: ProfileResponseType =
+          await fetchFavoritedData(pathOnlyUserName);
+        setFavoritedData(data);
+        // 여기서 data 변수에 접근 가능
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (currentTab === 'Favorited Articles') {
+      fetchFavorited();
+    }
+  }, [currentTab]);
+
+  const [authorData, setAuthorData] = useState<undefined | FeedResponseType>();
+
+  const fetchAuthorData = async (author: string) => {
+    try {
+      const response = await getAuthorArticle(author);
+      if (!response.ok) {
+        throw new Error('Failed to fetch profile');
+      }
+      return response.json();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    const fetchAuthor = async () => {
+      try {
+        const data: FeedResponseType = await fetchAuthorData(pathOnlyUserName);
+        setAuthorData(data);
+        // 여기서 data 변수에 접근 가능
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (currentTab === 'My Articles') {
+      fetchAuthor();
+    }
+    fetchAuthor();
+  }, [currentTab]);
+
+  console.log(favoritedData, authorData);
+
   return (
     <div className="profile-page">
-      <div className="user-info">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-md-10 offset-md-1">
-              <img src="http://i.imgur.com/Qr71crq.jpg" className="user-img" />
-              <h4>Eric Simons</h4>
-              <p>
-                Cofounder @GoThinkster, lived in Aol's HQ for a few months,
-                kinda looks like Peeta from the Hunger Games
-              </p>
-              <button className="btn btn-sm btn-outline-secondary action-btn">
-                <i className="ion-plus-round"></i>
-                &nbsp; Follow Eric Simons
-              </button>
-              <button
-                onClick={() => router.push('/settings')}
-                className="btn btn-sm btn-outline-secondary action-btn"
-              >
-                <i className="ion-gear-a"></i>
-                &nbsp; Edit Profile Settings
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {userData && <UserProfile userData={userData} />}
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
             <div className="articles-toggle">
               <ul className="nav nav-pills outline-active">
-                <li className="nav-item">
-                  <a className="nav-link active" href="">
-                    My Articles
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="">
-                    Favorited Articles
-                  </a>
-                </li>
+                {PROFILE_PAGE_TAB.map((tab) => (
+                  <li
+                    key={tab.label}
+                    onClick={() => setCurrentTab(tab.label)}
+                    className="nav-item"
+                  >
+                    <p
+                      className={cn(
+                        CurrentTabStyle({
+                          isCurrentTab: currentTab === tab.label,
+                        }),
+                      )}
+                    >
+                      {tab.label}
+                    </p>
+                  </li>
+                ))}
               </ul>
             </div>
-
-            <div className="article-preview">
-              <div className="article-meta">
-                <a href="/profile/eric-simons">
-                  <img src="http://i.imgur.com/Qr71crq.jpg" />
-                </a>
-                <div className="info">
-                  <a href="/profile/eric-simons" className="author">
-                    Eric Simons
-                  </a>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 29
-                </button>
-              </div>
-              <a
-                href="/article/how-to-buil-webapps-that-scale"
-                className="preview-link"
-              >
-                <h1>How to build webapps that scale</h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">
-                    realworld
-                  </li>
-                  <li className="tag-default tag-pill tag-outline">
-                    implementations
-                  </li>
-                </ul>
-              </a>
-            </div>
-
-            <div className="article-preview">
-              <div className="article-meta">
-                <a href="/profile/albert-pai">
-                  <img src="http://i.imgur.com/N4VcUeJ.jpg" />
-                </a>
-                <div className="info">
-                  <a href="/profile/albert-pai" className="author">
-                    Albert Pai
-                  </a>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 32
-                </button>
-              </div>
-              <a href="/article/the-song-you" className="preview-link">
-                <h1>
-                  The song you won't ever stop singing. No matter how hard you
-                  try.
-                </h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">Music</li>
-                  <li className="tag-default tag-pill tag-outline">Song</li>
-                </ul>
-              </a>
-            </div>
-
+            {authorData && currentTab === 'My Articles' && (
+              <Articles articles={authorData} />
+            )}
+            {favoritedData && currentTab === 'Favorited Articles' && (
+              <Articles articles={favoritedData} />
+            )}
             <ul className="pagination">
               <li className="page-item active">
                 <a className="page-link" href="">
@@ -132,4 +177,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProfilePage;

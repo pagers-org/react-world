@@ -52,4 +52,45 @@ const postArticleRegister = async (
     .catch((err) => console.error(err));
 };
 
-export { getGlobalFeed, getMyFeed, postArticleRegister };
+const getFavorited = async (
+  slug: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(
+    `${BASE_URL}/articles?favorited=${slug}&limit=5&offset=0`,
+    {
+      ...options,
+      method: 'get',
+      headers: {
+        ...BASE_HEADER,
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+};
+
+const getAuthorArticle = async (
+  author: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(`${BASE_URL}/articles?author=${author}&limit=5&offset=0`, {
+    ...options,
+    method: 'get',
+    headers: {
+      ...BASE_HEADER,
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+export {
+  getGlobalFeed,
+  getMyFeed,
+  postArticleRegister,
+  getFavorited,
+  getAuthorArticle,
+};
