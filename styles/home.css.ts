@@ -1,8 +1,6 @@
 import { style } from '@vanilla-extract/css';
-import { textCenter } from './common.css';
 
 export const banner = style([
-  textCenter,
   {
     padding: '2rem',
     color: '#fff',

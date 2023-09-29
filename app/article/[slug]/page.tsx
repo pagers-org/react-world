@@ -13,8 +13,10 @@ type Props = {
 };
 const ArticlePage = async ({ params: { slug } }: Props) => {
   const {
+    article,
     article: { title, author, createdAt, body, tagList, favoritesCount },
   } = await getArticleAPI(slug);
+  console.log(article);
 
   return (
     <section>
@@ -22,7 +24,6 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
         <h1 className={articleDetailTitle}>{title}</h1>
         <div className={flex}>
           <UserBox author={author} createdAt={createdAt} />
-
           <FollowButton author={author} />
           <FavoriteButton favoritesCount={favoritesCount} />
         </div>

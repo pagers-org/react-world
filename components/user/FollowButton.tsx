@@ -2,16 +2,22 @@
 import Button from '@/composables/Button';
 import { PlusIcon } from '@/composables/icons';
 import { fontSize } from '@/styles/common.css';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 type Props = {
   author: any;
 };
-const FollowButton = ({ author }: Props) => {
+const FollowButton = ({ author: { username, following } }: Props) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
-    mutationFn: () => fetch(`/api/profiles/${author.username}`, { method: 'POST' }).then(res => res.json()),
+    mutationFn: async () => {
+      const method = following ? 'DELETE' : 'POST';
+      return fetch(`/api/profiles/${username}`, { method }).then(res => res.json());
+    },
     onSuccess: data => {
+      queryClient.invalidateQueries(['articles', 'global']);
       console.log(data);
     },
     onError: error => {
@@ -22,7 +28,7 @@ const FollowButton = ({ author }: Props) => {
 
   return (
     <Button onClick={() => mutate()} type="gray">
-      <PlusIcon className={fontSize} /> Follow {author.username}
+      <PlusIcon className={fontSize} /> {following ? 'Unfollow' : 'Follow'} {username}
     </Button>
   );
 };
