@@ -22,6 +22,7 @@ const ArticlePage = async ({ params: { slug } }: Props) => {
         <h1 className={articleDetailTitle}>{title}</h1>
         <div className={flex}>
           <UserBox author={author} createdAt={createdAt} />
+
           <FollowButton author={author} />
           <FavoriteButton favoritesCount={favoritesCount} />
         </div>

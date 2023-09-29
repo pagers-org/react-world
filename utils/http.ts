@@ -28,7 +28,8 @@ export const http = {
         throw new Error(errorData.message || 'Request failed');
       }
 
-      // console.log(response);
+      console.log(response);
+      console.log(JSON.stringify(response));
 
       console.log('성공');
 
