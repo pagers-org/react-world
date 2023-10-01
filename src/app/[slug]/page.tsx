@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 import Articles from '@/pageComponents/Articles/Articles';
+import Pagination from '@/pageComponents/Pagination/Paginaiton';
+
+import { PER_PAGE } from '@/constants/pagintaion';
 
 import { getAuthorArticle, getFavorited } from '@/api/article';
 
@@ -14,13 +17,14 @@ import { cn } from '@/utils/style';
 import UserProfile from './components/UserProfile';
 import { CurrentTabStyle } from './style';
 
+type TapType = 'My Articles' | 'Favorited Articles';
+
 const ProfilePage = () => {
-  const [currentTab, setCurrentTab] = useState<
-    'My Articles' | 'Favorited Articles'
-  >('My Articles');
+  const [currentTab, setCurrentTab] = useState<TapType>('My Articles');
   const [favoritedData, setFavoritedData] = useState<
     undefined | FeedResponseType
   >();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const pathname = usePathname();
   const pathOnlyUserName = pathname?.substring(2);
@@ -92,7 +96,12 @@ const ProfilePage = () => {
     fetchAuthor();
   }, [currentTab]);
 
-  console.log(favoritedData, authorData);
+  const getCurrentTabData = (currentTab: TapType) => {
+    if (currentTab === 'My Articles') {
+      return authorData;
+    }
+    return favoritedData;
+  };
 
   return (
     <div className="profile-page">
@@ -122,23 +131,27 @@ const ProfilePage = () => {
               </ul>
             </div>
             {authorData && currentTab === 'My Articles' && (
-              <Articles articles={authorData} />
+              <Articles
+                articles={authorData.articles.slice(
+                  (currentPage - 1) * 10,
+                  currentPage * 10,
+                )}
+              />
             )}
             {favoritedData && currentTab === 'Favorited Articles' && (
-              <Articles articles={favoritedData} />
+              <Articles
+                articles={favoritedData.articles.slice(
+                  (currentPage - 1) * 10,
+                  currentPage * 10,
+                )}
+              />
             )}
-            <ul className="pagination">
-              <li className="page-item active">
-                <a className="page-link" href="">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="">
-                  2
-                </a>
-              </li>
-            </ul>
+            <Pagination
+              totalPage={getCurrentTabData(currentTab)?.articles.length}
+              limit={PER_PAGE}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
         </div>
       </div>
