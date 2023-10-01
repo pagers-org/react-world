@@ -1,5 +1,5 @@
 import { getArticlesAPI, getArticlesWithTagAPI } from '@/services/articles';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { RefObject } from 'react';
 import useIntersectionObserver from './useIntersectionObserver';
 
@@ -27,6 +27,20 @@ const useArticles = (ref: RefObject<HTMLElement>, tab: string) => {
     },
   });
 
+  const { mutate } = useMutation({
+    mutationFn: async (slug: string) => {
+      return fetch(`/api/articles/favorite/${slug}`).then(res => res.json());
+    },
+    onSuccess: data => {
+      console.log('성공');
+      console.log(data);
+    },
+    onError: err => {
+      console.log('Error 발생');
+      console.log(err);
+    },
+  });
+
   const nextPage = () => {
     if (!hasNextPage || isFetchingNextPage) {
       return;
@@ -36,7 +50,7 @@ const useArticles = (ref: RefObject<HTMLElement>, tab: string) => {
 
   useIntersectionObserver(nextPage, ref);
 
-  return { data };
+  return { data, mutate };
 };
 
 export default useArticles;

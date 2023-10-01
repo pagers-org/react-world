@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FillHeartIcon } from '@/composables/icons';
 import { fillGreenButton, flex, flexBetween, greenButton } from '@/styles/common.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useCurrentTab from '@/stores/useCurrentTab';
 
 type Props = {
   article: any;
@@ -14,6 +15,7 @@ const ArticlePreview = ({
   article: { title, description, favorited, favoritesCount, tagList, author, createdAt, slug },
 }: Props) => {
   const router = useRouter();
+  const { tab } = useCurrentTab();
 
   const queryClient = useQueryClient();
 
@@ -26,12 +28,20 @@ const ArticlePreview = ({
     },
     onError: err => {
       // 권한이 없을 경우 login 페이지로 이동
+      console.log(err);
+
       router.push('/login');
     },
-    onSuccess: res => {
+    onSuccess: data => {
       console.log('성공 후 리패치');
-
-      queryClient.invalidateQueries({ queryKey: ['articles'] });
+      console.log(data);
+      // queryClient.invalidateQueries({ queryKey: ['articles', tab] });
+      queryClient.setQueryData(['articles', tab], (oldQueryData: any) => {
+        return {
+          ...oldQueryData,
+          data: [...oldQueryData.data, data?.data],
+        };
+      });
     },
   });
   return (

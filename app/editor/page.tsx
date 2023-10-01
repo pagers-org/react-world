@@ -1,13 +1,14 @@
 'use client';
 import TagInput from '@/components/editor/TagInput';
-import { registerArticle } from '@/services/articles';
 import { articleTextarea } from '@/styles/article.css';
-import { commentTextarea } from '@/styles/comments.css';
 import { container, input } from '@/styles/common.css';
 import { editorForm, editorButton } from '@/styles/editor.css';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
 const EditorPage = () => {
+  const queryClient = useQueryClient();
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -15,12 +16,25 @@ const EditorPage = () => {
     tagList: [],
   });
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    // console.log('들어옴');
+  const { mutate } = useMutation({
+    mutationFn: () =>
+      fetch('/api/articles/new', { method: 'POST', body: JSON.stringify({ article: formData }) }).then(res =>
+        res.json()
+      ),
+    onSuccess: data => {
+      console.log('등록 성공');
 
-    // const res = await registerArticle();
-    // console.log(res);
+      console.log(data);
+      queryClient.invalidateQueries(['articles', 'global']);
+    },
+    onError: (error: any) => {
+      console.log('에러 발생');
+      console.error(error);
+    },
+  });
+
+  const handleClick = () => {
+    mutate();
   };
 
   const handleChange = (e: any) => {
@@ -31,7 +45,7 @@ const EditorPage = () => {
   };
   return (
     <section className={container}>
-      <form onSubmit={handleSubmit} className={editorForm}>
+      <div className={editorForm}>
         <input
           type="text"
           name="title"
@@ -58,9 +72,11 @@ const EditorPage = () => {
         ></textarea>
         <TagInput setFormData={setFormData} />
         <div>
-          <input type="submit" value="Publish Article" className={editorButton} />
+          <button className={editorButton} onClick={handleClick}>
+            Publish Article
+          </button>
         </div>
-      </form>
+      </div>
     </section>
   );
 };

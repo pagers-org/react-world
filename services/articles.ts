@@ -25,25 +25,4 @@ const getArticleAPI = (slug: string) => {
   return http.get(`/articles/${slug}`);
 };
 
-const favoriteAPI = (slug: string, auth: string) => {
-  console.log(slug);
-  console.log(auth);
-
-  return http.post(`/articles/${slug}/favorite`, '', {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      Authorization: `Token ${auth}`,
-    },
-  });
-};
-
-const unFavoriteAPI = (slug: string, auth: string) => {
-  return http.delete(`/articles/${slug}/favorite`, {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      Authorization: `Token ${auth}`,
-    },
-  });
-};
-
-export { getArticlesAPI, getArticlesWithTagAPI, getArticlesFeed, getArticleAPI, favoriteAPI, unFavoriteAPI };
+export { getArticlesAPI, getArticlesWithTagAPI, getArticlesFeed, getArticleAPI };

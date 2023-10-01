@@ -13,7 +13,7 @@ const ArticleList = () => {
 
   return (
     <div>
-      {data?.pages?.at(-1)?.articles?.length === 0 ? (
+      {data?.pages?.at(0)?.articles?.length === 0 ? (
         '데이터가 없습니다.'
       ) : (
         <div>
