@@ -8,6 +8,8 @@ import {
 
 import { BASE_HEADER, BASE_URL } from '@/constants/auth';
 
+const accessToken = JSON.parse(window.localStorage.getItem('user'))?.token;
+
 // Login for existing user
 const postUserLogin = async (
   request: LoginPostRequestType,
@@ -54,6 +56,7 @@ const updateUser = async (
     headers: {
       ...BASE_HEADER,
       ...headers,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(payload),
   })
