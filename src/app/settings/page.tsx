@@ -11,7 +11,7 @@ import { updateUser } from '@/api/auth';
 
 import { LocalStorage, ParseGetLocalStorage } from '@/utils/browserStorage';
 
-const page = () => {
+const Settings = () => {
   const router = useRouter();
 
   const handleClickLogout = () => {
@@ -64,20 +64,17 @@ const page = () => {
   };
 
   useEffect(() => {
-    console.log(previousUserInfo);
     if (previousUserInfo) {
       setFormInput(
         produce((input) => {
-          const { email, password, username, image } = previousUserInfo;
+          const { email, username, image } = previousUserInfo;
           input.email = email;
           input.username = username;
           input.profilePictureUrl = image;
         }),
       );
     }
-  }, [previousUserInfo]);
-
-  console.log(formInput);
+  }, []);
 
   return (
     <div className="settings-page">
@@ -200,4 +197,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Settings;
