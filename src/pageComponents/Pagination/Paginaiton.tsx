@@ -5,7 +5,7 @@ import { cn } from '@/utils/style';
 import { PaginationStyle } from './style';
 
 interface PaginationProps {
-  totalPage: number;
+  totalPage: number | undefined;
   limit: number;
   offset?: number;
   currentPage: number;

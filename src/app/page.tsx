@@ -4,16 +4,21 @@ import ProtecTedRoute from '@/composables/ProtectedRoute.tsx/ProtectedRoute';
 import { FeedResponseType } from '@/types/article';
 import { useEffect, useState } from 'react';
 
+import Pagination from '@/pageComponents/Pagination/Paginaiton';
+
+import { PER_PAGE } from '@/constants/pagintaion';
+
 import { getGlobalFeed, getMyFeed } from '@/api/article';
+
+type HomePageTabType = 'myFeed' | 'globalFeed';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [globalFeeds, setGlobalFeeds] = useState<FeedResponseType | null>();
   const [myFeeds, setMyFeeds] = useState<FeedResponseType | null>();
-  const [currentTab, setCurrentTab] = useState<'myFeed' | 'globalFeed'>(
-    'globalFeed',
-  );
+  const [currentTab, setCurrentTab] = useState<HomePageTabType>('globalFeed');
   const [user, setUser] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchGlobalFeed = async () => {
     await getGlobalFeed().then((res) => {
@@ -40,6 +45,13 @@ const Home = () => {
       setIsLoading(false);
       throw error;
     }
+  };
+
+  const getCurrentTabData = (currentTab: HomePageTabType) => {
+    if (currentTab === 'myFeed') {
+      return myFeeds;
+    }
+    return globalFeeds;
   };
 
   useEffect(() => {
@@ -193,18 +205,12 @@ const Home = () => {
                 <div>피드 없음</div>
               )}
 
-              <ul className="pagination">
-                <li className="page-item active">
-                  <a className="page-link" href="">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="">
-                    2
-                  </a>
-                </li>
-              </ul>
+              <Pagination
+                totalPage={getCurrentTabData(currentTab)?.articles.length}
+                limit={PER_PAGE}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
             </div>
 
             <div className="col-md-3">
