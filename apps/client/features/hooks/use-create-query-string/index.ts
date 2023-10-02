@@ -1,12 +1,16 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 
-interface IUserCreateQueryString {
+interface ICreateQueryString {
     key: string;
     value: string;
 }
 
-export default function useCreateQueryString() {
+interface IPathName {
+    pathName: string;
+}
+
+export default function useCustomNavigate() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -22,9 +26,11 @@ export default function useCreateQueryString() {
     );
 
     return {
-        moveToUrlWithoutAnchor: ({ key, value }: IUserCreateQueryString) =>
+        moveToUrlWithoutAnchor: ({ key, value }: ICreateQueryString) =>
             router.push(pathname + '?' + createQueryString(key, value)),
-        moveToUrlWithAnchor: ({ key, value }: IUserCreateQueryString) =>
+        moveToUrlWithAnchor: ({ key, value }: ICreateQueryString) =>
             pathname + '?' + createQueryString(key, value),
+        moveToUrlWithoutQuery: ({ pathName }: IPathName) =>
+            router.push(pathName),
     };
 }

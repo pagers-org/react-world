@@ -15,12 +15,13 @@ import Pagination from '../composable/pagination';
 import TagList from './tag-list';
 import { TReturnComponent } from '@/types/common.type';
 import { articleKeys } from '@/config/react-query/query-key-factory';
-import useCreateQueryString from '@/features/hooks/use-create-query-string';
+
 import ErrorBoundary from '../error-boundary';
 import { Suspense } from 'react';
+import useCustomNavigate from '@/features/hooks/use-create-query-string';
 
 export default function HomeComponent(): TReturnComponent {
-    const { moveToUrlWithoutAnchor } = useCreateQueryString();
+    const { moveToUrlWithoutAnchor } = useCustomNavigate();
 
     const searchParams = useSearchParams();
 
