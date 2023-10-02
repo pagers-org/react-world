@@ -1,14 +1,24 @@
 import { IArticle } from '@/features/graphql/queries/articles';
+import useCustomNavigate from '@/features/hooks/use-create-query-string';
 
 interface IArticleListProps {
     articleListData: IArticle[];
 }
 
 export default function ArticleList({ articleListData }: IArticleListProps) {
+    const { moveToUrlWithoutQuery } = useCustomNavigate();
     return (
         <>
             {articleListData.map(article => (
-                <div key={article.slug} className="article-preview">
+                <div
+                    key={article.slug}
+                    onClick={() =>
+                        moveToUrlWithoutQuery({
+                            pathName: `/article/${article.slug}`,
+                        })
+                    }
+                    className="article-preview"
+                >
                     <div className="article-meta">
                         <a href={`/profile/${article.author.username}`}>
                             <img src={article.author.image} />

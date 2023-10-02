@@ -1,7 +1,9 @@
 import { GTagsQuery, tagsQuery } from '@/features/graphql/queries/tags';
+import useCustomNavigate from '@/features/hooks/use-create-query-string';
 import { useQuery } from '@tanstack/react-query';
 import { tagKeys } from 'config/react-query/query-key-factory';
 import request from 'graphql-request';
+import Link from 'next/link';
 
 export default function TagList() {
     const { data } = useQuery({
@@ -13,6 +15,8 @@ export default function TagList() {
             ),
     });
 
+    const { moveToUrlWithAnchor } = useCustomNavigate();
+
     const tags = data?.getTags.tags || []; // 뭔가 서버에서 SDL을 만들 때 이상하게 만든건지 데이터가 왜 deps가 하나가 더 있는거 같지
 
     return (
@@ -20,9 +24,13 @@ export default function TagList() {
             <p>Popular Tags</p>
             <div className="tag-list">
                 {tags.map(tag => (
-                    <a key={tag} href="" className="tag-pill tag-default">
+                    <Link
+                        key={tag}
+                        className="tag-pill tag-default"
+                        href={moveToUrlWithAnchor({ key: 'tag', value: tag })}
+                    >
                         {tag}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </div>
