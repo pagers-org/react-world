@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
+        // "module": "module",
+        // "module": "esnext",
         /* Language and Environment */
-        "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+        "target": "ES2022" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 
         /* Modules */
         "rootDir": "./" /* Specify the root folder within your source files. */,

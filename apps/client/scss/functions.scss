@@ -1,0 +1,3 @@
+@function expect-unit($param-val, $default-unit: px) {
+  @return if(unitless($param-val), #{$param-val} + $default-unit, $param-val);
+}
