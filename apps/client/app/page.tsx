@@ -1,3 +1,4 @@
+import ErrorBoundary from '@/components/error-boundary';
 import HomeComponent from '@/components/home';
 import {
     GArticlesQuery,

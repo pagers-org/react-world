@@ -4,8 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { tagKeys } from 'config/react-query/query-key-factory';
 import request from 'graphql-request';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useCallback } from 'react';
 
 export default function TagList() {
     const { data } = useQuery({

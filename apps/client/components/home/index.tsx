@@ -2,7 +2,7 @@
 
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import {
     GArticlesQuery,
@@ -15,8 +15,9 @@ import Pagination from '../composable/pagination';
 import TagList from './tag-list';
 import { TReturnComponent } from '@/types/common.type';
 import { articleKeys } from '@/config/react-query/query-key-factory';
-import { useCallback } from 'react';
 import useCreateQueryString from '@/features/hooks/use-create-query-string';
+import ErrorBoundary from '../error-boundary';
+import { Suspense } from 'react';
 
 export default function HomeComponent(): TReturnComponent {
     const { moveToUrlWithoutAnchor } = useCreateQueryString();
@@ -25,9 +26,6 @@ export default function HomeComponent(): TReturnComponent {
 
     const currentPage = searchParams.get('page') || 1;
     const showPageCnt = searchParams.get('limit') || 10;
-    const tag = searchParams.get('tag');
-    const author = searchParams.get('author');
-    const favorited = searchParams.get('favorited');
 
     const { data } = useQuery({
         queryKey: articleKeys.lists(),
@@ -51,8 +49,20 @@ export default function HomeComponent(): TReturnComponent {
             <div className="container page">
                 <div className="row">
                     <div className="col-md-9">
-                        <FeedToggle />
-                        <ArticleList articleListData={articleListData} />
+                        <ErrorBoundary fallback={<div>Feed Error</div>}>
+                            <Suspense fallback={<div>Feed Loading ...</div>}>
+                                <FeedToggle />
+                            </Suspense>
+                        </ErrorBoundary>
+                        <ErrorBoundary fallback={<div>articleList Error</div>}>
+                            <Suspense
+                                fallback={<div>articleList Loading ...</div>}
+                            >
+                                <ArticleList
+                                    articleListData={articleListData}
+                                />
+                            </Suspense>
+                        </ErrorBoundary>
                         {totalCnt > 0 && (
                             <Pagination
                                 currentPage={currentPage as number}
@@ -63,7 +73,11 @@ export default function HomeComponent(): TReturnComponent {
                         )}
                     </div>
                     <div className="col-md-3">
-                        <TagList />
+                        <ErrorBoundary fallback={<div>tag Error</div>}>
+                            <Suspense fallback={<div>tag loading...</div>}>
+                                <TagList />
+                            </Suspense>
+                        </ErrorBoundary>
                     </div>
                 </div>
             </div>
