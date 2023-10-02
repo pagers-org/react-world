@@ -11,7 +11,9 @@
             "@/services/*": ["services/*"],
             "@/stores/*": ["stores/*"],
             "@/types/*": ["types/*"],
-            "@/utils/*": ["utils/*"]
+            "@/utils/*": ["utils/*"],
+            "@/config/*": ["config/*"],
+            "@/scss/*": ["scss/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

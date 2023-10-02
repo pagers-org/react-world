@@ -4,18 +4,14 @@ import {
     articlesQuery,
 } from '@/features/graphql/queries/articles';
 import { tagsQuery } from '@/features/graphql/queries/tags';
+import { ISearchParams } from '@/types/common.type';
 import { dehydrate } from '@tanstack/query-core';
 import { Hydrate } from '@tanstack/react-query';
 import getQueryClient from 'config/react-query/get-query-client';
 import { articleKeys, tagKeys } from 'config/react-query/query-key-factory';
 import { request } from 'graphql-request';
 
-export default async function Page({
-    searchParams,
-}: {
-    params: { slug: string };
-    searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default async function Page({ searchParams }: ISearchParams) {
     const queryClient = getQueryClient();
 
     await queryClient.prefetchQuery(articleKeys.lists(), () =>
@@ -27,7 +23,7 @@ export default async function Page({
                 tag: searchParams?.tag,
                 author: searchParams?.author,
                 favorited: searchParams?.favorited,
-                offset: Number(searchParams?.offset),
+                offset: Number(searchParams?.page),
                 limit: Number(searchParams?.limit),
             },
         ),

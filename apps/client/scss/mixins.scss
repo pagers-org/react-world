@@ -1,0 +1,524 @@
+@import './variables';
+
+@mixin clear() {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+@mixin clear-font($color: $font-color) {
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  font-family: $font-family;
+  color: $color;
+}
+
+@mixin clear-anchor($color: $font-color) {
+  @include clear-font($color);
+
+  text-decoration: none;
+
+  &:active {
+    color: $color;
+  }
+}
+
+@mixin clear-form() {
+  @include clear;
+
+  display: block;
+  border: 0 none;
+  outline: none;
+}
+
+@mixin clear-button() {
+  @include clear;
+
+  border: 0 none;
+  cursor: pointer;
+}
+
+@mixin hidden-el() {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+@mixin blind() {
+  position: absolute;
+  left: -9999px;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  font-size: 0;
+  line-height: 0;
+}
+
+@mixin scrollbar() {
+  --scrollbar-color: transparent;
+  --scrollbar-container-color: transparent;
+  --scrollbar-thumb-color: rgb(0 0 0 / 8%);
+  --scrollbar-thumb-hover-color: rgb(0 0 0 / 11%);
+  --scrollbar-track-color: rgb(0 0 0 / 7%);
+  --scrollbar-border-radius: 10px;
+  --scrollbar-size: 8px;
+  --scrollbar-padding: 1px;
+  --scrollbar-hover-size: 12px;
+  --scroll-view-margin: 0;
+  --scroll-view-color: transparent;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+  overflow-y: overlay;
+
+  &:hover {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      // background: var(--scrollbar-track-color);
+      border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #e8e8e8;
+      border-radius: 6px;
+      border: 0 none;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    // background: var(--scrollbar-track-color);
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #e8e8e8;
+    border-radius: 6px;
+    border: 0 none;
+  }
+}
+
+@mixin hide-scrollbar() {
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb {
+    width: 16px;
+    border-radius: 13px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 10px;
+  }
+
+  &:hover {
+    color: rgba(0, 0, 0, 10%);
+  }
+
+  overflow: overlay;
+  transition: color 0.3s ease;
+  color: rgba(0, 0, 0, 0%);
+}
+
+@mixin ellipsis() {
+  width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin ellipsis-multi-line($line-clamp: 2, $line-height: 1.4em) {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: $line-height;
+  max-height: ($line-height * $line-clamp);
+  word-wrap: break-word;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-clamp;
+  -webkit-box-orient: vertical;
+}
+
+@mixin close-x($size: 50px, $line-size: 2px, $color: #000) {
+  @include clear;
+
+  width: calc($size * 2);
+  height: calc($size * 2);
+  border: 0 none;
+  background-color: transparent;
+
+  &::before,
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: ($size / 2);
+    height: $size;
+    width: $line-size;
+    background-color: $color;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+@mixin arrow($size: 3px, $aSize: 4px, $borderColor: #fff) {
+  $size-unit: expect-unit($size, px);
+
+  width: $aSize;
+  height: $aSize;
+  border: solid $borderColor;
+  border-width: 0 $size-unit $size-unit 0;
+  display: inline-block;
+
+  &.down {
+    transform: rotate(45deg);
+    transition: transform 0.15s linear;
+  }
+}
+
+@mixin arrow-active() {
+  transform: rotate(-135deg);
+  transition: transform 0.15s linear;
+}
+
+@mixin skeleton-ani() {
+  background: $skeleton-background-color;
+  background: $skeleton-background-color-gradient;
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1s shine linear infinite;
+
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+}
+
+@mixin flex-box($align: center, $justify: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin grid-box() {
+  display: flex;
+  flex-wrap: wrap;
+
+  & .col1 {
+    box-sizing: border-box;
+
+    @include desktop {
+      width: 25%;
+    }
+
+    @include tablet {
+      width: 50%;
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  & .col2 {
+    box-sizing: border-box;
+
+    @include desktop {
+      width: 50%;
+    }
+
+    @include tablet {
+      width: 100%;
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  & .col3 {
+    box-sizing: border-box;
+
+    @include desktop {
+      width: 75%;
+    }
+
+    @include tablet {
+      width: 100%;
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  & .col4 {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+@mixin hamburger() {
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+  outline: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  & > .hamburger_box {
+    width: 24px;
+    height: 14px;
+    display: inline-block;
+    position: relative;
+
+    & > .hamburger_inner {
+      top: 1px;
+      transition-duration: 0.275s;
+      transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      width: 24px;
+      height: 2px;
+      background-color: $primary-color;
+      border-radius: 10px;
+      position: absolute;
+      transition-property: transform;
+      display: block;
+
+      &::before,
+      &::after {
+        width: 24px;
+        height: 2px;
+        background-color: $primary-color;
+        border-radius: 10px;
+        position: absolute;
+        transition-duration: 0.15s;
+        transition-timing-function: ease;
+        content: '';
+        display: block;
+        box-sizing: border-box;
+      }
+
+      &::before {
+        top: 6px;
+        transition: opacity 0.125s 0.275s ease;
+      }
+
+      &::after {
+        top: 12px;
+        transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        bottom: -6px;
+      }
+    }
+  }
+
+  &.active {
+    .hamburger_inner {
+      transform: translate3d(0, 6px, 0) rotate(135deg);
+      transition-delay: 0.075s;
+
+      &::before {
+        transition-delay: 0s;
+        opacity: 0;
+      }
+
+      &::after {
+        transform: translate3d(0, -12px, 0) rotate(-270deg);
+        transition-delay: 0.075s;
+      }
+    }
+  }
+}
+
+@mixin plus-minus($color: $primary-color, $size: 14px) {
+  @include clear;
+
+  position: relative;
+  display: block;
+  width: $size;
+  height: $size;
+  border: 1px solid lighten($color-dark, 50%);
+  border-radius: 2px;
+  background-color: $color-light;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    top: 2px;
+    bottom: 2px;
+    left: calc(50% - 1px);
+    background-color: lighten($color, 10%);
+    transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    left: 2px;
+    right: 2px;
+    top: calc(50% - 1px);
+    background-color: lighten($color, 10%);
+  }
+}
+
+@mixin search-btn($position: 'bottom') {
+  @include clear;
+  @include flex-box;
+
+  position: absolute;
+  z-index: 99;
+  right: 1rem;
+  gap: 0.5rem;
+
+  @if $position == 'bottom' {
+    bottom: -18px;
+  } @else {
+    top: -20px;
+  }
+
+  & > button {
+    @include clear;
+    @include flex-box;
+
+    font-size: 32px;
+    width: 40px;
+    height: 40px;
+    line-height: 0;
+    transition: all 0.2s ease-in-out;
+
+    &.hide {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include mobile {
+    gap: 0.25rem;
+    right: 0.5rem;
+    bottom: -22px;
+
+    & > button {
+      font-size: 26px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+@mixin list-btn($position: 'bottom') {
+  @include clear;
+  @include flex-box($justify: normal);
+
+  gap: 0.5rem;
+  position: absolute;
+  z-index: 99;
+
+  @if $position == 'bottom' {
+    bottom: -35px;
+    right: 0;
+  } @else {
+    top: -56px;
+    right: 0;
+  }
+
+  & > button {
+    @include clear;
+    @include flex-box;
+
+    font-size: 1.5rem;
+    line-height: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  @include mobile {
+    gap: 0.25rem;
+
+    &.top {
+      top: -54px;
+      right: -10px;
+    }
+
+    &.bottom {
+      bottom: -33px;
+      right: -10px;
+    }
+
+    & > button {
+      font-size: 1.25rem;
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+@mixin media($device-width) {
+  $device-width-unit: expect-unit($device-width, px);
+  @media (max-width: #{$device-width-unit}) {
+    @content;
+  }
+}
+
+@mixin mobile-max {
+  @media (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin keyframe($animation-name) {
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
