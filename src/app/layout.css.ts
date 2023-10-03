@@ -28,11 +28,11 @@ export const headControllers = style({
   margin: 0,
   padding: 0,
   listStyleType: 'none',
-  cursor: 'pointer',
 });
 
 export const controlButton = style({
   color: vars.color.black03,
+  cursor: 'pointer',
   ':hover': {
     color: vars.color.black06,
   },
