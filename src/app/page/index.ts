@@ -1,1 +1,1 @@
-export * from './Feeds.server';
+export * from './Articles.server';

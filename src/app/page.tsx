@@ -1,4 +1,4 @@
-import { Feeds } from './page/Feeds.server';
+import { Articles } from './page/Articles.server';
 import { mainBanner, bannerTitle, bannerSubTitle } from './page.css';
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
         <p className={bannerSubTitle}>A place to share your knowledge.</p>
       </section>
       <section>
-        <Feeds />
+        <Articles />
       </section>
     </div>
   );

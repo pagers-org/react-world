@@ -2,12 +2,12 @@ import { style } from '@vanilla-extract/css';
 
 import { vars } from '@/app/style.css';
 
-export const feedSummary = style({
+export const articleSummary = style({
   padding: '30px 20px',
   borderTop: `1px solid ${vars.color.black03}`,
 });
 
-export const feedSummaryHeader = style({
+export const articleSummaryHeader = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignContent: 'center',
@@ -50,18 +50,18 @@ export const likeCount = style({
   cursor: 'pointer',
 });
 
-export const feedTitle = style({
+export const articleTitle = style({
   margin: 0,
   marginBottom: '10px',
   cursor: 'pointer',
 });
 
-export const feedDescription = style({
+export const articleDescription = style({
   color: vars.color.gray9,
   cursor: 'pointer',
 });
 
-export const feedSummaryFooter = style({
+export const articleSummaryFooter = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -73,12 +73,12 @@ export const readMore = style({
   cursor: 'pointer',
 });
 
-export const feedTags = style({
+export const articleTags = style({
   display: 'flex',
   gap: '5px',
 });
 
-export const feedTag = style({
+export const articleTag = style({
   color: vars.color.grayA,
   border: `1px solid ${vars.color.grayA}`,
   borderRadius: '100px',
