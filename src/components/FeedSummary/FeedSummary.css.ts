@@ -29,6 +29,7 @@ export const userInfo = style({
 
 export const username = style({
   color: vars.color.standardGreen,
+  cursor: 'pointer',
 });
 
 export const createdAt = style({
@@ -37,6 +38,9 @@ export const createdAt = style({
 });
 
 export const likeCount = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '5px',
   width: 'fit-content',
   height: 'fit-content',
   color: vars.color.standardGreen,

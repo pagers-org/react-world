@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+import { AiFillHeart } from 'react-icons/ai';
+
+import { format } from 'date-fns';
 
 import { Article } from '@/gen';
 
@@ -36,10 +39,15 @@ export function FeedSummary({ feed }: FeedSummaryProps) {
           />
           <div>
             <div className={username}>{feed.author.username}</div>
-            <div className={createdAt}>{feed.createdAt.toString()}</div>
+            <div className={createdAt}>
+              {format(feed.createdAt, 'MMMM d, yyyy')}
+            </div>
           </div>
         </div>
-        <div className={likeCount}>{feed.favoritesCount}</div>
+        <div className={likeCount}>
+          <AiFillHeart />
+          {feed.favoritesCount}
+        </div>
       </div>
       <div>
         <h1 className={feedTitle}>{feed.title}</h1>
