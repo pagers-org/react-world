@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <div>
       <section className={mainBanner}>
-        <h1 className={bannerTitle}>Hello, Next.js!</h1>
+        <h1 className={bannerTitle}>conduit</h1>
         <p className={bannerSubTitle}>A place to share your knowledge.</p>
       </section>
     </div>

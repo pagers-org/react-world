@@ -20,7 +20,7 @@ export const mainBanner = style({
 export const bannerTitle = style({
   fontSize: '56px',
   margin: 0,
-  textShadow: '0px 2px 5px rgba(0, 0, 0, 0.5)',
+  textShadow: '0px 2px 3px rgba(0, 0, 0, 0.5)',
 });
 
 export const bannerSubTitle = style({
