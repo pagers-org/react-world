@@ -1,8 +1,7 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes } from "react";
 import { popularTagBtnStyles, selectedPopularTagStyles } from "./styles/popularTagBtn.css";
 
 interface PopularTagBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
   selected: boolean;
 }
 

@@ -7,4 +7,5 @@ interface Props {
 const Tag = ({ text }: Props) => {
   return <div className={TagStyle}>{text}</div>;
 };
+
 export default Tag;

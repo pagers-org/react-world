@@ -2,11 +2,17 @@ import { activeTabStyle, inactiveTabStyle } from "./styles/tabs.css";
 import { useTabsStore, useArticlesParamsStore } from "@/stores/useStore";
 
 interface TabsProps {
-  tabs: (string | undefined)[];
+  tabs: string[];
 }
 
 const Tabs = ({ tabs }: TabsProps) => {
-  return <ul className="flex">{tabs.map((tab) => tab && <Tab key={tab} text={tab} />)}</ul>;
+  return (
+    <ul className="flex">
+      {tabs.map((tab) => (
+        <Tab key={tab} text={tab} />
+      ))}
+    </ul>
+  );
 };
 export default Tabs;
 

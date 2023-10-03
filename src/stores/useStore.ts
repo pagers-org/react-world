@@ -6,6 +6,17 @@ interface TabState {
   setActiveTab: (tab: string) => void;
 }
 
+type ArticlesState = {
+  articlesParams: ArticleQueryParams;
+};
+
+type ArticlesStoreActions = {
+  setSelectedTag: (tag: string) => void;
+  resetSelectedTag: () => void;
+  setCurrentPage: (selectedPage: number) => void;
+  resetCurrentPage: () => void;
+};
+
 export const useTabsStore = create<TabState>((set) => ({
   activeTab: "Global Feed",
   setActiveTab: (newTab: string) => set({ activeTab: newTab }),
@@ -17,17 +28,6 @@ const defaultArticlesState = {
   favorited: "",
   offset: 0,
   limit: 10,
-};
-
-type ArticlesState = {
-  articlesParams: ArticleQueryParams;
-};
-
-type ArticlesStoreActions = {
-  setSelectedTag: (tag: string) => void;
-  resetSelectedTag: () => void;
-  setCurrentPage: (selectedPage: number) => void;
-  resetCurrentPage: () => void;
 };
 
 export const useArticlesParamsStore = create(

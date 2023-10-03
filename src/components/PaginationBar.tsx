@@ -17,23 +17,17 @@ const PaginationBar: React.FC<PaginationBarProps> = ({ count }) => {
     setCurrentPage(page);
   };
 
-  const renderPaginationButtons = () => {
-    const pageBtns = [];
-    for (let i = 1; i <= Math.ceil(count / 10); i++) {
-      pageBtns.push(
-        <PageBtn key={i} onClick={() => handlePageClick(i)} isActive={i === currentPage}>
-          {i}
-        </PageBtn>,
-      );
-    }
-    return pageBtns;
+  const PaginationButtons = () => {
+    return [...Array(Math.ceil(count / 10) + 1)].map((_, index) => (
+      <PageBtn key={index + 1} onClick={() => handlePageClick(index)} isActive={index === currentPage - 1}>
+        {index + 1}
+      </PageBtn>
+    ));
   };
 
   return (
     <div>
-      <div className="[&>*:first-child]:rounded-l-md [&>*:last-child]:rounded-r-md mt-5">
-        {renderPaginationButtons()}
-      </div>
+      <div className="[&>*:first-child]:rounded-l-md [&>*:last-child]:rounded-r-md mt-5">{PaginationButtons()}</div>
     </div>
   );
 };

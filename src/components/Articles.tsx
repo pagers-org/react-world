@@ -27,15 +27,15 @@ const Articles = () => {
           {isLoading && <div>Loading...</div>}
           {articleResponse && (
             <div>
-              <Tabs tabs={[undefined, "Global Feed", articlesParams.tag]} />
+              <Tabs tabs={["Global Feed", articlesParams.tag]} />
               <ul>
                 {articleResponse.articles.map((article) => (
                   <ArticleCard article={article} />
                 ))}
               </ul>
+              <PaginationBar count={articleResponse.articlesCount} />
             </div>
           )}
-          {articleResponse && <PaginationBar count={articleResponse.articlesCount} />}
         </div>
         <PopularTags />
       </section>

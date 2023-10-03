@@ -5,7 +5,7 @@ import PopularTagBtn from "./buttons/PopularTagBtn";
 import { useTabsStore, useArticlesParamsStore } from "@/stores/useStore";
 
 const PopularTags = () => {
-  const { data: tags } = useQuery(["/api/tags"], () => getTags(), {
+  const { data: tags, isLoading } = useQuery(["/api/tags"], () => getTags(), {
     refetchOnWindowFocus: false,
   });
   const {
@@ -24,7 +24,7 @@ const PopularTags = () => {
   return (
     <div className="bg-gray-200 p-2">
       <h2 className="text-sm mb-1">Popular Tags</h2>
-      {tags ? (
+      {tags && (
         <ul className="flex flex-wrap w-60 gap-1 ">
           {tags.map((tag) => (
             <PopularTagBtn selected={selectedTag === tag} key={tag} onClick={() => handleClickPopularTag(tag)}>
@@ -32,9 +32,8 @@ const PopularTags = () => {
             </PopularTagBtn>
           ))}
         </ul>
-      ) : (
-        <p>Loading tags...</p>
       )}
+      {isLoading && <p>Loading tags...</p>}
     </div>
   );
 };

@@ -5,10 +5,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
 const ProvidersWrapper = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </div>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };
 export default ProvidersWrapper;

@@ -29,7 +29,7 @@ const ArticleCard = ({
         <Link href={`/articles/${slug}`}>Read more...</Link>
         <ul className="flex gap-1">
           {tagList.map((tag) => (
-            <Tag text={tag} />
+            <Tag text={tag} key={tag} />
           ))}
         </ul>
       </div>
