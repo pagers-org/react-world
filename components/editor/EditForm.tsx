@@ -29,16 +29,23 @@ const EditForm = ({ slug }: { slug: string }) => {
   });
 
   const { mutate } = useMutation({
-    mutationFn: () =>
-      fetch('/api/articles/new', { method: 'POST', body: JSON.stringify({ article: formData }) }).then(res =>
-        res.json()
-      ),
+    mutationFn: async () => {
+      if (slug) {
+        return fetch(`/api/articles/${slug}`, { method: 'PUT', body: JSON.stringify({ article: formData }) }).then(
+          res => res.json()
+        );
+      } else {
+        return fetch('/api/articles/new', { method: 'POST', body: JSON.stringify({ article: formData }) }).then(res =>
+          res.json()
+        );
+      }
+    },
     onSuccess: data => {
       console.log('등록 성공');
 
       console.log(data);
       queryClient.invalidateQueries(['articles', 'global']);
-      router.push('router');
+      router.push('/');
     },
     onError: (error: any) => {
       console.log('에러 발생');
