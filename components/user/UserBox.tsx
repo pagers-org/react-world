@@ -7,7 +7,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 type Props = {
-  author: any;
+  author: {
+    username: string;
+    image: string;
+  };
   createdAt: string;
 };
 const UserBox = ({ author: { username, image }, createdAt }: Props) => {
