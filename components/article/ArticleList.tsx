@@ -5,11 +5,14 @@ import React, { useRef } from 'react';
 import { flexCenter } from '@/styles/common.css';
 import useCurrentTab from '@/stores/useCurrentTab';
 import useArticles from '@/hooks/useArticles';
+import useUserStore from '@/stores/useUserStore';
+import { User } from '@/types';
 
 const ArticleList = () => {
   const targetRef = useRef(null);
+  const { username } = useUserStore() as User;
   const { tab } = useCurrentTab();
-  const { data } = useArticles(targetRef, tab);
+  const { data } = useArticles(targetRef, tab, username);
 
   return (
     <div>

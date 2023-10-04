@@ -8,8 +8,13 @@ const getArticlesWithTagAPI = (tag: string, offset = 0, limit = 10) => {
   return http.get(`/articles?tag=${tag}&limit=${limit}&offset=${offset ? offset * limit : 0}`);
 };
 
-const getArticlesWithAuthorAPI = (username: string, offset = 0, limit = 10) => {
-  return http.get(`/articles?author=${username}&limit=${limit}&offset=${offset ? offset * limit : 0}`);
+const getArticlesWithAuthorAPI = (username: string, auth: string, offset = 0, limit = 10) => {
+  return http.get(`/articles?author=${username}&limit=${limit}&offset=${offset ? offset * limit : 0}`, {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Token ${auth}`,
+    },
+  });
 };
 
 const getArticlesWithFavoritedAPI = (username: string, offset = 0, limit = 10) => {

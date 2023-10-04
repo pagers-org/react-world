@@ -1,12 +1,19 @@
-import ArticleTab from '@/components/article/ArticleTab';
+'use client';
+
+import ArticleList from '@/components/article/ArticleList';
 import { SettingIcon } from '@/composables/icons';
+import useUserStore from '@/stores/useUserStore';
 import { container } from '@/styles/common.css';
 import { settingButton, userBlock, userImage, userInfo, userName } from '@/styles/profile.css';
+import { User } from '@/types';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const ProfilePage = async () => {
-  // const user = await fetchUser();
+const ArticleTab = dynamic(() => import('@/components/article/ArticleTab'), { ssr: false });
+
+const ProfilePage = () => {
+  const { username } = useUserStore() as User;
   return (
     <section>
       <div className={userBlock}>
@@ -18,7 +25,7 @@ const ProfilePage = async () => {
             height={100}
             className={userImage}
           />
-          <div className={userName}>hyeon9782</div>
+          <div className={userName}>{username}</div>
           <Link href="/settings" className={settingButton}>
             <SettingIcon />
             &nbsp; Edit Profile Settings
@@ -27,6 +34,7 @@ const ProfilePage = async () => {
       </div>
       <div className={container}>
         <ArticleTab />
+        <ArticleList />
       </div>
     </section>
   );
