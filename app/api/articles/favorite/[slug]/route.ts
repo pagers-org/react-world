@@ -26,10 +26,10 @@ export async function POST(request: NextRequest, route: { params: { slug: string
 }
 
 // 좋아요 취소
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: NextRequest, route: { params: { slug: string } }) {
   try {
     console.log('좋아요 취소');
-    const slug = await request.json();
+    const slug = route.params.slug;
     const token = request.cookies.get('token')?.value || '';
     const res = await http.delete(`/articles/${slug}/favorite`, {
       headers: {
@@ -37,6 +37,7 @@ export async function DELETE(request: NextRequest) {
         Authorization: `Token ${token}`,
       },
     });
+    console.log(res);
     return NextResponse.json({ message: 'Un Favorite Success', success: true, data: res });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });

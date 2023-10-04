@@ -35,13 +35,13 @@ const ArticlePreview = ({
     onSuccess: data => {
       console.log('성공 후 리패치');
       console.log(data);
-      // queryClient.invalidateQueries({ queryKey: ['articles', tab] });
-      queryClient.setQueryData(['articles', tab], (oldQueryData: any) => {
-        return {
-          ...oldQueryData,
-          data: [...oldQueryData.data, data?.data],
-        };
-      });
+      queryClient.invalidateQueries({ queryKey: ['articles', tab] });
+      // queryClient.setQueryData(['articles', tab], (oldQueryData: any) => {
+      //   return {
+      //     ...oldQueryData,
+      //     data: [...oldQueryData.data, data?.data],
+      //   };
+      // });
     },
   });
   return (
