@@ -3,17 +3,19 @@
 import { TrashIcon } from '@/composables/icons';
 import { commentContent, commentFormFooter, commnetCard } from '@/styles/comments.css';
 import { circle, flexCenter } from '@/styles/common.css';
+import { Comment } from '@/types';
+import { formatDate } from '@/utils';
 import Image from 'next/image';
 type Props = {
-  author: any;
+  comment: Comment;
 };
-const CommentCard = ({ author }: Props) => {
+const CommentCard = ({ comment }: Props) => {
   const handleTrashClick = () => {
     console.log('쓰레기 클릭');
   };
   return (
     <div className={commnetCard}>
-      <div className={commentContent}>ㅋㅋㅋ</div>
+      <div className={commentContent}>{comment.body}</div>
       <div className={commentFormFooter}>
         <div className={flexCenter}>
           <Image
@@ -23,7 +25,7 @@ const CommentCard = ({ author }: Props) => {
             height={20}
             alt="iamge"
           />
-          &nbsp; hyeon9782 September 12, 2023
+          &nbsp; {comment.author.username} {formatDate(comment.createAt)}
         </div>
         <TrashIcon onClick={handleTrashClick} />
       </div>

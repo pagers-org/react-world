@@ -67,8 +67,7 @@ const ArticlePage = ({ params: { slug } }: Props) => {
           </div>
         </div>
       </Suspense>
-
-      <CommentBox />
+      <CommentBox slug={slug} />
     </section>
   );
 };

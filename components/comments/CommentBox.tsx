@@ -6,15 +6,28 @@ import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import { flexCenter, flexRow, textCenter } from '@/styles/common.css';
 import { User } from '@/types';
+import { useQuery } from '@tanstack/react-query';
 
-const CommentBox = () => {
+const CommentBox = ({ slug }: { slug: string }) => {
   const { email } = useUserStore() as User;
+  const { data: comments } = useQuery({
+    queryKey: ['comments', slug],
+    queryFn: async () => fetch(`/api/comments/${slug}`).then(res => res.json()),
+    select: res => res.data.comments,
+  });
+
+  console.log(comments);
+
   return (
     <div>
       {email ? (
         <div className={`${flexRow} ${flexCenter}`}>
-          <CommentForm />
-          <CommentCard />
+          <CommentForm slug={slug} />
+          <div className={flexRow}>
+            {comments.map(comment => (
+              <CommentCard key={comment.id} comment={comment} />
+            ))}
+          </div>
         </div>
       ) : (
         <div className={textCenter}>
