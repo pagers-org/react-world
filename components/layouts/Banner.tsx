@@ -10,7 +10,7 @@ type Props = {
 const Banner = ({ children, background }: Props) => {
   const { email } = useUserStore();
   return email && background === 'green' ? (
-    <></>
+    <div></div>
   ) : (
     <div className={`${banner} ${background === 'green' ? backgroundGreen : backgroundBlack}`}>
       <div className={container}>{children}</div>
