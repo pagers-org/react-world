@@ -16,6 +16,8 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const { value } = req.cookies.get('token');
   const user = await req.json();
+  console.log('Route');
+  console.log(user);
 
   return updateUserAPI(user, value);
 }

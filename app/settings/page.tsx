@@ -12,7 +12,7 @@ import { useState } from 'react';
 const SettingsPage = () => {
   const router = useRouter();
 
-  const { logout, email, username, image, bio } = useUserStore() as User & UserAction;
+  const { logout, updateUser, email, username, image, bio } = useUserStore() as User & UserAction;
 
   // 초기화 함수로 전환
   const [formData, setFormData] = useState({
@@ -28,6 +28,13 @@ const SettingsPage = () => {
     onSuccess: data => {
       console.log(data);
       console.log('성공');
+      updateUser({
+        ...formData,
+      });
+      router.push(`/@${username}`);
+    },
+    onError: () => {
+      alert('실패');
     },
   });
 
@@ -36,6 +43,7 @@ const SettingsPage = () => {
 
     mutate({
       ...formData,
+      password: formData && formData.password,
     });
   };
 

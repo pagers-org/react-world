@@ -78,6 +78,7 @@ export type User = {
   username: string;
   bio: string;
   image: string;
+  password?: string;
 };
 
 export type UserAction = {

@@ -7,6 +7,7 @@ const initialState: User = {
   email: '',
   bio: '',
   image: '',
+  password: '',
 };
 
 const useUserStore = create(
