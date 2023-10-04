@@ -1,7 +1,12 @@
 import { http } from '@/utils/http';
 
-const getArticlesAPI = (offset = 0, limit = 20) => {
-  return http.get(`/articles?limit=${limit}&offset=${offset ? offset * limit : 0}`);
+const getArticlesAPI = (auth: string, offset = 0, limit = 20) => {
+  return http.get(`/articles?limit=${limit}&offset=${offset ? offset * limit : 0}`, {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Token ${auth}`,
+    },
+  });
 };
 
 const getArticlesWithTagAPI = (tag: string, offset = 0, limit = 10) => {

@@ -1,9 +1,4 @@
-import {
-  getArticlesAPI,
-  getArticlesWithAuthorAPI,
-  getArticlesWithFavoritedAPI,
-  getArticlesWithTagAPI,
-} from '@/services/articles';
+import { getArticlesWithFavoritedAPI, getArticlesWithTagAPI } from '@/services/articles';
 import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { RefObject } from 'react';
 import useIntersectionObserver from './useIntersectionObserver';
@@ -14,10 +9,10 @@ const useArticles = (ref: RefObject<HTMLElement>, tab: string, username = '') =>
     queryFn: async ({ pageParam = 0 }) => {
       switch (tab) {
         case 'global':
-          return await getArticlesAPI(pageParam);
+          // return await getArticlesAPI(pageParam);
+          return fetch(`/api/articles?page=${pageParam}`).then(res => res.json());
         case 'my':
-          // return await getArticlesWithAuthorAPI(username);
-          return fetch(`/api/articles/my?username=${username}`).then(res => res.json());
+          return fetch(`/api/articles/my?username=${username}&page=${pageParam}`).then(res => res.json());
         case 'favorited':
           return await getArticlesWithFavoritedAPI(username);
         case 'your':
