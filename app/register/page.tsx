@@ -4,7 +4,7 @@ import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexRow, flexCenter, fillGreenButton } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
-import { NewUser } from '@/types';
+import { NewUser, UserAction } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -12,7 +12,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const RegisterPage = () => {
   const router = useRouter();
-  const { login } = useUserStore();
+  const { login } = useUserStore() as UserAction;
   const [formData, setFormData] = useState<NewUser>({
     username: '',
     email: '',

@@ -2,13 +2,14 @@
 import useUserStore from '@/stores/useUserStore';
 import { backgroundBlack, backgroundGreen, container } from '@/styles/common.css';
 import { banner } from '@/styles/home.css';
+import { User } from '@/types';
 import { ReactNode } from 'react';
 type Props = {
   children: ReactNode;
   background: 'green' | 'black';
 };
 const Banner = ({ children, background }: Props) => {
-  const { email } = useUserStore();
+  const { email } = useUserStore() as User;
   return email && background === 'green' ? (
     <div></div>
   ) : (

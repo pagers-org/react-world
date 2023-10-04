@@ -6,6 +6,7 @@ import { userImageSm } from '@/styles/profile.css';
 import Image from 'next/image';
 import { EditIcon, SettingIcon } from '@/composables/icons';
 import useUserStore from '@/stores/useUserStore';
+import { User } from '@/types';
 
 const NAVS = [
   {
@@ -35,7 +36,7 @@ const NAVS = [
 ];
 
 const NavBar = () => {
-  const { username, image } = useUserStore();
+  const { username, image } = useUserStore() as User;
   const pathname = usePathname();
 
   return (

@@ -5,9 +5,10 @@ import React from 'react';
 import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import { flexCenter, flexRow, textCenter } from '@/styles/common.css';
+import { User } from '@/types';
 
 const CommentBox = () => {
-  const { email } = useUserStore();
+  const { email } = useUserStore() as User;
   return (
     <div>
       {email ? (

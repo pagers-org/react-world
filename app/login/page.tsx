@@ -4,14 +4,14 @@ import useUserStore from '@/stores/useUserStore';
 import { form, question, title } from '@/styles/account.css';
 import { input, container, flexCenter, flexRow, fillGreenButton } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
-import { LoginUser } from '@/types';
+import { LoginUser, UserAction } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
-  const { login } = useUserStore();
+  const { login } = useUserStore() as UserAction;
 
   const [formData, setFormData] = useState<LoginUser>({
     email: '',

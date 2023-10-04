@@ -2,9 +2,10 @@
 import useCurrentTab from '@/stores/useCurrentTab';
 import useUserStore from '@/stores/useUserStore';
 import { articleTab, articleTabItem, articleTabItemActivate, articleTabItemDisable } from '@/styles/article.css';
+import { User } from '@/types';
 
 const ArticleTab = () => {
-  const { email } = useUserStore();
+  const { email } = useUserStore() as User;
   const { tab, setTab } = useCurrentTab();
 
   const handleTabClick = (tab: string) => {

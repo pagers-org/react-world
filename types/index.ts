@@ -23,14 +23,6 @@ export type NewUser = {
   password: string;
 };
 
-export type User = {
-  email: string;
-  token?: string;
-  username: string;
-  bio: string;
-  image: string;
-};
-
 export type UpdateUser = {
   email: string;
   password: string;
@@ -80,9 +72,17 @@ export type Comment = {
   author: Profile;
 };
 
+export type User = {
+  email: string;
+  token?: string;
+  username: string;
+  bio: string;
+  image: string;
+};
+
 export type UserAction = {
-  login?: (e: any) => void;
-  updateUser?: () => void;
+  login?: (user: User) => void;
+  updateUser?: (user: User) => void;
   logout?: () => void;
   reset?: () => void;
 };

@@ -3,6 +3,7 @@ import useUserStore from '@/stores/useUserStore';
 import { articleTextarea } from '@/styles/article.css';
 import { container, flex, hr, input } from '@/styles/common.css';
 import { logoutButton, settingBlock, settingForm, settingTitle, updateButton } from '@/styles/settings.css';
+import { User, UserAction } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -11,7 +12,7 @@ import { useState } from 'react';
 const SettingsPage = () => {
   const router = useRouter();
 
-  const { logout, email, username, image, bio } = useUserStore();
+  const { logout, email, username, image, bio } = useUserStore() as User & UserAction;
 
   // 초기화 함수로 전환
   const [formData, setFormData] = useState({
