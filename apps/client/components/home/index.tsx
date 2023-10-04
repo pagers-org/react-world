@@ -51,18 +51,10 @@ export default function HomeComponent(): TReturnComponent {
                 <div className="row">
                     <div className="col-md-9">
                         <ErrorBoundary fallback={<div>Feed Error</div>}>
-                            <Suspense fallback={<div>Feed Loading ...</div>}>
-                                <FeedToggle />
-                            </Suspense>
+                            <FeedToggle />
                         </ErrorBoundary>
                         <ErrorBoundary fallback={<div>articleList Error</div>}>
-                            <Suspense
-                                fallback={<div>articleList Loading ...</div>}
-                            >
-                                <ArticleList
-                                    articleListData={articleListData}
-                                />
-                            </Suspense>
+                            <ArticleList articleListData={articleListData} />
                         </ErrorBoundary>
                         {totalCnt > 0 && (
                             <Pagination
@@ -75,9 +67,7 @@ export default function HomeComponent(): TReturnComponent {
                     </div>
                     <div className="col-md-3">
                         <ErrorBoundary fallback={<div>tag Error</div>}>
-                            <Suspense fallback={<div>tag loading...</div>}>
-                                <TagList />
-                            </Suspense>
+                            <TagList />
                         </ErrorBoundary>
                     </div>
                 </div>

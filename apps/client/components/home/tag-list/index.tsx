@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { tagKeys } from 'config/react-query/query-key-factory';
 import request from 'graphql-request';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function TagList() {
     const { data } = useQuery({
