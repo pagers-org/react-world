@@ -20,7 +20,9 @@ const TagInput = ({ setFormData }: Props) => {
     }
   };
 
-  const handleClick = (tag: string) => {
+  const handleTagClick = (tag: string) => {
+    console.log('쿨릭');
+
     setTags((prevTags: string[]) => prevTags.filter(prevTag => prevTag !== tag));
   };
 
@@ -34,7 +36,7 @@ const TagInput = ({ setFormData }: Props) => {
         onKeyDown={handleKeyDown}
         className={input}
       />
-      <TagList tags={tags} onClick={handleClick} />
+      <TagList tags={tags} onClick={handleTagClick} />
     </>
   );
 };
