@@ -7,10 +7,12 @@ import useCurrentTab from '@/stores/useCurrentTab';
 import useArticles from '@/hooks/useArticles';
 import useUserStore from '@/stores/useUserStore';
 import { User } from '@/types';
-
-const ArticleList = () => {
+type Props = {
+  username: string;
+};
+const ArticleList = ({ username }: Props) => {
   const targetRef = useRef(null);
-  const { username } = useUserStore() as User;
+  // const { username } = useUserStore() as User;
   const { tab } = useCurrentTab();
   const { data } = useArticles(targetRef, tab, username);
 

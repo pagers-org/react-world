@@ -1,9 +1,12 @@
 'use client';
 
 import ArticleList from '@/components/article/ArticleList';
+import FollowButton from '@/components/user/FollowButton';
 import { SettingIcon } from '@/composables/icons';
+import useUserStore from '@/stores/useUserStore';
 import { container } from '@/styles/common.css';
 import { settingButton, userBlock, userImage, userInfo, userName } from '@/styles/profile.css';
+import { User } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -14,6 +17,7 @@ type Props = {
   params: { username: string };
 };
 const ProfilePage = ({ params: { username } }: Props) => {
+  const { username: currentUsername } = useUserStore() as User;
   const { data: profile } = useQuery({
     queryKey: ['profile', username],
     queryFn: () => fetch(`/api/profiles/${username}`).then(res => res.json()),
@@ -29,15 +33,19 @@ const ProfilePage = ({ params: { username } }: Props) => {
         <div className={userInfo}>
           <Image src={profile.image} alt="Profile" width={100} height={100} className={userImage} />
           <div className={userName}>{profile.username}</div>
-          <Link href="/settings" className={settingButton}>
-            <SettingIcon />
-            &nbsp; Edit Profile Settings
-          </Link>
+          {currentUsername === profile.username ? (
+            <Link href="/settings" className={settingButton}>
+              <SettingIcon />
+              &nbsp; Edit Profile Settings
+            </Link>
+          ) : (
+            <FollowButton author={{ username: profile.username, following: profile.following }} />
+          )}
         </div>
       </div>
       <div className={container}>
         <ArticleTab />
-        <ArticleList />
+        <ArticleList username={profile.username} />
       </div>
     </section>
   );
