@@ -1,3 +1,11 @@
+import Articles from "@/components/Articles";
+import HomeBanner from "@/components/HomeBanner";
+
 export default function Home() {
-  return <h1>Hello Next!</h1>;
+  return (
+    <main>
+      <HomeBanner />
+      <Articles />
+    </main>
+  );
 }
