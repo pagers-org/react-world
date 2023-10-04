@@ -1,17 +1,29 @@
 'use client';
 
 import { TrashIcon } from '@/composables/icons';
+import useUserStore from '@/stores/useUserStore';
 import { commentContent, commentFormFooter, commnetCard } from '@/styles/comments.css';
 import { circle, flexCenter } from '@/styles/common.css';
-import { Comment } from '@/types';
+import { Comment, User } from '@/types';
 import { formatDate } from '@/utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 type Props = {
   comment: Comment;
+  slug: string;
 };
-const CommentCard = ({ comment }: Props) => {
-  const handleTrashClick = () => {
-    console.log('쓰레기 클릭');
+const CommentCard = ({ comment, slug }: Props) => {
+  const queryClient = useQueryClient();
+  const { username } = useUserStore() as User;
+  const { mutate } = useMutation({
+    mutationFn: async (slug: string) =>
+      fetch(`/api/comments/${slug}?id=${comment.id}`, { method: 'DELETE' }).then(res => res.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['comments', slug]);
+    },
+  });
+  const handleTrashClick = (slug: string) => {
+    mutate(slug);
   };
   return (
     <div className={commnetCard}>
@@ -27,7 +39,7 @@ const CommentCard = ({ comment }: Props) => {
           />
           &nbsp; {comment.author.username} {formatDate(comment.createAt)}
         </div>
-        <TrashIcon onClick={handleTrashClick} />
+        {comment.author.username === username && <TrashIcon onClick={() => handleTrashClick(slug)} />}
       </div>
     </div>
   );

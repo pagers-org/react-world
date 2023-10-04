@@ -48,18 +48,24 @@ async function POST(req: NextRequest, route: { params: { slug: string } }) {
 
 async function DELETE(req: NextRequest, route: { params: { slug: string } }) {
   try {
+    const { searchParams } = new URL(req.url);
+
+    const id = searchParams.get('id');
     const slug = route.params.slug;
+
     const token = req.cookies.get('token')?.value || '';
 
     console.log(slug);
     console.log(token);
+    console.log('삭제 전');
 
-    const res = await http.delete(`/articles/${slug}/comments`, {
+    const res = await http.delete(`/articles/${slug}/comments/${id}`, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         Authorization: `Token ${token}`,
       },
     });
+    console.log('삭제 후');
 
     console.log(res);
 
