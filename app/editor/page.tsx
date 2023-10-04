@@ -3,13 +3,16 @@ import TagInput from '@/components/editor/TagInput';
 import { articleTextarea } from '@/styles/article.css';
 import { container, input } from '@/styles/common.css';
 import { editorForm, editorButton } from '@/styles/editor.css';
+import { NewArticle } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const EditorPage = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<NewArticle>({
     title: '',
     description: '',
     body: '',
@@ -26,6 +29,7 @@ const EditorPage = () => {
 
       console.log(data);
       queryClient.invalidateQueries(['articles', 'global']);
+      router.push('router');
     },
     onError: (error: any) => {
       console.log('에러 발생');
@@ -42,6 +46,10 @@ const EditorPage = () => {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const appendTag = (tag: string) => {
+    setFormData(prevData => ({ ...prevData, tagList: [...prevData.tagList, tag] }));
   };
   return (
     <section className={container}>
@@ -62,6 +70,7 @@ const EditorPage = () => {
           onChange={handleChange}
           value={formData.description}
         />
+
         <textarea
           rows={8}
           name="body"
@@ -70,7 +79,7 @@ const EditorPage = () => {
           onChange={handleChange}
           value={formData.body}
         ></textarea>
-        <TagInput setFormData={setFormData} />
+        <TagInput appendTag={appendTag} />
         <div>
           <button className={editorButton} onClick={handleClick}>
             Publish Article

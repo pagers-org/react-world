@@ -5,16 +5,16 @@ import { useState } from 'react';
 import TagList from '../tags/TagList';
 
 type Props = {
-  setFormData: any;
+  appendTag: (tag: string) => void;
 };
 
-const TagInput = ({ setFormData }: Props) => {
+const TagInput = ({ appendTag }: Props) => {
   const [value, setValue] = useState('');
   const [tags, setTags] = useState<string[]>([]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter' && value.trim() !== '') {
-      setFormData(prevData => ({ ...prevData, tagList: tags }));
+      appendTag(value);
       setTags(prev => [...prev, value]);
       setValue('');
     }

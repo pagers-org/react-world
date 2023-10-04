@@ -23,6 +23,8 @@ export const http = {
         const errorData = await response.json();
         // console.log('error');
         // console.log(errorData);
+        console.log(errorData);
+
         console.log('실패');
 
         throw new Error(errorData.message || 'Request failed');
