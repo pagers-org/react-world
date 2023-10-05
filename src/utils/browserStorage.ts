@@ -1,18 +1,18 @@
 const LocalStorage = {
   get(key: string): string | null {
-    return localStorage.getItem(key);
+    return global.window.localStorage.getItem(key);
   },
 
   set(key: string, value: string) {
-    localStorage.setItem(key, value);
+    global.window.localStorage.setItem(key, value);
   },
 
   remove(key: string) {
-    localStorage.removeItem(key);
+    global.window.localStorage.removeItem(key);
   },
 
   clear() {
-    localStorage.clear();
+    global.window.localStorage.clear();
   },
 };
 

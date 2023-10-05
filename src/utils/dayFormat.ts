@@ -6,6 +6,10 @@ class DayFormatter {
     this.date = date;
   }
 
+  getMonthDate() {
+    return dayjs(this.date).locale('en').format('MMMM Do');
+  }
+
   getMonthDayYear() {
     return dayjs(this.date).format('MMMM D, YYYY');
   }

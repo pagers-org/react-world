@@ -7,7 +7,14 @@ interface ArticlePostRequestType {
   };
 }
 
-type ArticleType = {
+interface AuthorType {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+}
+
+interface ArticleType {
   slug: string;
   title: string;
   description: string;
@@ -17,16 +24,16 @@ type ArticleType = {
   updatedAt: string;
   favorited: boolean;
   favoritesCount: number;
-  author: {
-    username: string;
-    bio: string;
-    image: string;
-    following: boolean;
-  };
-};
+  author: AuthorType;
+}
 interface FeedResponseType {
   articles: ArticleType[];
   articlesCount: number;
 }
 
-export type { FeedResponseType, ArticlePostRequestType, ArticleType };
+export type {
+  FeedResponseType,
+  ArticlePostRequestType,
+  ArticleType,
+  AuthorType,
+};
