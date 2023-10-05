@@ -3,7 +3,8 @@ import { Container } from '../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
-import { NAV_ITEMS, type NavItemType } from '@/app-types/NavItemModel';
+import type { NavItemType } from '@/app-types/NavItemModel';
+import { NAV_ITEMS } from '@/constants/navItems';
 
 const NAV_ITEM_TITLES: { [key in NavItemType]: string } = {
   home: 'Home',

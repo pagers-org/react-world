@@ -15,8 +15,7 @@ import { EditorPage } from '@/pages/editor';
 import { SettingsPage } from '@/pages/settings';
 import { Global } from '@emotion/react';
 import globalStyles from '@/styles/globalStyles';
-import type { NavItemType } from '@/app-types/NavItemModel';
-import { NAV_ITEMS } from '@/app-types/NavItemModel';
+import { NAV_ITEMS } from '@/constants/navItems';
 
 export const AppRoutes = () => {
   return (
