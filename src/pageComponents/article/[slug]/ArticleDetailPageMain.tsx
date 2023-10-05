@@ -54,7 +54,7 @@ const ArticleDetailPageMain = ({ article }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentAuthorProfileMenus, setCurrentAuthorProfileMenus] =
     useState<ReactNode>(<></>);
-  const [currentCommentMenus, setCurrentCommentMenus] = useState<ReactNode>(
+  const [currentCommentForm, setCurrentCommentForm] = useState<ReactNode>(
     <></>,
   );
 
@@ -238,26 +238,47 @@ const ArticleDetailPageMain = ({ article }: Props) => {
   ]);
 
   useEffect(() => {
-    const currentCommentMenus = (
-      <div className="card-footer">
-        <Image
-          src={currentUser.image}
-          alt={currentUser.username}
-          width={30}
-          height={30}
-          className="comment-author-img"
-        />
-        <button
-          className="btn btn-sm btn-primary"
-          type="button"
-          onClick={() => handleComment('Post')}
-        >
-          Post Comment
-        </button>
-      </div>
-    );
-    setCurrentCommentMenus(currentCommentMenus);
-  }, [currentUser]);
+    if (currentUser.username) {
+      const currentCommentForm = (
+        <form className="card comment-form">
+          <div className="card-block">
+            <textarea
+              ref={commentRef}
+              className="form-control"
+              placeholder="Write a comment..."
+              rows={3}
+              disabled={isPostCommentLoading}
+            ></textarea>
+          </div>
+          <div className="card-footer">
+            <Image
+              src={currentUser.image}
+              alt={currentUser.username}
+              width={30}
+              height={30}
+              className="comment-author-img"
+            />
+            <button
+              className="btn btn-sm btn-primary"
+              type="button"
+              onClick={() => handleComment('Post')}
+            >
+              Post Comment
+            </button>
+          </div>
+        </form>
+      );
+      setCurrentCommentForm(currentCommentForm);
+    } else {
+      const guideLine = (
+        <p>
+          <Link href="/login">Sign in</Link> or{' '}
+          <Link href="/register">Sign up</Link> to add comments on this article.
+        </p>
+      );
+      setCurrentCommentForm(guideLine);
+    }
+  }, [currentUser, isPostCommentLoading]);
 
   return (
     <div className="article-page">
@@ -323,18 +344,7 @@ const ArticleDetailPageMain = ({ article }: Props) => {
 
         <div className="row">
           <div className="col-xs-12 col-md-8 offset-md-2">
-            <form className="card comment-form">
-              <div className="card-block">
-                <textarea
-                  ref={commentRef}
-                  className="form-control"
-                  placeholder="Write a comment..."
-                  rows={3}
-                  disabled={isPostCommentLoading}
-                ></textarea>
-              </div>
-              {currentCommentMenus}
-            </form>
+            {currentCommentForm}
 
             {!isCommentsLoading && comments ? (
               comments?.comments.map(
