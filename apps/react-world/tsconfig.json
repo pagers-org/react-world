@@ -24,16 +24,16 @@
     /* Path */
     "baseUrl": "./src",
     "paths": {
-      "@apis/*": ["apis/*"],
-      "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
-      "@pages/*": ["pages/*"],
-      "@quries/*": ["quries/*"],
-      "@routes/*": ["routes/*"],
-      "@stores/*": ["stores/*"],
-      "@utils/*": ["utils/*"],
-      "@styles/*": ["../styles/*"],
-      "@app-types/*": ["types/*"],
+      "@/apis/*": ["apis/*"],
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/pages/*": ["pages/*"],
+      "@/quries/*": ["quries/*"],
+      "@/routes/*": ["routes/*"],
+      "@/stores/*": ["stores/*"],
+      "@/utils/*": ["utils/*"],
+      "@/styles/*": ["../styles/*"],
+      "@/app-types/*": ["types/*"],
     }
   },
   "references": [{ "path": "./tsconfig.node.json" }]
