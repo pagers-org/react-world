@@ -3,7 +3,7 @@
 import { FeedResponseType } from '@/types/article';
 import { ProfileResponseType } from '@/types/profile';
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import Articles from '@/pageComponents/Articles/Articles';
 import Pagination from '@/pageComponents/Pagination/Paginaiton';
@@ -102,6 +102,19 @@ const ProfilePage = () => {
     }
     return favoritedData;
   };
+
+  const getDataAndSetData = (
+    setState: Dispatch<SetStateAction<FeedResponseType>>,
+  ) => {
+    return function (data: FeedResponseType) {
+      console.log('나한테 왔어욤');
+      if (data) {
+        setState(data);
+      }
+    };
+  };
+
+  console.log(authorData);
 
   return (
     <div className="profile-page">

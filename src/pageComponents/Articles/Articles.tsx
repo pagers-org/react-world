@@ -1,4 +1,4 @@
-import { ArticleType } from '@/types/article';
+import { ArticleType, FeedResponseType } from '@/types/article';
 
 import Article from '../Article/Article';
 
