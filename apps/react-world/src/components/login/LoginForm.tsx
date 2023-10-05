@@ -3,6 +3,7 @@ import type { LoginStatus } from '@hooks/useLogin';
 import { useForm } from 'react-hook-form';
 import { LoginErrorMessage, StyledLoginButton } from './LoginForm.styled';
 import { type ReactNode } from 'react';
+import type { UserCredentials } from '@appTypes/UserCredentials';
 
 /*
 - ^로 시작합니다.
@@ -17,7 +18,7 @@ const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 interface LoginFormProps {
   loginError: LoginUserErrors | null;
   loginStatus: LoginStatus;
-  onLoginSubmit: (data: { email: string; password: string }) => void;
+  onLoginSubmit: (data: UserCredentials) => void;
 }
 
 const LoginForm = (props: LoginFormProps) => {

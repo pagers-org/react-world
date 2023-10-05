@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { LoginUserErrors } from '../apis/login/LoginService.types'; // 로그인 관련 타입으로 수정
 import LoginService from '../apis/login/LoginService'; // LoginService로 수정
 import { saveTokenToCookie } from '@utils/jwtUtils';
+import type { UserCredentials } from '@appTypes/UserCredentials';
 
 export type LoginStatus = 'idle' | 'loggingIn' | 'success' | 'failed';
 
@@ -9,7 +10,7 @@ const useLogin = () => {
   const [loginError, setLoginError] = useState<LoginUserErrors | null>(null);
   const [loginStatus, setLoginStatus] = useState<LoginStatus>('idle');
 
-  const handleLogin = async (data: { email: string; password: string }) => {
+  const handleLogin = async (data: UserCredentials) => {
     try {
       setLoginStatus('loggingIn');
       const response = await LoginService.loginUser(data);
