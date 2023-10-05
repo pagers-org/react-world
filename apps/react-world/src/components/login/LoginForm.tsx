@@ -91,18 +91,19 @@ const LoginForm = (props: LoginFormProps) => {
   );
 };
 
-interface LoginButtonProps {
-  disabled: boolean;
+interface LoginButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 const LoginButton = (props: LoginButtonProps) => {
-  const { disabled, children } = props;
+  const { disabled = false, children, ...restProps } = props;
 
   return (
     <StyledLoginButton
       type="submit"
       className={`btn btn-lg pull-xs-right`}
       disabled={disabled}
+      {...restProps}
     >
       {children}
     </StyledLoginButton>
