@@ -7,7 +7,6 @@ import TagList from '@/components/tags/TagList';
 import FavoriteButton from '@/components/user/FavoriteButton';
 import FollowButton from '@/components/user/FollowButton';
 import UserBox from '@/components/user/UserBox';
-import { getArticleAPI } from '@/services/articles';
 import useUserStore from '@/stores/useUserStore';
 import { articleContent, articleDetailTitle } from '@/styles/article.css';
 import { container, flex, justifyCenter, paddingTB } from '@/styles/common.css';
@@ -18,8 +17,6 @@ type Props = {
   params: { slug: string };
 };
 const ArticlePage = ({ params: { slug } }: Props) => {
-  console.log(slug);
-
   const { username } = useUserStore() as User;
 
   const { data: article } = useQuery({
@@ -28,9 +25,6 @@ const ArticlePage = ({ params: { slug } }: Props) => {
     enabled: !!slug,
     select: res => res.data.article,
   });
-  console.log('Detail');
-
-  console.log(article);
 
   const { title, author, createdAt, body, tagList, favoritesCount } = article;
 
@@ -63,7 +57,7 @@ const ArticlePage = ({ params: { slug } }: Props) => {
           <hr />
           <div className={`${justifyCenter} ${paddingTB}`}>
             <UserBox author={author} createdAt={createdAt} />
-            <FollowButton author={author} /> &nbsp;
+            <FollowButton author={author} slug={slug} /> &nbsp;
             <FavoriteButton favoritesCount={favoritesCount} />
           </div>
         </div>
