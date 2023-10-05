@@ -1,18 +1,37 @@
 import styled from '@emotion/styled';
-import { Container } from '../../Container';
+import { Container } from '../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
+import type { NavItemType } from '@/app-types/NavItemModel';
+import { NAV_ITEMS } from '@/constants/navItems';
 
-export const Navbar = () => {
+const NAV_ITEM_TITLES: { [key in NavItemType]: string } = {
+  home: 'Home',
+  login: 'Sign in',
+  register: 'Sign up',
+};
+
+interface NavbarProps {
+  selectedNavItem: NavItemType;
+}
+
+export const Navbar = (props: NavbarProps) => {
+  const { selectedNavItem } = props;
+
   return (
     <NavbarContainer>
       <Container>
         <NavbarBrand />
         <NavList>
-          <NavItem href="/" isActive title="Home" />
-          <NavItem href="/login" title="Sign in" />
-          <NavItem href="/register" title="Sign up" />
+          {NAV_ITEMS.map(item => (
+            <NavItem
+              key={item.name}
+              to={item.path}
+              isActive={selectedNavItem === item.name}
+              title={NAV_ITEM_TITLES[item.name]}
+            />
+          ))}
         </NavList>
       </Container>
     </NavbarContainer>

@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { api } from '@apis/apiInstances';
+import { api } from '@/apis/apiInstances';
 import type {
   ArticleDetailResponse,
   ArticleDetailErrorResponse,

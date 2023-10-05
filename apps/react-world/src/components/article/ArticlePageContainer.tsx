@@ -1,10 +1,10 @@
-import { Container } from '@components/shared/Container';
+import { Container } from '@/components/shared/Container';
 import ArticleActions from './ArticleActions';
 import ArticleComments from './ArticleComments';
 import ArticleContents from './ArticleContents';
 import ArticleHeader from './ArticleHeader';
-import useArticleDetailQuery from '@quries/useArticleDetailQuery';
-import useArticleCommentsQuery from '@quries/useArticleCommentsQuery';
+import useArticleDetailQuery from '@/quries/useArticleDetailQuery';
+import useArticleCommentsQuery from '@/quries/useArticleCommentsQuery';
 
 interface ArticlePageContainerProps {
   articleSlug: string;

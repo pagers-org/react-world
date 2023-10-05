@@ -1,4 +1,4 @@
-import type { ArticleCommentData } from '@apis/article/ArticleService.types';
+import type { ArticleCommentData } from '@/apis/article/ArticleService.types';
 
 interface ArticleCommentsProps {
   comments: ArticleCommentData[];

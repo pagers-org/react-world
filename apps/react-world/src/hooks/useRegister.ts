@@ -5,7 +5,7 @@ import type {
   RegisterUserResponse,
 } from '../apis/register/RegisterService.types';
 import RegisterService from '../apis/register/RegisterService';
-import { saveTokenToCookie } from '@utils/jwtUtils';
+import { saveTokenToCookie } from '@/utils/jwtUtils';
 
 const useRegister = () => {
   const [userData, setUserData] = useState<RegisterUserParams>({
