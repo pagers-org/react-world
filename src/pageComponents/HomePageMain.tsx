@@ -15,6 +15,7 @@ import {
   useDeleteFavoriteMutation,
   usePostFavoriteMutation,
 } from '@/hooks/query/favorites/useFavoritesMutation';
+import { useTagsQuery } from '@/hooks/query/tags/useTagsQuery';
 
 interface Props {
   feeds: FeedsResponse;
@@ -80,6 +81,8 @@ const HomePageMain = ({ feeds }: Props) => {
       );
     }
   };
+
+  const { data: popularTags, isLoading: isPopularTagsLoading } = useTagsQuery();
 
   useEffect(() => {
     let type = searchParams?.get('type') ?? 'your';
@@ -232,30 +235,21 @@ const HomePageMain = ({ feeds }: Props) => {
                 <p>Popular Tags</p>
 
                 <div className="tag-list">
-                  <Link href="" className="tag-pill tag-default">
-                    programming
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    javascript
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    emberjs
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    angularjs
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    react
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    mean
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    node
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    rails
-                  </Link>
+                  {!isPopularTagsLoading && popularTags ? (
+                    <>
+                      {popularTags.tags.map((popularTag) => (
+                        <Link
+                          key={popularTag}
+                          href=""
+                          className="tag-pill tag-default"
+                        >
+                          {popularTag}
+                        </Link>
+                      ))}
+                    </>
+                  ) : (
+                    <>Loading tags...</>
+                  )}
                 </div>
               </div>
             </div>

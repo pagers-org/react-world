@@ -3,13 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getTags } from '@/api/tags';
 
-export const useTagsQuery = ({
-  headers = {},
-  options = {},
-}: {
-  headers?: HeadersInit;
-  options?: RequestInit;
-}) => {
+export const useTagsQuery = (
+  { headers, options } = {
+    headers: {},
+    options: {},
+  },
+) => {
   const query = useQuery([queryKeys.GetTags], () =>
     getTags({ headers, options }),
   );
