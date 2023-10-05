@@ -30,6 +30,8 @@ export default defineConfig({
       '@/styles/*': '/styles/*',
       '@/app-types': '/src/types',
       '@/app-types/*': '/src/types/*',
+      '@/constants': '/src/constants',
+      '@/constants/*': '/src/constants/*',
     },
   },
 });
