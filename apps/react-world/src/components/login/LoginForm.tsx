@@ -1,5 +1,9 @@
-import styled from '@emotion/styled';
+import type { LoginUserErrors } from '@/apis/login/LoginService.types';
+import type { LoginStatus } from '@/hooks/useLogin';
 import { useForm } from 'react-hook-form';
+import { LoginErrorMessage, StyledLoginButton } from './LoginForm.styled';
+import { type ReactNode } from 'react';
+import type { UserCredentials } from '@/app-types/UserCredentials';
 
 /*
 - ^로 시작합니다.
@@ -12,24 +16,24 @@ import { useForm } from 'react-hook-form';
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 interface LoginFormProps {
-  onLoginSubmit: (data: { email: string; password: string }) => void;
+  loginError: LoginUserErrors | null;
+  loginStatus: LoginStatus;
+  onLoginSubmit: (data: UserCredentials) => void;
 }
 
 const LoginForm = (props: LoginFormProps) => {
-  const { onLoginSubmit } = props;
+  const { loginError, loginStatus, onLoginSubmit } = props;
   const { register, handleSubmit, formState } = useForm<{
     email: string;
     password: string;
   }>();
   const { errors } = formState;
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    console.log('onSubmit: ' + JSON.stringify(data, null, 2));
-    onLoginSubmit(data);
-  };
+  const shouldLoginButtonDisabled = loginStatus === 'loggingIn';
+  const buttonText = loginStatus === 'loggingIn' ? 'Signing in...' : 'Sign in';
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onLoginSubmit)}>
       <fieldset className="form-group">
         <input
           {...register('email', {
@@ -73,18 +77,37 @@ const LoginForm = (props: LoginFormProps) => {
           <LoginErrorMessage>{errors.password.message}</LoginErrorMessage>
         )}
       </fieldset>
-      <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
-        Sign in
-      </button>
+      {loginError && (
+        <LoginErrorMessage>
+          {Object.entries(loginError)
+            .map(([key, value]) => `${key} ${value[0]}`)
+            .join('. ')}
+        </LoginErrorMessage>
+      )}
+      <LoginButton disabled={shouldLoginButtonDisabled}>
+        {buttonText}
+      </LoginButton>
     </form>
   );
 };
 
-const LoginErrorMessage = styled.p`
-  color: red;
-  margin-top: 5px;
-  margin-left: 5px;
-  font-size: 14px;
-`;
+interface LoginButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: ReactNode;
+}
+const LoginButton = (props: LoginButtonProps) => {
+  const { disabled = false, children, ...restProps } = props;
+
+  return (
+    <StyledLoginButton
+      type="submit"
+      className={`btn btn-lg pull-xs-right`}
+      disabled={disabled}
+      {...restProps}
+    >
+      {children}
+    </StyledLoginButton>
+  );
+};
 
 export default LoginForm;

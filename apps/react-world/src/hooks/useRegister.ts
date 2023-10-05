@@ -3,8 +3,8 @@ import type {
   RegisterUserErrors,
   RegisterUserParams,
   RegisterUserResponse,
-} from '../apis/register/RegisterService.types';
-import RegisterService from '../apis/register/RegisterService';
+} from '@/apis/register/RegisterService.types';
+import RegisterService from '@/apis/register/RegisterService';
 import { saveTokenToCookie } from '@/utils/jwtUtils';
 
 const useRegister = () => {

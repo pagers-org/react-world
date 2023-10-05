@@ -6,11 +6,11 @@ import ArticlePreview from './ArticlePreview';
 import PopularArticleTagList from './PopularArticleTagList';
 import HomeFeedTab from './HomeFeedTab';
 import Pagination from './Pagination';
-import ArticleService from '../../apis/article/ArticleService';
-import useArticlePreviewQuery from '../../quries/useArticlePreviewQuery';
-import usePopularArticleTagsQuery from '../../quries/usePopularArticleTagsQuery';
-import { ARTICLE_PREVIEW_FETCH_LIMIT } from '../../apis/article/ArticlePreviewService';
-import { ARTICLE_DETAIL_CACHE_KEY } from '../../quries/useArticleDetailQuery';
+import ArticleService from '@/apis/article/ArticleService';
+import useArticlePreviewQuery from '@/quries/useArticlePreviewQuery';
+import usePopularArticleTagsQuery from '@/quries/usePopularArticleTagsQuery';
+import { ARTICLE_PREVIEW_FETCH_LIMIT } from '@/apis/article/ArticlePreviewService';
+import { ARTICLE_DETAIL_CACHE_KEY } from '@/quries/useArticleDetailQuery';
 
 type StandardFeedType = 'my' | 'global';
 type ArticleTagFeedType = string; // 아티클 태그는 어떤 문자열이든 가능

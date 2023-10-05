@@ -1,5 +1,5 @@
-import type { ArticlePreviewData } from '../../apis/article/ArticlePreviewService.types';
-import { formatDate } from '../../utils/dateUtils';
+import type { ArticlePreviewData } from '@/apis/article/ArticlePreviewService.types';
+import { formatDate } from '@/utils/dateUtils';
 import {
   ArticlePreviewContainer,
   ArticlePreviewMeta,

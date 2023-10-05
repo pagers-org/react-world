@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import ArticlePreviewService from '../apis/article/ArticlePreviewService';
+import ArticlePreviewService from '@/apis/article/ArticlePreviewService';
 
 export const ARTICLE_PREVIEW_CACHE_KEY = '@article/preview';
 

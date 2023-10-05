@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import ArticleService from '../apis/article/ArticleService';
-import type { ArticleDetailResponse } from '../apis/article/ArticleService.types';
+import ArticleService from '@/apis/article/ArticleService';
+import type { ArticleDetailResponse } from '@/apis/article/ArticleService.types';
 
 export const ARTICLE_DETAIL_CACHE_KEY = '@article/detail';
 

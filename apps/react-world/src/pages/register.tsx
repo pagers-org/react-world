@@ -1,4 +1,4 @@
-import useRegister from '../hooks/useRegister';
+import useRegister from '@/hooks/useRegister';
 
 export const RegisterPage = () => {
   const { userData, error, isLoading, handleInputChange, handleSubmit } =
