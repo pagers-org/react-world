@@ -1,5 +1,5 @@
-import type { ArticleAuthor } from '@apis/article/Article.types';
-import { formatDate } from '@utils/dateUtils';
+import type { ArticleAuthor } from '@/apis/article/Article.types';
+import { formatDate } from '@/utils/dateUtils';
 
 interface ArticleActionsProps {
   author: ArticleAuthor;

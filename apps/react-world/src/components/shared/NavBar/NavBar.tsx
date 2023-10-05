@@ -3,7 +3,7 @@ import { Container } from '../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
-import type { NavItemType } from '@app-types/NavItemModel';
+import type { NavItemType } from '@/app-types/NavItemModel';
 
 interface NavbarProps {
   selectedNavItem: NavItemType;

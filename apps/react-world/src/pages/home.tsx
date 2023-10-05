@@ -1,9 +1,9 @@
-import HomePageContainer from '@components/home/HomePageContainer';
-import { HomeBanner } from '@components/home/HomeBanner';
-import HomeFeedContents from '@components/home/HomeFeedContents';
+import HomePageContainer from '@/components/home/HomePageContainer';
+import { HomeBanner } from '@/components/home/HomeBanner';
+import HomeFeedContents from '@/components/home/HomeFeedContents';
 import { useLocation } from 'react-router-dom';
-import { useDefaultQueryParamsSetter } from '@hooks/useDefaultQueryParamsSetter';
-import { useConditionalReplace } from '@hooks/useConditionalReplace';
+import { useDefaultQueryParamsSetter } from '@/hooks/useDefaultQueryParamsSetter';
+import { useConditionalReplace } from '@/hooks/useConditionalReplace';
 
 export const HomePage = () => {
   const location = useLocation();
