@@ -1,7 +1,146 @@
+'use client';
+
+import Pagination from '@/composables/Pagination';
+import { useUserStore } from '@/stores/users';
+import { ProfileResponse } from '@/types/api/profile';
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ReactNode, useEffect, useState } from 'react';
 
-const ProfileUserPageMain = () => {
+import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
+
+import { useArticlesQuery } from '@/hooks/query/articles/useArticlesQuery';
+import {
+  useDeleteUnFollowUserMutation,
+  usePostFollowUserMutation,
+} from '@/hooks/query/profile/useProfileMutation';
+
+interface Props {
+  profile: ProfileResponse['profile'];
+}
+
+const ProfileUserPageMain = ({ profile }: Props) => {
+  // server-side fetch (profile 정보)
+  // client-side fetch (article 정보) - react query 이용
+
+  const searchParams = useSearchParams();
+  const { push: navigate } = useRouter();
+
+  const user = useUserStore((state) => state.user);
+
+  const [currentProfile, setCurrentProfile] =
+    useState<Props['profile']>(profile);
+
+  const [profileMenusElement, setProfileMenusElement] = useState<ReactNode>();
+
+  const [articleType, setArticleType] = useState<'my' | 'favorited'>();
+  const [page, setPage] = useState<string>(INITIAL_PAGE);
+
+  const { username, image, following } = currentProfile ?? profile;
+
+  const perPage = FEED_PER_PAGE;
+
+  const offset = ((parseInt(page) - 1) * parseInt(perPage)).toString();
+  const limit = perPage;
+
+  const feedQueryObj =
+    articleType === 'my' ? { author: username } : { favorited: username };
+
+  const { data, isLoading } = useArticlesQuery({
+    queryStrings: {
+      ...feedQueryObj,
+      offset,
+      limit,
+    },
+  });
+
+  const { mutate: postFollowMutate, isLoading: isPostFollowLoading } =
+    usePostFollowUserMutation();
+  const { mutate: deleteUnfollowMutate, isLoading: isDeleteUnfollowLoading } =
+    useDeleteUnFollowUserMutation();
+
+  const followUser = (following: boolean) => {
+    if (!user.email) {
+      navigate('/login');
+      return;
+    }
+
+    if (following) {
+      deleteUnfollowMutate(
+        { username },
+        {
+          onSuccess: (res) => {
+            const { profile } = res;
+            setCurrentProfile(profile);
+          },
+        },
+      );
+    } else {
+      postFollowMutate(
+        {
+          username,
+        },
+        {
+          onSuccess: (res) => {
+            const { profile } = res;
+            setCurrentProfile(profile);
+          },
+        },
+      );
+    }
+  };
+
+  useEffect(() => {
+    const type = searchParams?.get('type') ?? 'my';
+
+    setArticleType(type as 'my' | 'favorited');
+  }, [searchParams]);
+
+  useEffect(() => {
+    const page = searchParams?.get('page') ?? INITIAL_PAGE;
+
+    setPage(page);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const profileMenusElement =
+      user.username === username ? (
+        <button
+          className="btn btn-sm btn-outline-secondary action-btn"
+          type="button"
+          onClick={() => {
+            navigate('/settings');
+          }}
+        >
+          <i className="ion-gear-a"></i>
+          &nbsp; Edit Profile Settings
+        </button>
+      ) : (
+        <button
+          className={`btn btn-sm action-btn ${classNames({
+            'btn-secondary': following,
+            'btn-outline-secondary': !following,
+          })}`}
+          type="button"
+          onClick={() => followUser(following)}
+          disabled={isPostFollowLoading || isDeleteUnfollowLoading}
+        >
+          <i className="ion-plus-round"></i>
+          &nbsp; {following ? 'Unfollow' : 'Follow'} {username}
+        </button>
+      );
+
+    setProfileMenusElement(profileMenusElement);
+  }, [
+    following,
+    user.username,
+    username,
+    isPostFollowLoading,
+    isDeleteUnfollowLoading,
+  ]);
+
   return (
     <div className="profile-page">
       <div className="user-info">
@@ -9,25 +148,16 @@ const ProfileUserPageMain = () => {
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
               <Image
-                src="http://i.imgur.com/Qr71crq.jpg"
-                alt="Eric Simons"
+                src={image}
+                alt={username}
                 className="user-img"
                 width={100}
                 height={100}
               />
-              <h4>Eric Simons</h4>
-              <p>
-                {`Cofounder @GoThinkster, lived in Aol's HQ for a few months,
-                kinda looks like Peeta from the Hunger Games`}
-              </p>
-              <button className="btn btn-sm btn-outline-secondary action-btn">
-                <i className="ion-plus-round"></i>
-                &nbsp; Follow Eric Simons
-              </button>
-              <button className="btn btn-sm btn-outline-secondary action-btn">
-                <i className="ion-gear-a"></i>
-                &nbsp; Edit Profile Settings
-              </button>
+              <h4>{username}</h4>
+              <p>{profile?.bio}</p>
+
+              {profileMenusElement}
             </div>
           </div>
         </div>
@@ -39,102 +169,110 @@ const ProfileUserPageMain = () => {
             <div className="articles-toggle">
               <ul className="nav nav-pills outline-active">
                 <li className="nav-item">
-                  <Link className="nav-link active" href="">
+                  <Link
+                    className={`nav-link ${classNames({
+                      active: articleType === 'my',
+                    })}`}
+                    href={{
+                      query: {
+                        type: 'my',
+                        page: INITIAL_PAGE,
+                      },
+                    }}
+                    onClick={() => setArticleType('my')}
+                  >
                     My Articles
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="">
+                  <Link
+                    className={`nav-link ${classNames({
+                      active: articleType === 'favorited',
+                    })}`}
+                    href={{
+                      query: {
+                        type: 'favorited',
+                        page: INITIAL_PAGE,
+                      },
+                    }}
+                    onClick={() => setArticleType('favorited')}
+                  >
                     Favorited Articles
                   </Link>
                 </li>
               </ul>
             </div>
-
-            <div className="article-preview">
-              <div className="article-meta">
-                <Link href="/profile/eric-simons">
-                  <Image
-                    src="http://i.imgur.com/Qr71crq.jpg"
-                    alt="eric simons"
-                    width={32}
-                    height={32}
-                  />
-                </Link>
-                <div className="info">
-                  <Link href="/profile/eric-simons" className="author">
-                    Eric Simons
-                  </Link>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 29
-                </button>
-              </div>
-              <Link
-                href="/article/how-to-buil-webapps-that-scale"
-                className="preview-link"
-              >
-                <h1>How to build webapps that scale</h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">
-                    realworld
-                  </li>
-                  <li className="tag-default tag-pill tag-outline">
-                    implementations
-                  </li>
-                </ul>
-              </Link>
-            </div>
-
-            <div className="article-preview">
-              <div className="article-meta">
-                <Link href="/profile/albert-pai">
-                  <Image
-                    src="http://i.imgur.com/N4VcUeJ.jpg"
-                    alt="albert pai"
-                    width={32}
-                    height={32}
-                  />
-                </Link>
-                <div className="info">
-                  <Link href="/profile/albert-pai" className="author">
-                    Albert Pai
-                  </Link>
-                  <span className="date">January 20th</span>
-                </div>
-                <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i className="ion-heart"></i> 32
-                </button>
-              </div>
-              <Link href="/article/the-song-you" className="preview-link">
-                <h1>
-                  {`The song you won't ever stop singing. No matter how hard you
-                  try.`}
-                </h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-                <ul className="tag-list">
-                  <li className="tag-default tag-pill tag-outline">Music</li>
-                  <li className="tag-default tag-pill tag-outline">Song</li>
-                </ul>
-              </Link>
-            </div>
-
-            <ul className="pagination">
-              <li className="page-item active">
-                <a className="page-link" href="">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="">
-                  2
-                </a>
-              </li>
-            </ul>
+            {!isLoading && data ? (
+              <>
+                {data.articles.length > 0 ? (
+                  data.articles.map(
+                    ({
+                      slug,
+                      title,
+                      description,
+                      tagList,
+                      createdAt,
+                      favoritesCount,
+                      author: { username: authorUsername, image: authorImage },
+                    }) => (
+                      <div key={slug} className="article-preview">
+                        <div className="article-meta">
+                          <Link href={`/profile/${authorUsername}`}>
+                            <Image
+                              src={authorImage}
+                              alt={authorUsername}
+                              width={32}
+                              height={32}
+                            />
+                          </Link>
+                          <div className="info">
+                            <Link
+                              href={`/profile/${authorUsername}`}
+                              className="author"
+                            >
+                              {authorUsername}
+                            </Link>
+                            <span className="date">{createdAt}</span>
+                          </div>
+                          <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                            <i className="ion-heart"></i> {favoritesCount}
+                          </button>
+                        </div>
+                        <Link
+                          href={`/article/${slug}`}
+                          className="preview-link"
+                        >
+                          <h1>{title}</h1>
+                          <p>{description}</p>
+                          <span>Read more...</span>
+                          <ul className="tag-list">
+                            {tagList.map((tag) => (
+                              <li
+                                key={tag}
+                                className="tag-default tag-pill tag-outline"
+                              >
+                                {tag}
+                              </li>
+                            ))}
+                          </ul>
+                        </Link>
+                      </div>
+                    ),
+                  )
+                ) : (
+                  <div className="article-preview">
+                    No articles are here... yet.
+                  </div>
+                )}
+                <Pagination
+                  totalCounts={data.articlesCount}
+                  page={parseInt(page)}
+                  perPage={parseInt(perPage)}
+                />
+              </>
+            ) : (
+              <div className="article-preview">Loading articles...</div>
+            )}
           </div>
         </div>
       </div>

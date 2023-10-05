@@ -1,43 +1,111 @@
+'use client';
+
+import { useUserStore } from '@/stores/users';
+import { ArticleResponse } from '@/types/api/articles';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { ReactNode, useEffect, useState } from 'react';
 
-const ArticleDetailPageMain = () => {
+import { deleteArticle } from '@/api/articles';
+
+interface Props {
+  article: ArticleResponse['article'];
+}
+
+const ArticleDetailPageMain = ({ article }: Props) => {
+  const router = useRouter();
+
+  const currentUser = useUserStore((state) => state.user);
+
+  const {
+    slug,
+    title,
+    description,
+    body,
+    tagList,
+    createdAt,
+    favorited,
+    favoritesCount,
+    author: { username: authorUsername, image: authorImage },
+  } = article;
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentAuthorProfileMenus, setCurrentAuthorProfileMenus] =
+    useState<ReactNode>(<></>);
+
+  const isAuthor = currentUser.username === authorUsername;
+
+  const editCurrentArticle = () => {
+    router.push(`/editor?title=${encodeURIComponent(slug)}`);
+  };
+
+  const deleteCurrentArticle = () => {
+    setIsLoading(true);
+
+    deleteArticle({ slug }).then(() => {
+      router.push('/');
+
+      setIsLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    const authorProfileMenus = isAuthor ? (
+      <>
+        <button
+          className="btn btn-sm btn-outline-secondary"
+          onClick={editCurrentArticle}
+        >
+          <i className="ion-edit"></i> Edit Article
+        </button>{' '}
+        <button
+          className="btn btn-sm btn-outline-danger"
+          onClick={deleteCurrentArticle}
+          disabled={isLoading}
+        >
+          <i className="ion-trash-a"></i> Delete Article
+        </button>
+      </>
+    ) : (
+      <>
+        <button className="btn btn-sm btn-outline-secondary">
+          <i className="ion-plus-round"></i>
+          &nbsp; Follow Eric Simons <span className="counter">(10)</span>
+        </button>
+        &nbsp;&nbsp;
+        <button className="btn btn-sm btn-outline-primary">
+          <i className="ion-heart"></i>
+          &nbsp; Favorite Post <span className="counter">(29)</span>
+        </button>
+      </>
+    );
+
+    setCurrentAuthorProfileMenus(authorProfileMenus);
+  }, [isAuthor, isLoading]);
+
   return (
     <div className="article-page">
       <div className="banner">
         <div className="container">
-          <h1>How to build webapps that scale</h1>
+          <h1>{title}</h1>
 
           <div className="article-meta">
-            <Link href="/profile/eric-simons">
+            <Link href={`/profile/${authorUsername}`}>
               <Image
-                src="http://i.imgur.com/Qr71crq.jpg"
-                alt="eric simons"
+                src={authorImage}
+                alt={authorUsername}
                 width={32}
                 height={32}
               />
             </Link>
             <div className="info">
-              <Link href="/profile/eric-simons" className="author">
-                Eric Simons
+              <Link href={`/profile/${authorUsername}`} className="author">
+                {authorUsername}
               </Link>
-              <span className="date">January 20th</span>
+              <span className="date">{createdAt}</span>
             </div>
-            <button className="btn btn-sm btn-outline-secondary">
-              <i className="ion-plus-round"></i>
-              &nbsp; Follow Eric Simons <span className="counter">(10)</span>
-            </button>
-            &nbsp;&nbsp;
-            <button className="btn btn-sm btn-outline-primary">
-              <i className="ion-heart"></i>
-              &nbsp; Favorite Post <span className="counter">(29)</span>
-            </button>
-            <button className="btn btn-sm btn-outline-secondary">
-              <i className="ion-edit"></i> Edit Article
-            </button>
-            <button className="btn btn-sm btn-outline-danger">
-              <i className="ion-trash-a"></i> Delete Article
-            </button>
+            {currentAuthorProfileMenus}
           </div>
         </div>
       </div>
@@ -45,17 +113,13 @@ const ArticleDetailPageMain = () => {
       <div className="container page">
         <div className="row article-content">
           <div className="col-md-12">
-            <p>
-              Web development technologies have evolved at an incredible clip
-              over the past few years.
-            </p>
-            <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-            <p>{`It's a great solution for learning how other frameworks work.`}</p>
+            <p>{body}</p>
             <ul className="tag-list">
-              <li className="tag-default tag-pill tag-outline">realworld</li>
-              <li className="tag-default tag-pill tag-outline">
-                implementations
-              </li>
+              {tagList.map((tag) => (
+                <li key={tag} className="tag-default tag-pill tag-outline">
+                  {tag}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -64,35 +128,21 @@ const ArticleDetailPageMain = () => {
 
         <div className="article-actions">
           <div className="article-meta">
-            <Link href="profile.html">
+            <Link href={`/profile/${authorUsername}`}>
               <Image
-                src="http://i.imgur.com/Qr71crq.jpg"
-                alt="eric simons"
+                src={authorImage}
+                alt={authorUsername}
                 width={32}
                 height={32}
               />
             </Link>
             <div className="info">
-              <Link href="" className="author">
-                Eric Simons
+              <Link href={`/profile/${authorUsername}`} className="author">
+                {authorUsername}
               </Link>
-              <span className="date">January 20th</span>
+              <span className="date">{createdAt}</span>
             </div>
-            <button className="btn btn-sm btn-outline-secondary">
-              <i className="ion-plus-round"></i>
-              &nbsp; Follow Eric Simons
-            </button>
-            &nbsp;
-            <button className="btn btn-sm btn-outline-primary">
-              <i className="ion-heart"></i>
-              &nbsp; Favorite Article <span className="counter">(29)</span>
-            </button>
-            <button className="btn btn-sm btn-outline-secondary">
-              <i className="ion-edit"></i> Edit Article
-            </button>
-            <button className="btn btn-sm btn-outline-danger">
-              <i className="ion-trash-a"></i> Delete Article
-            </button>
+            {currentAuthorProfileMenus}
           </div>
         </div>
 

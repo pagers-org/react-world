@@ -9,3 +9,6 @@ export const HTTP_METHOD = {
 export const COMMON_HEADERS = {
   'Content-Type': 'application/json; charset=utf-8',
 };
+
+export const FEED_PER_PAGE = '10';
+export const INITIAL_PAGE = '1';

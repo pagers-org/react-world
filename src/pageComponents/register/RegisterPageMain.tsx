@@ -29,8 +29,10 @@ const RegisterPageMain = () => {
     setIsLoading(true);
 
     postUserRegister({
-      user: {
-        ...form,
+      payload: {
+        user: {
+          ...form,
+        },
       },
     }).then((res) => {
       if (res?.errors) {

@@ -33,4 +33,6 @@ export type UserResponse = {
     image: string;
   };
   errors?: unknown;
+  status?: string;
+  message?: string;
 };

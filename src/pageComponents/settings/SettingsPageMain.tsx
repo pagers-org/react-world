@@ -75,7 +75,9 @@ const SettingsPageMain = ({ mySettings }: Props) => {
         };
 
     putCurrentUser({
-      user: payload,
+      payload: {
+        user: payload,
+      },
     }).then((res) => {
       if (typeof res === 'string') {
         if (res.match(/email/)) {
@@ -102,7 +104,7 @@ const SettingsPageMain = ({ mySettings }: Props) => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleLogout = () => {
+  const logoutUser = () => {
     logout();
     router.push('/');
   };
@@ -204,7 +206,7 @@ const SettingsPageMain = ({ mySettings }: Props) => {
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={handleLogout}
+              onClick={logoutUser}
             >
               Or click here to logout.
             </button>
