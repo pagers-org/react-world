@@ -42,12 +42,8 @@ export const AppRoutes = () => {
 const NavBarWithLocation = () => {
   const location = useLocation();
 
-  let selectedNavItem: NavItemType = 'home'; // default
-  for (const navItem of NAV_ITEMS) {
-    if (location.pathname === navItem.path) {
-      selectedNavItem = navItem.name;
-      break;
-    }
-  }
+  const { name: selectedNavItem } = NAV_ITEMS.find(
+    navItem => location.pathname === navItem.path,
+  ) || { name: 'home' };
   return <Navbar selectedNavItem={selectedNavItem} />;
 };
