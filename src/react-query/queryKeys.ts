@@ -7,4 +7,5 @@ export const queryKeys = {
   DeleteComment: 'DeleteComment',
   PostFavorite: 'PostFavorite',
   DeleteFavorite: 'DeleteFavorite',
+  GetTags: 'GetTags',
 } as const;
