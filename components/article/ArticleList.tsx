@@ -16,6 +16,10 @@ const ArticleList = ({ username }: Props) => {
   const { tab } = useCurrentTab();
   const { data } = useArticles(targetRef, tab, username);
 
+  console.log('List');
+
+  console.log(data);
+
   return (
     <div>
       {data?.pages?.at(0)?.articles?.length === 0 ? (

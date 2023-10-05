@@ -24,10 +24,11 @@ const ArticlePage = ({ params: { slug } }: Props) => {
 
   const { data: article } = useQuery({
     queryKey: ['article', slug],
-    queryFn: async () => await getArticleAPI(slug),
+    queryFn: async () => await fetch(`/api/articles/${slug}`).then(res => res.json()),
     enabled: !!slug,
-    select: res => res.article,
+    select: res => res.data.article,
   });
+  console.log('Detail');
 
   console.log(article);
 
@@ -48,7 +49,7 @@ const ArticlePage = ({ params: { slug } }: Props) => {
               </div>
             ) : (
               <div className={flex}>
-                <FollowButton author={author} />
+                <FollowButton author={author} slug={slug} />
                 <FavoriteButton favoritesCount={favoritesCount} />
               </div>
             )}

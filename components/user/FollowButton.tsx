@@ -6,8 +6,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 type Props = {
   author: any;
+  slug: string;
 };
-const FollowButton = ({ author: { username, following } }: Props) => {
+const FollowButton = ({ author: { username, following }, slug }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -17,7 +18,9 @@ const FollowButton = ({ author: { username, following } }: Props) => {
       return fetch(`/api/profiles/${username}`, { method }).then(res => res.json());
     },
     onSuccess: data => {
-      queryClient.invalidateQueries(['articles', 'global']);
+      queryClient.invalidateQueries(['article', slug]);
+      console.log('Success');
+
       console.log(data);
     },
     onError: error => {

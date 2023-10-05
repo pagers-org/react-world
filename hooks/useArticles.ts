@@ -9,14 +9,13 @@ const useArticles = (ref: RefObject<HTMLElement>, tab: string, username = '') =>
     queryFn: async ({ pageParam = 0 }) => {
       switch (tab) {
         case 'global':
-          // return await getArticlesAPI(pageParam);
-          return fetch(`/api/articles?page=${pageParam}`).then(res => res.json());
+          return await fetch(`/api/articles?page=${pageParam}`).then(res => res.json());
         case 'my':
-          return fetch(`/api/articles/my?username=${username}&page=${pageParam}`).then(res => res.json());
+          return await fetch(`/api/articles/my?username=${username}&page=${pageParam}`).then(res => res.json());
         case 'favorited':
           return await getArticlesWithFavoritedAPI(username);
         case 'your':
-          return fetch(`/api/articles/feed?page=${pageParam}`).then(res => res.json());
+          return await fetch(`/api/articles/feed?page=${pageParam}`).then(res => res.json());
         default:
           return await getArticlesWithTagAPI(tab, pageParam);
       }
