@@ -50,6 +50,13 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     });
   };
 
+  const favoriteCurrentArticle = () => {
+    if (!currentUser.email) {
+      router.push('/login');
+      return;
+    }
+  };
+
   useEffect(() => {
     const authorProfileMenus = isAuthor ? (
       <>
@@ -74,9 +81,12 @@ const ArticleDetailPageMain = ({ article }: Props) => {
           &nbsp; Follow Eric Simons <span className="counter">(10)</span>
         </button>
         &nbsp;&nbsp;
-        <button className="btn btn-sm btn-outline-primary">
+        <button
+          className="btn btn-sm btn-outline-primary"
+          onClick={favoriteCurrentArticle}
+        >
           <i className="ion-heart"></i>
-          &nbsp; Favorite Post <span className="counter">(29)</span>
+          &nbsp; Favorite Article <span className="counter">(29)</span>
         </button>
       </>
     );

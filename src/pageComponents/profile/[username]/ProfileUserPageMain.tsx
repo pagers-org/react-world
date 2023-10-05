@@ -92,6 +92,13 @@ const ProfileUserPageMain = ({ profile }: Props) => {
     }
   };
 
+  const favoriteArticle = () => {
+    if (!user.email) {
+      navigate('/login');
+      return;
+    }
+  };
+
   useEffect(() => {
     const type = searchParams?.get('type') ?? 'my';
 
@@ -234,7 +241,10 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                             </Link>
                             <span className="date">{createdAt}</span>
                           </div>
-                          <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                          <button
+                            className="btn btn-outline-primary btn-sm pull-xs-right"
+                            onClick={favoriteArticle}
+                          >
                             <i className="ion-heart"></i> {favoritesCount}
                           </button>
                         </div>

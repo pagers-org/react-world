@@ -6,7 +6,7 @@ import { FeedsResponse } from '@/types/api/articles';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
 import { INITIAL_PAGE } from '@/constants/api';
@@ -18,6 +18,7 @@ interface Props {
 const HomePageMain = ({ feeds }: Props) => {
   // server-side fetch - server component만 이용
 
+  const { push: navigate } = useRouter();
   const searchParams = useSearchParams();
 
   const user = useUserStore((state) => state.user);
@@ -28,6 +29,13 @@ const HomePageMain = ({ feeds }: Props) => {
   const [tabsElement, setTabsElement] = useState<ReactNode>();
 
   const { articlesCount, articles } = feeds;
+
+  const favoriteArticle = () => {
+    if (!user.email) {
+      navigate('/login');
+      return;
+    }
+  };
 
   useEffect(() => {
     let type = searchParams?.get('type') ?? 'your';
@@ -134,7 +142,10 @@ const HomePageMain = ({ feeds }: Props) => {
                         </Link>
                         <span className="date">{createdAt}</span>
                       </div>
-                      <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                      <button
+                        className="btn btn-outline-primary btn-sm pull-xs-right"
+                        onClick={favoriteArticle}
+                      >
                         <i className="ion-heart"></i> {favoritesCount}
                       </button>
                     </div>
