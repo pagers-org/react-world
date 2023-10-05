@@ -1,16 +1,20 @@
 'use client';
 
-import { queryClient } from '@/react-query/queryClient';
 import { useUserStore } from '@/stores/users';
 import { ArticleResponse } from '@/types/api/articles';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import { deleteArticle } from '@/api/articles';
 
+import {
+  useDeleteCommentMutation,
+  usePostCommentMutation,
+} from '@/hooks/query/comments/useCommentsMutation';
+import { useCommentsQuery } from '@/hooks/query/comments/useCommentsQuery';
 import {
   useDeleteFavoriteMutation,
   usePostFavoriteMutation,
@@ -50,6 +54,9 @@ const ArticleDetailPageMain = ({ article }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentAuthorProfileMenus, setCurrentAuthorProfileMenus] =
     useState<ReactNode>(<></>);
+  const [currentCommentMenus, setCurrentCommentMenus] = useState<ReactNode>(
+    <></>,
+  );
 
   const isAuthor = currentUser.username === authorUsername;
 
@@ -135,6 +142,40 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     }
   };
 
+  const { data: comments, isLoading: isCommentsLoading } = useCommentsQuery({
+    slug,
+  });
+
+  const commentRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const { mutate: postCommentMutate, isLoading: isPostCommentLoading } =
+    usePostCommentMutation();
+  const { mutate: deleteCommentMutate } = useDeleteCommentMutation();
+
+  const handleComment = (type: 'Post' | 'Delete', id?: number) => {
+    if (!commentRef.current) {
+      return;
+    }
+
+    if (type === 'Post') {
+      postCommentMutate({
+        slug,
+        payload: {
+          comment: {
+            body: commentRef.current.value,
+          },
+        },
+      });
+    } else if (id) {
+      deleteCommentMutate({
+        slug,
+        id,
+      });
+    }
+
+    commentRef.current.value = '';
+  };
+
   useEffect(() => {
     const authorProfileMenus = isAuthor ? (
       <>
@@ -195,6 +236,28 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     isDeleteUnfollowLoading,
     isAuthorFollowing,
   ]);
+
+  useEffect(() => {
+    const currentCommentMenus = (
+      <div className="card-footer">
+        <Image
+          src={currentUser.image}
+          alt={currentUser.username}
+          width={30}
+          height={30}
+          className="comment-author-img"
+        />
+        <button
+          className="btn btn-sm btn-primary"
+          type="button"
+          onClick={() => handleComment('Post')}
+        >
+          Post Comment
+        </button>
+      </div>
+    );
+    setCurrentCommentMenus(currentCommentMenus);
+  }, [currentUser]);
 
   return (
     <div className="article-page">
@@ -263,75 +326,56 @@ const ArticleDetailPageMain = ({ article }: Props) => {
             <form className="card comment-form">
               <div className="card-block">
                 <textarea
+                  ref={commentRef}
                   className="form-control"
                   placeholder="Write a comment..."
                   rows={3}
+                  disabled={isPostCommentLoading}
                 ></textarea>
               </div>
-              <div className="card-footer">
-                <Image
-                  src="http://i.imgur.com/Qr71crq.jpg"
-                  alt="eric simons"
-                  width={30}
-                  height={30}
-                  className="comment-author-img"
-                />
-                <button className="btn btn-sm btn-primary">Post Comment</button>
-              </div>
+              {currentCommentMenus}
             </form>
 
-            <div className="card">
-              <div className="card-block">
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-              <div className="card-footer">
-                <a href="/profile/author" className="comment-author">
-                  <Image
-                    className="comment-author-img"
-                    src="http://i.imgur.com/Qr71crq.jpg"
-                    alt="eric simons"
-                    width={20}
-                    height={20}
-                  />
-                </a>
-                &nbsp;
-                <a href="/profile/jacob-schmidt" className="comment-author">
-                  Jacob Schmidt
-                </a>
-                <span className="date-posted">Dec 29th</span>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-block">
-                <p className="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-              <div className="card-footer">
-                <a href="/profile/author" className="comment-author">
-                  <Image
-                    className="comment-author-img"
-                    src="http://i.imgur.com/Qr71crq.jpg"
-                    alt="eric simons"
-                    width={20}
-                    height={20}
-                  />
-                </a>
-                &nbsp;
-                <a href="/profile/jacob-schmidt" className="comment-author">
-                  Jacob Schmidt
-                </a>
-                <span className="date-posted">Dec 29th</span>
-                <span className="mod-options">
-                  <i className="ion-trash-a"></i>
-                </span>
-              </div>
-            </div>
+            {!isCommentsLoading && comments ? (
+              comments?.comments.map(
+                ({ id, body, createdAt, author: { username, image } }) => (
+                  <div key={id} className="card">
+                    <div className="card-block">
+                      <p className="card-text">{body}</p>
+                    </div>
+                    <div className="card-footer">
+                      <a href="/profile/author" className="comment-author">
+                        <Image
+                          className="comment-author-img"
+                          src={image}
+                          alt={username}
+                          width={20}
+                          height={20}
+                        />
+                      </a>
+                      &nbsp;
+                      <a
+                        href="/profile/jacob-schmidt"
+                        className="comment-author"
+                      >
+                        {username}
+                      </a>
+                      <span className="date-posted">{createdAt}</span>
+                      {username === currentUser.username && (
+                        <span
+                          className="mod-options"
+                          onClick={() => handleComment('Delete', id)}
+                        >
+                          <i className="ion-trash-a"></i>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ),
+              )
+            ) : (
+              <>Loading comments...</>
+            )}
           </div>
         </div>
       </div>
