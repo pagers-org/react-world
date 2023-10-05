@@ -87,10 +87,61 @@ const getAuthorArticle = async (
   });
 };
 
+const getArticleDetail = async (
+  slug: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(`${BASE_URL}/articles/${slug}`, {
+    ...options,
+    method: 'get',
+    headers: {
+      ...BASE_HEADER,
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+const favoriteUser = async (
+  slug: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(`${BASE_URL}/articles/${slug}/favorite`, {
+    ...options,
+    method: 'post',
+    headers: {
+      ...BASE_HEADER,
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+const unFavoriteUser = async (
+  slug: string,
+  headers: HeadersInit = {},
+  options: RequestInit = {},
+): Promise<Response> => {
+  return await fetch(`${BASE_URL}/articles/${slug}/favorite`, {
+    ...options,
+    method: 'delete',
+    headers: {
+      ...BASE_HEADER,
+      ...headers,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
 export {
   getGlobalFeed,
   getMyFeed,
   postArticleRegister,
   getFavorited,
   getAuthorArticle,
+  favoriteUser,
+  unFavoriteUser,
+  getArticleDetail,
 };
