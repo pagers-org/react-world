@@ -3,7 +3,13 @@ import { Container } from '../Container';
 import { NavItem } from './NavItem';
 import { NavbarBrand } from './NavBarBrand';
 import { NavList } from './NavList';
-import type { NavItemType } from '@/app-types/NavItemModel';
+import { NAV_ITEMS, type NavItemType } from '@/app-types/NavItemModel';
+
+const NAV_ITEM_TITLES: { [key in NavItemType]: string } = {
+  home: 'Home',
+  login: 'Sign in',
+  register: 'Sign up',
+};
 
 interface NavbarProps {
   selectedNavItem: NavItemType;
@@ -12,23 +18,17 @@ interface NavbarProps {
 export const Navbar = (props: NavbarProps) => {
   const { selectedNavItem } = props;
 
-  const navItems = [
-    { path: '/', name: 'home', title: 'Home' },
-    { path: '/login', name: 'login', title: 'Sign in' },
-    { path: '/register', name: 'register', title: 'Sign up' },
-  ];
-
   return (
     <NavbarContainer>
       <Container>
         <NavbarBrand />
         <NavList>
-          {navItems.map(item => (
+          {NAV_ITEMS.map(item => (
             <NavItem
               key={item.name}
               to={item.path}
               isActive={selectedNavItem === item.name}
-              title={item.title}
+              title={NAV_ITEM_TITLES[item.name]}
             />
           ))}
         </NavList>
