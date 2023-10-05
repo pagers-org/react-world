@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import PopularArticleTagService from '../apis/article/PopularArticleTagService';
+import PopularArticleTagService from '@/apis/article/PopularArticleTagService';
 
 export const POPULAR_ARTICLE_TAG_CACHE_KEY = '@article/popular_tags';
 
