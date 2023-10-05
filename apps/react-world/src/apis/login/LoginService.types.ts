@@ -1,6 +1,6 @@
 // LoginService.types.ts
 
-import type CurrentUser from '@appTypes/CurrentUser';
+import type CurrentUser from '@/app-types/CurrentUser';
 
 export interface LoginUserParams {
   email: string;

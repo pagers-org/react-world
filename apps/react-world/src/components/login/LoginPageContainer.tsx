@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import LoginHeader from './LoginHeader';
-import useLogin from '@hooks/useLogin';
+import useLogin from '@/hooks/useLogin';
 
 const LoginPageContainer = () => {
   const { loginError, loginStatus, handleLogin } = useLogin();

@@ -1,9 +1,9 @@
-import type { LoginUserErrors } from '@apis/login/LoginService.types';
-import type { LoginStatus } from '@hooks/useLogin';
+import type { LoginUserErrors } from '@/apis/login/LoginService.types';
+import type { LoginStatus } from '@/hooks/useLogin';
 import { useForm } from 'react-hook-form';
 import { LoginErrorMessage, StyledLoginButton } from './LoginForm.styled';
 import { type ReactNode } from 'react';
-import type { UserCredentials } from '@appTypes/UserCredentials';
+import type { UserCredentials } from '@/app-types/UserCredentials';
 
 /*
 - ^로 시작합니다.

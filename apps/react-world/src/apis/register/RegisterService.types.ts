@@ -1,4 +1,4 @@
-import type CurrentUser from '@appTypes/CurrentUser';
+import type CurrentUser from '@/app-types/CurrentUser';
 
 export interface RegisterUserParams {
   username: string;

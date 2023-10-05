@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import type { LoginUserErrors } from '../apis/login/LoginService.types'; // 로그인 관련 타입으로 수정
 import LoginService from '../apis/login/LoginService'; // LoginService로 수정
-import { saveTokenToCookie } from '@utils/jwtUtils';
-import type { UserCredentials } from '@appTypes/UserCredentials';
+import { saveTokenToCookie } from '@/utils/jwtUtils';
+import type { UserCredentials } from '@/app-types/UserCredentials';
 
 export type LoginStatus = 'idle' | 'loggingIn' | 'success' | 'failed';
 
