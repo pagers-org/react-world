@@ -15,8 +15,6 @@ import { getCookie } from '@/utils/cookie';
 
 import { httpClient } from './http/httpClient';
 
-/* Client Side APIs */
-
 // Create an article (Auth Required)
 export const postArticle = ({
   payload,
@@ -93,10 +91,6 @@ export const deleteArticle = ({
     .catch((err) => console.error(err));
 };
 
-// -----------------------------------------------------------------------------------------------------
-
-/* Server Side APIs for Next 13 APP Router extended fetch api */
-
 // Get recent articles from users you follow (Auth Required)
 export const getMyFeeds = ({
   queryStrings = {
@@ -109,12 +103,16 @@ export const getMyFeeds = ({
   headers?: HeadersInit;
   options?: RequestInit;
 }): Promise<FeedsResponse> => {
+  const accessToken = getCookie(COOKIE_ACCESS_TOKEN_KEY);
   const qs = new URLSearchParams(queryStrings).toString();
 
   return httpClient
     .get(`/articles/feed?${qs}`, {
       ...options,
-      headers,
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
     .then((res) => res.json())
     .catch((err) => console.error(err));

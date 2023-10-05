@@ -9,34 +9,28 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
-import { INITIAL_PAGE } from '@/constants/api';
+import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
 
+import {
+  useArticlesQuery,
+  useMyFeedArticlesQuery,
+} from '@/hooks/query/articles/useArticlesQuery';
 import {
   useDeleteFavoriteMutation,
   usePostFavoriteMutation,
 } from '@/hooks/query/favorites/useFavoritesMutation';
 import { useTagsQuery } from '@/hooks/query/tags/useTagsQuery';
 
-interface Props {
-  feeds: FeedsResponse;
-}
-
-const HomePageMain = ({ feeds }: Props) => {
-  // server-side fetch - server component만 이용
-
+const HomePageMain = () => {
   const { push: navigate } = useRouter();
   const searchParams = useSearchParams();
 
   const user = useUserStore((state) => state.user);
 
-  const [feedType, setFeedType] = useState<'your' | 'global'>();
+  const [feedType, setFeedType] = useState<string>();
   const [page, setPage] = useState<number>(1);
 
   const [tabsElement, setTabsElement] = useState<ReactNode>();
-
-  const { articlesCount, articles } = feeds;
-
-  const [currentArticles, setCurrentArticles] = useState(articles);
 
   const {
     mutate: postFavoriteMutate,
@@ -55,52 +49,61 @@ const HomePageMain = ({ feeds }: Props) => {
 
     if (favorited) {
       deleteFavoriteMutate({ slug });
-      setCurrentArticles((prev) =>
-        prev.map((article) =>
-          article.slug === slug
-            ? {
-                ...article,
-                favorited: !article.favorited,
-                favoritesCount: article.favoritesCount - 1,
-              }
-            : article,
-        ),
-      );
     } else {
       postFavoriteMutate({ slug });
-      setCurrentArticles((prev) =>
-        prev.map((article) =>
-          article.slug === slug
-            ? {
-                ...article,
-                favorited: !article.favorited,
-                favoritesCount: article.favoritesCount + 1,
-              }
-            : article,
-        ),
-      );
     }
   };
+
+  const [currentArticles, setCurrentArticles] = useState<FeedsResponse | null>(
+    null,
+  );
+
+  const offset = ((page - 1) * parseInt(FEED_PER_PAGE)).toString();
+  const limit = FEED_PER_PAGE;
+
+  const useQuery =
+    feedType === 'your' ? useMyFeedArticlesQuery : useArticlesQuery;
+
+  const { data: articles, isLoading: isArticlesLoading } = useQuery(
+    feedType !== 'global' && feedType !== 'your'
+      ? {
+          queryStrings: {
+            offset,
+            limit,
+            tag: '',
+          },
+        }
+      : {
+          queryStrings: {
+            offset,
+            limit,
+          },
+        },
+  );
 
   const { data: popularTags, isLoading: isPopularTagsLoading } = useTagsQuery();
 
   useEffect(() => {
-    let type = searchParams?.get('type') ?? 'your';
-
-    if (!user.email) {
-      type = 'global';
-    } else if (type !== 'your' && type !== 'global') {
-      type = 'your';
+    if (user.email) {
+      setFeedType('your');
+    } else {
+      setFeedType('global');
     }
-
-    setFeedType(type as 'your' | 'global');
-  }, [searchParams, user.email]);
+  }, [user]);
 
   useEffect(() => {
     const page = searchParams?.get('page') ?? INITIAL_PAGE;
 
     setPage(parseInt(page));
   }, [searchParams]);
+
+  useEffect(() => {
+    if (isArticlesLoading || !articles) {
+      return;
+    }
+
+    setCurrentArticles(articles);
+  }, [isArticlesLoading, articles]);
 
   useEffect(() => {
     const tabsElement = (
@@ -113,7 +116,6 @@ const HomePageMain = ({ feeds }: Props) => {
               })}`}
               href={{
                 query: {
-                  type: 'your',
                   page: INITIAL_PAGE,
                 },
               }}
@@ -130,7 +132,6 @@ const HomePageMain = ({ feeds }: Props) => {
             })}`}
             href={{
               query: {
-                type: 'global',
                 page: INITIAL_PAGE,
               },
             }}
@@ -160,74 +161,82 @@ const HomePageMain = ({ feeds }: Props) => {
             <div className="col-md-9">
               <div className="feed-toggle">{tabsElement}</div>
 
-              {currentArticles.map(
-                ({
-                  slug,
-                  title,
-                  description,
-                  favorited,
-                  tagList,
-                  createdAt,
-                  favoritesCount,
-                  author: { username: authorUsername, image: authorImage },
-                }) => (
-                  <div key={slug} className="article-preview">
-                    <div className="article-meta">
-                      <Link href={`/profile/${authorUsername}`}>
-                        <Image
-                          src={authorImage}
-                          alt={authorUsername}
-                          width={32}
-                          height={32}
-                        />
-                      </Link>
-                      <div className="info">
-                        <Link
-                          href={`/profile/${authorUsername}`}
-                          className="author"
-                        >
-                          {authorUsername}
-                        </Link>
-                        <span className="date">{createdAt}</span>
-                      </div>
-                      <button
-                        className={`btn btn-sm pull-xs-right ${classNames({
-                          'btn-outline-primary': !favorited,
-                          'btn-primary': favorited,
-                        })}`}
-                        onClick={() => favoriteArticle(slug, favorited)}
-                        disabled={
-                          isPostFavoriteMutationLoading ||
-                          isDeleteFavoriteMutationLoading
-                        }
-                      >
-                        <i className="ion-heart"></i> {favoritesCount}
-                      </button>
-                    </div>
-                    <Link href={`/article/${slug}`} className="preview-link">
-                      <h1>{title}</h1>
-                      <p>{description}</p>
-                      <span>Read more...</span>
-                      <ul className="tag-list">
-                        {tagList.map((tag) => (
-                          <li
-                            key={tag}
-                            className="tag-default tag-pill tag-outline"
+              {currentArticles ? (
+                <>
+                  {currentArticles.articles.map(
+                    ({
+                      slug,
+                      title,
+                      description,
+                      favorited,
+                      tagList,
+                      createdAt,
+                      favoritesCount,
+                      author: { username: authorUsername, image: authorImage },
+                    }) => (
+                      <div key={slug} className="article-preview">
+                        <div className="article-meta">
+                          <Link href={`/profile/${authorUsername}`}>
+                            <Image
+                              src={authorImage}
+                              alt={authorUsername}
+                              width={32}
+                              height={32}
+                            />
+                          </Link>
+                          <div className="info">
+                            <Link
+                              href={`/profile/${authorUsername}`}
+                              className="author"
+                            >
+                              {authorUsername}
+                            </Link>
+                            <span className="date">{createdAt}</span>
+                          </div>
+                          <button
+                            className={`btn btn-sm pull-xs-right ${classNames({
+                              'btn-outline-primary': !favorited,
+                              'btn-primary': favorited,
+                            })}`}
+                            onClick={() => favoriteArticle(slug, favorited)}
+                            disabled={
+                              isPostFavoriteMutationLoading ||
+                              isDeleteFavoriteMutationLoading
+                            }
                           >
-                            {tag}
-                          </li>
-                        ))}
-                      </ul>
-                    </Link>
-                  </div>
-                ),
+                            <i className="ion-heart"></i> {favoritesCount}
+                          </button>
+                        </div>
+                        <Link
+                          href={`/article/${slug}`}
+                          className="preview-link"
+                        >
+                          <h1>{title}</h1>
+                          <p>{description}</p>
+                          <span>Read more...</span>
+                          <ul className="tag-list">
+                            {tagList.map((tag) => (
+                              <li
+                                key={tag}
+                                className="tag-default tag-pill tag-outline"
+                              >
+                                {tag}
+                              </li>
+                            ))}
+                          </ul>
+                        </Link>
+                      </div>
+                    ),
+                  )}
+                  <Pagination
+                    totalCounts={currentArticles.articlesCount}
+                    page={page}
+                    perPage={parseInt(FEED_PER_PAGE)}
+                  />
+                </>
+              ) : (
+                <>Loading articles...</>
               )}
-
-              <Pagination
-                totalCounts={articlesCount}
-                page={page}
-                perPage={10}
-              />
             </div>
 
             <div className="col-md-3">

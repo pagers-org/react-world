@@ -1,5 +1,6 @@
 export const queryKeys = {
   GetArticles: 'GetArticles',
+  GetMyFeedArticles: 'GetMyFeedArticles',
   PostFollowUser: 'PostFollowUser',
   DeleteUnfollowUser: 'DeleteUnfollowUser',
   GetComments: 'GetComments',
