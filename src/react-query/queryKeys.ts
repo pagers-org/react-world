@@ -5,4 +5,6 @@ export const queryKeys = {
   GetComments: 'GetComments',
   PostComment: 'PostComment',
   DeleteComment: 'DeleteComment',
+  PostFavorite: 'PostFavorite',
+  DeleteFavorite: 'DeleteFavorite',
 } as const;
