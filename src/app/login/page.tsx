@@ -1,9 +1,10 @@
 'use client';
 
+import ProtecTedRoute from '@/composables/ProtectedRoute.tsx/ProtectedRoute';
 import { LoginPostRequestType } from '@/types/auth';
 import { produce } from 'immer';
 import { useRouter } from 'next/navigation';
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import { postUserLogin } from '@/api/auth';
 
@@ -11,19 +12,21 @@ const page = () => {
   const router = useRouter();
 
   const [formInput, setFormInput] = useState({
-    username: '',
     email: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState<null | string>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    const eventTarget = e.target;
     const userInfo: LoginPostRequestType = {
       user: {
-        email: e.target.email.value,
-        password: e.target.password.value,
+        email: eventTarget.email.value,
+        password: eventTarget.password.value,
       },
     };
     login(userInfo);
@@ -32,11 +35,13 @@ const page = () => {
   const login = async (userInfo: LoginPostRequestType) => {
     await postUserLogin(userInfo).then((res) => {
       if (res.errors) {
+        setIsLoading(false);
         const errorText = `${Object.keys(res.errors)} ${
           Object.values(res.errors)[0]
         }`;
         setError(errorText);
       } else {
+        localStorage.setItem('user', JSON.stringify(res.user));
         router.push('/');
       }
     });
@@ -92,7 +97,9 @@ const page = () => {
                   />
                 </div>
                 <button
+                  type="submit"
                   disabled={
+                    isLoading ||
                     formInput.email.length === 0 ||
                     formInput.password.length === 0
                   }
@@ -109,4 +116,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProtecTedRoute(page);

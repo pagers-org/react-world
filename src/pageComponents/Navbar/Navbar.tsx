@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { cn } from '@/utils/style';
 
@@ -11,22 +11,43 @@ import { NavbarStyle } from './style';
 const Navbar = () => {
   const pathname = usePathname();
 
-  const PATH = [
-    { href: '/', title: 'Home', id: 'Home' },
-    { href: '/login', title: 'Sign in', id: 'Sign in' },
-    { href: '/signUp', title: 'Sign Up', id: 'Sign up' },
+  const NOT_LOGIN_PATH = [
+    { href: '/', title: 'Home' },
+    { href: '/login', title: 'Sign in' },
+    { href: '/signUp', title: 'Sign Up' },
+  ];
+
+  const LOGIN_PATH = [
+    { href: '/', title: 'Home' },
+    {
+      href: '/editor',
+      title: (
+        <div>
+          <img src="" alt="" />
+          New Article
+        </div>
+      ),
+    },
+    { href: '/settings', title: 'settings' },
+    {
+      href: `/@${JSON.parse(window.localStorage.getItem('user'))?.username}`,
+      title: JSON.parse(window.localStorage.getItem('user'))?.username,
+    },
   ];
 
   return (
     <nav className="navbar navbar-light">
       <div className="container flex !justify-between">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" href="/">
           Moseung
-        </a>
+        </Link>
         <ul className="flex gap-2">
-          {PATH.map((path) => (
+          {(JSON.parse(window.localStorage.getItem('user'))
+            ? LOGIN_PATH
+            : NOT_LOGIN_PATH
+          ).map((path, index) => (
             <Link
-              key={path.id}
+              key={index}
               className={cn(
                 NavbarStyle({ isCurrentPath: pathname === path.href }),
               )}
