@@ -15,6 +15,10 @@ import {
   useDeleteFavoriteMutation,
   usePostFavoriteMutation,
 } from '@/hooks/query/favorites/useFavoritesMutation';
+import {
+  useDeleteUnFollowUserMutation,
+  usePostFollowUserMutation,
+} from '@/hooks/query/profile/useProfileMutation';
 
 interface Props {
   article: ArticleResponse['article'];
@@ -36,7 +40,11 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     createdAt,
     favorited,
     favoritesCount,
-    author: { username: authorUsername, image: authorImage },
+    author: {
+      username: authorUsername,
+      image: authorImage,
+      following: isAuthorFollowing,
+    },
   } = currentArticle;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -91,6 +99,42 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     }
   };
 
+  const { mutate: postFollowMutate, isLoading: isPostFollowLoading } =
+    usePostFollowUserMutation();
+  const { mutate: deleteUnfollowMutate, isLoading: isDeleteUnfollowLoading } =
+    useDeleteUnFollowUserMutation();
+
+  const followUser = (following: boolean) => {
+    if (!currentUser.email) {
+      router.push('/login');
+      return;
+    }
+
+    if (following) {
+      deleteUnfollowMutate(
+        { username: authorUsername },
+        {
+          onSuccess: (res) => {
+            const { profile } = res;
+            setCurrentArticle((prev) => ({ ...prev, author: profile }));
+          },
+        },
+      );
+    } else {
+      postFollowMutate(
+        {
+          username: authorUsername,
+        },
+        {
+          onSuccess: (res) => {
+            const { profile } = res;
+            setCurrentArticle((prev) => ({ ...prev, author: profile }));
+          },
+        },
+      );
+    }
+  };
+
   useEffect(() => {
     const authorProfileMenus = isAuthor ? (
       <>
@@ -110,11 +154,20 @@ const ArticleDetailPageMain = ({ article }: Props) => {
       </>
     ) : (
       <>
-        <button className="btn btn-sm btn-outline-secondary">
+        <button
+          className={`btn btn-sm ${classNames({
+            'btn-secondary': isAuthorFollowing,
+            'btn-outline-secondary': !isAuthorFollowing,
+          })}`}
+          type="button"
+          onClick={() => followUser(isAuthorFollowing)}
+          disabled={isPostFollowLoading || isDeleteUnfollowLoading}
+        >
           <i className="ion-plus-round"></i>
-          &nbsp; Follow Eric Simons <span className="counter">(10)</span>
+          &nbsp;{' '}
+          {`${isAuthorFollowing ? 'Unfollow' : 'Follow'} ${authorUsername}`}
         </button>
-        &nbsp;&nbsp;
+        &nbsp;
         <button
           className={`btn btn-sm ${classNames({
             'btn-outline-primary': !favorited,
@@ -138,6 +191,9 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     isLoading,
     isDeleteFavoriteMutationLoading,
     isPostFavoriteMutationLoading,
+    isPostFollowLoading,
+    isDeleteUnfollowLoading,
+    isAuthorFollowing,
   ]);
 
   return (
