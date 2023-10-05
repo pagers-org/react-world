@@ -1,13 +1,20 @@
 'use client';
 
+import { queryClient } from '@/react-query/queryClient';
 import { useUserStore } from '@/stores/users';
 import { ArticleResponse } from '@/types/api/articles';
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
 import { deleteArticle } from '@/api/articles';
+
+import {
+  useDeleteFavoriteMutation,
+  usePostFavoriteMutation,
+} from '@/hooks/query/favorites/useFavoritesMutation';
 
 interface Props {
   article: ArticleResponse['article'];
@@ -17,6 +24,8 @@ const ArticleDetailPageMain = ({ article }: Props) => {
   const router = useRouter();
 
   const currentUser = useUserStore((state) => state.user);
+
+  const [currentArticle, setCurrentArticle] = useState(article);
 
   const {
     slug,
@@ -28,7 +37,7 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     favorited,
     favoritesCount,
     author: { username: authorUsername, image: authorImage },
-  } = article;
+  } = currentArticle;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentAuthorProfileMenus, setCurrentAuthorProfileMenus] =
@@ -50,10 +59,35 @@ const ArticleDetailPageMain = ({ article }: Props) => {
     });
   };
 
-  const favoriteCurrentArticle = () => {
+  const {
+    mutate: postFavoriteMutate,
+    isLoading: isPostFavoriteMutationLoading,
+  } = usePostFavoriteMutation();
+  const {
+    mutate: deleteFavoriteMutate,
+    isLoading: isDeleteFavoriteMutationLoading,
+  } = useDeleteFavoriteMutation();
+
+  const favoriteCurrentArticle = (slug: string, favorited: boolean) => {
     if (!currentUser.email) {
       router.push('/login');
       return;
+    }
+
+    if (favorited) {
+      deleteFavoriteMutate({ slug });
+      setCurrentArticle((prev) => ({
+        ...prev,
+        favorited: !prev.favorited,
+        favoritesCount: prev.favoritesCount - 1,
+      }));
+    } else {
+      postFavoriteMutate({ slug });
+      setCurrentArticle((prev) => ({
+        ...prev,
+        favorited: !prev.favorited,
+        favoritesCount: prev.favoritesCount + 1,
+      }));
     }
   };
 
@@ -82,17 +116,29 @@ const ArticleDetailPageMain = ({ article }: Props) => {
         </button>
         &nbsp;&nbsp;
         <button
-          className="btn btn-sm btn-outline-primary"
-          onClick={favoriteCurrentArticle}
+          className={`btn btn-sm ${classNames({
+            'btn-outline-primary': !favorited,
+            'btn-primary': favorited,
+          })}`}
+          onClick={() => favoriteCurrentArticle(slug, favorited)}
+          disabled={
+            isPostFavoriteMutationLoading || isDeleteFavoriteMutationLoading
+          }
         >
           <i className="ion-heart"></i>
-          &nbsp; Favorite Article <span className="counter">(29)</span>
+          &nbsp; {`${favorited ? 'Unfavorite' : 'Favorite'}`} Article{' '}
+          <span className="counter">{`(${favoritesCount})`}</span>
         </button>
       </>
     );
 
     setCurrentAuthorProfileMenus(authorProfileMenus);
-  }, [isAuthor, isLoading]);
+  }, [
+    isAuthor,
+    isLoading,
+    isDeleteFavoriteMutationLoading,
+    isPostFavoriteMutationLoading,
+  ]);
 
   return (
     <div className="article-page">

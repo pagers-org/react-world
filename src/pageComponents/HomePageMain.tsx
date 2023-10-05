@@ -11,6 +11,11 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { INITIAL_PAGE } from '@/constants/api';
 
+import {
+  useDeleteFavoriteMutation,
+  usePostFavoriteMutation,
+} from '@/hooks/query/favorites/useFavoritesMutation';
+
 interface Props {
   feeds: FeedsResponse;
 }
@@ -30,10 +35,49 @@ const HomePageMain = ({ feeds }: Props) => {
 
   const { articlesCount, articles } = feeds;
 
-  const favoriteArticle = () => {
+  const [currentArticles, setCurrentArticles] = useState(articles);
+
+  const {
+    mutate: postFavoriteMutate,
+    isLoading: isPostFavoriteMutationLoading,
+  } = usePostFavoriteMutation();
+  const {
+    mutate: deleteFavoriteMutate,
+    isLoading: isDeleteFavoriteMutationLoading,
+  } = useDeleteFavoriteMutation();
+
+  const favoriteArticle = (slug: string, favorited: boolean) => {
     if (!user.email) {
       navigate('/login');
       return;
+    }
+
+    if (favorited) {
+      deleteFavoriteMutate({ slug });
+      setCurrentArticles((prev) =>
+        prev.map((article) =>
+          article.slug === slug
+            ? {
+                ...article,
+                favorited: !article.favorited,
+                favoritesCount: article.favoritesCount - 1,
+              }
+            : article,
+        ),
+      );
+    } else {
+      postFavoriteMutate({ slug });
+      setCurrentArticles((prev) =>
+        prev.map((article) =>
+          article.slug === slug
+            ? {
+                ...article,
+                favorited: !article.favorited,
+                favoritesCount: article.favoritesCount + 1,
+              }
+            : article,
+        ),
+      );
     }
   };
 
@@ -113,11 +157,12 @@ const HomePageMain = ({ feeds }: Props) => {
             <div className="col-md-9">
               <div className="feed-toggle">{tabsElement}</div>
 
-              {articles.map(
+              {currentArticles.map(
                 ({
                   slug,
                   title,
                   description,
+                  favorited,
                   tagList,
                   createdAt,
                   favoritesCount,
@@ -143,8 +188,15 @@ const HomePageMain = ({ feeds }: Props) => {
                         <span className="date">{createdAt}</span>
                       </div>
                       <button
-                        className="btn btn-outline-primary btn-sm pull-xs-right"
-                        onClick={favoriteArticle}
+                        className={`btn btn-sm pull-xs-right ${classNames({
+                          'btn-outline-primary': !favorited,
+                          'btn-primary': favorited,
+                        })}`}
+                        onClick={() => favoriteArticle(slug, favorited)}
+                        disabled={
+                          isPostFavoriteMutationLoading ||
+                          isDeleteFavoriteMutationLoading
+                        }
                       >
                         <i className="ion-heart"></i> {favoritesCount}
                       </button>

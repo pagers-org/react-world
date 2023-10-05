@@ -1,7 +1,10 @@
 'use client';
 
 import Pagination from '@/composables/Pagination';
+import { queryClient } from '@/react-query/queryClient';
+import { queryKeys } from '@/react-query/queryKeys';
 import { useUserStore } from '@/stores/users';
+import { FeedsResponse } from '@/types/api/articles';
 import { ProfileResponse } from '@/types/api/profile';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -12,6 +15,10 @@ import { ReactNode, useEffect, useState } from 'react';
 import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
 
 import { useArticlesQuery } from '@/hooks/query/articles/useArticlesQuery';
+import {
+  useDeleteFavoriteMutation,
+  usePostFavoriteMutation,
+} from '@/hooks/query/favorites/useFavoritesMutation';
 import {
   useDeleteUnFollowUserMutation,
   usePostFollowUserMutation,
@@ -37,6 +44,10 @@ const ProfileUserPageMain = ({ profile }: Props) => {
 
   const [articleType, setArticleType] = useState<'my' | 'favorited'>();
   const [page, setPage] = useState<string>(INITIAL_PAGE);
+
+  const [currentArticles, setCurrentArticles] = useState<FeedsResponse | null>(
+    null,
+  );
 
   const { username, image, following } = currentProfile ?? profile;
 
@@ -92,10 +103,53 @@ const ProfileUserPageMain = ({ profile }: Props) => {
     }
   };
 
-  const favoriteArticle = () => {
+  const {
+    mutate: postFavoriteMutate,
+    isLoading: isPostFavoriteMutationLoading,
+  } = usePostFavoriteMutation({
+    onSuccess: () => queryClient.invalidateQueries([queryKeys.GetArticles]),
+  });
+  const {
+    mutate: deleteFavoriteMutate,
+    isLoading: isDeleteFavoriteMutationLoading,
+  } = useDeleteFavoriteMutation({
+    onSuccess: () => queryClient.invalidateQueries([queryKeys.GetArticles]),
+  });
+
+  const favoriteArticle = (slug: string, favorited: boolean) => {
     if (!user.email) {
       navigate('/login');
       return;
+    }
+
+    if (favorited) {
+      deleteFavoriteMutate({ slug });
+      setCurrentArticles((prev) => ({
+        articlesCount: prev?.articlesCount ?? 0,
+        articles: (prev?.articles ?? []).map((article) =>
+          article.slug === slug
+            ? {
+                ...article,
+                favorited: !article.favorited,
+                favoritesCount: article.favoritesCount - 1,
+              }
+            : article,
+        ),
+      }));
+    } else {
+      postFavoriteMutate({ slug });
+      setCurrentArticles((prev) => ({
+        articlesCount: prev?.articlesCount ?? 0,
+        articles: (prev?.articles ?? []).map((article) =>
+          article.slug === slug
+            ? {
+                ...article,
+                favorited: !article.favorited,
+                favoritesCount: article.favoritesCount + 1,
+              }
+            : article,
+        ),
+      }));
     }
   };
 
@@ -110,6 +164,14 @@ const ProfileUserPageMain = ({ profile }: Props) => {
 
     setPage(page);
   }, [searchParams]);
+
+  useEffect(() => {
+    if (isLoading || !data) {
+      return;
+    }
+
+    setCurrentArticles(data);
+  }, [isLoading, data]);
 
   useEffect(() => {
     const profileMenusElement =
@@ -209,14 +271,15 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                 </li>
               </ul>
             </div>
-            {!isLoading && data ? (
+            {currentArticles ? (
               <>
-                {data.articles.length > 0 ? (
-                  data.articles.map(
+                {currentArticles.articles.length > 0 ? (
+                  currentArticles.articles.map(
                     ({
                       slug,
                       title,
                       description,
+                      favorited,
                       tagList,
                       createdAt,
                       favoritesCount,
@@ -242,8 +305,15 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                             <span className="date">{createdAt}</span>
                           </div>
                           <button
-                            className="btn btn-outline-primary btn-sm pull-xs-right"
-                            onClick={favoriteArticle}
+                            className={`btn btn-sm pull-xs-right ${classNames({
+                              'btn-outline-primary': !favorited,
+                              'btn-primary': favorited,
+                            })}`}
+                            onClick={() => favoriteArticle(slug, favorited)}
+                            disabled={
+                              isPostFavoriteMutationLoading ||
+                              isDeleteFavoriteMutationLoading
+                            }
                           >
                             <i className="ion-heart"></i> {favoritesCount}
                           </button>
@@ -275,7 +345,7 @@ const ProfileUserPageMain = ({ profile }: Props) => {
                   </div>
                 )}
                 <Pagination
-                  totalCounts={data.articlesCount}
+                  totalCounts={currentArticles.articlesCount}
                   page={parseInt(page)}
                   perPage={parseInt(perPage)}
                 />
