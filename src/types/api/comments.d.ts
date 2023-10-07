@@ -1,13 +1,15 @@
 import { ProfileResponse } from './profile';
 
+export type Comment = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: ProfileResponse['profile'];
+};
+
 export type CommentsResponse = {
-  comments: Array<{
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    body: string;
-    author: ProfileResponse['profile'];
-  }>;
+  comments: Comment[];
 };
 
 export type CommentPayload = {
