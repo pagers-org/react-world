@@ -12,7 +12,7 @@ export const useCommentsQuery = ({
   headers?: HeadersInit;
   options?: RequestInit;
 }) => {
-  const query = useQuery([queryKeys.GetComments], () =>
+  const query = useQuery([queryKeys.GetComments, slug], () =>
     getComments({ slug, headers, options }),
   );
 
