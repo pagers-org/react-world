@@ -1,8 +1,9 @@
 'use client';
 import Button from '@/composables/Button';
 import { PlusIcon } from '@/composables/icons';
+import useProfile from '@/hooks/useProfile';
 import { fontSize } from '@/styles/common.css';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 type Props = {
   author: any;
@@ -12,25 +13,28 @@ const FollowButton = ({ author: { username, following }, slug }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationFn: async () => {
-      const method = following ? 'DELETE' : 'POST';
-      return fetch(`/api/profiles/${username}`, { method }).then(res => res.json());
-    },
-    onSuccess: data => {
-      queryClient.invalidateQueries(['article', slug]);
-      console.log('Success');
+  const onSuccess = (res: any) => {
+    console.log(res);
+    queryClient.invalidateQueries(['article', slug]);
+  };
 
-      console.log(data);
-    },
-    onError: error => {
-      console.error(error);
-      router.push('/login');
-    },
-  });
+  const onError = (err: any) => {
+    console.error(err);
+    router.push('/login');
+  };
+
+  const { follow, unFollow } = useProfile({ onSuccess, onError });
+
+  const handleButtonClick = () => {
+    if (following) {
+      unFollow();
+    } else {
+      follow();
+    }
+  };
 
   return (
-    <Button onClick={() => mutate()} type="gray">
+    <Button onClick={() => handleButtonClick()} type="gray">
       <PlusIcon className={fontSize} /> {following ? 'Unfollow' : 'Follow'} {username}
     </Button>
   );

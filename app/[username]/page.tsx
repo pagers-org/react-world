@@ -3,11 +3,11 @@
 import ArticleList from '@/components/article/ArticleList';
 import FollowButton from '@/components/user/FollowButton';
 import { SettingIcon } from '@/composables/icons';
+import useProfile from '@/hooks/useProfile';
 import useUserStore from '@/stores/useUserStore';
 import { container } from '@/styles/common.css';
 import { settingButton, userBlock, userImage, userInfo, userName } from '@/styles/profile.css';
 import { User } from '@/types';
-import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,12 +18,8 @@ type Props = {
 };
 const ProfilePage = ({ params: { username } }: Props) => {
   const { username: currentUsername } = useUserStore() as User;
-  const { data: profile } = useQuery({
-    queryKey: ['profile', username],
-    queryFn: () => fetch(`/api/profiles/${username}`).then(res => res.json()),
-    // enabled: !!username,
-    select: res => res.response.profile,
-  });
+
+  const { profile } = useProfile({ username });
 
   console.log(profile);
 
