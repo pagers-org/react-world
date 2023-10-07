@@ -82,7 +82,7 @@ export type User = {
 };
 
 export type UserAction = {
-  login?: (user: User) => void;
+  saveUserInfo?: (user: User) => void;
   updateUser?: (user: User) => void;
   logout?: () => void;
   reset?: () => void;

@@ -10,24 +10,24 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const SignInForm = () => {
   const router = useRouter();
-  // const { login } = useUserStore() as UserAction;
+  const { saveUserInfo } = useUserStore() as UserAction;
 
   const [loginUser, setLoginUser] = useState<LoginUser>({
     email: '',
     password: '',
   });
 
-  const { login } = useAuth();
+  const loginSuccess = (res: any) => {
+    saveUserInfo({ ...res.user });
+    router.push('/');
+  };
 
-  // const onSuccess = (res: any) => {
-  //   login({ ...res.user });
-  //   router.push('/');
-  // };
+  const loginError = (err: any) => {
+    console.log(err.message);
+    alert('이메일 또는 비밀번호가 잘못되었습니다.');
+  };
 
-  // const onError = (err: any) => {
-  //   console.log(err.message);
-  //   alert('이메일 또는 비밀번호가 잘못되었습니다.');
-  // };
+  const { login } = useAuth({ loginSuccess, loginError });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

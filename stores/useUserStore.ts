@@ -14,7 +14,7 @@ const useUserStore = create(
   persist<User | UserAction>(
     set => ({
       ...initialState,
-      login: user => {
+      saveUserInfo: user => {
         set(() => {
           const { email, username, bio, image } = user;
 

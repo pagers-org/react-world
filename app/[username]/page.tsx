@@ -21,7 +21,7 @@ const ProfilePage = ({ params: { username } }: Props) => {
   const { data: profile } = useQuery({
     queryKey: ['profile', username],
     queryFn: () => fetch(`/api/profiles/${username}`).then(res => res.json()),
-    enabled: !!username,
+    // enabled: !!username,
     select: res => res.response.profile,
   });
 
