@@ -11,14 +11,34 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 const SignUpForm = () => {
   const router = useRouter();
-  const { login } = useUserStore() as UserAction;
+  const { saveUserInfo } = useUserStore() as UserAction;
   const [newUser, setNewUser] = useState<NewUser>({
     username: '',
     email: '',
     password: '',
   });
 
-  const { signup } = useAuth();
+  const signupSuccess = (res: any) => {
+    console.log('Client');
+
+    console.log(res);
+
+    saveUserInfo({
+      ...res.user,
+    });
+    router.push('/');
+  };
+
+  const signupError = () => {
+    alert('회원가입에 실패했습니다.');
+    setNewUser({
+      username: '',
+      email: '',
+      password: '',
+    });
+  };
+
+  const { signup } = useAuth({ signupSuccess, signupError });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

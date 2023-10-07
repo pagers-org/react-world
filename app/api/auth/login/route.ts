@@ -5,15 +5,15 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const req = await loginAPI(body);
+    const res = await loginAPI(body);
 
     const response = NextResponse.json({
       message: 'Login successfull',
       success: true,
-      user: req.user,
+      user: res.user,
     });
 
-    response.cookies.set('token', req.user.token, {
+    response.cookies.set('token', res.user.token, {
       httpOnly: true,
       path: '/',
     });
