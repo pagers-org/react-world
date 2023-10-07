@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
 
@@ -27,7 +27,9 @@ const HomePageMain = () => {
 
   const user = useUserStore((state) => state.user);
 
-  const [feedType, setFeedType] = useState<string>();
+  const [feedType, setFeedType] = useState<string>(
+    user.email ? 'your' : 'global',
+  );
   const [page, setPage] = useState<number>(1);
 
   const [myFeedTabElement, setMyFeedTabElement] = useState<ReactNode>(<></>);
@@ -108,14 +110,6 @@ const HomePageMain = () => {
     setTagFeedTabElement(tagFeedTabElement);
     setFeedType(popularTag);
   };
-
-  useEffect(() => {
-    if (user.email) {
-      setFeedType('your');
-    } else {
-      setFeedType('global');
-    }
-  }, [user]);
 
   useEffect(() => {
     const page = searchParams?.get('page') ?? INITIAL_PAGE;
