@@ -30,7 +30,7 @@ const useArticles = ({
         case 'my':
           return await fetch(`/api/articles/my?username=${username}&page=${pageParam}`).then(res => res.json());
         case 'favorited':
-          return await getArticlesWithFavoritedAPI(username);
+          return await fetch(`/api/articles?username=${username}&page=${pageParam}`).then(res => res.json());
         case 'your':
           return await fetch(`/api/articles/feed?page=${pageParam}`).then(res => res.json());
         default:

@@ -10,19 +10,12 @@ export const http = {
       ...options,
     };
     console.log(defaultOptions);
-
-    // console.log('서버자나');
-    // console.log(API_BASE_URL);
-
-    // console.log(defaultOptions);
-
     try {
       const response = await fetch(`${API_BASE_URL}${url}`, defaultOptions);
 
       if (!response.ok) {
         const errorData = await response.json();
-        // console.log('error');
-        // console.log(errorData);
+
         console.log(errorData);
 
         console.log('실패');
@@ -30,7 +23,7 @@ export const http = {
         throw new Error(errorData.message || 'Request failed');
       }
 
-      console.log(response);
+      // console.log(response);
       console.log(JSON.stringify(response));
 
       console.log('성공');

@@ -22,8 +22,13 @@ const getArticlesWithAuthorAPI = (username: string, auth: string, offset = 0, li
   });
 };
 
-const getArticlesWithFavoritedAPI = (username: string, offset = 0, limit = 10) => {
-  return http.get(`/articles?favorited=${username}&limit=${limit}&offset=${offset ? offset * limit : 0}`);
+const getArticlesWithFavoritedAPI = (username: string, auth: string, offset = 0, limit = 10) => {
+  return http.get(`/articles?favorited=${username}&limit=${limit}&offset=${offset ? offset * limit : 0}`, {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Token ${auth}`,
+    },
+  });
 };
 
 const getArticlesFeed = (offset = 0, auth: string, limit = 10) => {
