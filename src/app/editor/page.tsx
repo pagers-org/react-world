@@ -1,9 +1,9 @@
-import { FeedResponse } from '@/types/api/articles';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import EditorPageMain from '@/pageComponents/editor/EditorPageMain';
 
+import { ERROR } from '@/constants/error';
 import { COOKIE_ACCESS_TOKEN_KEY } from '@/constants/key';
 
 import { getArticle } from '@/api/articles';
@@ -20,12 +20,16 @@ const getArticleDetail = async (slug: string) => {
     const cookieStore = cookies();
     const accessToken = cookieStore.get(COOKIE_ACCESS_TOKEN_KEY)?.value;
 
-    const res = (await getArticle({
+    const res = await getArticle({
       slug,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    })) as FeedResponse;
+    });
+
+    if (res?.errors || res?.status === 'error') {
+      throw new Error(ERROR.ARTICLE_DETAIL);
+    }
 
     return res.article;
   } catch (e) {
