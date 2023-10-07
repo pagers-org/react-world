@@ -3,12 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 async function GET(req: NextRequest, route: { params: { slug: string } }) {
   try {
-    console.log('GET Route');
-
     const slug = route.params.slug;
     const token = req.cookies.get('token')?.value || '';
-    console.log(slug);
-    console.log(token);
 
     const res = await http.get(`/articles/${slug}`, {
       headers: {
@@ -17,23 +13,18 @@ async function GET(req: NextRequest, route: { params: { slug: string } }) {
       },
     });
 
-    console.log(res);
-
     return NextResponse.json({ message: 'Article Get Success', success: true, data: res });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
+
 async function PUT(req: NextRequest, route: { params: { slug: string } }) {
   try {
     const body = await req.json();
     const slug = route.params.slug;
     const token = req.cookies.get('token')?.value || '';
-
-    console.log(slug);
-    console.log(token);
-    console.log(body);
 
     const res = await http.put(`/articles/${slug}`, body, {
       headers: {
@@ -42,20 +33,16 @@ async function PUT(req: NextRequest, route: { params: { slug: string } }) {
       },
     });
 
-    console.log(res);
-
     return NextResponse.json({ message: 'Article Update Success', success: true, data: res });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
+
 async function DELETE(req: NextRequest, route: { params: { slug: string } }) {
   try {
     const slug = route.params.slug;
     const token = req.cookies.get('token')?.value || '';
-    console.log('좋아요 Route');
-    console.log(slug);
-    console.log(token);
 
     const res = await http.delete(`/articles/${slug}`, {
       headers: {
@@ -63,8 +50,6 @@ async function DELETE(req: NextRequest, route: { params: { slug: string } }) {
         Authorization: `Token ${token}`,
       },
     });
-
-    console.log(res);
 
     return NextResponse.json({ message: 'Article Delete Success', success: true, data: res });
   } catch (error: any) {

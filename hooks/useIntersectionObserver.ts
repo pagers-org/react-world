@@ -11,13 +11,16 @@ const useIntersectionObserver = (cb: () => void, ref: RefObject<HTMLElement>) =>
       },
       { threshold: 0.4 } //40%가 보일때를 기본 값으로 설정 했습니다.
     );
-    if (ref.current) {
-      observer.observe(ref.current);
+
+    const currentRef = ref?.current;
+
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [cb, ref]);

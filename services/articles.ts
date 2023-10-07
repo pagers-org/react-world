@@ -27,10 +27,6 @@ const getArticlesWithFavoritedAPI = (username: string, offset = 0, limit = 10) =
 };
 
 const getArticlesFeed = (offset = 0, auth: string, limit = 10) => {
-  console.log('Feed');
-
-  console.log(auth);
-
   return http.get(`/articles/feed?limit=${limit}&offset=${offset ? offset * limit : 0}`, {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

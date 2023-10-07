@@ -3,8 +3,25 @@ import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { RefObject } from 'react';
 import useIntersectionObserver from './useIntersectionObserver';
 
-const useArticles = (ref: RefObject<HTMLElement>, tab: string, username = '') => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+const useArticles = ({
+  targetRef,
+  tab = 'global',
+  username = '',
+  onSuccess,
+  onError,
+}: {
+  targetRef?: RefObject<HTMLElement> | undefined;
+  tab?: string;
+  username?: string;
+  onSuccess?: (res: any) => void;
+  onError?: (err: any) => void;
+}) => {
+  const {
+    data: articlesData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ['articles', tab],
     queryFn: async ({ pageParam = 0 }) => {
       switch (tab) {
@@ -29,20 +46,23 @@ const useArticles = (ref: RefObject<HTMLElement>, tab: string, username = '') =>
 
       return currentPage++;
     },
+    enabled: !!targetRef,
   });
 
-  const { mutate } = useMutation({
+  const { mutate: favorite } = useMutation({
     mutationFn: async (slug: string) => {
-      return fetch(`/api/articles/favorite/${slug}`).then(res => res.json());
+      return await fetch(`/api/articles/favorite/${slug}`, { method: 'POST' }).then(res => res.json());
     },
-    onSuccess: data => {
-      console.log('성공');
-      console.log(data);
+    onSuccess,
+    onError,
+  });
+
+  const { mutate: unFavorite } = useMutation({
+    mutationFn: async (slug: string) => {
+      return await fetch(`/api/articles/favorite/${slug}`, { method: 'DELETE' }).then(res => res.json());
     },
-    onError: err => {
-      console.log('Error 발생');
-      console.log(err);
-    },
+    onSuccess,
+    onError,
   });
 
   const nextPage = () => {
@@ -52,9 +72,9 @@ const useArticles = (ref: RefObject<HTMLElement>, tab: string, username = '') =>
     fetchNextPage();
   };
 
-  useIntersectionObserver(nextPage, ref);
+  useIntersectionObserver(nextPage, targetRef);
 
-  return { data, mutate };
+  return { articlesData, favorite, unFavorite };
 };
 
 export default useArticles;

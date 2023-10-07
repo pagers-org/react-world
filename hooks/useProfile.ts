@@ -11,7 +11,7 @@ const useProfile = ({
 }) => {
   const { data: profile } = useQuery({
     queryKey: ['profile', username],
-    queryFn: () => fetch(`/api/profiles/${username}`).then(res => res.json()),
+    queryFn: () => fetch(`/api/profiles/${username}`, { method: 'GET' }).then(res => res.json()),
     enabled: !!username,
     select: res => res.response.profile,
   });
