@@ -6,8 +6,8 @@ const useProfile = ({
   onError,
 }: {
   username?: string;
-  onSuccess: (res: any) => void;
-  onError: (err: any) => void;
+  onSuccess?: (res: any) => void;
+  onError?: (err: any) => void;
 }) => {
   const { data: profile } = useQuery({
     queryKey: ['profile', username],
