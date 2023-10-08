@@ -57,8 +57,17 @@ const ArticlePage = ({ params: { slug } }: Props) => {
           <hr />
           <div className={`${justifyCenter} ${paddingTB}`}>
             <UserBox author={author} createdAt={createdAt} />
-            <FollowButton author={author} slug={slug} /> &nbsp;
-            <FavoriteButton favoritesCount={favoritesCount} />
+            {author.username === username ? (
+              <div className={flex}>
+                <ArticleEditButton slug={slug} />
+                <ArticleDeleteButton slug={slug} />
+              </div>
+            ) : (
+              <div className={flex}>
+                <FollowButton author={author} slug={slug} />
+                <FavoriteButton favoritesCount={favoritesCount} />
+              </div>
+            )}
           </div>
         </div>
       </Suspense>

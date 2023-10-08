@@ -6,7 +6,7 @@ import { flexCenter } from '@/styles/common.css';
 import useCurrentTab from '@/stores/useCurrentTab';
 import useArticles from '@/hooks/useArticles';
 type Props = {
-  username: string;
+  username?: string;
 };
 const ArticleList = ({ username }: Props) => {
   const targetRef = useRef(null);

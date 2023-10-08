@@ -1,4 +1,4 @@
-import { getArticlesWithFavoritedAPI, getArticlesWithTagAPI } from '@/services/articles';
+import { getArticlesWithTagAPI } from '@/services/articles';
 import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { RefObject } from 'react';
 import useIntersectionObserver from './useIntersectionObserver';

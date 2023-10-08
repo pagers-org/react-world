@@ -25,16 +25,16 @@ const FollowButton = ({ author: { username, following }, slug }: Props) => {
 
   const { follow, unFollow } = useProfile({ onSuccess, onError });
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (username: string) => {
     if (following) {
-      unFollow();
+      unFollow(username);
     } else {
-      follow();
+      follow(username);
     }
   };
 
   return (
-    <Button onClick={() => handleButtonClick()} type="gray">
+    <Button onClick={() => handleButtonClick(username)} type="gray">
       <PlusIcon className={fontSize} /> {following ? 'Unfollow' : 'Follow'} {username}
     </Button>
   );

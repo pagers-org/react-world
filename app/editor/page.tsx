@@ -29,7 +29,7 @@ const EditorPage = () => {
 
       console.log(data);
       queryClient.invalidateQueries(['articles', 'global']);
-      router.push('router');
+      router.push('/');
     },
     onError: (error: any) => {
       console.log('에러 발생');

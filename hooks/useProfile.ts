@@ -17,7 +17,7 @@ const useProfile = ({
   });
 
   const { mutate: follow } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (username: string) => {
       return fetch(`/api/profiles/${username}`, { method: 'POST' }).then(res => res.json());
     },
     onSuccess,
@@ -25,7 +25,7 @@ const useProfile = ({
   });
 
   const { mutate: unFollow } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (username: string) => {
       return fetch(`/api/profiles/${username}`, { method: 'DELETE' }).then(res => res.json());
     },
     onSuccess,
