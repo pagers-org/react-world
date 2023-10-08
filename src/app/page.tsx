@@ -1,9 +1,16 @@
-import { hero } from "./page.css"
+import { Articles } from './page/Articles.server';
+import { mainBanner, bannerTitle, bannerSubTitle } from './page.css';
 
 export default function Page() {
   return (
-  <div>
-    <h1 className={hero}>Hello, Next.js!</h1>
-  </div>
-  )
+    <div>
+      <section className={mainBanner}>
+        <h1 className={bannerTitle}>conduit</h1>
+        <p className={bannerSubTitle}>A place to share your knowledge.</p>
+      </section>
+      <section>
+        <Articles />
+      </section>
+    </div>
+  );
 }

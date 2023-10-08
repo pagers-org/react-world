@@ -5,7 +5,6 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:tailwindcss/recommended',
   ],
   rules: {
     'prettier/prettier': 'error',

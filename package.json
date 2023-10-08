@@ -35,10 +35,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@vanilla-extract/css": "^1.13.0",
+    "date-fns": "^2.30.0",
     "next": "^13.4.19",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
