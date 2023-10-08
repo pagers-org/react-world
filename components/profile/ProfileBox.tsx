@@ -1,10 +1,10 @@
 import { SettingIcon } from '@/composables/icons';
 import useUserStore from '@/stores/useUserStore';
 import { settingButton, userBlock, userImage, userInfo, userName } from '@/styles/profile.css';
-import { User } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import FollowButton from '../user/FollowButton';
+import { User } from '@/types/api/users';
 type Props = {
   image: string;
   username: string;

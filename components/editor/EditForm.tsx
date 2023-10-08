@@ -6,8 +6,9 @@ import { editorButton, editorForm } from '@/styles/editor.css';
 import TagInput from './TagInput';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { NewArticle } from '@/types';
+
 import { useRouter } from 'next/navigation';
+import { NewArticle } from '@/types/api/articles';
 
 const EditForm = ({ slug }: { slug?: string }) => {
   const queryClient = useQueryClient();
@@ -39,15 +40,11 @@ const EditForm = ({ slug }: { slug?: string }) => {
         );
       }
     },
-    onSuccess: data => {
-      console.log('등록 성공');
-
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries(['articles', 'global']);
       router.push('/');
     },
     onError: (error: any) => {
-      console.log('에러 발생');
       console.error(error);
     },
   });

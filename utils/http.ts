@@ -10,6 +10,8 @@ export const http = {
       ...options,
     };
     console.log(defaultOptions);
+    console.log(API_BASE_URL);
+
     try {
       const response = await fetch(`${API_BASE_URL}${url}`, defaultOptions);
 

@@ -13,8 +13,6 @@ async function GET(req: NextRequest, route: { params: { slug: string } }) {
       },
     });
 
-    console.log(res);
-
     return NextResponse.json({ message: 'Comment Get Success', success: true, data: res });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
@@ -26,10 +24,6 @@ async function POST(req: NextRequest, route: { params: { slug: string } }) {
     const body = await req.json();
     const slug = route.params.slug;
     const token = req.cookies.get('token')?.value || '';
-    console.log(body);
-
-    console.log(slug);
-    console.log(token);
 
     const res = await http.post(`/articles/${slug}/comments`, body, {
       headers: {
@@ -37,8 +31,6 @@ async function POST(req: NextRequest, route: { params: { slug: string } }) {
         Authorization: `Token ${token}`,
       },
     });
-
-    console.log(res);
 
     return NextResponse.json({ message: 'Comment Create Success', success: true, data: res });
   } catch (error: any) {
@@ -55,19 +47,12 @@ async function DELETE(req: NextRequest, route: { params: { slug: string } }) {
 
     const token = req.cookies.get('token')?.value || '';
 
-    console.log(slug);
-    console.log(token);
-    console.log('삭제 전');
-
     const res = await http.delete(`/articles/${slug}/comments/${id}`, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         Authorization: `Token ${token}`,
       },
     });
-    console.log('삭제 후');
-
-    console.log(res);
 
     return NextResponse.json({ message: 'Comment Delete Success', success: true, data: res });
   } catch (error: any) {

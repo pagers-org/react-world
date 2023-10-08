@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 import { flexCenter } from '@/styles/common.css';
 import useCurrentTab from '@/stores/useCurrentTab';
 import useArticles from '@/hooks/useArticles';
+import { Article } from '@/types/api/articles';
 type Props = {
   username?: string;
 };
@@ -21,7 +22,7 @@ const ArticleList = ({ username }: Props) => {
         <div>
           {articlesData?.pages.map((group, i) => (
             <div key={i}>
-              {group?.articles?.map(article => <ArticlePreview key={article.slug} article={article} />)}
+              {group?.articles?.map((article: Article) => <ArticlePreview key={article.slug} article={article} />)}
             </div>
           ))}
         </div>

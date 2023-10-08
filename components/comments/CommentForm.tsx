@@ -24,7 +24,6 @@ const CommentForm = ({ slug }: { slug: string }) => {
   });
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(comment);
 
     mutate(e.target.comment.value);
     setComment('');
@@ -36,6 +35,7 @@ const CommentForm = ({ slug }: { slug: string }) => {
         name="comment"
         className={commentTextarea}
         placeholder="Write a comment..."
+        value={comment}
         onChange={e => setComment(e.target.value)}
       ></textarea>
       <div className={commentFormFooter}>

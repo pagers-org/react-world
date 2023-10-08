@@ -1,4 +1,4 @@
-import { LoginUser, NewUser, UpdateUser } from '@/types';
+import { LoginUser, NewUser, UpdateUser } from '@/types/api/users';
 import { http } from '@/utils/http';
 
 // 회원가입

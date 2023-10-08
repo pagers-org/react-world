@@ -21,8 +21,6 @@ const TagInput = ({ appendTag }: Props) => {
   };
 
   const handleTagClick = (tag: string) => {
-    console.log('쿨릭');
-
     setTags((prevTags: string[]) => prevTags.filter(prevTag => prevTag !== tag));
   };
 

@@ -4,7 +4,9 @@ import { TrashIcon } from '@/composables/icons';
 import useUserStore from '@/stores/useUserStore';
 import { commentContent, commentFormFooter, commnetCard } from '@/styles/comments.css';
 import { circle, flexCenter } from '@/styles/common.css';
-import { Comment, User } from '@/types';
+import { Comment } from '@/types/api/comment';
+import { User } from '@/types/api/users';
+
 import { formatDate } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -37,7 +39,7 @@ const CommentCard = ({ comment, slug }: Props) => {
             height={20}
             alt="iamge"
           />
-          &nbsp; {comment.author.username} {formatDate(comment.createAt)}
+          &nbsp; {comment.author.username} {formatDate(comment.createdAt)}
         </div>
         {comment.author.username === username && <TrashIcon onClick={() => handleTrashClick(slug)} />}
       </div>

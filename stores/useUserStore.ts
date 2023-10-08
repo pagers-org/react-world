@@ -1,4 +1,5 @@
-import { User, UserAction } from '@/types';
+import { User } from '@/types/api/users';
+import { UserAction } from '@/types/store/userStore';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 

@@ -6,7 +6,7 @@ import { userImageSm } from '@/styles/profile.css';
 import Image from 'next/image';
 import { EditIcon, SettingIcon } from '@/composables/icons';
 import useUserStore from '@/stores/useUserStore';
-import { User } from '@/types';
+import { User } from '@/types/api/users';
 
 const NAVS = [
   {

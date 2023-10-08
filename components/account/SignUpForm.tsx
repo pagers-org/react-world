@@ -5,7 +5,9 @@ import useUserStore from '@/stores/useUserStore';
 import { form } from '@/styles/account.css';
 import { fillGreenButton, input } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
-import { NewUser, UserAction } from '@/types';
+import { NewUser } from '@/types/api/users';
+import { UserAction } from '@/types/store/userStore';
+
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
@@ -19,10 +21,6 @@ const SignUpForm = () => {
   });
 
   const signupSuccess = (res: any) => {
-    console.log('Client');
-
-    console.log(res);
-
     saveUserInfo({
       ...res.user,
     });

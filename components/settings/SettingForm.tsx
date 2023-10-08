@@ -24,9 +24,7 @@ const SettingForm = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: (formData: any) =>
       fetch('/api/auth/user', { method: 'PUT', body: JSON.stringify(formData) }).then(res => res.json()),
-    onSuccess: data => {
-      console.log(data);
-      console.log('성공');
+    onSuccess: () => {
       updateUser({
         ...formData,
       });

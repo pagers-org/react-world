@@ -20,14 +20,12 @@ const ArticlePreview = ({
 
   const queryClient = useQueryClient();
 
-  const onSuccess = (res: any) => {
-    console.log(res);
+  const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ['articles', tab] });
   };
 
-  const onError = (err: any) => {
+  const onError = () => {
     // 권한이 없을 경우 login 페이지로 이동
-    console.log(err);
     router.push('/login');
   };
 

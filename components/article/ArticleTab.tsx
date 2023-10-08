@@ -2,7 +2,7 @@
 import useCurrentTab from '@/stores/useCurrentTab';
 import useUserStore from '@/stores/useUserStore';
 import { articleTab, articleTabItem, articleTabItemActivate, articleTabItemDisable } from '@/styles/article.css';
-import { User } from '@/types';
+import { User } from '@/types/api/users';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 

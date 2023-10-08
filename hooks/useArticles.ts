@@ -13,8 +13,8 @@ const useArticles = ({
   targetRef?: RefObject<HTMLElement> | undefined;
   tab?: string;
   username?: string;
-  onSuccess?: (res: any) => void;
-  onError?: (err: any) => void;
+  onSuccess?: (res?: any) => void;
+  onError?: (err?: any) => void;
 }) => {
   const {
     data: articlesData,
@@ -28,11 +28,15 @@ const useArticles = ({
         case 'global':
           return await fetch(`http://localhost:3000/api/articles?page=${pageParam}`).then(res => res.json());
         case 'my':
-          return await fetch(`/api/articles/my?username=${username}&page=${pageParam}`).then(res => res.json());
+          return await fetch(`http://localhost:3000/api/articles/my?username=${username}&page=${pageParam}`).then(res =>
+            res.json()
+          );
         case 'favorited':
-          return await fetch(`/api/articles?username=${username}&page=${pageParam}`).then(res => res.json());
+          return await fetch(`http://localhost:3000/api/articles?username=${username}&page=${pageParam}`).then(res =>
+            res.json()
+          );
         case 'your':
-          return await fetch(`/api/articles/feed?page=${pageParam}`).then(res => res.json());
+          return await fetch(`http://localhost:3000/api/articles/feed?page=${pageParam}`).then(res => res.json());
         default:
           return await getArticlesWithTagAPI(tab, pageParam);
       }

@@ -4,7 +4,8 @@ import useUserStore from '@/stores/useUserStore';
 import { form } from '@/styles/account.css';
 import { fillGreenButton, input } from '@/styles/common.css';
 import { buttonBox } from '@/styles/layout.css';
-import { LoginUser, UserAction } from '@/types';
+import { LoginUser, UserResponse } from '@/types/api/users';
+import { UserAction } from '@/types/store/userStore';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
@@ -17,13 +18,13 @@ const SignInForm = () => {
     password: '',
   });
 
-  const loginSuccess = (res: any) => {
+  const loginSuccess = (res: UserResponse) => {
     saveUserInfo({ ...res.user });
     router.push('/');
   };
 
-  const loginError = (err: any) => {
-    console.log(err.message);
+  const loginError = (err: Error) => {
+    console.error(err.message);
     alert('이메일 또는 비밀번호가 잘못되었습니다.');
   };
 

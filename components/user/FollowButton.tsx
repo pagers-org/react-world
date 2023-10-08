@@ -13,13 +13,11 @@ const FollowButton = ({ author: { username, following }, slug }: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const onSuccess = (res: any) => {
-    console.log(res);
+  const onSuccess = () => {
     queryClient.invalidateQueries(['article', slug]);
   };
 
-  const onError = (err: any) => {
-    console.error(err);
+  const onError = () => {
     router.push('/login');
   };
 

@@ -1,4 +1,4 @@
-import { LoginUser, NewUser } from '@/types';
+import { LoginUser, NewUser, UserResponse } from '@/types/api/users';
 import { useMutation } from '@tanstack/react-query';
 // 로그인 / 로그아웃 / 회원가입 / 로그인 확인
 const useAuth = ({
@@ -9,13 +9,16 @@ const useAuth = ({
   signoutSuccess,
   signoutError,
 }: {
-  loginSuccess?: (res: any) => void;
-  loginError?: (err: any) => void;
-  signupSuccess?: (res: any) => void;
-  signupError?: (err: any) => void;
-  signoutSuccess?: (res: any) => void;
-  signoutError?: (err: any) => void;
+  loginSuccess?: (res: UserResponse) => void;
+  loginError?: (err: Error) => void;
+  signupSuccess?: (res: UserResponse) => void;
+  signupError?: (err: Error) => void;
+  signoutSuccess?: (res: UserResponse) => void;
+  signoutError?: (err: Error) => void;
 }) => {
+  // 그냥 onSuccess랑 onError로 다 해결할까? login, signup, signout을 같은 컴포넌트에서
+  // 사용할 일이 있을까?
+
   // 로그인
   const { mutate: login } = useMutation({
     mutationFn: async (loginUser: LoginUser) =>
@@ -36,7 +39,7 @@ const useAuth = ({
 
   // 로그아웃
   const { mutate: signOut } = useMutation({
-    mutationFn: () => fetch('/api/auth/logout').then(res => res.json()),
+    mutationFn: async () => await fetch('/api/auth/logout').then(res => res.json()),
     onSuccess: signoutSuccess,
     onError: signoutError,
   });

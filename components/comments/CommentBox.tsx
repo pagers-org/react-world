@@ -5,8 +5,9 @@ import React from 'react';
 import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import { flexCenter, flexRow, textCenter } from '@/styles/common.css';
-import { User } from '@/types';
 import { useQuery } from '@tanstack/react-query';
+import { User } from '@/types/api/users';
+import { Comment } from '@/types/api/comment';
 
 const CommentBox = ({ slug }: { slug: string }) => {
   const { email } = useUserStore() as User;
@@ -16,15 +17,13 @@ const CommentBox = ({ slug }: { slug: string }) => {
     select: res => res.data.comments,
   });
 
-  console.log(comments);
-
   return (
     <div>
       {email ? (
         <div className={`${flexRow} ${flexCenter}`}>
           <CommentForm slug={slug} />
           <div className={flexRow}>
-            {comments.map(comment => (
+            {comments.map((comment: Comment) => (
               <CommentCard key={comment.id} comment={comment} slug={slug} />
             ))}
           </div>
