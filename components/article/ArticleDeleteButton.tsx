@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 const ArticleDeleteButton = ({ slug }: { slug: string }) => {
   const router = useRouter();
   const handleButtonClick = async () => {
-    const res = fetch(`/api/articles/${slug}`, { method: 'DELETE' }).then(res => res.json());
+    const res = await fetch(`/api/articles/${slug}`, { method: 'DELETE' }).then(res => res.json());
     console.log(res);
     router.push('/');
   };

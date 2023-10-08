@@ -22,7 +22,6 @@ const ArticlePage = ({ params: { slug } }: Props) => {
   const { data: article } = useQuery({
     queryKey: ['article', slug],
     queryFn: async () => await fetch(`/api/articles/${slug}`).then(res => res.json()),
-    enabled: !!slug,
     select: res => res.data.article,
   });
 

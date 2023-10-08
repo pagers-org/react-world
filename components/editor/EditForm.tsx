@@ -8,17 +8,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { NewArticle } from '@/types';
 import { useRouter } from 'next/navigation';
-import { getArticleAPI } from '@/services/articles';
 
-const EditForm = ({ slug }: { slug: string }) => {
+const EditForm = ({ slug }: { slug?: string }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const { data: article } = useQuery({
     queryKey: ['article', slug],
-    queryFn: async () => await getArticleAPI(slug),
+    queryFn: async () => await fetch(`/api/articles/${slug}`).then(res => res.json()),
     enabled: !!slug,
-    select: res => res.article,
+    select: res => res.data.article,
   });
 
   const [formData, setFormData] = useState<NewArticle>({
