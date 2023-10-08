@@ -26,7 +26,7 @@ const useArticles = ({
     queryFn: async ({ pageParam = 0 }) => {
       switch (tab) {
         case 'global':
-          return await fetch(`/api/articles?page=${pageParam}`).then(res => res.json());
+          return await fetch(`http://localhost:3000/api/articles?page=${pageParam}`).then(res => res.json());
         case 'my':
           return await fetch(`/api/articles/my?username=${username}&page=${pageParam}`).then(res => res.json());
         case 'favorited':

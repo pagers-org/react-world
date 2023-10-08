@@ -1,5 +1,3 @@
-import ArticleList from '@/components/article/ArticleList';
-
 import SideBar from '@/components/layouts/SideBar';
 
 import { articleContainer } from '@/styles/article.css';
@@ -9,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 const ArticleTab = dynamic(() => import('@/components/article/ArticleTab'), { ssr: false });
+const ArticleList = dynamic(() => import('@/components/article/ArticleList'), { ssr: false });
 const Banner = dynamic(() => import('@/components/layouts/Banner'), { ssr: false });
 
 export default function Page() {
