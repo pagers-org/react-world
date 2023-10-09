@@ -1,0 +1,68 @@
+$font-size: 14px !default;
+$font-family: -apple-system, system-ui, blinkmacsystemfont, '맑은 고딕', 'Malgun Gothic', '돋움',
+  dotum, helvetica, 'Apple SD Gothic Neo', sans-serif;
+$font-color: #333;
+$line-color: #ddd;
+$breakpoint-mobile: 420px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1100px;
+$skeleton-background-color: #eee !default;
+$skeleton-background-color-gradient: linear-gradient(
+  110deg,
+  #ececec 8%,
+  #f5f5f5 18%,
+  #ececec 33%
+) !default;
+
+$bg-main: #f0f3f5;
+$bg-main-title: #f8f9fa;
+$default-color: #777;
+$primary-color: #0e5882;
+$success-color: #21a15f;
+$error-color: #c30733;
+$warn-color: #fcb40b;
+$color-light: #fff;
+$color-dark: #333;
+$box-shadow: 0 0.4687rem 0.1875rem rgba(4, 9, 20, 3%), 0 0.9375rem 0.4062rem rgba(4, 9, 20, 3%),
+  0 0.25rem 0.5312rem rgba(4, 9, 20, 5%), 0 0.125rem 0.1875rem rgba(4, 9, 20, 3%);
+$header-background: #fafbfc;
+$footer-text-color: #7c848b;
+$footer-line-color: #e9ecef;
+$left-side-background: #fff;
+$nav-text-color: #343a40;
+$nav-sub-text-color: #6c757d;
+$nav-line: #e0f3ff;
+$red-color: #d92550;
+$blue-color: #3f51b5;
+$footer-gnb-color: #fff;
+$list-border-color: #dfdfdf;
+$gbn-line-color: #e1e1e1;
+$disabled-color: #f9f9fa;
+$disabled-text-color: #b8bdc6;
+$thead-bg-color: #f3f3f3;
+$tbody-line-color: #eee;
+$input-line-color: #cbcbcb;
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes zoom-in-out {
+  0% {
+    transform: scale(1.5);
+  }
+
+  50% {
+    transform: scale(0.7);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

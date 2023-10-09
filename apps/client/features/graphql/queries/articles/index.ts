@@ -1,4 +1,4 @@
-import { gql, request } from 'graphql-request';
+import { gql } from 'graphql-request';
 
 interface IArticle {
     slug: string;
@@ -15,14 +15,16 @@ interface IArticle {
 
 interface IAuthor {
     username: string;
-    bio?: string;
+    bio: string;
     image: string;
     following: boolean;
 }
 
 interface GArticlesQuery {
-    articles: IArticle;
-    articlesCount: number;
+    getArticleList: {
+        articles: IArticle[];
+        articlesCount: number;
+    };
 }
 
 const articlesQuery = gql`
@@ -51,6 +53,7 @@ const articlesQuery = gql`
                 tagList
                 updatedAt
                 author {
+                    bio
                     following
                     image
                     username
