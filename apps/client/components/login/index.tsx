@@ -1,20 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import useRegister from './hooks/use-register';
+import useLogin from './hooks/use-login';
 
-export default function RegisterComponent() {
-    const { handleSignUpSubmit, handleInputChange, errorMessages } =
-        useRegister();
+export default function LoginComponent() {
+    const { handleInputChange, handleSignInSubmit, errorMessages } = useLogin();
 
     return (
         <div className="auth-page">
             <div className="container page">
                 <div className="row">
                     <div className="col-md-6 offset-md-3 col-xs-12">
-                        <h1 className="text-xs-center">Sign up</h1>
+                        <h1 className="text-xs-center">Sign in</h1>
                         <p className="text-xs-center">
-                            <Link href="/login">Have an account?</Link>
+                            <Link href="/register">Need an account?</Link>
                         </p>
                         {errorMessages.map(msg => (
                             <ul
@@ -24,16 +23,7 @@ export default function RegisterComponent() {
                                 <li>{msg.join(' ')}</li>
                             </ul>
                         ))}
-                        <form onSubmit={handleSignUpSubmit}>
-                            <fieldset className="form-group">
-                                <input
-                                    onChange={handleInputChange}
-                                    className="form-control form-control-lg"
-                                    type="text"
-                                    name="username"
-                                    placeholder="Username"
-                                />
-                            </fieldset>
+                        <form onSubmit={handleSignInSubmit}>
                             <fieldset className="form-group">
                                 <input
                                     onChange={handleInputChange}
@@ -47,13 +37,13 @@ export default function RegisterComponent() {
                                 <input
                                     onChange={handleInputChange}
                                     className="form-control form-control-lg"
-                                    type="password"
                                     name="password"
+                                    type="password"
                                     placeholder="Password"
                                 />
                             </fieldset>
                             <button className="btn btn-lg btn-primary pull-xs-right">
-                                Sign up
+                                Sign in
                             </button>
                         </form>
                     </div>

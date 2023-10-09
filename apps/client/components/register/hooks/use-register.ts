@@ -1,4 +1,5 @@
 import { httpClient } from '@/services/rest';
+import { IAuthReturnData } from '@/types/auth.type';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
@@ -7,16 +8,6 @@ interface IRegisterData {
         username: string;
         email: string;
         password: string;
-    };
-}
-
-interface IRegisterReturnData {
-    user: {
-        email: 'string';
-        token: 'string';
-        username: 'string';
-        bio: 'string';
-        image: 'string';
     };
 }
 
@@ -39,7 +30,7 @@ export default function useRegister() {
         const bodyData = { user: { ...registerRef.current } };
 
         try {
-            await httpClient.post<IRegisterReturnData, IRegisterData>(
+            await httpClient.post<IAuthReturnData, IRegisterData>(
                 '/users',
                 bodyData,
             );
