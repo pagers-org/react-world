@@ -1,15 +1,8 @@
-import { httpClient } from '@/services/rest';
-import { IAuthReturnData } from '@/types/auth.type';
+import { IRegisterData, authApi } from '@/services/rest/auth';
+import { extractErrorMessages } from '@/utils/func';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
-
-interface IRegisterData {
-    user: {
-        username: string;
-        email: string;
-        password: string;
-    };
-}
 
 export default function useRegister() {
     const router = useRouter();
@@ -24,25 +17,18 @@ export default function useRegister() {
         null,
     );
 
+    const { mutate: registerMutate } = useMutation(authApi.register, {
+        onSuccess: () => router.push('/login'),
+        onError: (e: any) => {
+            setErrorMessages(extractErrorMessages(e.response.data.errors));
+        },
+    });
+
     const handleSignUpSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const bodyData = { user: { ...registerRef.current } };
-
-        try {
-            await httpClient.post<IAuthReturnData, IRegisterData>(
-                '/users',
-                bodyData,
-            );
-
-            router.push('/login');
-        } catch (e: any) {
-            const errorMessages = Object.entries(e.response.data.errors).map(
-                msg => msg.flat(),
-            );
-
-            setErrorMessages(errorMessages);
-        }
+        const registerInfo = { user: { ...registerRef.current } };
+        await registerMutate({ registerInfo });
     };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
