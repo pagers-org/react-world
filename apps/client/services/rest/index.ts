@@ -28,7 +28,7 @@ class HttpClient {
             const response: AxiosResponse<T> =
                 await this.axiosInstance.request<T>(config);
             return response.data;
-        } catch (error) {
+        } catch (error: any) {
             throw error;
         }
     }
