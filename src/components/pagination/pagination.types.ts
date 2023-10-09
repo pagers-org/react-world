@@ -1,4 +1,5 @@
-import type { JSX } from 'solid-js';
+import type { Accessor, JSX, Setter } from 'solid-js';
+import { MaybeAccessor } from '@global/solid-util-types';
 
 export type PaginationProps = {
   'aria-current'?: boolean;
@@ -10,6 +11,7 @@ export type PaginationProps = {
 }[];
 
 export type PaginationOptions = {
+  onClick?: (page: number) => void;
   /** the overall number of pages */
   pages: number;
   /** the highest number of pages to show at the same time */
@@ -40,3 +42,7 @@ export type NormalizeOptionTypes = {
   page: number;
   pages: number;
 };
+
+export type CreatePaginationFunc = (
+  options?: MaybeAccessor<PaginationOptions>,
+) => [props: Accessor<PaginationProps>, page: Accessor<number>, setPage: Setter<number>];

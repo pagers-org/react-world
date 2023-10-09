@@ -1,20 +1,19 @@
-import { type Accessor, createMemo, createSignal, type Setter } from 'solid-js';
-import { noop } from '@/utils';
+import { createMemo, createSignal, type Setter } from 'solid-js';
+import { access, noop } from '@/utils';
 import { 페이지네이션_기본_옵션 } from './pagination.const';
-import type { PaginationOptions, PaginationProps } from './pagination.types';
-import { access, normalizeOption } from './pagination.utils';
-import type { MaybeAccessor } from '@global/solid-util-types';
+import type { CreatePaginationFunc, PaginationProps } from './pagination.types';
+import { normalizeOption } from './pagination.utils';
 
-export const createPagination = (
-  options?: MaybeAccessor<PaginationOptions>,
-): [props: Accessor<PaginationProps>, page: Accessor<number>, setPage: Setter<number>] => {
+export const createPagination: CreatePaginationFunc = (options) => {
   const opts = createMemo(() => Object.assign({}, 페이지네이션_기본_옵션, access(options)));
   const [page, _setPage] = createSignal(opts().initialPage || 1);
   const setPage = (p: number | ((_p: number) => number)) => {
     if (typeof p === 'function') {
       p = p(page());
     }
-    return p >= 1 && p <= opts().pages ? _setPage(p) : page();
+    const newPage = p >= 1 && p <= opts().pages ? _setPage(p) : page();
+    opts()?.onClick(newPage);
+    return newPage;
   };
 
   const maxPages = createMemo(() => Math.min(opts().maxPages, opts().pages));
@@ -45,7 +44,11 @@ export const createPagination = (
 
   const first = Object.defineProperties(
     {
-      onClick: () => setPage(1),
+      onClick: () =>
+        setPage(() => {
+          opts()?.onClick(1);
+          return 1;
+        }),
     } as unknown as PaginationProps[number],
     {
       'data-disabled': { get: () => page() <= 1, set: noop, enumerable: true },
@@ -55,7 +58,12 @@ export const createPagination = (
   );
   const back = Object.defineProperties(
     {
-      onClick: () => setPage((p) => (p > 1 ? p - 1 : p)),
+      onClick: () =>
+        setPage((p) => {
+          const nextPage = p > 1 ? p - 1 : p;
+          opts()?.onClick(nextPage);
+          return nextPage;
+        }),
     } as unknown as PaginationProps[number],
     {
       'data-disabled': { get: () => page() <= 1, set: noop, enumerable: true },
@@ -65,8 +73,12 @@ export const createPagination = (
   );
   const next = Object.defineProperties(
     {
-      // eslint-disable-next-line solid/reactivity
-      onClick: () => setPage((p) => (p < opts().pages ? p + 1 : p)),
+      onClick: () =>
+        setPage((p) => {
+          const nextPage = p < opts().pages ? p + 1 : p;
+          opts()?.onClick(nextPage);
+          return nextPage;
+        }),
     } as unknown as PaginationProps[number],
     {
       'data-disabled': { get: () => page() >= opts().pages, set: noop, enumerable: true },
@@ -76,7 +88,12 @@ export const createPagination = (
   );
   const last = Object.defineProperties(
     {
-      onClick: () => setPage(opts().pages),
+      onClick: () =>
+        setPage(() => {
+          const nextPage = opts().pages;
+          opts()?.onClick(nextPage);
+          return nextPage;
+        }),
     } as unknown as PaginationProps[number],
     {
       'data-disabled': { get: () => page() >= opts().pages, set: noop, enumerable: true },

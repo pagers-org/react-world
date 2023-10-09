@@ -1,3 +1,3 @@
-export interface Tags {
+export type Tags = {
   tags: string[];
-}
+};
