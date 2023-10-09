@@ -1,4 +1,10 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, {
+    AxiosInstance,
+    AxiosResponse,
+    AxiosRequestConfig,
+    CustomParamsSerializer,
+} from 'axios';
+import { stringify } from 'qs';
 
 class HttpClient {
     private static readonly instance: HttpClient = new HttpClient();
@@ -7,6 +13,9 @@ class HttpClient {
     private constructor() {
         this.axiosInstance = axios.create({
             baseURL: process.env.NEXT_PUBLIC_REST_API_BASE_URL,
+            paramsSerializer: {
+                serialize: stringify as CustomParamsSerializer,
+            },
         });
     }
 
@@ -24,11 +33,11 @@ class HttpClient {
         }
     }
 
-    public async get<T>(url: string, params?: object): Promise<T> {
+    public async get<T, P>(url: string, params?: P): Promise<T> {
         return this.makeRequest<T>({ method: 'get', url, params });
     }
 
-    public async post<T>(url: string, data?: object): Promise<T> {
+    public async post<T, P>(url: string, data?: P): Promise<T> {
         return this.makeRequest<T>({ method: 'post', url, data });
     }
 
@@ -36,7 +45,7 @@ class HttpClient {
         return this.makeRequest<T>({ method: 'delete', url });
     }
 
-    public async patch<T>(url: string, data?: object): Promise<T> {
+    public async patch<T, P>(url: string, data?: P): Promise<T> {
         return this.makeRequest<T>({ method: 'patch', url, data });
     }
 }
