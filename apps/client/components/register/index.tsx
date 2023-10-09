@@ -1,10 +1,11 @@
 'use client';
 
 import useRegister from '@/app/register/hooks/use-register';
-import { useRef } from 'react';
+import Link from 'next/link';
 
 export default function RegisterComponent() {
-    const { handleSignUpSubmit, handleInputChange } = useRegister();
+    const { handleSignUpSubmit, handleInputChange, errorMessages } =
+        useRegister();
 
     return (
         <div className="auth-page">
@@ -13,13 +14,16 @@ export default function RegisterComponent() {
                     <div className="col-md-6 offset-md-3 col-xs-12">
                         <h1 className="text-xs-center">Sign up</h1>
                         <p className="text-xs-center">
-                            <a href="/login">Have an account?</a>
+                            <Link href="/login">Have an account?</Link>
                         </p>
-
-                        <ul className="error-messages">
-                            <li>That email is already taken</li>
-                        </ul>
-
+                        {errorMessages.map(msg => (
+                            <ul
+                                key={JSON.stringify(msg)}
+                                className="error-messages"
+                            >
+                                <li>{msg.join(' ')}</li>
+                            </ul>
+                        ))}
                         <form onSubmit={handleSignUpSubmit}>
                             <fieldset className="form-group">
                                 <input

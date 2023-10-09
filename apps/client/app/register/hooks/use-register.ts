@@ -1,6 +1,6 @@
 import { httpClient } from '@/services/rest';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useRef } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 interface IRegisterData {
     user: {
@@ -29,6 +29,10 @@ export default function useRegister() {
         password: '',
     });
 
+    const [errorMessages, setErrorMessages] = useState<unknown[][] | null>(
+        null,
+    );
+
     const handleSignUpSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -41,8 +45,12 @@ export default function useRegister() {
             );
 
             router.push('/login');
-        } catch (e) {
-            alert('Error Occured');
+        } catch (e: any) {
+            const errorMessages = Object.entries(e.response.data.errors).map(
+                msg => msg.flat(),
+            );
+
+            setErrorMessages(errorMessages);
         }
     };
 
@@ -56,5 +64,6 @@ export default function useRegister() {
     return {
         handleSignUpSubmit,
         handleInputChange,
+        errorMessages: errorMessages || [],
     };
 }
