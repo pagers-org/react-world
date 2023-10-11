@@ -6,40 +6,110 @@ import { FeedsResponse } from '@/types/api/articles';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 
-import { INITIAL_PAGE } from '@/constants/api';
+import { FEED_PER_PAGE, INITIAL_PAGE } from '@/constants/api';
 
-interface Props {
-  feeds: FeedsResponse;
-}
+import {
+  useArticlesQuery,
+  useMyFeedArticlesQuery,
+} from '@/hooks/query/articles/useArticlesQuery';
+import {
+  useDeleteFavoriteMutation,
+  usePostFavoriteMutation,
+} from '@/hooks/query/favorites/useFavoritesMutation';
+import { useTagsQuery } from '@/hooks/query/tags/useTagsQuery';
 
-const HomePageMain = ({ feeds }: Props) => {
-  // server-side fetch - server component만 이용
-
+const HomePageMain = () => {
+  const { push: navigate } = useRouter();
   const searchParams = useSearchParams();
 
   const user = useUserStore((state) => state.user);
 
-  const [feedType, setFeedType] = useState<'your' | 'global'>();
+  const [feedType, setFeedType] = useState<string>(
+    user.email ? 'your' : 'global',
+  );
   const [page, setPage] = useState<number>(1);
 
-  const [tabsElement, setTabsElement] = useState<ReactNode>();
+  const [myFeedTabElement, setMyFeedTabElement] = useState<ReactNode>(<></>);
+  const [tagFeedTabElement, setTagFeedTabElement] = useState<ReactNode>(<></>);
 
-  const { articlesCount, articles } = feeds;
+  const {
+    mutate: postFavoriteMutate,
+    isLoading: isPostFavoriteMutationLoading,
+  } = usePostFavoriteMutation();
+  const {
+    mutate: deleteFavoriteMutate,
+    isLoading: isDeleteFavoriteMutationLoading,
+  } = useDeleteFavoriteMutation();
 
-  useEffect(() => {
-    let type = searchParams?.get('type') ?? 'your';
-
+  const favoriteArticle = (slug: string, favorited: boolean) => {
     if (!user.email) {
-      type = 'global';
-    } else if (type !== 'your' && type !== 'global') {
-      type = 'your';
+      navigate('/login');
+      return;
     }
 
-    setFeedType(type as 'your' | 'global');
-  }, [searchParams, user.email]);
+    if (favorited) {
+      deleteFavoriteMutate({ slug });
+    } else {
+      postFavoriteMutate({ slug });
+    }
+  };
+
+  const [currentArticles, setCurrentArticles] = useState<FeedsResponse | null>(
+    null,
+  );
+
+  const offset = ((page - 1) * parseInt(FEED_PER_PAGE)).toString();
+  const limit = FEED_PER_PAGE;
+
+  const useQuery =
+    feedType === 'your' ? useMyFeedArticlesQuery : useArticlesQuery;
+
+  const {
+    data: articles,
+    isLoading: isArticlesLoading,
+    isFetching: isArticlesFetching,
+  } = useQuery(
+    feedType !== 'global' && feedType !== 'your'
+      ? {
+          queryStrings: {
+            offset,
+            limit,
+            tag: feedType,
+          },
+        }
+      : {
+          queryStrings: {
+            offset,
+            limit,
+          },
+        },
+  );
+
+  const { data: popularTags, isLoading: isPopularTagsLoading } = useTagsQuery();
+
+  const handlePopularTag = (popularTag: string) => {
+    const tagFeedTabElement = (
+      <li className="nav-item">
+        <Link
+          className={`nav-link active`}
+          href={{
+            query: {
+              page: INITIAL_PAGE,
+            },
+          }}
+          onClick={() => setFeedType(popularTag)}
+        >
+          {`# ${popularTag}`}
+        </Link>
+      </li>
+    );
+
+    setTagFeedTabElement(tagFeedTabElement);
+    setFeedType(popularTag);
+  };
 
   useEffect(() => {
     const page = searchParams?.get('page') ?? INITIAL_PAGE;
@@ -48,158 +118,187 @@ const HomePageMain = ({ feeds }: Props) => {
   }, [searchParams]);
 
   useEffect(() => {
-    const tabsElement = (
-      <ul className="nav nav-pills outline-active">
-        {user.email && (
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${classNames({
-                active: feedType === 'your',
-              })}`}
-              href={{
-                query: {
-                  type: 'your',
-                  page: INITIAL_PAGE,
-                },
-              }}
-              onClick={() => setFeedType('your')}
-            >
-              Your Feed
-            </Link>
-          </li>
-        )}
+    if (isArticlesLoading || !articles) {
+      return;
+    }
+
+    setCurrentArticles(articles);
+  }, [isArticlesLoading, articles]);
+
+  useEffect(() => {
+    if (user.email) {
+      const myFeedTabElement = (
         <li className="nav-item">
           <Link
             className={`nav-link ${classNames({
-              active: feedType === 'global',
+              active: feedType === 'your',
             })}`}
             href={{
               query: {
-                type: 'global',
                 page: INITIAL_PAGE,
               },
             }}
-            onClick={() => setFeedType('global')}
+            onClick={() => {
+              setTagFeedTabElement(<></>);
+              setFeedType('your');
+            }}
           >
-            Global Feed
+            Your Feed
           </Link>
         </li>
-      </ul>
-    );
-
-    setTabsElement(tabsElement);
-  }, [user.email, feedType]);
+      );
+      setMyFeedTabElement(myFeedTabElement);
+    }
+  }, [user, feedType]);
 
   return (
-    tabsElement && (
-      <div className="home-page">
-        <div className="banner">
-          <div className="container">
-            <h1 className="logo-font">conduit</h1>
-            <p>A place to share your knowledge.</p>
-          </div>
+    <div className="home-page">
+      <div className="banner">
+        <div className="container">
+          <h1 className="logo-font">conduit</h1>
+          <p>A place to share your knowledge.</p>
         </div>
+      </div>
 
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-9">
-              <div className="feed-toggle">{tabsElement}</div>
-
-              {articles.map(
-                ({
-                  slug,
-                  title,
-                  description,
-                  tagList,
-                  createdAt,
-                  favoritesCount,
-                  author: { username: authorUsername, image: authorImage },
-                }) => (
-                  <div key={slug} className="article-preview">
-                    <div className="article-meta">
-                      <Link href={`/profile/${authorUsername}`}>
-                        <Image
-                          src={authorImage}
-                          alt={authorUsername}
-                          width={32}
-                          height={32}
-                        />
-                      </Link>
-                      <div className="info">
-                        <Link
-                          href={`/profile/${authorUsername}`}
-                          className="author"
-                        >
-                          {authorUsername}
-                        </Link>
-                        <span className="date">{createdAt}</span>
-                      </div>
-                      <button className="btn btn-outline-primary btn-sm pull-xs-right">
-                        <i className="ion-heart"></i> {favoritesCount}
-                      </button>
-                    </div>
-                    <Link href={`/article/${slug}`} className="preview-link">
-                      <h1>{title}</h1>
-                      <p>{description}</p>
-                      <span>Read more...</span>
-                      <ul className="tag-list">
-                        {tagList.map((tag) => (
-                          <li
-                            key={tag}
-                            className="tag-default tag-pill tag-outline"
-                          >
-                            {tag}
-                          </li>
-                        ))}
-                      </ul>
-                    </Link>
-                  </div>
-                ),
-              )}
-
-              <Pagination
-                totalCounts={articlesCount}
-                page={page}
-                perPage={10}
-              />
+      <div className="container page">
+        <div className="row">
+          <div className="col-md-9">
+            <div className="feed-toggle">
+              <ul className="nav nav-pills outline-active">
+                {myFeedTabElement}
+                <li className="nav-item">
+                  <Link
+                    className={`nav-link ${classNames({
+                      active: feedType === 'global',
+                    })}`}
+                    href={{
+                      query: {
+                        page: INITIAL_PAGE,
+                      },
+                    }}
+                    onClick={() => {
+                      setTagFeedTabElement(<></>);
+                      setFeedType('global');
+                    }}
+                  >
+                    Global Feed
+                  </Link>
+                </li>
+                {tagFeedTabElement}
+              </ul>
             </div>
 
-            <div className="col-md-3">
-              <div className="sidebar">
-                <p>Popular Tags</p>
+            {isArticlesFetching && isArticlesLoading ? (
+              <>Loading articles...</>
+            ) : (
+              currentArticles && (
+                <>
+                  {currentArticles.articles.map(
+                    ({
+                      slug,
+                      title,
+                      description,
+                      favorited,
+                      tagList,
+                      createdAt,
+                      favoritesCount,
+                      author: { username: authorUsername, image: authorImage },
+                    }) => (
+                      <div key={slug} className="article-preview">
+                        <div className="article-meta">
+                          <Link href={`/profile/${authorUsername}`}>
+                            <Image
+                              src={authorImage}
+                              alt={authorUsername}
+                              width={32}
+                              height={32}
+                            />
+                          </Link>
+                          <div className="info">
+                            <Link
+                              href={`/profile/${authorUsername}`}
+                              className="author"
+                            >
+                              {authorUsername}
+                            </Link>
+                            <span className="date">{createdAt}</span>
+                          </div>
+                          <button
+                            className={`btn btn-sm pull-xs-right ${classNames({
+                              'btn-outline-primary': !favorited,
+                              'btn-primary': favorited,
+                            })}`}
+                            onClick={() => favoriteArticle(slug, favorited)}
+                            disabled={
+                              isPostFavoriteMutationLoading ||
+                              isDeleteFavoriteMutationLoading
+                            }
+                          >
+                            <i className="ion-heart"></i> {favoritesCount}
+                          </button>
+                        </div>
+                        <Link
+                          href={`/article/${slug}`}
+                          className="preview-link"
+                        >
+                          <h1>{title}</h1>
+                          <p>{description}</p>
+                          <span>Read more...</span>
+                          <ul className="tag-list">
+                            {tagList.map((tag) => (
+                              <li
+                                key={tag}
+                                className="tag-default tag-pill tag-outline"
+                              >
+                                {tag}
+                              </li>
+                            ))}
+                          </ul>
+                        </Link>
+                      </div>
+                    ),
+                  )}
+                  <Pagination
+                    totalCounts={currentArticles.articlesCount}
+                    page={page}
+                    perPage={parseInt(FEED_PER_PAGE)}
+                  />
+                </>
+              )
+            )}
+          </div>
 
-                <div className="tag-list">
-                  <Link href="" className="tag-pill tag-default">
-                    programming
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    javascript
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    emberjs
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    angularjs
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    react
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    mean
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    node
-                  </Link>
-                  <Link href="" className="tag-pill tag-default">
-                    rails
-                  </Link>
-                </div>
+          <div className="col-md-3">
+            <div className="sidebar">
+              <p>Popular Tags</p>
+
+              <div className="tag-list">
+                {!isPopularTagsLoading && popularTags ? (
+                  <>
+                    {popularTags.tags.map((popularTag) => (
+                      <Link
+                        key={popularTag}
+                        className="tag-pill tag-default"
+                        href={{
+                          query: {
+                            page: INITIAL_PAGE,
+                          },
+                        }}
+                        onClick={() => handlePopularTag(popularTag)}
+                      >
+                        {popularTag}
+                      </Link>
+                    ))}
+                  </>
+                ) : (
+                  <>Loading tags...</>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    </div>
   );
 };
 
