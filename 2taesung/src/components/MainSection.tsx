@@ -10,10 +10,10 @@ import { Suspense } from 'react';
 
 export default async function MainSection({
   articleList,
-  pageList,
+  pageNums,
 }: {
   articleList: Array<Article>;
-  pageList: Array<number>;
+  pageNums: Array<number>;
 }) {
   return (
     <div className="container page">
@@ -21,11 +21,11 @@ export default async function MainSection({
         <div className="col-md-9">
           <FeedToggle />
           <Suspense fallback={<Loading />}>
-            {articleList.map((article: Article) => {
+            {articleList.map(article => {
               return <Item key={article.slug} article={article} />;
             })}
           </Suspense>
-          <Pagination pageList={pageList} />
+          <Pagination pageNums={pageNums} />
         </div>
         <div className="col-md-3">
           <Sidebar />
