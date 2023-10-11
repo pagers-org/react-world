@@ -1,25 +1,26 @@
 import Banner from '@/components/Banner';
 import MainSection from '@/components/MainSection';
+import { roundUpDivision } from '@/util';
 
-const PAGE_PER_NUM = 5;
+const PER_NUM_PAGE = 5;
 
 async function getData({ page }: { page: number }) {
-  const res = await fetch('https://api.realworld.io/api/articles');
-  const { articles } = await res.json();
-  const pageList = Array.from(
-    { length: articles.length / PAGE_PER_NUM },
-    (_, i) => i + 1,
+  const res = await fetch(
+    `https://api.realworld.io/api/articles?offset=${
+      (page - 1) * 5
+    }&limit=${PER_NUM_PAGE}`,
   );
-  const articleList = articles.splice(
-    (page - 1) * PAGE_PER_NUM,
-    page * PAGE_PER_NUM,
+  const { articles, articlesCount } = await res.json();
+  const pageNums = Array.from(
+    { length: roundUpDivision(articlesCount, PER_NUM_PAGE) },
+    (_, i) => i + 1,
   );
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
 
-  return { articleList, pageList };
+  return { articles, pageNums };
 }
 
 export default async function Home({
@@ -29,13 +30,13 @@ export default async function Home({
 }) {
   const page =
     typeof searchParams.page === 'string' ? Number(searchParams.page) : 1;
-  const { articleList, pageList } = await getData({ page });
+  const { articles, pageNums } = await getData({ page });
 
   return (
     <main className="h-full w-full">
       <div className="home-page">
         <Banner />
-        <MainSection articleList={articleList} pageList={pageList} />
+        <MainSection articleList={articles} pageNums={pageNums} />
       </div>
     </main>
   );
