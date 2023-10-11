@@ -1,17 +1,15 @@
 import Link from 'next/link';
 
-export default function Pagination({ pageList }: { pageList: Array<number> }) {
+export default function Pagination({ pageNums }: { pageNums: Array<number> }) {
   return (
     <ul className="pagination">
-      {pageList.map(num => {
+      {pageNums?.map(num => {
         return (
-          <Link
-            key={num}
-            className="page-item active"
-            href={`/home?page=${num}`}
-          >
-            {num}
-          </Link>
+          <li key={num} className="page-item">
+            <Link className="page-link" href={`/home?page=${num}`}>
+              {num}
+            </Link>
+          </li>
         );
       })}
     </ul>
