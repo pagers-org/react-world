@@ -1,5 +1,7 @@
 'use client';
 
+import { queryClient } from '@/react-query/queryClient';
+import { queryKeys } from '@/react-query/queryKeys';
 import { useUserStore } from '@/stores/users';
 import { ArticleResponse } from '@/types/api/articles';
 import classNames from 'classnames';
@@ -149,8 +151,12 @@ const ArticleDetailPageMain = ({ article }: Props) => {
   const commentRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { mutate: postCommentMutate, isLoading: isPostCommentLoading } =
-    usePostCommentMutation();
-  const { mutate: deleteCommentMutate } = useDeleteCommentMutation();
+    usePostCommentMutation({
+      onSuccess: () => queryClient.invalidateQueries([queryKeys.GetComments]),
+    });
+  const { mutate: deleteCommentMutate } = useDeleteCommentMutation({
+    onSuccess: () => queryClient.invalidateQueries([queryKeys.GetComments]),
+  });
 
   const handleComment = (type: 'Post' | 'Delete', id?: number) => {
     if (!commentRef.current) {
