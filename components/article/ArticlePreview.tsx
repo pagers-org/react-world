@@ -5,8 +5,10 @@ import TagList from '../tags/TagList';
 import { useRouter } from 'next/navigation';
 import { FillHeartIcon } from '@/composables/icons';
 import { fillGreenButton, flex, flexBetween, greenButton } from '@/styles/common.css';
-import { useMutation } from '@tanstack/react-query';
-import { favoriteArticleAPI, unFavoriteArticleAPI } from '@/services/favorites';
+import { useQueryClient } from '@tanstack/react-query';
+import useCurrentTab from '@/stores/useCurrentTab';
+import useArticles from '@/hooks/useArticles';
+
 type Props = {
   article: any;
 };
@@ -14,23 +16,34 @@ const ArticlePreview = ({
   article: { title, description, favorited, favoritesCount, tagList, author, createdAt, slug },
 }: Props) => {
   const router = useRouter();
+  const { tab } = useCurrentTab();
 
-  const { mutate } = useMutation({
-    mutationFn: favorited ? unFavoriteArticleAPI : favoriteArticleAPI,
-    onError: err => {
-      console.error(err);
-    },
-    onSuccess: res => {
-      console.log(res);
+  const queryClient = useQueryClient();
 
-      console.log('좋아요!');
-    },
-  });
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: ['articles', tab] });
+  };
+
+  const onError = () => {
+    // 권한이 없을 경우 login 페이지로 이동
+    router.push('/login');
+  };
+
+  const { favorite, unFavorite } = useArticles({ onSuccess, onError });
+
+  const handleButtonClick = (slug: string) => {
+    if (favorited) {
+      unFavorite(slug);
+    } else {
+      favorite(slug);
+    }
+  };
+
   return (
     <div className={articlePreview}>
       <div className={articleMeta}>
         <UserBox author={author} createdAt={createdAt} />
-        <button onClick={() => mutate(slug)} className={favorited ? `${fillGreenButton}` : `${greenButton}`}>
+        <button onClick={() => handleButtonClick(slug)} className={favorited ? `${fillGreenButton}` : `${greenButton}`}>
           <div className={flex}>
             <FillHeartIcon /> &nbsp;
             {favoritesCount}

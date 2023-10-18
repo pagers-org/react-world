@@ -5,22 +5,22 @@ import { useState } from 'react';
 import TagList from '../tags/TagList';
 
 type Props = {
-  setFormData: any;
+  appendTag: (tag: string) => void;
 };
 
-const TagInput = ({ setFormData }: Props) => {
+const TagInput = ({ appendTag }: Props) => {
   const [value, setValue] = useState('');
   const [tags, setTags] = useState<string[]>([]);
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter' && value.trim() !== '') {
-      setFormData(prevData => ({ ...prevData, tagList: tags }));
+      appendTag(value);
       setTags(prev => [...prev, value]);
       setValue('');
     }
   };
 
-  const handleClick = (tag: string) => {
+  const handleTagClick = (tag: string) => {
     setTags((prevTags: string[]) => prevTags.filter(prevTag => prevTag !== tag));
   };
 
@@ -34,7 +34,7 @@ const TagInput = ({ setFormData }: Props) => {
         onKeyDown={handleKeyDown}
         className={input}
       />
-      <TagList tags={tags} onClick={handleClick} />
+      <TagList tags={tags} onClick={handleTagClick} />
     </>
   );
 };

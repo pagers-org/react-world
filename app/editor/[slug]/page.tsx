@@ -1,7 +1,14 @@
-import React from 'react';
-
-const EditorUpdatePage = () => {
-  return <section>EditorUpdatePage</section>;
+'use client';
+import EditForm from '@/components/editor/EditForm';
+type Props = {
+  params: { slug: string };
+};
+const EditorUpdatePage = ({ params: { slug } }: Props) => {
+  return (
+    <section>
+      <EditForm slug={slug} />
+    </section>
+  );
 };
 
 export default EditorUpdatePage;

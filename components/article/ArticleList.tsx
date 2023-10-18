@@ -1,44 +1,35 @@
-// 'use client';
-import { ArticleAPI, fetchArticles } from '@/services/articles';
+'use client';
+
 import ArticlePreview from './ArticlePreview';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useRef } from 'react';
+import { flexCenter } from '@/styles/common.css';
+import useCurrentTab from '@/stores/useCurrentTab';
+import useArticles from '@/hooks/useArticles';
+import { Article } from '@/types/api/articles';
+type Props = {
+  username?: string;
+};
+const ArticleList = ({ username }: Props) => {
+  const targetRef = useRef(null);
+  const { tab } = useCurrentTab();
+  const { articlesData } = useArticles({ targetRef, tab, username });
 
-const ArticleList = async () => {
-  const { articles } = await ArticleAPI.all(1);
-
-  // const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } = useInfiniteQuery({
-  //   queryKey: ['articles'],
-  //   queryFn: ({ pageParam = 1 }) => ArticleAPI.all(pageParam),
-  //   getNextPageParam: (lastPage, pages) => {
-  //     if (5 > page.current) {
-  //       return page.current;
-  //     }
-  //     return undefined;
-  //   },
-  //   retry: false,
-  //   onSuccess: () => {
-  //     console.log('성공' + page.current);
-
-  //     page.current++;
-  //   },
-  //   onError: () => {},
-  // });
-
-  // return (
-  //   <div>
-  //     <button onClick={() => fetchNextPage()}>다음</button>
-  //     {data?.pages.map((group, i) => (
-  //       <div key={i}>
-  //         {group.articles.map(article => (
-  //           <ArticlePreview key={article.slug} article={article} />
-  //         ))}
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
-
-  return <div>{articles?.map(article => <ArticlePreview key={article.slug} article={article} />)}</div>;
+  return (
+    <div>
+      {articlesData?.pages?.at(0)?.articles?.length === 0 ? (
+        '데이터가 없습니다.'
+      ) : (
+        <div>
+          {articlesData?.pages.map((group, i) => (
+            <div key={i}>
+              {group?.articles?.map((article: Article) => <ArticlePreview key={article.slug} article={article} />)}
+            </div>
+          ))}
+        </div>
+      )}
+      <div className={flexCenter} ref={targetRef}></div>
+    </div>
+  );
 };
 
 export default ArticleList;

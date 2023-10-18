@@ -8,6 +8,9 @@ import Providers from '@/libs/Providers';
 export const metadata: Metadata = {
   title: 'next world',
   description: 'next world by hyeon',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

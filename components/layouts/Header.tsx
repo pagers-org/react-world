@@ -1,4 +1,3 @@
-'use client';
 import { header, logo } from '@/styles/layout.css';
 import Link from 'next/link';
 import React from 'react';

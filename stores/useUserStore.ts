@@ -1,24 +1,24 @@
-import { User, UserAction } from '@/types';
-import { setCookie } from '@/utils/cookies';
+import { User } from '@/types/api/users';
+import { UserAction } from '@/types/store/userStore';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 const initialState: User = {
   username: '',
   email: '',
-  token: '',
   bio: '',
   image: '',
+  password: '',
 };
 
 const useUserStore = create(
   persist<User | UserAction>(
     set => ({
       ...initialState,
-      login: user => {
+      saveUserInfo: user => {
         set(() => {
-          const { email, username, bio, image, token } = user;
-          setCookie('token', token, 60 * 60 * 24);
+          const { email, username, bio, image } = user;
+
           return {
             email,
             username,
@@ -29,13 +29,12 @@ const useUserStore = create(
       },
       logout: () => {
         set(() => {
-          setCookie('token', '', 0);
           return {
             ...initialState,
           };
         });
       },
-      updateUser: user => {
+      updateUser: (user: User) => {
         set(() => {
           return {
             ...user,

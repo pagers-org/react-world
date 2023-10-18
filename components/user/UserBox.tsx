@@ -4,16 +4,19 @@ import { circle } from '@/styles/common.css';
 import { formatDate } from '@/utils';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 type Props = {
-  author: any;
+  author: {
+    username: string;
+    image: string;
+  };
   createdAt: string;
 };
 const UserBox = ({ author: { username, image }, createdAt }: Props) => {
-  const handleUserBoxClick = async () => {
-    console.log('클라 클릭');
-
-    await fetch(`/api/profile?username=${username}`);
+  const router = useRouter();
+  const handleUserBoxClick = () => {
+    router.push(`/@${username}`);
   };
   return (
     <div className={userBoxBlock} onClick={handleUserBoxClick}>

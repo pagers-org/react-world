@@ -1,55 +1,76 @@
-import CommentCard from '@/components/comments/CommentCard';
-import CommentForm from '@/components/comments/CommentForm';
+'use client';
+import ArticleDeleteButton from '@/components/article/ArticleDeleteButton';
+import ArticleEditButton from '@/components/article/ArticleEditButton';
+import CommentBox from '@/components/comments/CommentBox';
 import Banner from '@/components/layouts/Banner';
 import TagList from '@/components/tags/TagList';
 import FavoriteButton from '@/components/user/FavoriteButton';
 import FollowButton from '@/components/user/FollowButton';
 import UserBox from '@/components/user/UserBox';
-import { fetchArticle } from '@/services/articles';
+import useUserStore from '@/stores/useUserStore';
 import { articleContent, articleDetailTitle } from '@/styles/article.css';
-import { container, flex, flexCenter, flexRow, justifyCenter, paddingTB, textCenter } from '@/styles/common.css';
-import { Article } from '@/types';
-import Link from 'next/link';
-import React from 'react';
+import { container, flex, justifyCenter, paddingTB } from '@/styles/common.css';
+import { User } from '@/types';
+import { useQuery } from '@tanstack/react-query';
+import React, { Suspense } from 'react';
 type Props = {
   params: { slug: string };
 };
-const ArticlePage = async ({ params: { slug } }: Props) => {
-  const { title, author, createdAt, body, tagList, favoritesCount } = await fetchArticle<Article>(slug);
-  const user = true;
+const ArticlePage = ({ params: { slug } }: Props) => {
+  const { username } = useUserStore() as User;
+
+  const { data: article } = useQuery({
+    queryKey: ['article', slug],
+    queryFn: async () => await fetch(`/api/articles/${slug}`).then(res => res.json()),
+    select: res => res.data.article,
+  });
+
+  const { title, author, createdAt, body, tagList, favoritesCount } = article;
+
   return (
     <section>
-      <Banner background="black">
-        <h1 className={articleDetailTitle}>{title}</h1>
-        <div className={flex}>
-          <UserBox author={author} createdAt={createdAt} />
-          <FollowButton author={author} />
-          <FavoriteButton favoritesCount={favoritesCount} />
+      <Suspense fallback={<div>로딩중...</div>}>
+        <Banner background="black">
+          <h1 className={articleDetailTitle}>{title}</h1>
+          <div className={flex}>
+            <UserBox author={author} createdAt={createdAt} />
+
+            {author.username === username ? (
+              <div className={flex}>
+                <ArticleEditButton slug={slug} />
+                <ArticleDeleteButton slug={slug} />
+              </div>
+            ) : (
+              <div className={flex}>
+                <FollowButton author={author} slug={slug} />
+                <FavoriteButton favoritesCount={favoritesCount} />
+              </div>
+            )}
+          </div>
+        </Banner>
+      </Suspense>
+      <Suspense fallback={<div>로딩중...</div>}>
+        <div className={container}>
+          <p className={articleContent}>{body}</p>
+          <TagList tags={tagList} />
+          <hr />
+          <div className={`${justifyCenter} ${paddingTB}`}>
+            <UserBox author={author} createdAt={createdAt} />
+            {author.username === username ? (
+              <div className={flex}>
+                <ArticleEditButton slug={slug} />
+                <ArticleDeleteButton slug={slug} />
+              </div>
+            ) : (
+              <div className={flex}>
+                <FollowButton author={author} slug={slug} />
+                <FavoriteButton favoritesCount={favoritesCount} />
+              </div>
+            )}
+          </div>
         </div>
-      </Banner>
-      <div className={container}>
-        <p className={articleContent}>{body}</p>
-        <TagList tags={tagList} />
-        <hr />
-        <div className={`${justifyCenter} ${paddingTB}`}>
-          <UserBox author={author} createdAt={createdAt} />
-          <FollowButton author={author} /> &nbsp;
-          <FavoriteButton favoritesCount={favoritesCount} />
-        </div>
-        <div>
-          {user ? (
-            <div className={`${flexRow} ${flexCenter}`}>
-              <CommentForm />
-              <CommentCard />
-            </div>
-          ) : (
-            <div className={textCenter}>
-              <Link href="/login">Sign in</Link> or <Link href="/register">sign up</Link> to add comments on this
-              article.
-            </div>
-          )}
-        </div>
-      </div>
+      </Suspense>
+      <CommentBox slug={slug} />
     </section>
   );
 };

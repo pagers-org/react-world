@@ -1,19 +1,35 @@
 'use client';
 
 import { TrashIcon } from '@/composables/icons';
+import useUserStore from '@/stores/useUserStore';
 import { commentContent, commentFormFooter, commnetCard } from '@/styles/comments.css';
 import { circle, flexCenter } from '@/styles/common.css';
+import { Comment } from '@/types/api/comment';
+import { User } from '@/types/api/users';
+
+import { formatDate } from '@/utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 type Props = {
-  author: any;
+  comment: Comment;
+  slug: string;
 };
-const CommentCard = ({ author }: Props) => {
-  const handleTrashClick = () => {
-    console.log('쓰레기 클릭');
+const CommentCard = ({ comment, slug }: Props) => {
+  const queryClient = useQueryClient();
+  const { username } = useUserStore() as User;
+  const { mutate } = useMutation({
+    mutationFn: async (slug: string) =>
+      fetch(`/api/comments/${slug}?id=${comment.id}`, { method: 'DELETE' }).then(res => res.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['comments', slug]);
+    },
+  });
+  const handleTrashClick = (slug: string) => {
+    mutate(slug);
   };
   return (
     <div className={commnetCard}>
-      <div className={commentContent}>ㅋㅋㅋ</div>
+      <div className={commentContent}>{comment.body}</div>
       <div className={commentFormFooter}>
         <div className={flexCenter}>
           <Image
@@ -23,9 +39,9 @@ const CommentCard = ({ author }: Props) => {
             height={20}
             alt="iamge"
           />
-          &nbsp; hyeon9782 September 12, 2023
+          &nbsp; {comment.author.username} {formatDate(comment.createdAt)}
         </div>
-        <TrashIcon onClick={handleTrashClick} />
+        {comment.author.username === username && <TrashIcon onClick={() => handleTrashClick(slug)} />}
       </div>
     </div>
   );

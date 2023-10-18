@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { button, fillGreenButton, redButton } from './common.css';
+import { fillGreenButton, redButton } from './common.css';
 
 export const settingBlock = style({
   display: 'flex',

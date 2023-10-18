@@ -1,15 +1,19 @@
-import { fetchArticlesWithTag, registerArticle } from '@/services/articles';
+import { getArticlesAPI, getArticlesWithFavoritedAPI } from '@/services/articles';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
-  const tag = req.nextUrl.searchParams.get('tag') ?? '';
-  const res = await fetchArticlesWithTag(tag);
-  return NextResponse.json(res);
-}
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
 
-export async function POST(req: NextRequest) {
-  console.log(req.body);
+  const page = searchParams.get('page');
+  const username = searchParams.get('username');
 
-  const res = await registerArticle(req.body);
-  return NextResponse.json(res);
+  const token = request.cookies.get('token')?.value || '';
+
+  if (username) {
+    const { articles, articlesCount } = await getArticlesWithFavoritedAPI(username, token, Number(page));
+    return NextResponse.json({ articles, articlesCount });
+  } else {
+    const { articles, articlesCount } = await getArticlesAPI(token, Number(page));
+    return NextResponse.json({ articles, articlesCount });
+  }
 }

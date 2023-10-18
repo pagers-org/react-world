@@ -1,66 +1,36 @@
-import { API_BASE_URL } from '@/constants/env';
-import { LoginUser, NewUser, UpdateUser } from '@/types';
-import { getCookie } from '@/utils/cookies';
-import Error from 'next/error';
+import { LoginUser, NewUser, UpdateUser } from '@/types/api/users';
+import { http } from '@/utils/http';
 
-// Register a new user
+// 회원가입
 const registerUserAPI = async (user: NewUser) => {
-  console.log(user);
-
-  return fetch(`${API_BASE_URL}/users`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    body: JSON.stringify({ user }),
-  }).then(res => {
-    if (!(res.status === 201)) {
-      throw new Error('Error');
-    }
-    return res.json();
-  });
+  return http.post('/users', { user });
 };
 
-// Login for existing user
+// 로그인
 const loginAPI = async (user: LoginUser) => {
-  return fetch(`${API_BASE_URL}/users/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    body: JSON.stringify({ user }),
-  }).then(res => {
-    if (!(res.status === 200)) {
-      throw new Error('Error');
-    }
-    return res.json();
-  });
+  return http.post('/users/login', { user });
 };
 
-// Updated user information for current user
-const updateUserAPI = async (user: UpdateUser) => {
-  const accessToken = getCookie('token');
-  console.log(accessToken);
-
-  return fetch(`${API_BASE_URL}/user`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json; charset=utf-8', Authorization: `Token ${accessToken}` },
-    body: JSON.stringify({ user }),
-  }).then(res => {
-    if (!(res.status === 200)) {
-      throw new Error('Error');
+// 회원정보 수정
+const updateUserAPI = async (user: UpdateUser, auth: string) => {
+  return http.put(
+    '/user',
+    { user },
+    {
+      headers: {
+        Authorization: `Token ${auth}`,
+      },
     }
-    return res.json();
-  });
+  );
 };
 
-// Gets the currently logged-in user
-const getUserAPI = async () => {
-  const accessToken = getCookie('token');
-  return fetch(`${API_BASE_URL}/user`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json; charset=utf-8', Authorization: `Token ${accessToken}` },
-  }).then(res => {
-    if (!(res.status === 200)) {
-      throw new Error('Error');
-    }
-    return res.json();
+// 현재 유저 조회
+const getUserAPI = async (auth: string) => {
+  return http.get('/user', {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: `Token ${auth}`,
+    },
   });
 };
 
