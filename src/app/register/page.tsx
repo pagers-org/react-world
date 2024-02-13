@@ -3,12 +3,12 @@
 import Button from '@/components/Button';
 import { FormTitle } from '@/components/FormTitle';
 import Input from '@/components/Input';
+import { ROUTE } from '@/constants/route';
 import { postRegister } from '@/service/register';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useState } from 'react';
 
 import * as styles from './page.css';
-import { ROUTE } from '@/constants/route';
 
 interface Props {
   email: string;
@@ -45,7 +45,11 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginContainer}>
-      <FormTitle title="Sign Up" subTitle="Have an account?" href={ROUTE.SIGNIN} />
+      <FormTitle
+        title="Sign Up"
+        subTitle="Have an account?"
+        href={ROUTE.SIGNIN}
+      />
       <form className={styles.formType} onSubmit={handleSubmit}>
         <Input
           type="text"

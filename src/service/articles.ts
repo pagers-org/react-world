@@ -4,6 +4,7 @@ import { ARTICLE_LIMIT_PER_PAGE, TAB } from '@/constants';
 import { QUERY_KEY } from '@/constants/query';
 import { Article } from '@/types/articles';
 import { API_BASE_URL } from '@/utils';
+import { getCookieValue } from '@/utils/cookies';
 import { useQuery } from '@tanstack/react-query';
 
 export interface FetchArticlesResponse {
@@ -17,16 +18,15 @@ const getArticles = async (
 ): Promise<FetchArticlesResponse> => {
   const endpoint = tab === TAB.GLOBAL ? 'articles' : 'articles/feed';
   const url = `${API_BASE_URL}/${endpoint}?offset=${page}&limit=${ARTICLE_LIMIT_PER_PAGE}`;
-
-  const userToken = document.cookie.replace('token=', '');
-
+  const userToken = getCookieValue('token')
+  
   const headers: Record<string, string> = {};
 
   if (userToken) {
     headers.Authorization = `Bearer ${userToken}`;
   }
 
-  const res = await fetch(url, { headers });
+  const res = userToken ? await fetch(url, { headers }) : await fetch(url);
   return res.json();
 };
 
